@@ -1,136 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Starter Tailwind
 
-Live demo: [https://flowbite-next-starter.vercel.app/](https://flowbite-next-starter.vercel.app/)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-It also includes:
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 
-- [x] [`flowbite`](https://flowbite.com)
-- [x] [`flowbite-react`](https://flowbite-react.com)
-- [x] [`react-icons`](https://react-icons.github.io/react-icons)
-- [x] [`tailwindcss`](https://tailwindcss.com)
-- [x] Quality of life tools, like
-  - [x] [`eslint`](https://eslint.org) with some plugins
-  - [x] [`prettier`](https://prettier.io)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-## Getting started
+![alt text](https://github.com/taylorbryant/next-starter-tailwind/blob/master/public/screenshot.png "Screenshot of Tailwind Next.js Starter homepage")
 
-`Next.js` requires [`Node.js`](https://nodejs.org).
+ <div align="center">
+ <p><strong>A <a href="https://nextjs.org" target="_blank">Next.js</a> starter styled using <a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>.</strong></p>
+ <p>Uses Tailwind CSS' <a href="https://tailwindcss.com/docs/controlling-file-size" target="_blank">built-in purge option</a> to remove unused CSS.</p>
+ <p>Illustrations by <a href="https://undraw.co/" target="_blank">unDraw</a>.</p>
+ <p>View demo <a href="https://next-starter-tailwind.taylorbryant.dev" target="_blank">here</a>.</p>
+</div>
 
-If you don't already have `npm` and `yarn` available, make sure you set them up.
+## Deploy
 
-```bash
-npm i -g npm yarn
-```
+### Vercel
 
-Install the dependencies:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2Ftaylorbryant%2Fnext-starter-tailwind%2Ftree%2Fmaster)
 
-```bash
-yarn install
-```
+## License
 
-Now you can run the development server:
+[MIT](https://github.com/taylorbryant/next-starter-tailwind/blob/master/LICENSE.md)
 
-```bash
-yarn dev
-```
+## How you can help
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Enjoying this starter and want to help? You can:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [Create an issue](https://github.com/taylorbryant/next-starter-tailwind/issues/new) with some constructive criticism
+- [Submit a pull request](https://github.com/taylorbryant/next-starter-tailwind/compare) with some improvements to the project
 
-## Add `flowbite-react` to `next` on your own
+## Contributors ✨
 
-Follow these steps to add `flowbite-react` to a `next` project without cloning this repo.
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-### Requirements
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Mozart409"><img src="https://avatars2.githubusercontent.com/u/38767929?v=4" width="100px;" alt=""/><br /><sub><b>Amadeus</b></sub></a><br /><a href="https://github.com/taylorbryant/next-starter-tailwind/commits?author=Mozart409" title="Code">💻</a> <a href="#ideas-Mozart409" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://www.synaptech.fr"><img src="https://avatars3.githubusercontent.com/u/10560326?v=4" width="100px;" alt=""/><br /><sub><b>David Eugene</b></sub></a><br /><a href="https://github.com/taylorbryant/next-starter-tailwind/commits?author=egdavid" title="Code">💻</a></td>
+  </tr>
+</table>
 
-- [x] [Node.js](https://nodejs.org/en/)
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 
-### How-to
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
-#### Create a new `next` starter project:
-
-```sh
-npx create-next-app@latest --typescript
-cd my-app
-```
-
-#### Install `tailwindcss` and `flowbite-react`:
-
-```sh
-npm install --save autoprefixer postcss tailwindcss flowbite flowbite-react
-```
-
-#### Create `postcss.config.js`:
-
-```js
-module.exports = {
-  plugins: {
-    autoprefixer: {},
-    tailwindcss: {},
-  },
-};
-```
-
-#### Create `tailwind.config.js`:
-
-```js
-/**
- * @type {import('@types/tailwindcss/tailwind-config').TailwindConfig}
- */
-module.exports = {
-  content: [
-    "./node_modules/flowbite-react/**/*.js",
-    "./pages/**/*.{ts,tsx}",
-    "./public/**/*.html",
-  ],
-  plugins: [require("flowbite/plugin")],
-  theme: {},
-};
-```
-
-#### And replace the contents of `styles/globals.css` by:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-#### Start using `flowbite-react`!
-
-```js
-import { Alert } from "flowbite-react";
-
-export default function MyPage() {
-  return <Alert color="info">Alert!</Alert>;
-}
-```
-
-## Outstanding issues
-
-- **Carousel**s don't seem to work with [`next/image`](https://nextjs.org/docs/api-reference/next/image), so a normal `<img/>` is required, which ESLint will warn about
-- **Modal**s don't work on `next` on `react@18` because of an hydration mismatch
-
-## Learn more
-
-### About `next`
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-### About `flowbite`
-
-[Flowbite](https://flowbite.com) is an open source collection of UI components built with the utility classes from Tailwind CSS that you can use as a starting point when coding user interfaces and websites.
-
-In this repository, we setup [`flowbite-react`](https://flowbite-react.com) for you with examples of how to use the React components in `pages/index.tsx`.
-
-## Deploy on `vercel`
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
