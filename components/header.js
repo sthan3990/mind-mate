@@ -7,20 +7,20 @@ export default function Header() {
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
 
   return (
-    <header className="bg-green-600">
+    <header className="bg-primary text-tahit">
       <div className="flex flex-wrap items-center justify-between lg:container px-4 py-6 mx-auto md:flex-no-wrap md:px-6">
         <div className="flex items-center">
           <Image
-            src="/tailwind-logo.svg"
-            width={40}
-            height={40}
+            src="/logo.png"
+            width={50}
+            height={50}
             priority
-            alt="Tailwind CSS logo"
+            alt="Mind Mate"
           />
 
           <Link href="/">
             <a className="text-lg md:text-xl font-bold ml-3 text-white">
-              Next.js Starter Tailwind
+              Mind Mate
             </a>
           </Link>
         </div>
@@ -47,6 +47,8 @@ export default function Header() {
         >
           {[
             { title: "Home", route: "/" },
+            { title: "About", route: "/about" },
+            { title: "About", route: "/about" },
             { title: "About", route: "/about" },
           ].map(({ route, title }) => (
             <li className="mt-3 md:mt-0 md:ml-6" key={title}>

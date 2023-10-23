@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
           content="A Next.js starter styled using Tailwind CSS."
         />
       </Head>
-
+    
       <Component {...pageProps} />
     </Layout>
   );
