@@ -27,10 +27,8 @@ interface Props {
 
 const Links = [
   { name: 'Chatbot', route: '/chatbot' },
-  { name: 'Projects', route: '/Projects' },
-  { name: 'Team', route: '/Team' },
+  { name: 'Journal', route: '/journal' },
   { name: 'Register', route: '/register' },
-
 ];
 
 const dropdownLinks = [
