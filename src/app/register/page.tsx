@@ -52,7 +52,7 @@ export default function JoinOurTeam() {
           align={'center'}
         >
 
-          <Image src="./register/image.svg" />
+          <Image src="./register/image.svg" alt="Mind Mate"/>
 
         </Stack>
 

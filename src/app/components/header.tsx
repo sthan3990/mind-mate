@@ -62,7 +62,7 @@ export default function Navbar() {
           />
           <HStack spacing={8} alignItems={'center'}>
             <Box>
-              <Image height={50} width={50} src="/logo.svg" />
+              <Image height={50} width={50} src="/logo.svg" alt="Mind Mate"/>
             </Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               {Links.map((link) => (

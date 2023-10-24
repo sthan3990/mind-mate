@@ -28,7 +28,7 @@ export default function Footer() {
           spacing={8}>
           <Stack spacing={6}>
             <Box>
-              <Image src="./logo.svg" />
+              <Image src="./logo.svg" alt="Mind Mate"/>
             </Box>
             <Text fontSize={'sm'}>© 2022 Chakra Templates. All rights reserved</Text>
           </Stack>
