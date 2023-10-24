@@ -38,8 +38,14 @@ export async function GET(request: Request) {
         timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
       );`;
 
+    const cbtChatSessions = await sql`
+      CREATE TABLE IF NOT EXISTS cbt_chatsessions (
+        id SERIAL PRIMARY KEY NOT NULL,
+        timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+      );`;
+
     return NextResponse.json(
-      { users, journals, questions, responses },
+      { users, journals, questions, responses, cbtChatSessions },
       { status: 200 }
     );
   } catch (error) {
