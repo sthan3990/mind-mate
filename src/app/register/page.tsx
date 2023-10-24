@@ -14,7 +14,6 @@ import {
   InputGroup,
   Image,
   HStack,
-  useColorModeValue,
   Link,
   useDisclosure,
   FormControl,
@@ -36,67 +35,72 @@ export default function JoinOurTeam() {
   };
 
   return (
-    <Box position={'relative'}>
+    <Box position={'relative'} >
+
       <Container
         as={SimpleGrid}
         maxW={'7xl'}
         columns={{ base: 1, md: 2 }}
-        spacing={{ base: 10, lg: 32 }}
+        spacing={{ base: 5, lg: 10 }}
         py={{ base: 10, sm: 20, lg: 32 }}>
+
         <Stack
-          bg={'gray.50'}
           rounded={'xl'}
           p={{ base: 4, sm: 6, md: 8 }}
           spacing={{ base: 8 }}
-          maxW={{ lg: 'lg' }}>
+          maxW={{ lg: 'lg' }}
+          align={'center'}
+        >
+
           <Image src="./register/image.svg" />
+
         </Stack>
 
         <Stack
-          bg={'gray.50'}
+          bg="primary.700"
           rounded={'xl'}
           p={{ base: 4, sm: 6, md: 8 }}
           spacing={{ base: 8 }}
           maxW={{ lg: 'lg' }}>
           <Stack align={'center'}>
-            <Heading fontSize={'4xl'} textAlign={'center'}>
+            <Heading fontSize={'4xl'} textAlign={'center'} color="black">
               Sign up
             </Heading>
-            <Text fontSize={'lg'} color={'gray.600'}>
+            <Text fontSize={'lg'} color="Black">
               to enjoy all of our cool features ✌️
             </Text>
 
           </Stack>
           <Box as={'form'} mt={10}>
-
             <Box
               rounded={'lg'}
-              bg={useColorModeValue('white', 'gray.700')}
+              bg="primary.700"
               boxShadow={'lg'}
+              color="black"
               p={8}>
               <Stack spacing={4}>
                 <HStack>
                   <Box>
                     <FormControl id="firstName" isRequired>
                       <FormLabel>First Name</FormLabel>
-                      <Input type="text" />
+                      <Input type="text" background="gray" />
                     </FormControl>
                   </Box>
                   <Box>
                     <FormControl id="lastName">
                       <FormLabel>Last Name</FormLabel>
-                      <Input type="text" />
+                      <Input type="text" background="gray" />
                     </FormControl>
                   </Box>
                 </HStack>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
-                  <Input type="email" />
+                  <Input type="email" background="gray" />
                 </FormControl>
                 <FormControl id="password" isRequired>
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
-                    <Input type={showPassword ? 'text' : 'password'} />
+                    <Input background="gray" type={showPassword ? 'text' : 'password'} />
                     <InputRightElement h={'full'}>
                       <Button
                         variant={'ghost'}
@@ -111,8 +115,8 @@ export default function JoinOurTeam() {
                 <Stack spacing={10} pt={2}>
                   <Button
                     fontFamily={'heading'}
-                    bg={'gray.200'}
-                    color={'gray.800'}
+                    bg={'blue.200'}
+                    color={'blue.800'}
                     onClick={onOpen}>
                     Terms and Conditions
                   </Button>
@@ -125,17 +129,19 @@ export default function JoinOurTeam() {
                     loadingText="Submitting"
                     size="lg"
                     isDisabled={!agreed}
-                    bg={'blue.400'}
-                    color={'white'}
+                    bg={'blue.100'}
+                    color={'black'}
                     _hover={{
-                      bg: 'blue.500',
+                      bg: 'blue.600',
                     }}>
                     Sign up
                   </Button>
                 </Stack>
                 <Stack pt={6}>
                   <Text align={'center'}>
-                    Already a user? <Link color={'blue.400'}>Login</Link>
+                    Already a user? <Link href="login" color={'blue.400'}>Login</Link>
+              
+
                   </Text>
                 </Stack>
               </Stack>

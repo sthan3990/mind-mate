@@ -1,6 +1,16 @@
-import ChakraUiProvider from '@/providers/chakra-ui.provider'
-import Navbar from './components/header'
-import Footer from './components/footer'
+import ChakraUiProvider from '@/providers/chakra-ui.provider';
+import Navbar from './components/header';
+import Footer from './components/footer';
+
+const rootLayoutStyles = {
+  display: 'flex',
+  flexDirection: 'column',
+  minHeight: '100vh',
+};
+
+const contentStyles = {
+  flex: 1,
+};
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,17 +18,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <head>
         {/* Add your head content here */}
       </head>
-      <body>
+      <body style={rootLayoutStyles}>
         <ChakraUiProvider>
-          <div>
-            <Navbar />
+          <Navbar />
+          <div style={contentStyles}>
             {children}
-            <Footer />
           </div>
+          <Footer />
         </ChakraUiProvider>
       </body>
     </html>
-  )
-}
+  );
+};
 
 export default RootLayout;

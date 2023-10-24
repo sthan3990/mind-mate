@@ -3,6 +3,8 @@ export const colors = {
   primary: {
     900: "#2d3258",
     800: "#15193b",
+    700: "#F9F2FF"
+
   },
   success: {
     900: "#2E7D32",

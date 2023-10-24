@@ -26,9 +26,11 @@ interface Props {
 }
 
 const Links = [
-  { name: 'Chatbot', route: '/Chatbot' },
+  { name: 'Chatbot', route: '/chatbot' },
   { name: 'Projects', route: '/Projects' },
   { name: 'Team', route: '/Team' },
+  { name: 'Register', route: '/register' },
+
 ];
 
 const dropdownLinks = [
