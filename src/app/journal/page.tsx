@@ -34,10 +34,11 @@ const Form1 = () => {
        Tap on the emoji that best captures your current emotion.
       </Heading>
         <HStack justifyContent="space-between">
-        <Image src="./journal/1.png"/> 
-        <Image src="./journal/2.png"/> 
-        <Image src="./journal/3.png"/> 
-        <Image src="./journal/4.png"/> 
+        <Image alt="angry-5" src="./journal/1.png"/> 
+        <Image alt="less-angry" src="./journal/2.png"/> 
+        <Image alt="neutral" src="./journal/3.png"/> 
+        <Image alt="happy" src="./journal/4.png"/> 
+        <Image alt="very-happy" src="./journal/4.png"/> 
         </HStack>
     </>
   )

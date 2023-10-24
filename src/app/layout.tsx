@@ -4,7 +4,6 @@ import Footer from './components/footer';
 
 const rootLayoutStyles = {
   display: 'flex',
-  flexDirection: 'column',
   minHeight: '100vh',
 };
 

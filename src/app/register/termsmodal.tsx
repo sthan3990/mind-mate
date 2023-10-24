@@ -12,7 +12,13 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-function TermsModal({ isOpen, onClose, onAgree }) {
+interface TermsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onAgree: () => void;
+}
+
+function TermsModal({ isOpen, onClose, onAgree }: TermsModalProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
