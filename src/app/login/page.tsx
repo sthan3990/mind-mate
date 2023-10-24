@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Flex,
@@ -15,35 +15,26 @@ import {
   Text,
   useColorModeValue,
   Link,
-} from '@chakra-ui/react'
-import { useState } from 'react'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-    >
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading fontSize={'4xl'} textAlign={'center'}>
+    <Flex minH={"100vh"} align={"center"} justify={"center"}>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"} textAlign={"center"}>
             Login
           </Heading>
-          <Text fontSize={'lg'} color="white">
+          <Text fontSize={"lg"} color="white">
             to enjoy all of our cool features
           </Text>
         </Stack>
-        <Box
-          rounded={'lg'}
-          bg="black"
-          boxShadow={'lg'}
-          p={8}
-        >
-          <Stack spacing={6} >
+        <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
+          <Stack spacing={6}>
             <HStack>
               <Box>
                 <FormControl id="username" isRequired>
@@ -52,41 +43,42 @@ const LoginPage = () => {
                 </FormControl>
               </Box>
               <Box>
-
                 <FormControl id="password" isRequired>
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
-                    <Input type={showPassword ? 'text' : 'password'} />
-                    <InputRightElement h={'full'}>
+                    <Input type={showPassword ? "text" : "password"} />
+                    <InputRightElement h={"full"}>
                       <Button
-                        variant={'ghost'}
-                        onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                        variant={"ghost"}
+                        onClick={() =>
+                          setShowPassword((showPassword) => !showPassword)
+                        }
+                      >
                         {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                       </Button>
                     </InputRightElement>
                   </InputGroup>
                 </FormControl>
               </Box>
-
             </HStack>
             <Stack spacing={10} pt={2}>
               <Button
                 loadingText="Submitting"
                 size="lg"
-                bg={'blue.400'}
-                color={'white'}
+                bg={"blue.400"}
+                color={"white"}
                 _hover={{
-                  bg: 'blue.500',
-                }}>
+                  bg: "blue.500",
+                }}
+              >
                 Login
               </Button>
             </Stack>
-
           </Stack>
         </Box>
       </Stack>
     </Flex>
-  )
+  );
 };
 
 export default LoginPage;
