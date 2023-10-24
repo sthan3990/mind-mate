@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Progress,
   Box,
@@ -20,34 +20,34 @@ import {
   FormHelperText,
   Image,
   HStack,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
 
 const Form1 = () => {
-  const [show, setShow] = useState(false)
-  const handleClick = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
   return (
     <>
-      <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
-       Tap on the emoji that best captures your current emotion.
+      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+        Tap on the emoji that best captures your current emotion.
       </Heading>
-        <HStack justifyContent="space-between">
-        <Image alt="angry-5" src="./journal/1.png"/> 
-        <Image alt="less-angry" src="./journal/2.png"/> 
-        <Image alt="neutral" src="./journal/3.png"/> 
-        <Image alt="happy" src="./journal/4.png"/> 
-        <Image alt="very-happy" src="./journal/4.png"/> 
-        </HStack>
+      <HStack justifyContent="space-between">
+        <Image alt="angry-5" src="./journal/1.png" />
+        <Image alt="less-angry" src="./journal/2.png" />
+        <Image alt="neutral" src="./journal/3.png" />
+        <Image alt="happy" src="./journal/4.png" />
+        <Image alt="very-happy" src="./journal/5.png" />
+      </HStack>
     </>
-  )
-}
+  );
+};
 
 const Form2 = () => {
   return (
     <>
-      <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
+      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         User Details
       </Heading>
       <FormControl as={GridItem} colSpan={[6, 3]}>
@@ -57,8 +57,9 @@ const Form2 = () => {
           fontWeight="md"
           color="gray.700"
           _dark={{
-            color: 'gray.50',
-          }}>
+            color: "gray.50",
+          }}
+        >
           Country / Region
         </FormLabel>
         <Select
@@ -70,7 +71,8 @@ const Form2 = () => {
           shadow="sm"
           size="sm"
           w="full"
-          rounded="md">
+          rounded="md"
+        >
           <option>United States</option>
           <option>Canada</option>
           <option>Mexico</option>
@@ -84,9 +86,10 @@ const Form2 = () => {
           fontWeight="md"
           color="gray.700"
           _dark={{
-            color: 'gray.50',
+            color: "gray.50",
           }}
-          mt="2%">
+          mt="2%"
+        >
           Street address
         </FormLabel>
         <Input
@@ -109,9 +112,10 @@ const Form2 = () => {
           fontWeight="md"
           color="gray.700"
           _dark={{
-            color: 'gray.50',
+            color: "gray.50",
           }}
-          mt="2%">
+          mt="2%"
+        >
           City
         </FormLabel>
         <Input
@@ -134,9 +138,10 @@ const Form2 = () => {
           fontWeight="md"
           color="gray.700"
           _dark={{
-            color: 'gray.50',
+            color: "gray.50",
           }}
-          mt="2%">
+          mt="2%"
+        >
           State / Province
         </FormLabel>
         <Input
@@ -159,9 +164,10 @@ const Form2 = () => {
           fontWeight="md"
           color="gray.700"
           _dark={{
-            color: 'gray.50',
+            color: "gray.50",
           }}
-          mt="2%">
+          mt="2%"
+        >
           ZIP / Postal
         </FormLabel>
         <Input
@@ -177,13 +183,13 @@ const Form2 = () => {
         />
       </FormControl>
     </>
-  )
-}
+  );
+};
 
 const Form3 = () => {
   return (
     <>
-      <Heading w="100%" textAlign={'center'} fontWeight="normal">
+      <Heading w="100%" textAlign={"center"} fontWeight="normal">
         Social Handles
       </Heading>
       <SimpleGrid columns={1} spacing={6}>
@@ -193,18 +199,20 @@ const Form3 = () => {
             fontWeight="md"
             color="gray.700"
             _dark={{
-              color: 'gray.50',
-            }}>
+              color: "gray.50",
+            }}
+          >
             Website
           </FormLabel>
           <InputGroup size="sm">
             <InputLeftAddon
               bg="gray.50"
               _dark={{
-                bg: 'gray.800',
+                bg: "gray.800",
               }}
               color="gray.500"
-              rounded="md">
+              rounded="md"
+            >
               http://
             </InputLeftAddon>
             <Input
@@ -222,8 +230,9 @@ const Form3 = () => {
             fontWeight="md"
             color="gray.700"
             _dark={{
-              color: 'gray.50',
-            }}>
+              color: "gray.50",
+            }}
+          >
             About
           </FormLabel>
           <Textarea
@@ -232,7 +241,7 @@ const Form3 = () => {
             shadow="sm"
             focusBorderColor="brand.400"
             fontSize={{
-              sm: 'sm',
+              sm: "sm",
             }}
           />
           <FormHelperText>
@@ -241,13 +250,13 @@ const Form3 = () => {
         </FormControl>
       </SimpleGrid>
     </>
-  )
-}
+  );
+};
 
 export default function GuidedJournal() {
-  const toast = useToast()
-  const [step, setStep] = useState(1)
-  const [progress, setProgress] = useState(33.33)
+  const toast = useToast();
+  const [step, setStep] = useState(1);
+  const [progress, setProgress] = useState(33.33);
 
   return (
     <>
@@ -258,37 +267,46 @@ export default function GuidedJournal() {
         maxWidth={800}
         p={6}
         m="10px auto"
-        as="form">
-        <Progress hasStripe value={progress} mb="5%" mx="5%" isAnimated></Progress>
+        as="form"
+      >
+        <Progress
+          hasStripe
+          value={progress}
+          mb="5%"
+          mx="5%"
+          isAnimated
+        ></Progress>
         {step === 1 ? <Form1 /> : step === 2 ? <Form2 /> : <Form3 />}
         <ButtonGroup mt="5%" w="100%">
           <Flex w="100%" justifyContent="space-between">
             <Flex>
               <Button
                 onClick={() => {
-                  setStep(step - 1)
-                  setProgress(progress - 33.33)
+                  setStep(step - 1);
+                  setProgress(progress - 33.33);
                 }}
                 isDisabled={step === 1}
                 colorScheme="teal"
                 variant="solid"
                 w="7rem"
-                mr="5%">
+                mr="5%"
+              >
                 Back
               </Button>
               <Button
                 w="7rem"
                 isDisabled={step === 3}
                 onClick={() => {
-                  setStep(step + 1)
+                  setStep(step + 1);
                   if (step === 3) {
-                    setProgress(100)
+                    setProgress(100);
                   } else {
-                    setProgress(progress + 33.33)
+                    setProgress(progress + 33.33);
                   }
                 }}
                 colorScheme="teal"
-                variant="outline">
+                variant="outline"
+              >
                 Next
               </Button>
             </Flex>
@@ -299,13 +317,14 @@ export default function GuidedJournal() {
                 variant="solid"
                 onClick={() => {
                   toast({
-                    title: 'Account created.',
+                    title: "Account created.",
                     description: "We've created your account for you.",
-                    status: 'success',
+                    status: "success",
                     duration: 3000,
                     isClosable: true,
-                  })
-                }}>
+                  });
+                }}
+              >
                 Submit
               </Button>
             ) : null}
@@ -313,5 +332,5 @@ export default function GuidedJournal() {
         </ButtonGroup>
       </Box>
     </>
-  )
+  );
 }
