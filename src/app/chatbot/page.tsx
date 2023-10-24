@@ -16,21 +16,14 @@ export default function ChatGPT() {
     if (input.trim() === '') return;
     setMessages([...messages, { text: input, user: 'user' }]);
     setInput('');
-    // Here, you would send the user's message to your backend for processing by GPT-3.
-    // For this example, we're just adding the user's message to the chat.
+
   };
 
-  // Simulate a response from ChatGPT
-  const simulateGPTResponse = (userMessage) => {
-    // In a real application, you would send the user's message to your backend and get a response from GPT-3.
-    // For this example, we'll simulate a simple response.
-    return `ChatGPT responds to: "${userMessage}"`;
-  };
-
+  
   const handleChatGPTResponse = () => {
     const userMessage = messages[messages.length - 1].text;
-    const response = simulateGPTResponse(userMessage);
-    setMessages([...messages, { text: response, user: 'chatGPT' }]);
+    //const response = simulateGPTResponse(userMessage);
+    //setMessages([...messages, { text: response, user: 'chatGPT' }]);
   };
 
   return (
