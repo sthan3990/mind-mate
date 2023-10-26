@@ -1,11 +1,13 @@
 import { sql } from "@vercel/postgres";
+import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const fName = "Alice";
-  const lName = "Smith";
-  const email = "smith@gmail.com";
-  const password = "password";
+  const { searchParams } = new URL(request.url);
+  const fName = searchParams.get("fName");
+  const lName = searchParams.get("lName");
+  const email = searchParams.get("email");
+  const password = searchParams.get("password");
 
   try {
     if (!fName || !email || !password)
@@ -15,6 +17,5 @@ export async function GET(request: Request) {
     return NextResponse.json({ error }, { status: 500 });
   }
 
-  const users = await sql`SELECT * FROM users;`;
-  return NextResponse.json({ users: users.rows }, { status: 200 });
+  redirect("/");
 }

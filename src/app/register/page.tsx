@@ -1,6 +1,9 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { sql } from "@vercel/postgres";
+import { NextResponse } from "next/server";
+import { useRouter } from "next/navigation";
 
 import {
   Box,
@@ -18,95 +21,142 @@ import {
   useDisclosure,
   FormControl,
   FormLabel,
-  InputRightElement
-} from '@chakra-ui/react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+  InputRightElement,
+} from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-import TermsModal from './termsmodal';
+import TermsModal from "./termsmodal";
+
+// async function asyncCall(
+//   fName: string,
+//   lName: string,
+//   email: string,
+//   password: string
+// ) {
+//   try {
+//     if (!fName || !email || !password)
+//       throw new Error("First name, email, and password is required");
+//     await sql`INSERT INTO users (first_name, last_name, email, password) VALUES (${fName}, ${lName}, ${email}, ${password});`;
+//   } catch (error) {
+//     return NextResponse.json({ error }, { status: 500 });
+//   }
+// }
 
 export default function JoinOurTeam() {
+  const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [agreed, setAgreed] = useState(false);
+
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleAgree = () => {
     setAgreed(!agreed); // Toggle the 'agreed' state
     onClose();
   };
 
-  return (
-    <Box position={'relative'} >
+  const createAccount = (
+    fName: string,
+    lName: string,
+    email: string,
+    password: string
+  ) => {
+    push(
+      `/api/add-users?fName=${fName}&lName=${lName}&email=${email}&password=${password}`
+    );
+  };
 
+  return (
+    <Box position={"relative"}>
       <Container
         as={SimpleGrid}
-        maxW={'7xl'}
+        maxW={"7xl"}
         columns={{ base: 1, md: 2 }}
         spacing={{ base: 5, lg: 10 }}
-        py={{ base: 10, sm: 20, lg: 32 }}>
-
+        py={{ base: 10, sm: 20, lg: 32 }}
+      >
         <Stack
-          rounded={'xl'}
+          rounded={"xl"}
           p={{ base: 4, sm: 6, md: 8 }}
           spacing={{ base: 8 }}
-          maxW={{ lg: 'lg' }}
-          align={'center'}
+          maxW={{ lg: "lg" }}
+          align={"center"}
         >
-
-          <Image src="./register/image.svg" alt="Mind Mate"/>
-
+          <Image src="./register/image.svg" alt="Mind Mate" />
         </Stack>
 
         <Stack
           bg="primary.700"
-          rounded={'xl'}
+          rounded={"xl"}
           p={{ base: 4, sm: 6, md: 8 }}
           spacing={{ base: 8 }}
-          maxW={{ lg: 'lg' }}>
-          <Stack align={'center'}>
-            <Heading fontSize={'4xl'} textAlign={'center'} color="black">
+          maxW={{ lg: "lg" }}
+        >
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"} textAlign={"center"} color="black">
               Sign up
             </Heading>
-            <Text fontSize={'lg'} color="Black">
+            <Text fontSize={"lg"} color="Black">
               to enjoy all of our cool features ✌️
             </Text>
-
           </Stack>
-          <Box as={'form'} mt={10}>
+          <Box as={"form"} mt={10}>
             <Box
-              rounded={'lg'}
+              rounded={"lg"}
               bg="primary.700"
-              boxShadow={'lg'}
+              boxShadow={"lg"}
               color="black"
-              p={8}>
+              p={8}
+            >
               <Stack spacing={4}>
                 <HStack>
                   <Box>
                     <FormControl id="firstName" isRequired>
                       <FormLabel>First Name</FormLabel>
-                      <Input type="text" background="gray" />
+                      <Input
+                        type="text"
+                        background="gray"
+                        onChange={(event) => setFName(event.target.value)}
+                      />
                     </FormControl>
                   </Box>
                   <Box>
                     <FormControl id="lastName">
                       <FormLabel>Last Name</FormLabel>
-                      <Input type="text" background="gray" />
+                      <Input
+                        type="text"
+                        background="gray"
+                        onChange={(event) => setLName(event.target.value)}
+                      />
                     </FormControl>
                   </Box>
                 </HStack>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
-                  <Input type="email" background="gray" />
+                  <Input
+                    type="email"
+                    background="gray"
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
                 </FormControl>
                 <FormControl id="password" isRequired>
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
-                    <Input background="gray" type={showPassword ? 'text' : 'password'} />
-                    <InputRightElement h={'full'}>
+                    <Input
+                      background="gray"
+                      type={showPassword ? "text" : "password"}
+                      onChange={(event) => setPassword(event.target.value)}
+                    />
+                    <InputRightElement h={"full"}>
                       <Button
-                        variant={'ghost'}
+                        variant={"ghost"}
                         onClick={() =>
                           setShowPassword((showPassword) => !showPassword)
-                        }>
+                        }
+                      >
                         {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                       </Button>
                     </InputRightElement>
@@ -114,10 +164,11 @@ export default function JoinOurTeam() {
                 </FormControl>
                 <Stack spacing={10} pt={2}>
                   <Button
-                    fontFamily={'heading'}
-                    bg={'blue.200'}
-                    color={'blue.800'}
-                    onClick={onOpen}>
+                    fontFamily={"heading"}
+                    bg={"blue.200"}
+                    color={"blue.800"}
+                    onClick={onOpen}
+                  >
                     Terms and Conditions
                   </Button>
                   <TermsModal
@@ -129,19 +180,22 @@ export default function JoinOurTeam() {
                     loadingText="Submitting"
                     size="lg"
                     isDisabled={!agreed}
-                    bg={'blue.100'}
-                    color={'black'}
+                    bg={"blue.100"}
+                    color={"black"}
                     _hover={{
-                      bg: 'blue.600',
-                    }}>
+                      bg: "blue.600",
+                    }}
+                    onClick={() => createAccount(fName, lName, email, password)}
+                  >
                     Sign up
                   </Button>
                 </Stack>
                 <Stack pt={6}>
-                  <Text align={'center'}>
-                    Already a user? <Link href="login" color={'blue.400'}>Login</Link>
-              
-
+                  <Text align={"center"}>
+                    Already a user?{" "}
+                    <Link href="login" color={"blue.400"}>
+                      Login
+                    </Link>
                   </Text>
                 </Stack>
               </Stack>
