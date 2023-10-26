@@ -16,13 +16,16 @@ export async function GET(request: Request) {
 
   try {
     const check = await sql`SELECT * FROM users WHERE email = ${email};`;
+    console.log(check.rows[0]);
     if (!fName || !email || !password) {
       throw new Error("First name, email, and password is required");
-    } else if (!check) {
+    } else if (check.rows[0]) {
+      throw new Error("Account already exists");
+    } else {
       await sql`INSERT INTO users (first_name, last_name, email, password) VALUES (${fName}, ${lName}, ${email}, ${hashedPassword});`;
     }
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    console.log(error);
   }
   redirect("/");
 
