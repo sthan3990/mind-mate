@@ -21,8 +21,8 @@ export async function GET(request: Request) {
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
-  //redirect("/");
+  redirect("/");
 
-  const users = await sql`SELECT * FROM users;`;
-  return NextResponse.json({ users: users.rows }, { status: 200 });
+  // const users = await sql`SELECT * FROM users;`;
+  // return NextResponse.json({ users: users.rows }, { status: 200 });
 }
