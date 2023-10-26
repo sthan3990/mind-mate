@@ -15,9 +15,12 @@ export async function GET(request: Request) {
   const hashedPassword = bcrypt.hashSync(password, salt);
 
   try {
-    if (!fName || !email || !password)
+    const check = await sql`SELECT * FROM users WHERE email = ${email};`;
+    if (!fName || !email || !password) {
       throw new Error("First name, email, and password is required");
-    await sql`INSERT INTO users (first_name, last_name, email, password) VALUES (${fName}, ${lName}, ${email}, ${hashedPassword});`;
+    } else if (!check) {
+      await sql`INSERT INTO users (first_name, last_name, email, password) VALUES (${fName}, ${lName}, ${email}, ${hashedPassword});`;
+    }
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }

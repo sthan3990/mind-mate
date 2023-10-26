@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { sql } from "@vercel/postgres";
-import { NextResponse } from "next/server";
 import { useRouter } from "next/navigation";
 
 import {
