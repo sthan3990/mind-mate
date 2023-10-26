@@ -21,6 +21,8 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Weather from './weather';
 
+const userIdPlaceholder = '123';
+
 interface Props {
   children: React.ReactNode;
 }
@@ -32,7 +34,7 @@ const Links = [
 ];
 
 const dropdownLinks = [
-  { name: 'Your Profile', route: '/profile/{id}' },
+  { name: 'Your Profile', route: `/profile` },
   { name: 'Logout', route: '/Projects' },
 ];
 
@@ -60,14 +62,14 @@ export default function Navbar() {
           />
           <HStack spacing={8} alignItems={'center'}>
             <Box>
-              <Image height={50} width={50} src="/logo.svg" alt="Mind Mate"/>
+              <Image height={50} width={50} src="/logo.svg" alt="Mind Mate" />
             </Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-                
-                   <Box  {...menuItemStyles}>{link.name}</Box> 
-                 
+
+                  <Box  {...menuItemStyles}>{link.name}</Box>
+
                 </Link>
               ))}
             </HStack>
@@ -92,7 +94,7 @@ export default function Navbar() {
               <MenuList bg="primary.900">
                 {dropdownLinks.map((link) => (
                   <Link href={link.route} key={link.route}>
-                     <MenuItem {...menuItemStyles}> {link.name} </MenuItem>
+                    <MenuItem {...menuItemStyles}> {link.name} </MenuItem>
                   </Link>
                 ))}
               </MenuList>
@@ -104,7 +106,7 @@ export default function Navbar() {
             <Stack as={'nav'} spacing={4}>
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-                   <Box  {...menuItemStyles}>{link.name}</Box>  
+                  <Box  {...menuItemStyles}>{link.name}</Box>
                 </Link>
               ))}
             </Stack>
