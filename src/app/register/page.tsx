@@ -27,21 +27,6 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 import TermsModal from "./termsmodal";
 
-// async function asyncCall(
-//   fName: string,
-//   lName: string,
-//   email: string,
-//   password: string
-// ) {
-//   try {
-//     if (!fName || !email || !password)
-//       throw new Error("First name, email, and password is required");
-//     await sql`INSERT INTO users (first_name, last_name, email, password) VALUES (${fName}, ${lName}, ${email}, ${password});`;
-//   } catch (error) {
-//     return NextResponse.json({ error }, { status: 500 });
-//   }
-// }
-
 export default function JoinOurTeam() {
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);

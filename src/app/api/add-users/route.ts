@@ -1,6 +1,6 @@
 import { sql } from "@vercel/postgres";
-import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -16,6 +16,5 @@ export async function GET(request: Request) {
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
-
   redirect("/");
 }
