@@ -27,7 +27,8 @@ interface Props {
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const userId = localStorage.getItem('userId');
+  // const userId = localStorage.getItem('userId');
+  const userId = 1;
 
   const Links = [
     { name: 'Chatbot', route: '/chatbot' },

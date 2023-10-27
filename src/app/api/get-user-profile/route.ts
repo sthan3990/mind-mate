@@ -6,13 +6,17 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
   // Ensure user ID exists
+
   if (!userId || isNaN(Number(userId))) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
   }
-
+  console.log("userIdin api route: ", userId);
   try {
     // Fetch user from db
     const user = await sql`SELECT first_name, last_name, email FROM users WHERE id = ${userId};`;
+    // const user = await sql`SELECT * FROM users`;
+
+    console.log("user api route: ", user);
 
     // If no user, return 404
     if (user.rowCount === 0) {
