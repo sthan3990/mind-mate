@@ -21,25 +21,24 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Weather from './weather';
 
-const userIdPlaceholder = '123';
-
 interface Props {
   children: React.ReactNode;
 }
 
-const Links = [
-  { name: 'Chatbot', route: '/chatbot' },
-  { name: 'Journal', route: '/journal' },
-  { name: 'Register', route: '/register' },
-];
-
-const dropdownLinks = [
-  { name: 'Your Profile', route: `/profile` },
-  { name: 'Logout', route: '/Projects' },
-];
-
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const userId = localStorage.getItem('userId');
+
+  const Links = [
+    { name: 'Chatbot', route: '/chatbot' },
+    { name: 'Journal', route: '/journal' },
+    { name: 'Register', route: '/register' },
+  ];
+
+  const dropdownLinks = [
+    { name: 'Your Profile', route: `/profile/${userId}` },
+    { name: 'Logout', route: '/Projects' },
+  ];
 
   const menuItemStyles = {
     bg: 'primary.900',

@@ -26,3 +26,5 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
 }
+
+// return NextResponse.json({ user: user }, { status: 200 });

@@ -16,44 +16,19 @@ import { useState, useEffect, } from "react";
 import { useRouter } from 'next/router';
 
 
-const UserProfilePage = () => {
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  // const userId = useRouter().query.id;
-  // console.log(userId);
+export default async function UserProfilePage({ userData }: { userData: { first_name: string, last_name: string, email: string } }) {
 
-  useEffect(() => {
-
-    // Fetch user data based on userId when component mounts
-    async function fetchUserData() {
-
-      try {
-        const response = await fetch(`/api/get-user-profile?userId=1`);
-        console.log("response is ", response);
-        const data = await response.json();
-        console.log("after teh response.json")
-        console.log("the data is ", data);
-        setUserData(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch user data:", error);
-        setLoading(false);
-      }
-    }
-
-    fetchUserData();
-  }, []);
-
-  if (loading) {
+  if (!userData) {
     return <Text>Loading...</Text>;
   }
 
-  if (!userData) {
-    return <Text>No user logged in!</Text>;
-  }
+  // if (!userData) {
+  //   return <Text>No user logged in!</Text>;
+  // }
+  console.log("userData: ", userData);
 
   return (
-    <p>hello is this working</p>
+    <p>helloooo</p>
     // <Flex minH={"100vh"} align={"center"} justify={"center"}>
     //   <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
     //     <Stack align={"center"}>
@@ -85,4 +60,28 @@ const UserProfilePage = () => {
   );
 };
 
-export default UserProfilePage;
+export async function getStaticProps({ params }: { params: { id: string } }) {
+
+  // Fetch user data based on userId when component mounts
+  async function fetchUserData() {
+
+    try {
+      const response = await fetch(`/api/get-user-profile/${params.id}`);
+      // console.log("response is ", response);
+      const data = await response.json();
+      return data;
+
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+  }
+
+  const userData = await fetchUserData();
+
+  return {
+    props: {
+      userData
+    }
+  }
+}
+
