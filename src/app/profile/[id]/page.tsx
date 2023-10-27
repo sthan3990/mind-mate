@@ -77,7 +77,6 @@ const UserProfilePage = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: error.message,
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -98,10 +97,10 @@ const UserProfilePage = () => {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
-            User Profile
+            User Profile Settings
           </Heading>
           <Text fontSize={"lg"} color="white">
-            Welcome {userData.first_name} {userData.last_name}
+            Welcome {userData["first_name"]} {userData["last_name"]}
           </Text>
         </Stack>
         <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
@@ -109,7 +108,7 @@ const UserProfilePage = () => {
             <FormControl>
               <FormLabel>First Name</FormLabel>
               <Input
-                placeholder={userData.first_name}
+                placeholder={userData["first_name"]}
                 value={updatedFirstName}
                 onChange={(e) => setUpdatedFirstName(e.target.value)}
               />
@@ -117,7 +116,7 @@ const UserProfilePage = () => {
             <FormControl>
               <FormLabel>Last Name</FormLabel>
               <Input
-                placeholder={userData.last_name}
+                placeholder={userData["last_name"]}
                 value={updatedLastName}
                 onChange={(e) => setUpdatedLastName(e.target.value)}
               />
@@ -125,7 +124,7 @@ const UserProfilePage = () => {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
-                placeholder={userData.email}
+                placeholder={userData["email"]}
                 value={updatedEmail}
                 onChange={(e) => setUpdatedEmail(e.target.value)}
               />

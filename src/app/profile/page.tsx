@@ -53,34 +53,35 @@ const UserProfilePage = () => {
   }
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"}>
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
-            User Profile
-          </Heading>
-          <Text fontSize={"lg"} color="white">
-            Welcome {userData.first_name} {userData.last_name}
-          </Text>
-        </Stack>
-        <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
-          <Stack spacing={6}>
-            <FormControl>
-              <FormLabel>First Name</FormLabel>
-              <Text>{userData.first_name}</Text>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Last Name</FormLabel>
-              <Text>{userData.last_name}</Text>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Text>{userData.email}</Text>
-            </FormControl>
-          </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+    <p>hello, no user signed in</p>
+    // <Flex minH={"100vh"} align={"center"} justify={"center"}>
+    //   <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+    //     <Stack align={"center"}>
+    //       <Heading fontSize={"4xl"} textAlign={"center"}>
+    //         User Profile
+    //       </Heading>
+    //       <Text fontSize={"lg"} color="white">
+    //         Welcome {userData.first_name} {userData.last_name}
+    //       </Text>
+    //     </Stack>
+    //     <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
+    //       <Stack spacing={6}>
+    //         <FormControl>
+    //           <FormLabel>First Name</FormLabel>
+    //           <Text>{userData.first_name}</Text>
+    //         </FormControl>
+    //         <FormControl>
+    //           <FormLabel>Last Name</FormLabel>
+    //           <Text>{userData.last_name}</Text>
+    //         </FormControl>
+    //         <FormControl>
+    //           <FormLabel>Email</FormLabel>
+    //           <Text>{userData.email}</Text>
+    //         </FormControl>
+    //       </Stack>
+    //     </Box>
+    //   </Stack>
+    // </Flex>
   );
 };
 

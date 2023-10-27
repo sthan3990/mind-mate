@@ -31,6 +31,6 @@ export async function PATCH(request: Request) {
 
   } catch (error) {
     // Handle any unexpected errors
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
