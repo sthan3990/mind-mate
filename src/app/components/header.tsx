@@ -1,4 +1,6 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import {
@@ -31,13 +33,21 @@ const Links = [
   { name: "Register", route: "/register" },
 ];
 
-const dropdownLinks = [
-  { name: "Your Profile", route: "/profile/{id}" },
-  { name: "Login", route: "/login" },
-  { name: "Logout", route: "/Projects" },
-];
-
 export default function Navbar() {
+  const logout = () => {
+    localStorage.setItem("User", "");
+    refresh();
+  };
+  const [userID, setUserID] = useState("");
+  useEffect(() => {
+    setUserID(
+      JSON.stringify(
+        localStorage.getItem("User") || localStorage.setItem("User", "")
+      )
+    );
+  }, [logout]);
+
+  const { refresh } = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const userId = localStorage.getItem('userId');
   const userId = 1;
@@ -60,6 +70,8 @@ export default function Navbar() {
       bg: useColorModeValue("blue.200", "blue.700"),
     },
   };
+
+  console.log(userID);
 
   return (
     <>
@@ -112,11 +124,18 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList bg="primary.900">
-                {dropdownLinks.map((link) => (
-                  <Link href={link.route} key={link.route}>
-                    <MenuItem {...menuItemStyles}> {link.name} </MenuItem>
+                <Link href={"/profile/{id}"} key={"/profile/{id}"}>
+                  <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
+                </Link>
+                {!userID ? (
+                  <Link href={"/login"} key={"/login"}>
+                    <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
                   </Link>
-                ))}
+                ) : (
+                  <MenuItem onClick={logout} {...menuItemStyles}>
+                    {"Logout"}
+                  </MenuItem>
+                )}
               </MenuList>
             </Menu>
           </Flex>

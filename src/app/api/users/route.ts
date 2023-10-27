@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     await sql`INSERT INTO users (first_name, last_name, email, password) VALUES (${fName}, ${lName}, ${email}, ${hashedPassword});`;
     return NextResponse.json({ message: "user Created" }, { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
