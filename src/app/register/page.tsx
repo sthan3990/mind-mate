@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { sql } from "@vercel/postgres";
-import { NextResponse } from "next/server";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 import {
   Box,
@@ -49,9 +48,10 @@ export default function JoinOurTeam() {
     email: string,
     password: string
   ) => {
-    push(
-      `/api/add-users?fName=${fName}&lName=${lName}&email=${email}&password=${password}`
-    );
+    axios.post("/api/users", { fName, lName, email, password }).then((res) => {
+      console.log(res);
+      push("/login");
+    });
   };
 
   return (
