@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import {
@@ -31,13 +32,9 @@ const Links = [
   { name: "Register", route: "/register" },
 ];
 
-const email = localStorage.getItem("User") || "";
-const dropdownLinks = [
-  { name: "Your Profile", route: "/profile/{id}" },
-  !email ? { name: "Login", route: "/login" } : { name: "Logout", route: "/" },
-];
-
 export default function Navbar() {
+  const { refresh } = useRouter();
+  const email = localStorage.getItem("User") || "";
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const menuItemStyles = {
@@ -49,7 +46,8 @@ export default function Navbar() {
   };
 
   const logout = () => {
-    localStorage.removeItem("User");
+    localStorage.setItem("User", "");
+    refresh();
   };
 
   return (
@@ -111,8 +109,7 @@ export default function Navbar() {
                   </Link>
                 ) : (
                   <MenuItem onClick={logout} {...menuItemStyles}>
-                    {" "}
-                    {"Logout"}{" "}
+                    {"Logout"}
                   </MenuItem>
                 )}
               </MenuList>

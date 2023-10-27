@@ -22,17 +22,10 @@ import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const LoginPage = () => {
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    const email = localStorage.getItem("User") || "";
-    if (email) {
-      push("/");
-    }
-  }, []);
 
   const loginRequest = (email: string, password: string) => {
     axios.post("/api/login", { email, password }).then((res) => {
@@ -40,9 +33,16 @@ const LoginPage = () => {
       if (res.data.message === "User logged in") {
         localStorage.setItem("User", email);
       }
-      push("/");
+      refresh();
     });
   };
+
+  useEffect(() => {
+    const email = localStorage.getItem("User") || "";
+    if (email) {
+      push("/");
+    }
+  }, [loginRequest]);
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"}>

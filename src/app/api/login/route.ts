@@ -1,5 +1,4 @@
 import { sql } from "@vercel/postgres";
-import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 const bcrypt = require("bcrypt");
 
