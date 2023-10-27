@@ -50,7 +50,7 @@ export default function JoinOurTeam() {
   ) => {
     axios.post("/api/users", { fName, lName, email, password }).then((res) => {
       console.log(res);
-      push("/");
+      push("/login");
     });
   };
 
