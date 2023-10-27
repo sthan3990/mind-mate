@@ -1,4 +1,4 @@
-Can find the site being hosted on [https://mind-mate-git-feature-register-shan3990.vercel.app/](https://mind-mate-git-feature-register-shan3990.vercel.app/)
+Can find the site being hosted on [[https://mind-mate-git-feature-register-shan3990.vercel.app/]([https://mind-mate-eight.vercel.app/)](https://mind-mate-git-feature-register-shan3990.vercel.app/](https://mind-mate-eight.vercel.app/))
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
