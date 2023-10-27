@@ -22,6 +22,10 @@ import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const LoginPage = () => {
+  useEffect(() => {
+    localStorage.getItem("User") || localStorage.setItem("User", "");
+  }, []);
+
   const { push, refresh } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
