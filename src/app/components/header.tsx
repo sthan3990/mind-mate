@@ -1,6 +1,6 @@
 "use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 import {
   Box,
   Flex,
@@ -17,82 +17,90 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-} from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import Weather from './weather';
+} from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import Weather from "./weather";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const Links = [
-  { name: 'Chatbot', route: '/chatbot' },
-  { name: 'Journal', route: '/journal' },
-  { name: 'Register', route: '/register' },
+  { name: "Chatbot", route: "/chatbot" },
+  { name: "Journal", route: "/journal" },
+  { name: "Register", route: "/register" },
 ];
 
 const dropdownLinks = [
-  { name: 'Your Profile', route: '/profile/{id}' },
-  { name: 'Logout', route: '/Projects' },
+  { name: "Your Profile", route: "/profile/{id}" },
+  { name: "Login", route: "/login" },
+  { name: "Logout", route: "/Projects" },
 ];
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const menuItemStyles = {
-    bg: 'primary.900',
+    bg: "primary.900",
     _hover: {
-      textDecoration: 'none',
-      bg: useColorModeValue('blue.200', 'blue.700'),
+      textDecoration: "none",
+      bg: useColorModeValue("blue.200", "blue.700"),
     },
   };
 
   return (
     <>
       <Box bg="primary.900" px={4}>
-        <Flex color="white" h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <Flex
+          color="white"
+          h={16}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
           <IconButton
-            size={'md'}
+            size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={'center'}>
+          <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Image height={50} width={50} src="/logo.svg" alt="Mind Mate"/>
+              <Image height={50} width={50} src="/logo.svg" alt="Mind Mate" />
             </Box>
-            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+            <HStack
+              as={"nav"}
+              spacing={4}
+              display={{ base: "none", md: "flex" }}
+            >
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-                
-                   <Box  {...menuItemStyles}>{link.name}</Box> 
-                 
+                  <Box {...menuItemStyles}>{link.name}</Box>
                 </Link>
               ))}
             </HStack>
           </HStack>
-          <Flex alignItems={'center'}>
+          <Flex alignItems={"center"}>
             <Weather />
             <Box ml={4} />
             <Menu>
               <MenuDivider />
               <MenuButton
                 as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
                 minW={0}
               >
                 <Avatar
-                  size={'sm'}
+                  size={"sm"}
                   src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
                 />
               </MenuButton>
               <MenuList bg="primary.900">
                 {dropdownLinks.map((link) => (
                   <Link href={link.route} key={link.route}>
-                     <MenuItem {...menuItemStyles}> {link.name} </MenuItem>
+                    <MenuItem {...menuItemStyles}> {link.name} </MenuItem>
                   </Link>
                 ))}
               </MenuList>
@@ -100,11 +108,11 @@ export default function Navbar() {
           </Flex>
         </Flex>
         {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}>
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-                   <Box  {...menuItemStyles}>{link.name}</Box>  
+                  <Box {...menuItemStyles}>{link.name}</Box>
                 </Link>
               ))}
             </Stack>
