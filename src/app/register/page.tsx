@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { ValidateEmail } from "../helper/validateEmail";
 
 import {
   Box,
@@ -23,7 +24,6 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-
 import TermsModal from "./termsmodal";
 
 export default function JoinOurTeam() {
@@ -48,10 +48,16 @@ export default function JoinOurTeam() {
     email: string,
     password: string
   ) => {
-    axios.post("/api/users", { fName, lName, email, password }).then((res) => {
-      console.log(res);
-      push("/login");
-    });
+    if (ValidateEmail(email)) {
+      axios
+        .post("/api/users", { fName, lName, email, password })
+        .then((res) => {
+          console.log(res);
+          push("/login");
+        });
+    } else {
+      alert("Invalid email address!");
+    }
   };
 
   return (
@@ -178,7 +184,7 @@ export default function JoinOurTeam() {
                 <Stack pt={6}>
                   <Text align={"center"}>
                     Already a user?{" "}
-                    <Link href="login" color={"blue.400"}>
+                    <Link href="/login" color={"blue.400"}>
                       Login
                     </Link>
                   </Text>

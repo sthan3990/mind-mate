@@ -31,10 +31,10 @@ const Links = [
   { name: "Register", route: "/register" },
 ];
 
+const email = localStorage.getItem("User") || "";
 const dropdownLinks = [
   { name: "Your Profile", route: "/profile/{id}" },
-  { name: "Login", route: "/login" },
-  { name: "Logout", route: "/Projects" },
+  !email ? { name: "Login", route: "/login" } : { name: "Logout", route: "/" },
 ];
 
 export default function Navbar() {
@@ -46,6 +46,10 @@ export default function Navbar() {
       textDecoration: "none",
       bg: useColorModeValue("blue.200", "blue.700"),
     },
+  };
+
+  const logout = () => {
+    localStorage.removeItem("User");
   };
 
   return (
@@ -98,11 +102,19 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList bg="primary.900">
-                {dropdownLinks.map((link) => (
-                  <Link href={link.route} key={link.route}>
-                    <MenuItem {...menuItemStyles}> {link.name} </MenuItem>
+                <Link href={"/profile/{id}"} key={"/profile/{id}"}>
+                  <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
+                </Link>
+                {!email ? (
+                  <Link href={"/login"} key={"/login"}>
+                    <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
                   </Link>
-                ))}
+                ) : (
+                  <MenuItem onClick={logout} {...menuItemStyles}>
+                    {" "}
+                    {"Logout"}{" "}
+                  </MenuItem>
+                )}
               </MenuList>
             </Menu>
           </Flex>
