@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 import Link from "next/link";
 import {
@@ -34,9 +33,6 @@ const Links = [
 ];
 
 export default function Navbar() {
-  useEffect(() => {
-    localStorage.getItem("User") || localStorage.setItem("User", "");
-  }, []);
   const { refresh } = useRouter();
   const email = localStorage.getItem("User") || "";
   const { isOpen, onOpen, onClose } = useDisclosure();
