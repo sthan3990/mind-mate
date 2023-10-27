@@ -26,7 +26,10 @@ export async function POST(request: Request) {
       return new NextResponse("password not correct");
     }
 
-    return NextResponse.json({ message: "User logged in" }, { status: 200 });
+    return NextResponse.json(
+      { message: "User logged in", userID: login.rows[0].id },
+      { status: 200 }
+    );
   } catch (error) {
     console.log(error);
   }

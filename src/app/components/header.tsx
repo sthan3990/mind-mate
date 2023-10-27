@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import {
@@ -33,8 +34,20 @@ const Links = [
 ];
 
 export default function Navbar() {
+  const logout = () => {
+    localStorage.setItem("User", "");
+    refresh();
+  };
+  const [userID, setUserID] = useState("");
+  useEffect(() => {
+    setUserID(
+      JSON.stringify(
+        localStorage.getItem("User") || localStorage.setItem("User", "")
+      )
+    );
+  }, [logout]);
+
   const { refresh } = useRouter();
-  const email = localStorage.getItem("User") || "";
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const menuItemStyles = {
@@ -45,10 +58,7 @@ export default function Navbar() {
     },
   };
 
-  const logout = () => {
-    localStorage.setItem("User", "");
-    refresh();
-  };
+  console.log(userID);
 
   return (
     <>
@@ -103,7 +113,7 @@ export default function Navbar() {
                 <Link href={"/profile/{id}"} key={"/profile/{id}"}>
                   <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
                 </Link>
-                {!email ? (
+                {!userID ? (
                   <Link href={"/login"} key={"/login"}>
                     <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
                   </Link>

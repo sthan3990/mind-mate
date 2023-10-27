@@ -29,9 +29,9 @@ const LoginPage = () => {
 
   const loginRequest = (email: string, password: string) => {
     axios.post("/api/login", { email, password }).then((res) => {
-      console.log(res.data.message);
+      console.log(res.data);
       if (res.data.message === "User logged in") {
-        localStorage.setItem("User", email);
+        localStorage.setItem("User", res.data.userID);
       }
       refresh();
     });
