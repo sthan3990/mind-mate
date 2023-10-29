@@ -1,10 +1,9 @@
 /** App Color Pallete (You can customize these colors or you can use Chakra UI's colors check the doc to know more about it) */
 export const colors = {
   primary: {
-    900: "#2d3258",
-    800: "#15193b",
+    900: "#15193b",
+    800: "#2d3258",
     700: "#F9F2FF"
-
   },
   success: {
     900: "#2E7D32",
@@ -17,7 +16,8 @@ export const colors = {
     900: "#FAD938",
   },
   text: {
-    white: "#FFFFFF"
+    white: "#FFFFFF",
+    black: "#000000"
   },
   white: {
     900: "#FFFFFF",

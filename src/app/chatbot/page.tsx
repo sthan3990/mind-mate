@@ -40,7 +40,7 @@ export default function ChatGPT() {
         color='blackAlpha.700'
         fontWeight='bold'
       >
-        <GridItem pl='2' bg='primary.900' area={'header'}>
+        <GridItem pl='2' bg='primary.800' area={'header'}>
           <Center>
           <Heading  as='h1' size='2xl'>Your CBT Chatbot </Heading>
             </Center>

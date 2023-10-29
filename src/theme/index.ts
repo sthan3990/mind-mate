@@ -14,8 +14,7 @@ export const theme = extendTheme({
       },
     }),
   },
-  components: {
-     
+  components: {   
   },
 });
 
