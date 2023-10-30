@@ -53,14 +53,14 @@ export default function Navbar() {
   const userId = 1;
 
   const Links = [
-    { name: 'Chatbot', route: '/chatbot' },
-    { name: 'Journal', route: '/journal' },
-    { name: 'Register', route: '/register' },
+    { name: "Chatbot", route: "/chatbot" },
+    { name: "Journal", route: "/journal" },
+    { name: "Register", route: "/register" },
   ];
 
   const dropdownLinks = [
-    { name: 'Your Profile', route: `/profile/${userId}` },
-    { name: 'Logout', route: '/Projects' },
+    { name: "Your Profile", route: `/profile/${userId}` },
+    { name: "Logout", route: "/Projects" },
   ];
 
   const menuItemStyles = {
@@ -70,8 +70,6 @@ export default function Navbar() {
       bg: useColorModeValue("blue.200", "blue.700"),
     },
   };
-
-  console.log(userID);
 
   return (
     <>
@@ -100,7 +98,6 @@ export default function Navbar() {
             >
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-                  
                   <Box {...menuItemStyles}>{link.name}</Box>
                 </Link>
               ))}
@@ -145,7 +142,6 @@ export default function Navbar() {
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-
                   <Box {...menuItemStyles}>{link.name}</Box>
                 </Link>
               ))}
