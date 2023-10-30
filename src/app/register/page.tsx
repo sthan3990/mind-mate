@@ -20,9 +20,12 @@ import {
   FormLabel,
   InputRightElement
 } from '@chakra-ui/react';
+
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 import TermsModal from './termsmodal';
+
+import { fonts } from '@/theme/fonts';
 
 export default function JoinOurTeam() {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,7 +60,8 @@ export default function JoinOurTeam() {
         </Stack>
 
         <Stack
-          bg="primary.700"
+        color='black'
+          bg="yellow"
           rounded={'xl'}
           p={{ base: 4, sm: 6, md: 8 }}
           spacing={{ base: 8 }}
@@ -71,10 +75,12 @@ export default function JoinOurTeam() {
             </Text>
 
           </Stack>
+
+
           <Box as={'form'} mt={10}>
             <Box
               rounded={'lg'}
-              bg="primary.700"
+              bg="red"
               boxShadow={'lg'}
               color="black"
               p={8}>
@@ -114,7 +120,7 @@ export default function JoinOurTeam() {
                 </FormControl>
                 <Stack spacing={10} pt={2}>
                   <Button
-                    fontFamily={'heading'}
+                    fontFamily={fonts.heading}
                     bg={'blue.200'}
                     color={'blue.800'}
                     onClick={onOpen}>
@@ -126,6 +132,7 @@ export default function JoinOurTeam() {
                     onClose={onClose}
                   />
                   <Button
+                    fontFamily={fonts.formspecial}
                     loadingText="Submitting"
                     size="lg"
                     isDisabled={!agreed}
@@ -140,14 +147,14 @@ export default function JoinOurTeam() {
                 <Stack pt={6}>
                   <Text align={'center'}>
                     Already a user? <Link href="login" color={'blue.400'}>Login</Link>
-              
-
                   </Text>
                 </Stack>
               </Stack>
             </Box>
           </Box>
         </Stack>
+
+        
       </Container>
     </Box>
   );
