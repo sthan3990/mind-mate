@@ -5,15 +5,20 @@ export async function GET(request: Request) {
   // Extract the user ID from the URL path
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
-  // Ensure user ID exists
 
+  console.log("searchParams: ", searchParams);
+
+  // Ensure user ID exists
   if (!userId || isNaN(Number(userId))) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
   }
-  console.log("userIdin api route: ", userId);
+  console.log("userId in api route: ", userId);
   try {
     // Fetch user from db
     const user = await sql`SELECT first_name, last_name, email FROM users WHERE id = ${userId};`;
+    // const user = await sql`SELECT * FROM users;`;
+    console.log("user: ", user);
+
     // const user = await sql`SELECT * FROM users`;
 
     console.log("user api route: ", user);

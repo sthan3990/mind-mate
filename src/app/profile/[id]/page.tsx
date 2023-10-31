@@ -26,7 +26,10 @@ const UserProfilePage = () => {
   const toast = useToast();
   // const router = useRouter();
 
-  const userId = window.location.pathname.split("/").pop();
+  // const userId = window.location.pathname.split("/").pop();
+  const userId = localStorage.getItem("User");
+
+  console.log("page userInfo is: ", userId);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -36,7 +39,7 @@ const UserProfilePage = () => {
         setUserData(data);
         setLoading(false);
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        console.error("Failed to fetch user dataa:", error);
         setLoading(false);
       }
     }
