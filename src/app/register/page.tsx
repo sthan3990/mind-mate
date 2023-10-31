@@ -31,7 +31,7 @@ export default function JoinOurTeam() {
   const leftSideStyle = {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-between", 
     position: "relative",
     backgroundColor: "#f9f8f8",
     width: "100%",
@@ -49,7 +49,7 @@ export default function JoinOurTeam() {
     paddingTop: "20px",
     paddingLeft: "20px",
   };
-
+  
   const mainImageStyle = {
     maxWidth: ["90%", "92%", "94%", "96%"],
     maxHeight: ["700px", "750px", "780px", "800px"],
@@ -60,11 +60,12 @@ export default function JoinOurTeam() {
     position: "relative",
     fontSize: "40px",
     fontWeight: 600,
-    fontFamily: fonts.heading,
+    fontFamily: fonts.heading, 
     textAlign: "left",
     marginLeft: "20px",
     color: "black",
   };
+  
 
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -100,26 +101,27 @@ export default function JoinOurTeam() {
   };
 
   return (
-    <SimpleGrid columns={2} spacing={0.1} w="full">
-      <Box sx={leftSideStyle}>
-        {/* Logo */}
-        <Box sx={logoStyle}>
-          <Image src="./logo.svg" alt="Logo" objectFit="cover" />
-          <Text sx={textStyle}>MindMate</Text>
+      <SimpleGrid columns={2} spacing={0.1} w="full">
+        <Box sx={leftSideStyle}>
+          {/* Logo */}
+          <Box sx={logoStyle}>
+            <Image src="./logo.svg" alt="Logo" objectFit="cover" />
+            <Text sx={textStyle}>MindMate</Text>
+          </Box>
+          <Box sx={mainImageStyle}>
+            {/* Main Image */}
+            <Image src="./register/image.svg" alt="Mind Mate" />
+          </Box>
         </Box>
-        <Box sx={mainImageStyle}>
-          {/* Main Image */}
-          <Image src="./register/image.svg" alt="Mind Mate" />
-        </Box>
-      </Box>
 
-      {/* Right Side with Signup Form */}
-      <Stack bg="white" color="black">
-        <Box p={{ base: 4, md: 6, lg: 8 }}>
+        {/* Right Side with Signup Form */}
+        <Stack
+          bg="white"
+          color="black"
+        >
+        <Box p={{ base: 4, md: 6, lg: 8}}>
           <Stack align={"center"} spacing={6}>
-            <Heading fontSize={"4xl"} fontFamily={fonts.heading}>
-              Create an Account 👋
-            </Heading>
+            <Heading fontSize={"4xl"} fontFamily={fonts.heading}>Create an Account  👋</Heading>
             <Box as={"form"} mt={10} w="full">
               <Stack spacing={4}>
                 <HStack spacing={4}>
@@ -165,12 +167,7 @@ export default function JoinOurTeam() {
                   </InputGroup>
                 </FormControl>
                 <Stack spacing={10} pt={2}>
-                  <Button
-                    fontFamily={"heading"}
-                    bg={"blue.200"}
-                    color={"blue.800"}
-                    onClick={onOpen}
-                  >
+                  <Button fontFamily={"heading"} bg={"blue.200"} color={"blue.800"} onClick={onOpen}>
                     Terms and Conditions
                   </Button>
                   <TermsModal
@@ -202,7 +199,7 @@ export default function JoinOurTeam() {
             </Box>
           </Stack>
         </Box>
-      </Stack>
-    </SimpleGrid>
+        </Stack>
+      </SimpleGrid>
   );
 }
