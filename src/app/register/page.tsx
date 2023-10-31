@@ -76,7 +76,6 @@ export default function JoinOurTeam() {
     width: ["30%", "40%", "50%", "60%"],
     height: "42px",
     marginTop: "60px",
-    marginLeft: "-135px",
     fontSize: ["20px", "24px", "28px", "32px"],
     maxWidth: "90%",
     alignSelf: "center",
@@ -184,7 +183,7 @@ export default function JoinOurTeam() {
       {/* Right Side with Signup Form */}
       <Stack bg="white" color="black">
         <Box p={{ base: 4, md: 6, lg: 8 }}>
-          <Stack align={"center"} spacing={12}>
+          <Stack  spacing={12}>
             <Heading fontSize={"4xl"} fontFamily={fonts.heading} sx={headingStyle}>
               Create an Account 👋
             </Heading>
@@ -238,7 +237,7 @@ export default function JoinOurTeam() {
               </Stack>
             </Box>
 
-            <Stack spacing={5} pt={1} justifyContent="center">
+            <Stack spacing={5} pt={1} justifyContent="center" alignItems="center" width="100%" >
             <HStack spacing={2}>
                 <Checkbox 
                   colorScheme="blue"
