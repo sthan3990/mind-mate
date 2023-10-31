@@ -27,8 +27,12 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const userId = searchParams.get("userId");
+  const journalId = searchParams.get("journalId");
+  const questionId = searchParams.get("questionId");
   try {
-    const { userId, journalId, questionId } = await request.json();
+    //const { userId, journalId, questionId } = await request.json();
     if (!userId) {
       return new NextResponse("User ID not provided.", {
         status: 400,
