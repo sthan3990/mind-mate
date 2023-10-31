@@ -13,4 +13,5 @@ export const fonts = {
   body: poppinsBody.style.fontFamily,
   heading: poppinsHeader.style.fontFamily,
   formspecial: inter.style.fontFamily
+  
 };
