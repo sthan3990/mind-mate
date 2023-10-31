@@ -13,7 +13,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-// import { useRouter } from 'next/router';
 
 const UserProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -24,9 +23,7 @@ const UserProfilePage = () => {
   const [updatedEmail, setUpdatedEmail] = useState("");
 
   const toast = useToast();
-  // const router = useRouter();
 
-  // const userId = window.location.pathname.split("/").pop();
   const userId = localStorage.getItem("User");
 
   console.log("page userInfo is: ", userId);

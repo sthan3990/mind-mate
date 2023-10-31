@@ -49,8 +49,6 @@ export default function Navbar() {
 
   const { refresh } = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const userId = localStorage.getItem('userId');
-  const userId = 1;
 
   const Links = [
     { name: "Chatbot", route: "/chatbot" },
@@ -59,7 +57,7 @@ export default function Navbar() {
   ];
 
   const dropdownLinks = [
-    { name: "Your Profile", route: `/profile/${userId}` },
+    { name: "Your Profile", route: `/profile/${userID}` },
     { name: "Logout", route: "/Projects" },
   ];
 
@@ -121,17 +119,17 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList bg="primary.900">
-                <Link href={"/profile/{id}"} key={"/profile/{id}"}>
-                  <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
-                </Link>
                 {!userID ? (
                   <Link href={"/login"} key={"/login"}>
                     <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
                   </Link>
                 ) : (
-                  <MenuItem onClick={logout} {...menuItemStyles}>
-                    {"Logout"}
-                  </MenuItem>
+                  <Link href={`/profile/${userID}`} key={`/profile/${userID}`}>
+                    <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
+                    <MenuItem onClick={logout} {...menuItemStyles}>
+                      {"Logout"}
+                    </MenuItem>
+                  </Link>
                 )}
               </MenuList>
             </Menu>
