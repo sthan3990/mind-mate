@@ -1,336 +1,116 @@
-"use client";
+// Journal.tsx
+'use client';
 
-import { useState } from "react";
-import {
-  Progress,
-  Box,
-  ButtonGroup,
-  Button,
-  Heading,
-  Flex,
-  FormControl,
-  GridItem,
-  FormLabel,
-  Input,
-  Select,
-  SimpleGrid,
-  InputLeftAddon,
-  InputGroup,
-  Textarea,
-  FormHelperText,
-  Image,
-  HStack,
-} from "@chakra-ui/react";
+import React from 'react';
+import { Button, HStack, Stack, Box, Text } from '@chakra-ui/react';
 
-import { useToast } from "@chakra-ui/react";
-
-const Form1 = () => {
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-
+const Journal: React.FC = () => {
   return (
-    <>
-      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
-        Tap on the emoji that best captures your current emotion.
-      </Heading>
-      <HStack justifyContent="space-between">
-        <Image alt="angry-5" src="./journal/1.png" />
-        <Image alt="less-angry" src="./journal/2.png" />
-        <Image alt="neutral" src="./journal/3.png" />
-        <Image alt="happy" src="./journal/4.png" />
-        <Image alt="very-happy" src="./journal/5.png" />
-      </HStack>
-    </>
-  );
-};
-
-const Form2 = () => {
-  return (
-    <>
-      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
-        User Details
-      </Heading>
-      <FormControl as={GridItem} colSpan={[6, 3]}>
-        <FormLabel
-          htmlFor="country"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
+    <Stack
+      height="65vh"
+      background="#15193B"
+      display="flex"
+      flexDir="column"
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Box>
+        <Text
+          fontFamily="Cantarell"
+          fontWeight="bold"
+          fontSize="40px"
+          color="#FFFFFF"
+          width="100%"
+          maxWidth="743.11px"
+          textAlign="center"
         >
-          Country / Region
-        </FormLabel>
-        <Select
-          id="country"
-          name="country"
-          autoComplete="country"
-          placeholder="Select option"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        >
-          <option>United States</option>
-          <option>Canada</option>
-          <option>Mexico</option>
-        </Select>
-      </FormControl>
-
-      <FormControl as={GridItem} colSpan={6}>
-        <FormLabel
-          htmlFor="street_address"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-          mt="2%"
-        >
-          Street address
-        </FormLabel>
-        <Input
-          type="text"
-          name="street_address"
-          id="street_address"
-          autoComplete="street-address"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        />
-      </FormControl>
-
-      <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
-        <FormLabel
-          htmlFor="city"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-          mt="2%"
-        >
-          City
-        </FormLabel>
-        <Input
-          type="text"
-          name="city"
-          id="city"
-          autoComplete="city"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        />
-      </FormControl>
-
-      <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-        <FormLabel
-          htmlFor="state"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-          mt="2%"
-        >
-          State / Province
-        </FormLabel>
-        <Input
-          type="text"
-          name="state"
-          id="state"
-          autoComplete="state"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        />
-      </FormControl>
-
-      <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-        <FormLabel
-          htmlFor="postal_code"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-          mt="2%"
-        >
-          ZIP / Postal
-        </FormLabel>
-        <Input
-          type="text"
-          name="postal_code"
-          id="postal_code"
-          autoComplete="postal-code"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        />
-      </FormControl>
-    </>
-  );
-};
-
-const Form3 = () => {
-  return (
-    <>
-      <Heading w="100%" textAlign={"center"} fontWeight="normal">
-        Social Handles
-      </Heading>
-      <SimpleGrid columns={1} spacing={6}>
-        <FormControl as={GridItem} colSpan={[3, 2]}>
-          <FormLabel
-            fontSize="sm"
-            fontWeight="md"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-          >
-            Website
-          </FormLabel>
-          <InputGroup size="sm">
-            <InputLeftAddon
-              bg="gray.50"
-              _dark={{
-                bg: "gray.800",
-              }}
-              color="gray.500"
-              rounded="md"
-            >
-              http://
-            </InputLeftAddon>
-            <Input
-              type="tel"
-              placeholder="www.example.com"
-              focusBorderColor="brand.400"
-              rounded="md"
-            />
-          </InputGroup>
-        </FormControl>
-
-        <FormControl id="email" mt={1}>
-          <FormLabel
-            fontSize="sm"
-            fontWeight="md"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-          >
-            About
-          </FormLabel>
-          <Textarea
-            placeholder="you@example.com"
-            rows={3}
-            shadow="sm"
-            focusBorderColor="brand.400"
-            fontSize={{
-              sm: "sm",
-            }}
-          />
-          <FormHelperText>
-            Brief description for your profile. URLs are hyperlinked.
-          </FormHelperText>
-        </FormControl>
-      </SimpleGrid>
-    </>
-  );
-};
-
-export default function GuidedJournal() {
-  const toast = useToast();
-  const [step, setStep] = useState(1);
-  const [progress, setProgress] = useState(33.33);
-
-  return (
-    <>
-      <Box
-        borderWidth="1px"
-        rounded="lg"
-        shadow="1px 1px 3px rgba(0,0,0,0.3)"
-        maxWidth={800}
-        p={6}
-        m="10px auto"
-        as="form"
-      >
-        <Progress
-          hasStripe
-          value={progress}
-          mb="5%"
-          mx="5%"
-          isAnimated
-        ></Progress>
-        {step === 1 ? <Form1 /> : step === 2 ? <Form2 /> : <Form3 />}
-        <ButtonGroup mt="5%" w="100%">
-          <Flex w="100%" justifyContent="space-between">
-            <Flex>
-              <Button
-                onClick={() => {
-                  setStep(step - 1);
-                  setProgress(progress - 33.33);
-                }}
-                isDisabled={step === 1}
-                colorScheme="teal"
-                variant="solid"
-                w="7rem"
-                mr="5%"
-              >
-                Back
-              </Button>
-              <Button
-                w="7rem"
-                isDisabled={step === 3}
-                onClick={() => {
-                  setStep(step + 1);
-                  if (step === 3) {
-                    setProgress(100);
-                  } else {
-                    setProgress(progress + 33.33);
-                  }
-                }}
-                colorScheme="teal"
-                variant="outline"
-              >
-                Next
-              </Button>
-            </Flex>
-            {step === 3 ? (
-              <Button
-                w="7rem"
-                colorScheme="red"
-                variant="solid"
-                onClick={() => {
-                  toast({
-                    title: "Account created.",
-                    description: "We've created your account for you.",
-                    status: "success",
-                    duration: 3000,
-                    isClosable: true,
-                  });
-                }}
-              >
-                Submit
-              </Button>
-            ) : null}
-          </Flex>
-        </ButtonGroup>
+          Select the Number of Questions
+        </Text>
       </Box>
-    </>
+
+      <Box>
+        <HStack spacing="4" align="center">
+          <Box>
+            <svg
+              width="133"
+              height="134"
+              viewBox="0 0 133 134"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="66.5" cy="66.5" r="63.5" fill="white" stroke="black" strokeWidth="4" />
+              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
+                1
+              </text>
+            </svg>
+          </Box>
+
+          <Box>
+            <svg
+              width="134"
+              height="134"
+              viewBox="0 0 134 134"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="67" cy="67" r="65" fill="white" stroke="black" strokeWidth="4" />
+              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
+                2
+              </text>
+            </svg>
+          </Box>
+
+          <Box>
+            <svg
+              width="134"
+              height="134"
+              viewBox="0 0 134 134"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="67" cy="67" r="65" fill="white" stroke="black" strokeWidth="4" />
+              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
+                3
+              </text>
+            </svg>
+          </Box>
+        </HStack>
+      </Box>
+      
+      <Box>
+        <Button background="#D0A2D1">
+          <Text
+            fontFamily="Poppins"
+            fontWeight="semibold"
+            fontSize="24px"
+            letterSpacing="-0.03em"
+            color="#393939"
+            width="100%"
+            maxWidth="118.2px"
+            textAlign="center"
+          >
+            Continue
+          </Text>
+        </Button>
+      </Box>
+
+      <Box>
+        <Text
+          fontFamily="Poppins"
+          fontWeight="semibolditalic"
+          fontSize="24px"
+          letterSpacing="-0.03em"
+          fontStyle="italic"
+          color="#CEB1CE"
+          width="100%"
+          maxWidth="973px"
+          textAlign="center"
+        >
+          Every question is a step towards self-discovery; even the smallest step can lead to profound insights. Choose what feels right for you today.
+        </Text>
+      </Box>
+    </Stack>
   );
-}
+};
+
+export default Journal;
