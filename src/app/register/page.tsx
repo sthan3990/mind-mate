@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { ValidateEmail } from "../helper/validateEmail";
+import { fonts } from "@/theme/fonts";
 
 import {
   Box,
@@ -23,10 +25,47 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-
 import TermsModal from "./termsmodal";
 
 export default function JoinOurTeam() {
+  const leftSideStyle = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    position: "relative",
+    backgroundColor: "#f9f8f8",
+    width: "100%",
+    height: "832px",
+    margin: 0,
+    padding: 0,
+  };
+
+  const logoStyle = {
+    display: "flex",
+    alignItems: "center",
+    position: "relative",
+    width: ["50%", "60%", "70%", "10%"],
+    height: ["41.02px", "49.224px", "57.428px", "82.04px"],
+    paddingTop: "20px",
+    paddingLeft: "20px",
+  };
+
+  const mainImageStyle = {
+    maxWidth: ["90%", "92%", "94%", "96%"],
+    maxHeight: ["700px", "750px", "780px", "800px"],
+    margin: "0 auto",
+  };
+
+  const textStyle = {
+    position: "relative",
+    fontSize: "40px",
+    fontWeight: 600,
+    fontFamily: fonts.heading,
+    textAlign: "left",
+    marginLeft: "20px",
+    color: "black",
+  };
+
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,82 +87,61 @@ export default function JoinOurTeam() {
     email: string,
     password: string
   ) => {
-    axios.post("/api/users", { fName, lName, email, password }).then((res) => {
-      console.log(res);
-      push("/login");
-    });
+    if (ValidateEmail(email)) {
+      axios
+        .post("/api/users", { fName, lName, email, password })
+        .then((res) => {
+          console.log(res);
+          push("/login");
+        });
+    } else {
+      alert("Invalid email address!");
+    }
   };
 
   return (
-    <Box position={"relative"}>
-      <Container
-        as={SimpleGrid}
-        maxW={"7xl"}
-        columns={{ base: 1, md: 2 }}
-        spacing={{ base: 5, lg: 10 }}
-        py={{ base: 10, sm: 20, lg: 32 }}
-      >
-        <Stack
-          rounded={"xl"}
-          p={{ base: 4, sm: 6, md: 8 }}
-          spacing={{ base: 8 }}
-          maxW={{ lg: "lg" }}
-          align={"center"}
-        >
+    <SimpleGrid columns={2} spacing={0.1} w="full">
+      <Box sx={leftSideStyle}>
+        {/* Logo */}
+        <Box sx={logoStyle}>
+          <Image src="./logo.svg" alt="Logo" objectFit="cover" />
+          <Text sx={textStyle}>MindMate</Text>
+        </Box>
+        <Box sx={mainImageStyle}>
+          {/* Main Image */}
           <Image src="./register/image.svg" alt="Mind Mate" />
-        </Stack>
+        </Box>
+      </Box>
 
-        <Stack
-          bg="primary.700"
-          rounded={"xl"}
-          p={{ base: 4, sm: 6, md: 8 }}
-          spacing={{ base: 8 }}
-          maxW={{ lg: "lg" }}
-        >
-          <Stack align={"center"}>
-            <Heading fontSize={"4xl"} textAlign={"center"} color="black">
-              Sign up
+      {/* Right Side with Signup Form */}
+      <Stack bg="white" color="black">
+        <Box p={{ base: 4, md: 6, lg: 8 }}>
+          <Stack align={"center"} spacing={6}>
+            <Heading fontSize={"4xl"} fontFamily={fonts.heading}>
+              Create an Account 👋
             </Heading>
-            <Text fontSize={"lg"} color="Black">
-              to enjoy all of our cool features ✌️
-            </Text>
-          </Stack>
-          <Box as={"form"} mt={10}>
-            <Box
-              rounded={"lg"}
-              bg="primary.700"
-              boxShadow={"lg"}
-              color="black"
-              p={8}
-            >
+            <Box as={"form"} mt={10} w="full">
               <Stack spacing={4}>
-                <HStack>
-                  <Box>
-                    <FormControl id="firstName" isRequired>
-                      <FormLabel>First Name</FormLabel>
-                      <Input
-                        type="text"
-                        background="gray"
-                        onChange={(event) => setFName(event.target.value)}
-                      />
-                    </FormControl>
-                  </Box>
-                  <Box>
-                    <FormControl id="lastName">
-                      <FormLabel>Last Name</FormLabel>
-                      <Input
-                        type="text"
-                        background="gray"
-                        onChange={(event) => setLName(event.target.value)}
-                      />
-                    </FormControl>
-                  </Box>
+                <HStack spacing={4}>
+                  <FormControl id="firstName" isRequired>
+                    <FormLabel>First Name</FormLabel>
+                    <Input
+                      type="text"
+                      onChange={(event) => setFName(event.target.value)}
+                    />
+                  </FormControl>
+                  <FormControl id="lastName" isRequired>
+                    <FormLabel>Last Name</FormLabel>
+                    <Input
+                      type="text"
+                      onChange={(event) => setLName(event.target.value)}
+                    />
+                  </FormControl>
                 </HStack>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
                   <Input
                     type="email"
-                    background="gray"
                     onChange={(event) => setEmail(event.target.value)}
                   />
                 </FormControl>
@@ -131,7 +149,6 @@ export default function JoinOurTeam() {
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
                     <Input
-                      background="gray"
                       type={showPassword ? "text" : "password"}
                       onChange={(event) => setPassword(event.target.value)}
                     />
@@ -139,7 +156,7 @@ export default function JoinOurTeam() {
                       <Button
                         variant={"ghost"}
                         onClick={() =>
-                          setShowPassword((showPassword) => !showPassword)
+                          setShowPassword((prevState) => !prevState)
                         }
                       >
                         {showPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -167,9 +184,7 @@ export default function JoinOurTeam() {
                     isDisabled={!agreed}
                     bg={"blue.100"}
                     color={"black"}
-                    _hover={{
-                      bg: "blue.600",
-                    }}
+                    _hover={{ bg: "blue.600" }}
                     onClick={() => createAccount(fName, lName, email, password)}
                   >
                     Sign up
@@ -178,16 +193,16 @@ export default function JoinOurTeam() {
                 <Stack pt={6}>
                   <Text align={"center"}>
                     Already a user?{" "}
-                    <Link href="login" color={"blue.400"}>
+                    <Link href="/login" color={"blue.400"}>
                       Login
                     </Link>
                   </Text>
                 </Stack>
               </Stack>
             </Box>
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
+          </Stack>
+        </Box>
+      </Stack>
+    </SimpleGrid>
   );
 }
