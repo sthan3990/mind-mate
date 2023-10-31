@@ -31,7 +31,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
   try {
-    //const { userId } = await request.json();
     if (!userId) {
       return new NextResponse("ID not provided.", {
         status: 400,
@@ -39,7 +38,7 @@ export async function GET(request: Request) {
     }
 
     const journals =
-      await sql`SELECT users.id, emotion_pre, emotion_post, timestamp FROM users join journals ON users.id = journals.user_id WHERE users.id = ${userId};`;
+      await sql`SELECT users.id, emotion_pre, emotion_post, num_questions, timestamp FROM users join journals ON users.id = journals.user_id WHERE users.id = ${userId};`;
     return NextResponse.json({ journals: journals.rows }, { status: 200 });
   } catch (error) {
     console.error(error);
