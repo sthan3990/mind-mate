@@ -30,7 +30,7 @@ const UserProfilePage = () => {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`/api/get-user-profile?userId=${userId}`);
+        const response = await fetch(`/api/user-profile?userId=${userId}`);
         const data = await response.json();
         setUserData(data);
         setLoading(false);
@@ -59,7 +59,7 @@ const UserProfilePage = () => {
     updatedEmail: string
   ) => {
     axios
-      .patch("/api/get-user-profile", {
+      .patch("/api/user-profile", {
         first_name: updatedFirstName,
         last_name: updatedLastName,
         email: updatedEmail,
@@ -72,11 +72,11 @@ const UserProfilePage = () => {
   };
 
   const deleteUser = (userId: string) => {
-    const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+    const isConfirmed = window.confirm("Are you sure you want to delete your account? This cannot be undone.");
 
     if (isConfirmed) {
       axios
-        .delete("/api/get-user-profile", { data: { userId: userId } })
+        .delete("/api/user-profile", { data: { userId: userId } })
         .then((res) => {
           console.log(res);
           push("/register");

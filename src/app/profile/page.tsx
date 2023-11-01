@@ -28,7 +28,7 @@ const UserProfilePage = () => {
     async function fetchUserData() {
 
       try {
-        const response = await fetch(`/api/get-user-profile?userId=1`);
+        const response = await fetch(`/api/user-profile?userId=1`);
         console.log("response is ", response);
         const data = await response.json();
         console.log("after teh response.json")

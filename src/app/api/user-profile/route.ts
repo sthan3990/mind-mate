@@ -67,6 +67,19 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
 
+}
+
+
+export async function DELETE(request: Request) {
+  // Extract the updated data from the request body
+  const { userId } = await request.json();
+
+  console.log(":request.json: ", request.json());
+
+  if (!userId || isNaN(Number(userId))) {
+    return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
+  }
+
   try {
     // Delete the user in the database
     const result = await sql`
@@ -86,4 +99,5 @@ export async function PATCH(request: Request) {
     // Handle any unexpected errors
     return NextResponse.json({ error: error }, { status: 500 });
   }
+
 }
