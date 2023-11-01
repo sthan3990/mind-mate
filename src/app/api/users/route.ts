@@ -19,7 +19,12 @@ export async function POST(request: Request) {
 
     const salt = bcrypt.genSaltSync(8);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    await sql`INSERT INTO users (first_name, last_name, email, password) VALUES (${fName}, ${lName}, ${email}, ${hashedPassword});`;
+    const user = await sql`INSERT INTO users 
+    (first_name, last_name, email, password) 
+    VALUES (${fName}, ${lName}, ${email}, ${hashedPassword}) 
+    RETURNING *;`;
+    let response = NextResponse.next()
+    response.cookies.set("User", user.rows[0].id)
     return NextResponse.json({ message: "user Created" }, { status: 200 });
   } catch (error) {
     console.error(error);

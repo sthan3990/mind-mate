@@ -71,23 +71,29 @@ const UserProfilePage = () => {
       });
   };
 
-  const deleteUser = (userId: string) => {
+  const deleteUser = () => {
     const isConfirmed = window.confirm("Are you sure you want to delete your account? This cannot be undone.");
 
     if (isConfirmed) {
+      console.log("before axios");
       axios
-        .delete("/api/user-profile", { data: { userId: userId } })
+        .delete("/api/user-profile")
         .then((res) => {
+          console.log("in the .then");
           console.log(res);
           push("/register");
+        })
+        .catch((error) => {
+          console.error("Error while deleting:", error);
         });
+      console.log("after axios");
     }
   };
 
   if (loading) {
     return <Text>Loading...</Text>;
   }
-  console.log("userData should be logged out: ", userData)
+  console.log("userData in profile Page: ", userData)
 
   if (!userId) {
     return <Text>No user logged in!</Text>;
@@ -134,7 +140,7 @@ const UserProfilePage = () => {
             <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
               Edit User Details
             </Button>
-            <Button colorScheme="red" onClick={() => deleteUser(userId)}>
+            <Button colorScheme="red" onClick={deleteUser}>
               Delete Account
             </Button>
           </Stack>
