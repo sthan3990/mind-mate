@@ -56,10 +56,15 @@ const UserProfilePage = () => {
   const handleUpdate = (
     updatedFirstName: string,
     updatedLastName: string,
-    updatedEmail: string,
+    updatedEmail: string
   ) => {
     axios
-      .patch("/api/get-user-profile", { updatedFirstName, updatedLastName, updatedEmail, userId })
+      .patch("/api/get-user-profile", {
+        first_name: updatedFirstName,
+        last_name: updatedLastName,
+        email: updatedEmail,
+        userId: userId,
+      })
       .then((res) => {
         console.log(res);
         push("/login");
