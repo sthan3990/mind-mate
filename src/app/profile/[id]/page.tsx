@@ -49,8 +49,8 @@ const UserProfilePage = () => {
 
   useEffect(() => {
     setUpdatedFirstName(userData["first_name"]);
-    setUpdatedEmail(userData["last_name"]);
-    setUpdatedLastName(userData["email"]);
+    setUpdatedEmail(userData["email"]);
+    setUpdatedLastName(userData["last_name"]);
   }, [userData]);
 
   const handleUpdate = (
@@ -87,8 +87,9 @@ const UserProfilePage = () => {
   if (loading) {
     return <Text>Loading...</Text>;
   }
+  console.log("userData should be logged out: ", userData)
 
-  if (!userData) {
+  if (!userId) {
     return <Text>No user logged in!</Text>;
   }
 
