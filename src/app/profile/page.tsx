@@ -67,7 +67,7 @@ const UserProfilePage = () => {
       })
       .then((res) => {
         console.log(res);
-        push(`/profile/${userId}`);
+        push(`/profile`);
       });
   };
 
@@ -138,7 +138,7 @@ const UserProfilePage = () => {
               />
             </FormControl>
             <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
-              Edit User Details
+              Submit Changes
             </Button>
             <Button colorScheme="red" onClick={deleteUser}>
               Delete Account
