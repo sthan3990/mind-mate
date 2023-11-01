@@ -64,7 +64,7 @@ const FormThree: React.FC = () => {
               <Input size='lg' backgroundColor="#737AA8" h="100%" />
             </InputLeftElement>
             <InputRightElement w="5%">
-              <Button leftIcon={ArrowForwardIcon}> </Button>
+              <Button leftIcon={ < ArrowForwardIcon />} /> 
             </InputRightElement>
           </InputGroup>
         </Stack>
