@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { ValidateEmail } from "../helper/validateEmail";
 import { fonts } from "@/theme/fonts";
-import { Checkbox } from "@chakra-ui/react";
 
 
 import {
@@ -13,14 +12,11 @@ import {
   Stack,
   Heading,
   Text,
-  Container,
   Input,
   Button,
   SimpleGrid,
   InputGroup,
   Image,
-  HStack,
-  Link,
   useDisclosure,
   FormControl,
   FormLabel,
@@ -92,15 +88,6 @@ export default function JoinOurTeam() {
   };
   
 
-  const registerButtonStyle = {
-    width: "300px",
-    height: "50px",
-    borderRadius: "6px",
-    bg: "#5871EB",
-    color: "black",
-    flexShrink: 0
-  };
-
   const loginButtonStyle = {
     width: "300px",
     height: "50px",
@@ -110,27 +97,6 @@ export default function JoinOurTeam() {
     flexShrink: 0
   };
 
-  const orTextStyle = {
-    display: "flex",
-    width: "36px",
-    height: "10px",
-    flexDirection: "column",
-    justifyContent: "center",
-    flexShrink: 0, 
-    color: "#BABABA",
-    textAlign: "center",
-    fontFamily: "Inter",
-    fontSize: "16px",
-    fontStyle: "normal",
-    fontWeight: 400,
-    lineHeight: "normal",
-  };
-  
-  const lineStyle = {
-    width: "172px",
-    height: "1px",
-    background: "#F5F5F5",
-  };
 
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
