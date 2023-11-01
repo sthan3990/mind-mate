@@ -15,6 +15,7 @@ import {
   Grid,
   VStack,
   HStack,
+  Flex
 } from '@chakra-ui/react';
 import { CopyIcon, ArrowForwardIcon, ChatIcon, CloseIcon } from '@chakra-ui/icons';
 import { useChat } from 'ai/react';
@@ -51,7 +52,7 @@ export default function Chatbot() {
         "history chat"
         "history input"
       `}
-        gridTemplateRows="50px 1fr 0.15fr"
+        gridTemplateRows="50px 1fr 0.12fr"
         gridTemplateColumns="150px 1fr"
         width='90vh'
         h='70vh'
@@ -108,6 +109,12 @@ export default function Chatbot() {
           background="#15193B"
           area="chat"
           style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+            <Flex
+            margin="0.5em"
+  flex="1"
+  overflowY="auto"
+  flexDirection="column"
+>
           {messages.map((message, index) => (
             <Box
               key={index}
@@ -123,7 +130,8 @@ export default function Chatbot() {
             >
               <Text fontSize="lg">{message.content}</Text>
               <IconButton
-                size="sm"
+              
+                size="xs"
                 aria-label="Copy Message"
                 icon={<CopyIcon />}
                 onClick={() => {
@@ -133,6 +141,7 @@ export default function Chatbot() {
               />
             </Box>
           ))}
+          </Flex>
         </GridItem>
 
         {/* INPUT SECTION */}
@@ -159,8 +168,8 @@ export default function Chatbot() {
     </InputLeftElement>
     <InputRightElement w="25%">
       <HStack>
-        <IconButton ml={1} aria-label="Send" icon={<ArrowForwardIcon />} />
-        <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} />
+        <IconButton ml={1} aria-label="Send" icon={<ArrowForwardIcon onClick={handleSubmit} />} />
+        <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} onClick={stop}/>
       </HStack>
     </InputRightElement>
   </InputGroup>
