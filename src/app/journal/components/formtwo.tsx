@@ -25,7 +25,7 @@ const FormTwo: React.FC = () => {
           maxWidth="743.11px"
           textAlign="center"
         >
-Tap on the emoji that best captures your current emotion.
+        Tap on the emoji that best captures your current emotion.
         </Text>
 
         <Text
