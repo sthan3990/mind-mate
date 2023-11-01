@@ -13,18 +13,17 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import axios from "axios";
+
+import { useRouter } from "next/navigation";
+import { ValidateEmail } from "../../helper/validateEmail";
 
 const UserProfilePage = () => {
-  const [userData, setUserData] = useState(null);
+  const { push } = useRouter();
+  const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "" });
   const [loading, setLoading] = useState(true);
 
-  const [updatedFirstName, setUpdatedFirstName] = useState("");
-  const [updatedLastName, setUpdatedLastName] = useState("");
-  const [updatedEmail, setUpdatedEmail] = useState("");
-
-  const toast = useToast();
-
-  const userId = localStorage.getItem("User");
+  const [userId, setUserId] = useState(localStorage.getItem("User"));
 
   console.log("page userInfo is: ", userId);
 
@@ -44,44 +43,27 @@ const UserProfilePage = () => {
     fetchUserData();
   }, []);
 
-  const handleUpdate = async () => {
-    try {
-      const response = await fetch(`/api/get-user-profile?userId=${userId}`, {
-        method: "PATCH",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          first_name: updatedFirstName,
-          last_name: updatedLastName,
-          email: updatedEmail,
-        }),
+  const [updatedFirstName, setUpdatedFirstName] = useState("");
+  const [updatedLastName, setUpdatedLastName] = useState("");
+  const [updatedEmail, setUpdatedEmail] = useState("");
+
+  useEffect(() => {
+    setUpdatedFirstName(userData["first_name"]);
+    setUpdatedEmail(userData["last_name"]);
+    setUpdatedLastName(userData["email"]);
+  }, [userData]);
+
+  const handleUpdate = (
+    updatedFirstName: string,
+    updatedLastName: string,
+    updatedEmail: string,
+  ) => {
+    axios
+      .patch("/api/get-user-profile", { updatedFirstName, updatedLastName, updatedEmail, userId })
+      .then((res) => {
+        console.log(res);
+        push("/login");
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to update user details');
-      }
-
-      const updatedData = await response.json();
-      setUserData(updatedData);
-
-      console.log("updatedData in handleupdate func: ", updatedData);
-
-      toast({
-        title: "Profile Updated",
-        description: "Your profile details have been updated.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    }
   };
 
   if (loading) {
@@ -127,15 +109,16 @@ const UserProfilePage = () => {
                 placeholder={userData["email"]}
                 value={updatedEmail}
                 onChange={(e) => setUpdatedEmail(e.target.value)}
+
               />
             </FormControl>
-            <Button mt={4} colorScheme="teal" onClick={handleUpdate}>
+            <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
               Submit Changes
             </Button>
           </Stack>
         </Box>
-      </Stack>
-    </Flex>
+      </Stack >
+    </Flex >
   );
 };
 
