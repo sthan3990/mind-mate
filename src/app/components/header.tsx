@@ -34,9 +34,11 @@ const Links = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const logout = () => {
     localStorage.setItem("User", "");
     refresh();
+    router.push("/register");
   };
   const [userID, setUserID] = useState("");
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function Navbar() {
   ];
 
   const dropdownLinks = [
-    { name: "Your Profile", route: `/profile/${userID}` },
+    { name: "Your Profile", route: `/profile` },
     { name: "Logout", route: "/Projects" },
   ];
 
@@ -124,7 +126,7 @@ export default function Navbar() {
                     <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
                   </Link>
                 ) : (
-                  <Link href={`/profile/${userID}`} key={`/profile/${userID}`}>
+                  <Link href={`/profile`} key={`/profile`}>
                     <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
                     <MenuItem onClick={logout} {...menuItemStyles}>
                       {"Logout"}

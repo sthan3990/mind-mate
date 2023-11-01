@@ -97,7 +97,7 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ message: "User successfully deleted" }, { status: 200 });
 
   } catch (error) {
-    console.error("Error in DELETE routeeeeeeee:", error);
+    console.error("Error in DELETE route:", error);
     return NextResponse.json({ error: error }, { status: 500 });
   }
 
