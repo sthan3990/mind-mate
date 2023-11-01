@@ -23,9 +23,11 @@ export async function POST(request: Request) {
     (first_name, last_name, email, password) 
     VALUES (${fName}, ${lName}, ${email}, ${hashedPassword}) 
     RETURNING *;`;
-    let response = NextResponse.next()
+
+    let response = NextResponse.json({ message: "user Created" }, { status: 200 });
     response.cookies.set("User", user.rows[0].id)
-    return NextResponse.json({ message: "user Created" }, { status: 200 });
+    return response;
+
   } catch (error) {
     console.error(error);
   }

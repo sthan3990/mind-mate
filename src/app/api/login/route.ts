@@ -28,14 +28,16 @@ export async function GET(request: Request) {
       return new NextResponse("password not correct");
     }
 
-    let response = NextResponse.next()
-    response.cookies.set("User", login.rows[0].id)
-    console.log("cookkies: ", response.cookies);
+    // let response = NextResponse.next()
 
-    return NextResponse.json(
+    let response = NextResponse.json(
       { message: "User logged in", userID: login.rows[0].id },
       { status: 200 }
     );
+    response.cookies.set("User", login.rows[0].id)
+    console.log("cookkies: ", response.cookies);
+    return response;
+
   } catch (error) {
     console.log(error);
   }
