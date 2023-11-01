@@ -66,6 +66,24 @@ export async function PATCH(request: Request) {
     // Handle any unexpected errors
     return NextResponse.json({ error: error }, { status: 500 });
   }
-}
 
-// return NextResponse.json({ user: user }, { status: 200 });
+  try {
+    // Delete the user in the database
+    const result = await sql`
+      DELETE FROM users
+      WHERE id = ${userId}
+    `;
+
+    // If user doesn't exist. Return a 404 error
+    if (result.rowCount === 0) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Return success message if user deleted
+    return NextResponse.json({ message: "User successfully deleted" }, { status: 200 });
+
+  } catch (error) {
+    // Handle any unexpected errors
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
+}

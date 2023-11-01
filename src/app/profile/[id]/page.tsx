@@ -16,14 +16,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { useRouter } from "next/navigation";
-import { ValidateEmail } from "../../helper/validateEmail";
+// import { ValidateEmail } from "../../helper/validateEmail";
 
 const UserProfilePage = () => {
   const { push } = useRouter();
   const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "" });
   const [loading, setLoading] = useState(true);
 
-  const [userId, setUserId] = useState(localStorage.getItem("User"));
+  const [userId, setUserId] = useState(localStorage.getItem("User") || "");
 
   console.log("page userInfo is: ", userId);
 
@@ -67,8 +67,21 @@ const UserProfilePage = () => {
       })
       .then((res) => {
         console.log(res);
-        push("/login");
+        push(`/profile/${userId}`);
       });
+  };
+
+  const deleteUser = (userId: string) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+
+    if (isConfirmed) {
+      axios
+        .delete("/api/get-user-profile", { data: { userId: userId } })
+        .then((res) => {
+          console.log(res);
+          push("/register");
+        });
+    }
   };
 
   if (loading) {
@@ -118,7 +131,10 @@ const UserProfilePage = () => {
               />
             </FormControl>
             <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
-              Submit Changes
+              Edit User Details
+            </Button>
+            <Button colorScheme="red" onClick={() => deleteUser(userId)}>
+              Delete Account
             </Button>
           </Stack>
         </Box>
