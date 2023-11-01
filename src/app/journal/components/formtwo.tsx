@@ -25,7 +25,7 @@ const FormTwo: React.FC = () => {
           maxWidth="743.11px"
           textAlign="center"
         >
-Tap on the emoji that best captures your current emotion.
+        Tap on the emoji that best captures your current emotion.
         </Text>
 
         <Text
@@ -40,7 +40,7 @@ Tap on the emoji that best captures your current emotion.
           maxWidth="973px"
           textAlign="center"
         >
-          Let's see where you're at right now!
+          Let&#39s see where you&#39re at right now!
         </Text>
       </Box>
 
