@@ -2,7 +2,7 @@
 
 // Journal.tsx
 import React from 'react';
-import { InputGroup, InputLeftElement, InputRightElement, Stack, Input, Box, Grid, GridItem, Text } from '@chakra-ui/react';
+import { InputGroup, InputLeftElement, InputRightElement, Stack, Input, Box, Grid, GridItem, Button, Text } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const FormThree: React.FC = () => {
@@ -64,7 +64,7 @@ const FormThree: React.FC = () => {
               <Input size='lg' backgroundColor="#737AA8" h="100%" />
             </InputLeftElement>
             <InputRightElement w="5%">
-            <ArrowForwardIcon w={10} h={10} />
+              <Button leftIcon={ArrowForwardIcon}> </Button>
             </InputRightElement>
           </InputGroup>
         </Stack>
