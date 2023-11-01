@@ -16,21 +16,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { useRouter } from "next/navigation";
-import { ValidateEmail } from "../../helper/validateEmail";
+// import { ValidateEmail } from "../../helper/validateEmail";
 
 const UserProfilePage = () => {
   const { push } = useRouter();
   const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "" });
   const [loading, setLoading] = useState(true);
 
-  const [userId, setUserId] = useState(localStorage.getItem("User"));
+  const [userId, setUserId] = useState(localStorage.getItem("User") || "");
 
   console.log("page userInfo is: ", userId);
 
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`/api/get-user-profile?userId=${userId}`);
+        const response = await fetch(`/api/user-profile?userId=${userId}`);
         const data = await response.json();
         setUserData(data);
         setLoading(false);
@@ -49,28 +49,53 @@ const UserProfilePage = () => {
 
   useEffect(() => {
     setUpdatedFirstName(userData["first_name"]);
-    setUpdatedEmail(userData["last_name"]);
-    setUpdatedLastName(userData["email"]);
+    setUpdatedEmail(userData["email"]);
+    setUpdatedLastName(userData["last_name"]);
   }, [userData]);
 
   const handleUpdate = (
     updatedFirstName: string,
     updatedLastName: string,
-    updatedEmail: string,
+    updatedEmail: string
   ) => {
     axios
-      .patch("/api/get-user-profile", { updatedFirstName, updatedLastName, updatedEmail, userId })
+      .patch("/api/user-profile", {
+        first_name: updatedFirstName,
+        last_name: updatedLastName,
+        email: updatedEmail,
+        userId: userId,
+      })
       .then((res) => {
         console.log(res);
-        push("/login");
+        push(`/profile/${userId}`);
       });
+  };
+
+  const deleteUser = () => {
+    const isConfirmed = window.confirm("Are you sure you want to delete your account? This cannot be undone.");
+
+    if (isConfirmed) {
+      console.log("before axios");
+      axios
+        .delete("/api/user-profile")
+        .then((res) => {
+          console.log("in the .then");
+          console.log(res);
+          push("/register");
+        })
+        .catch((error) => {
+          console.error("Error while deleting:", error);
+        });
+      console.log("after axios");
+    }
   };
 
   if (loading) {
     return <Text>Loading...</Text>;
   }
+  console.log("userData in profile Page: ", userData)
 
-  if (!userData) {
+  if (!userId) {
     return <Text>No user logged in!</Text>;
   }
 
@@ -113,7 +138,10 @@ const UserProfilePage = () => {
               />
             </FormControl>
             <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
-              Submit Changes
+              Edit User Details
+            </Button>
+            <Button colorScheme="red" onClick={deleteUser}>
+              Delete Account
             </Button>
           </Stack>
         </Box>

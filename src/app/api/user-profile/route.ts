@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export async function GET(request: Request) {
   // Extract the user ID from the URL path
@@ -38,8 +39,6 @@ export async function PATCH(request: Request) {
   // Extract the updated data from the request body
   const { first_name, last_name, email, userId } = await request.json();
 
-  console.log(":request.json: ", request.json());
-
   if (!userId || isNaN(Number(userId))) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
   }
@@ -66,6 +65,40 @@ export async function PATCH(request: Request) {
     // Handle any unexpected errors
     return NextResponse.json({ error: error }, { status: 500 });
   }
+
 }
 
-// return NextResponse.json({ user: user }, { status: 200 });
+
+export async function DELETE(request: Request) {
+  // Extract the updated data from the request body
+  // console.log("request.json: ", request.json());
+  const userId = cookies().get("User")?.value;
+  // const { userId } = await request.json();
+
+  console.log("userId in delete route: ", userId);
+
+  if (!userId || isNaN(Number(userId))) {
+    return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
+  }
+
+  try {
+    // Delete the user in the database
+    const result = await sql`
+      DELETE FROM users
+      WHERE id = ${userId}
+    `;
+
+    // If user doesn't exist. Return a 404 error
+    if (result.rowCount === 0) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Return success message if user deleted
+    return NextResponse.json({ message: "User successfully deleted" }, { status: 200 });
+
+  } catch (error) {
+    console.error("Error in DELETE routeeeeeeee:", error);
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
+
+}
