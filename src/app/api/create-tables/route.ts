@@ -13,7 +13,7 @@ export async function GET(request: Request) {
       );`;
 
     const journals = await sql`
-      CREATE TABLE IF NOT EXISTS  journals (
+      CREATE TABLE IF NOT EXISTS journals (
         id SERIAL PRIMARY KEY NOT NULL,
         user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
         emotion_pre INTEGER NOT NULL,
@@ -41,6 +41,7 @@ export async function GET(request: Request) {
     const cbtChatSessions = await sql`
       CREATE TABLE IF NOT EXISTS cbt_chatsessions (
         id SERIAL PRIMARY KEY NOT NULL,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
         timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
       );`;
 
