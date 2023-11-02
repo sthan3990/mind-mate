@@ -1,115 +1,143 @@
-// Journal.tsx
-'use client';
+"use client";
+import { useUser } from "../contexts/UserContext";
 
-import React from 'react';
-import { Button, HStack, Stack, Box, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from "react";
+import { Box, Stack, Button, Text } from "@chakra-ui/react";
+import InitialJournal from "./components/initialpage";
+import FormOne from "./components/formone";
+import FormTwo from "./components/formtwo";
+import FormThree from "./components/formthree";
+import FormFour from "./components/formfour";
+import axios from "axios";
 
 const Journal: React.FC = () => {
+  //userId from useContext
+  const { userId } = useUser();
+  const [step, setStep] = useState(0);
+  const [numQuestions, setNumQuestions] = useState(0);
+  const [preMoodState, setpreMoodState] = useState(0);
+  const [journalEntry, setJournalEntry] = useState("");
+  const [postMoodState, setpostMoodState] = useState(0);
+
+  useEffect(() => {}, [
+    numQuestions,
+    preMoodState,
+    journalEntry,
+    postMoodState,
+  ]);
+
+  const handleContinue = () => {
+    if (step < 4) {
+      setStep(step + 1);
+    } else {
+      setStep(step + 1);
+      writeToSql();
+      // Handle navigation to the final page or perform a post request here.
+    }
+  };
+
+  console.log(userId);
+
+  const writeToSql = () => {
+    axios
+      .post("/api/journals", {
+        params: { userId, preMoodState, journalEntry, postMoodState },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message === "User logged in") {
+          localStorage.setItem("User", res.data.userID);
+        }
+      });
+
+    // TODO: how to g the journal id
+    // axios.get("/api/questions", { }).then((res) => {
+    //   console.log(res.data);
+    //   if (res.data.message === "User logged in") {
+    //     localStorage.setItem("User", res.data.userID);
+    //   }
+    // });
+  };
+
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
+  const handleQuestions = (numberChosen: number) => {
+    setNumQuestions((prevNum) => numberChosen);
+  };
+
+  const handlepreMoodState = (moodChosen: number) => {
+    setpreMoodState((prevMoodState) => moodChosen);
+  };
+
+  const handlepostMoodState = (moodChosen: number) => {
+    setpostMoodState((prevMoodState) => moodChosen);
+  };
+
+  const handleJournalEntry = (journalEntry: string) => {
+    setJournalEntry((prevJournal) => journalEntry);
+  };
+
   return (
-    <Stack
-      height="65vh"
-      background="#15193B"
-      display="flex"
-      flexDir="column"
-      alignItems="center"
-      justifyContent="space-between"
-    >
-      <Box>
-        <Text
-          fontFamily="Cantarell"
-          fontWeight="bold"
-          fontSize="40px"
-          color="#FFFFFF"
-          width="100%"
-          maxWidth="743.11px"
-          textAlign="center"
-        >
-          Select the Number of Questions
-        </Text>
-      </Box>
+    <>
+      <Stack
+        height="65vh"
+        background="#15193B"
+        display="flex"
+        flexDir="column"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        {step === 0 && <InitialJournal handleQuestions={handleQuestions} />}
+        {step === 1 && <FormOne handleMoodState={handlepostMoodState} />}
+        {step === 2 && (
+          <FormTwo
+            setJournalEntry={setJournalEntry}
+            handleContinue={handleContinue}
+          />
+        )}
+        {step === 3 && <FormThree handleMoodState={handlepostMoodState} />}
+        {step === 4 && <FormFour />}
 
-      <Box>
-        <HStack spacing="4" align="center">
+        {step != 2 && (
           <Box>
-            <svg
-              width="133"
-              height="134"
-              viewBox="0 0 133 134"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="66.5" cy="66.5" r="63.5" fill="white" stroke="black" strokeWidth="4" />
-              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
-                1
-              </text>
-            </svg>
+            <Button background="#D0A2D1" onClick={handleBack}>
+              <Text
+                fontFamily="Poppins"
+                fontWeight="semibold"
+                fontSize="24px"
+                letterSpacing="-0.03em"
+                color="#393939"
+                width="100%"
+                maxWidth="118.2px"
+                textAlign="center"
+                onClick={handleBack}
+              >
+                Back
+              </Text>
+            </Button>
+            <Button background="#D0A2D1" onClick={handleContinue}>
+              <Text
+                fontFamily="Poppins"
+                fontWeight="semibold"
+                fontSize="24px"
+                letterSpacing="-0.03em"
+                color="#393939"
+                width="100%"
+                maxWidth="118.2px"
+                textAlign="center"
+                onClick={handleContinue}
+              >
+                Continue
+              </Text>
+            </Button>
           </Box>
-
-          <Box>
-            <svg
-              width="134"
-              height="134"
-              viewBox="0 0 134 134"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="67" cy="67" r="65" fill="white" stroke="black" strokeWidth="4" />
-              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
-                2
-              </text>
-            </svg>
-          </Box>
-
-          <Box>
-            <svg
-              width="134"
-              height="134"
-              viewBox="0 0 134 134"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="67" cy="67" r="65" fill="white" stroke="black" strokeWidth="4" />
-              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
-                3
-              </text>
-            </svg>
-          </Box>
-        </HStack>
-      </Box>
-      
-      <Box>
-        <Button background="#D0A2D1">
-          <Text
-            fontFamily="Poppins"
-            fontWeight="semibold"
-            fontSize="24px"
-            letterSpacing="-0.03em"
-            color="#393939"
-            width="100%"
-            maxWidth="118.2px"
-            textAlign="center"
-          >
-            Continue
-          </Text>
-        </Button>
-      </Box>
-
-      <Box>
-        <Text
-          fontFamily="Poppins"
-          fontWeight="semibolditalic"
-          fontSize="24px"
-          letterSpacing="-0.03em"
-          fontStyle="italic"
-          color="#CEB1CE"
-          width="100%"
-          maxWidth="973px"
-          textAlign="center"
-        >
-          Every question is a step towards self-discovery; even the smallest step can lead to profound insights. Choose what feels right for you today.
-        </Text>
-      </Box>
-    </Stack>
+        )}
+      </Stack>
+    </>
   );
 };
 

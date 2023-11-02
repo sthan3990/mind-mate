@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { fonts } from "@/theme/fonts";
+import { useUser } from "../contexts/UserContext"; //for the context
+
 
 import {
   Box,
@@ -98,15 +99,11 @@ export default function JoinOurTeam() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, userId } = useUser(); // for the context
+  const router = useRouter();
 
   const loginRequest = (email: string, password: string) => {
-    axios.get("/api/login", { params: { email, password } }).then((res) => {
-      console.log(res.data);
-      if (res.data.message === "User logged in") {
-        localStorage.setItem("User", res.data.userID);
-      }
-      refresh();
-    });
+    login(email, password); // Just call login from context
   };
 
   useEffect(() => {

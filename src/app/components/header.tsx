@@ -1,6 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useUser } from './../contexts/UserContext';
+
 
 import Link from "next/link";
 import {
@@ -35,38 +37,7 @@ const Links = [
 
 export default function Navbar() {
   const router = useRouter();
-  const logout = () => {
-    setUserId("")
-    localStorage.setItem("User", "");
-    // router.refresh();
-    // router.push("/");
-  };
-  const [userId, setUserId] = useState(localStorage.getItem("User") || "");
-  useEffect(() => {
-    function checkUserData() {
-      console.log("local storage triggered in header");
-      const item = localStorage.getItem('User')
-
-      if (item && item !== "") {
-        setUserId(item);
-      }
-    }
-
-    window.addEventListener('storage', checkUserData)
-
-    return () => {
-      window.removeEventListener('storage', checkUserData)
-    }
-  }, []);
-  // useEffect(() => {
-  //   setUserID(
-  //     JSON.stringify(
-  //       localStorage.getItem("User") || localStorage.setItem("User", "")
-  //     )
-  //   );
-  // }, [logout]);
-
-
+  const { userId, logout } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const Links = [

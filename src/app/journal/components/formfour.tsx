@@ -4,12 +4,7 @@
 import React from 'react';
 import { Button, HStack, Stack, Box, Text } from '@chakra-ui/react';
 
-interface FormThreeProps {
-  handleMoodState: (moodChosen: number) => void;
-}
-
-
-const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
+const FormFour: React.FC = ({  }) => {
   return (
     <Stack
       width="80%"
@@ -48,7 +43,7 @@ const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
           maxWidth="973px"
           textAlign="center"
         >
-          Now that you&#39ve journaled, let&#39s check in again. Where are you feeling now?
+          Let&#39;s see where you &#39;re at right now!
         </Text>
       </Box>
 
@@ -61,7 +56,7 @@ const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
               _hover={{
                 backgroundColor: 'red.400',
               }}
-              variant="unstyled" onClick={() => handleMoodState(1)} >
+              variant="unstyled" >
 
               <svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M136.377 69.3464C136.377 106.55 106.364 136.693 69.3609 136.693C32.3579 136.693 2.34473 106.55 2.34473 69.3464C2.34473 32.143 32.3579 2 69.3609 2C106.364 2 136.377 32.143 136.377 69.3464Z" fill="white" stroke="black" strokeWidth="4" />
@@ -81,7 +76,7 @@ const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => handleMoodState(2)} >
+            <Button variant="unstyled"  >
 
               <svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M136.433 69.3464C136.433 106.55 106.42 136.693 69.4168 136.693C32.4138 136.693 2.40063 106.55 2.40063 69.3464C2.40063 32.143 32.4138 2 69.4168 2C106.42 2 136.433 32.143 136.433 69.3464Z" fill="white" stroke="black" strokeWidth="4" />
@@ -100,7 +95,7 @@ const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => handleMoodState(3)} >
+            <Button variant="unstyled"  >
 
               <svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M136.489 69.3464C136.489 106.55 106.476 136.693 69.4727 136.693C32.4697 136.693 2.45654 106.55 2.45654 69.3464C2.45654 32.143 32.4697 2 69.4727 2C106.476 2 136.489 32.143 136.489 69.3464Z" fill="white" stroke="black" strokeWidth="4" />
@@ -113,7 +108,7 @@ const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => handleMoodState(4)} >
+            <Button variant="unstyled"  >
 
               <svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M136.545 69.3464C136.545 106.55 106.532 136.693 69.5286 136.693C32.5256 136.693 2.51245 106.55 2.51245 69.3464C2.51245 32.143 32.5256 2 69.5286 2C106.532 2 136.545 32.143 136.545 69.3464Z" fill="white" stroke="black" strokeWidth="4" />
@@ -133,7 +128,7 @@ const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => handleMoodState(5)} >
+            <Button variant="unstyled"  >
               <svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M136.601 69.3464C136.601 106.55 106.588 136.693 69.5845 136.693C32.5815 136.693 2.56836 106.55 2.56836 69.3464C2.56836 32.143 32.5815 2 69.5845 2C106.588 2 136.601 32.143 136.601 69.3464Z" fill="white" stroke="black" strokeWidth="4" />
                 <path d="M69.8828 114.853C95.033 114.853 115.421 94.4647 115.421 69.3145C115.421 44.1643 95.033 23.7761 69.8828 23.7761C44.7326 23.7761 24.3443 44.1643 24.3443 69.3145C24.3443 94.4647 44.7326 114.853 69.8828 114.853Z" fill="url(#paint0_linear_1_1019)" stroke="black" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
@@ -157,4 +152,4 @@ const FormThree: React.FC<FormThreeProps> = ({handleMoodState }) => {
   );
 };
 
-export default FormThree;
+export default FormFour;
