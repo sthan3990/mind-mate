@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { fonts } from "@/theme/fonts";
+import { fonts } from "../../theme/fonts";
 
 import {
   Box,

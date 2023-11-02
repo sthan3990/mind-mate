@@ -71,6 +71,7 @@ const PieChartComponent: React.FC<PieChartProps> = ({ graphData }) => {
   }, [graphData]);
 
   return (
+    
     <Box>
       <Heading as="h1" size="xl">
         Percentage of Mood Scores

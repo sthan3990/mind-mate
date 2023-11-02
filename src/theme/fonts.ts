@@ -20,5 +20,4 @@ export const fonts = {
   heading: poppinsHeader.style.fontFamily,
   alternative: alegreya_Sans.style.fontFamily,
   formspecial: inter.style.fontFamily
-
 };
