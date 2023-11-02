@@ -111,16 +111,6 @@ export default function JoinOurTeam() {
   const handleAgree = () => {
     setAgreed(!agreed); // Toggle the 'agreed' state
     onClose();
-
-  const loginRequest = (email: string, password: string) => {
-    axios.get("/api/login", { params: { email, password } }).then((res) => {
-      console.log(res.data);
-      if (res.data.message === "User logged in") {
-        localStorage.setItem("User", res.data.userID);
-      }
-      refresh();
-    });
-
   };
 
   const createAccount = (
@@ -142,7 +132,6 @@ export default function JoinOurTeam() {
   };
 
   return (
-
     <SimpleGrid columns={[1, 1, 2, 2]} spacing={0.1} w="full" minChildWidth="320px">
       <Box sx={leftSideStyle}>
         {/* Logo */}
@@ -168,24 +157,6 @@ export default function JoinOurTeam() {
               <Stack spacing={4}>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
-
-    <Flex minH={"100vh"} align={"center"} justify={"center"}>
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
-            Login
-          </Heading>
-          <Text fontSize={"lg"} color="white">
-            to enjoy all of our cool features
-          </Text>
-        </Stack>
-        <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
-          <Stack spacing={6}>
-            <HStack>
-              <Box>
-                <FormControl id="username" isRequired>
-                  <FormLabel>Username</FormLabel>
-
                   <Input
                     sx={rectangleIconStyle}
                     type="email"
