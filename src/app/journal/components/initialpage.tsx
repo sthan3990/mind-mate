@@ -19,7 +19,6 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Text>PAGE 1</Text>
       <Box>
         <Text
           fontFamily="Cantarell"
