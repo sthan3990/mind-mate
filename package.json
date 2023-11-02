@@ -32,7 +32,11 @@
     "papaparse": "^5.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+<<<<<<< HEAD
+    "react-router-dom": "^6.18.0",
+=======
     "recharts": "^2.9.2",
+>>>>>>> 006c0ba2e7c0ac5d8dafb8a4619eb653e7737066
     "sass": "^1.69.5",
     "typescript": "5.1.3"
   },

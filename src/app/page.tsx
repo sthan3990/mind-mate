@@ -1,7 +1,10 @@
 "use client";
 
+import React from 'react';
+import Link  from 'next/link';
 import React from "react";
 import { useUser } from "./contexts/UserContext";
+
 import {
   Flex,
   Text,
@@ -18,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { fonts } from "@/theme/fonts";
+
 
 const theme = extendTheme({
   breakpoints: {
@@ -141,7 +145,17 @@ const Navbar = () => {
           <Box>
             <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
           </Box>
-
+          <Flex justify="center">
+            <HStack>
+              <Link href="/journal">
+                  <Text sx={linkStyle}>Guided Journal</Text>
+                </Link>
+                <Link href="/chatbot">
+                  <Text sx={linkStyle}>CBT Chatbot</Text>
+                </Link>
+                <Link href="/progress-report">
+                  <Text sx={linkStyle}>Progress Report</Text>
+              </Link>
           {/* Menu Links */}
           <Flex justify="center" alignItems="center">
             {" "}
@@ -169,16 +183,38 @@ const Navbar = () => {
             </MenuButton>
             <Portal>
               <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
-                <MenuItem
-                  _hover={{ background: "white", color: "#FBC1AA" }}
-                  _active={{ bg: "white", color: "#FBC1AA" }}
-                  onClick={() => {
-                    // Handle settings action here
-                  }}
-                >
-                  Settings
-                </MenuItem>
+                <Link href="/settings" passHref>
+                  <MenuItem
+                    as="a"
+                    sx={{
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" }
+                    }}
+                    onClick={() => {
+                      // Handle settings action here
+                    }}
+                  >
+                    Settings
+                  </MenuItem>
+                </Link>
+
                 <Divider orientation="horizontal" />
+
+                <Link href="/login" passHref>
+                  <MenuItem
+                    as="a"
+                    sx={{
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" }
+                    }}
+                    onClick={() => {
+                      // Handle logout action here
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </Link>
+
                 <MenuItem
                   _hover={{ background: "white", color: "#FBC1AA" }}
                   _active={{ bg: "white", color: "#FBC1AA" }}
@@ -188,7 +224,9 @@ const Navbar = () => {
                 >
                   Logout
                 </MenuItem>
+
               </MenuList>
+
             </Portal>
           </Menu>
         </Flex>
