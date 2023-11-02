@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import Link  from 'next/link';
 import React from "react";
 import { useUser } from "./contexts/UserContext";
@@ -139,6 +138,8 @@ const Navbar = () => {
 
   return (
     <ChakraProvider theme={theme}>
+    
+      
       <Flex direction="column" align="center" p={4} bg="#F9F2FF" boxShadow="sm">
         <Flex width="100%" justify="space-between" align="center">
           {/* Logo */}
@@ -156,6 +157,8 @@ const Navbar = () => {
                 <Link href="/progress-report">
                   <Text sx={linkStyle}>Progress Report</Text>
               </Link>
+            </HStack>
+            </Flex>
           {/* Menu Links */}
           <Flex justify="center" alignItems="center">
             {" "}
@@ -171,7 +174,8 @@ const Navbar = () => {
                 <Text sx={linkStyle}>Progress Report</Text>
               </a>
             </HStack>
-          </Flex>
+            </Flex>
+   
 
           <Menu>
             <MenuButton
@@ -249,6 +253,7 @@ const Navbar = () => {
           <Text sx={awarenessStyle}>Mindful Awareness</Text>
         </Flex>
       </Flex>
+      
     </ChakraProvider>
   );
 };
