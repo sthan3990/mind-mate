@@ -29,6 +29,7 @@
     "openai": "^4.14.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "^6.18.0",
     "sass": "^1.69.5",
     "typescript": "5.1.3"
   }

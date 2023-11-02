@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link  from 'next/link';
 import {
   Flex,
   Text,
@@ -17,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { fonts } from "@/theme/fonts"; 
+
 
 const theme = extendTheme({
   breakpoints: {
@@ -138,48 +140,62 @@ const Navbar = () => {
           <Box>
             <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
           </Box>
-          <Flex justify="center"> {/* Just added justify="center" here */}
-          <HStack>
-            <a href="#" onClick={e => e.preventDefault()}>
-              <Text sx={linkStyle}>Guided Journal</Text>
-            </a>
-            <a href="#" onClick={e => e.preventDefault()}>
-              <Text sx={linkStyle}>CBT Chatbot</Text>
-            </a>
-            <a href="#" onClick={e => e.preventDefault()}>
-              <Text sx={linkStyle}>Progress Report</Text>
-            </a>
+          <Flex justify="center">
+            <HStack>
+              <Link href="/journal">
+                  <Text sx={linkStyle}>Guided Journal</Text>
+                </Link>
+                <Link href="/chatbot">
+                  <Text sx={linkStyle}>CBT Chatbot</Text>
+                </Link>
+                <Link href="/progress-report">
+                  <Text sx={linkStyle}>Progress Report</Text>
+              </Link>
             </HStack>
           </Flex>
+
           <Menu>
             <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
               Account
             </MenuButton>
             <Portal>
               <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
-                <MenuItem
-                  _hover={{ background: "white", color: "#FBC1AA" }}
-                  _active={{ bg: "white", color: "#FBC1AA" }}
-                  onClick={() => {
-                    // Handle settings action here
-                  }}
-                >
-                  Settings
-                </MenuItem>
+                <Link href="/settings" passHref>
+                  <MenuItem
+                    as="a"
+                    sx={{
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" }
+                    }}
+                    onClick={() => {
+                      // Handle settings action here
+                    }}
+                  >
+                    Settings
+                  </MenuItem>
+                </Link>
+
                 <Divider orientation="horizontal" />
-                <MenuItem
-                  _hover={{ background: "white", color: "#FBC1AA" }}
-                  _active={{ bg: "white", color: "#FBC1AA" }}
-                  onClick={() => {
-                    // Handle logout action here
-                  }}
-                >
-                  Logout
-                </MenuItem>
+
+                <Link href="/login" passHref>
+                  <MenuItem
+                    as="a"
+                    sx={{
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" }
+                    }}
+                    onClick={() => {
+                      // Handle logout action here
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </Link>
+
               </MenuList>
+
             </Portal>
           </Menu>
-
         </Flex>
         <Divider sx={dividerStyle} />
 
