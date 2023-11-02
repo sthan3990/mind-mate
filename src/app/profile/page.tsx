@@ -14,18 +14,19 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useUser } from "../contexts/UserContext";
 import { useRouter } from "next/navigation";
-// import { ValidateEmail } from "../../helper/validateEmail";
 
 const UserProfilePage = () => {
+  const { userId } = useUser();
   const { push } = useRouter();
   const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "" });
+  const [userID, setUserID] = useState(userId || "")
   const [loading, setLoading] = useState(true);
 
-  const [userId, setUserId] = useState(localStorage.getItem("User") || "");
+  // const [userId, setUserId] = useState(localStorage.getItem("User") || "");
 
-  // console.log("page userInfo is: ", userId);
+  console.log("context userId in profile page: ", userId);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -49,7 +50,7 @@ const UserProfilePage = () => {
       const item = localStorage.getItem('User')
 
       if (item && item !== "") {
-        setUserId(item);
+        setUserID(item);
       }
     }
 
