@@ -2,7 +2,18 @@
 
 import React from 'react';
 import {
-  Flex, Text, Button, Image, Box, Divider, HStack
+  Flex,
+  Text,
+  Button,
+  Image,
+  Box,
+  Divider,
+  HStack,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Portal
 } from "@chakra-ui/react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { fonts } from "@/theme/fonts"; 
@@ -140,7 +151,35 @@ const Navbar = () => {
             </a>
             </HStack>
           </Flex>
-          <Button borderRadius="550px" sx={accountButtonStyle}>Account</Button>
+          <Menu>
+            <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
+              Account
+            </MenuButton>
+            <Portal>
+              <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
+                <MenuItem
+                  _hover={{ background: "white", color: "#FBC1AA" }}
+                  _active={{ bg: "white", color: "#FBC1AA" }}
+                  onClick={() => {
+                    // Handle settings action here
+                  }}
+                >
+                  Settings
+                </MenuItem>
+                <Divider orientation="horizontal" />
+                <MenuItem
+                  _hover={{ background: "white", color: "#FBC1AA" }}
+                  _active={{ bg: "white", color: "#FBC1AA" }}
+                  onClick={() => {
+                    // Handle logout action here
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              </MenuList>
+            </Portal>
+          </Menu>
+
         </Flex>
         <Divider sx={dividerStyle} />
 

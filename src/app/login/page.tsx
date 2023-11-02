@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { ValidateEmail } from "../helper/validateEmail";
 import { fonts } from "@/theme/fonts";
-
 
 import {
   Box,
@@ -28,7 +26,7 @@ export default function JoinOurTeam() {
   const leftSideStyle = {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between", 
+    justifyContent: "space-between",
     position: "relative",
     backgroundColor: "#f9f8f8",
     width: "100%",
@@ -46,7 +44,7 @@ export default function JoinOurTeam() {
     paddingTop: "20px",
     paddingLeft: "20px",
   };
-  
+
   const mainImageStyle = {
     maxWidth: ["90%", "92%", "94%", "96%"],
     maxHeight: ["700px", "750px", "780px", "800px"],
@@ -57,7 +55,7 @@ export default function JoinOurTeam() {
     position: "relative",
     fontSize: "40px",
     fontWeight: 600,
-    fontFamily: fonts.heading, 
+    fontFamily: fonts.heading,
     textAlign: "left",
     marginLeft: "20px",
     color: "black",
@@ -81,12 +79,11 @@ export default function JoinOurTeam() {
     color: "#8692A6",
     borderWidth: "0.5px",
     borderColor: "#8692A6",
-    fontFamily: fonts.heading, 
+    fontFamily: fonts.heading,
     height: "50px",
     paddingLeft: "20px",
-    paddingRight: "20px"
+    paddingRight: "20px",
   };
-  
 
   const loginButtonStyle = {
     width: "300px",
@@ -94,23 +91,13 @@ export default function JoinOurTeam() {
     borderRadius: "6px",
     background: "#D0A2D1",
     color: "black",
-    flexShrink: 0
+    flexShrink: 0,
   };
 
-
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [agreed, setAgreed] = useState(false);
-
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleAgree = () => {
-    setAgreed(!agreed); // Toggle the 'agreed' state
-    onClose();
 
   const loginRequest = (email: string, password: string) => {
     axios.get("/api/login", { params: { email, password } }).then((res) => {
@@ -120,30 +107,22 @@ export default function JoinOurTeam() {
       }
       refresh();
     });
-
   };
 
-  const createAccount = (
-    fName: string,
-    lName: string,
-    email: string,
-    password: string
-  ) => {
-    if (ValidateEmail(email)) {
-      axios
-        .post("/api/users", { fName, lName, email, password })
-        .then((res) => {
-          console.log(res);
-          push("/login");
-        });
-    } else {
-      alert("Invalid email address!");
+  useEffect(() => {
+    const email = localStorage.getItem("User") || "";
+    if (email) {
+      push("/");
     }
-  };
+  }, [loginRequest]);
 
   return (
-
-    <SimpleGrid columns={[1, 1, 2, 2]} spacing={0.1} w="full" minChildWidth="320px">
+    <SimpleGrid
+      columns={[1, 1, 2, 2]}
+      spacing={0.1}
+      w="full"
+      minChildWidth="320px"
+    >
       <Box sx={leftSideStyle}>
         {/* Logo */}
         <Box sx={logoStyle}>
@@ -159,8 +138,12 @@ export default function JoinOurTeam() {
       {/* Right Side with Signup Form */}
       <Stack bg="white" color="black">
         <Box p={{ base: 4, md: 6, lg: 8 }}>
-          <Stack  spacing={12}>
-            <Heading fontSize={"4xl"} fontFamily={fonts.heading} sx={headingStyle}>
+          <Stack spacing={12}>
+            <Heading
+              fontSize={"4xl"}
+              fontFamily={fonts.heading}
+              sx={headingStyle}
+            >
               Welcome Back 👋
             </Heading>
 
@@ -168,24 +151,6 @@ export default function JoinOurTeam() {
               <Stack spacing={4}>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
-
-    <Flex minH={"100vh"} align={"center"} justify={"center"}>
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
-            Login
-          </Heading>
-          <Text fontSize={"lg"} color="white">
-            to enjoy all of our cool features
-          </Text>
-        </Stack>
-        <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
-          <Stack spacing={6}>
-            <HStack>
-              <Box>
-                <FormControl id="username" isRequired>
-                  <FormLabel>Username</FormLabel>
-
                   <Input
                     sx={rectangleIconStyle}
                     type="email"
@@ -203,7 +168,9 @@ export default function JoinOurTeam() {
                     <InputRightElement h={"full"}>
                       <Button
                         variant={"ghost"}
-                        onClick={() => setShowPassword((prevState) => !prevState)}
+                        onClick={() =>
+                          setShowPassword((prevState) => !prevState)
+                        }
                       >
                         {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                       </Button>
@@ -213,18 +180,22 @@ export default function JoinOurTeam() {
               </Stack>
             </Box>
 
-            <Stack spacing={5} pt={1} justifyContent="center" alignItems="center" width="100%" >
-
+            <Stack
+              spacing={5}
+              pt={1}
+              justifyContent="center"
+              alignItems="center"
+              width="100%"
+            >
               {/* redirects to the /login page */}
               <Button
                 size="lg"
                 sx={loginButtonStyle}
-                onClick={() => push("/login")}
+                onClick={() => loginRequest(email, password)}
               >
                 Log In
               </Button>
             </Stack>
-
           </Stack>
         </Box>
       </Stack>
