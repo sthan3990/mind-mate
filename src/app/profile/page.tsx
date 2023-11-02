@@ -19,47 +19,48 @@ import { useRouter } from "next/navigation";
 
 const UserProfilePage = () => {
   const { userId } = useUser();
+  console.log("context userId in beginning of profile page: ", userId);
   const { push } = useRouter();
   const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "" });
-  const [userID, setUserID] = useState(userId || "")
+  // const [userID, setUserID] = useState(userId || "")
   const [loading, setLoading] = useState(true);
 
   // const [userId, setUserId] = useState(localStorage.getItem("User") || "");
 
-  console.log("context userId in profile page: ", userId);
-
   useEffect(() => {
     async function fetchUserData() {
-      try {
-        const response = await fetch(`/api/user-profile?userId=${userId}`);
-        const data = await response.json();
-        setUserData(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch user data:", error);
-        setLoading(false);
+      if (userId) { // Only run the fetch if userId is available
+        try {
+          const response = await fetch(`/api/user-profile?userId=${userId}`);
+          const data = await response.json();
+          setUserData(data);
+        } catch (error) {
+          console.error("Failed to fetch user data:", error);
+        } finally {
+          setLoading(false); // Set loading to false in a finally block to ensure it runs after success or error
+        }
       }
     }
 
     fetchUserData();
-  }, []);
+  }, [userId]);
 
-  useEffect(() => {
-    function checkUserData() {
-      console.log("local storage triggered");
-      const item = localStorage.getItem('User')
+  // useEffect(() => {
+  //   function checkUserData() {
+  //     console.log("local storage triggered");
+  //     const item = localStorage.getItem('User')
 
-      if (item && item !== "") {
-        setUserID(item);
-      }
-    }
+  //     if (item && item !== "") {
+  //       setUserID(item);
+  //     }
+  //   }
 
-    window.addEventListener('storage', checkUserData)
+  //   window.addEventListener('storage', checkUserData)
 
-    return () => {
-      window.removeEventListener('storage', checkUserData)
-    }
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('storage', checkUserData)
+  //   }
+  // }, []);
 
   const [updatedFirstName, setUpdatedFirstName] = useState("");
   const [updatedLastName, setUpdatedLastName] = useState("");

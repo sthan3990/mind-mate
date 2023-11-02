@@ -30,7 +30,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.get("/api/login", { params: { email, password } });
-      console.log(response.data);
+      console.log("login response: ", response.data);
 
       if (response.data.message === "User logged in") {
         localStorage.setItem('User', response.data.userID);
