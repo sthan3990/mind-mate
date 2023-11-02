@@ -25,7 +25,7 @@ const UserProfilePage = () => {
 
   const [userId, setUserId] = useState(localStorage.getItem("User") || "");
 
-  console.log("page userInfo is: ", userId);
+  // console.log("page userInfo is: ", userId);
 
   useEffect(() => {
     async function fetchUserData() {

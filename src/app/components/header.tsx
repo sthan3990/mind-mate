@@ -36,9 +36,10 @@ const Links = [
 export default function Navbar() {
   const router = useRouter();
   const logout = () => {
+    setUserID("")
     localStorage.setItem("User", "");
-    refresh();
-    router.push("/register");
+    // router.refresh();
+    router.push("/");
   };
   const [userID, setUserID] = useState("");
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function Navbar() {
     );
   }, [logout]);
 
-  const { refresh } = useRouter();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const Links = [
