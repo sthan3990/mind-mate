@@ -11,6 +11,7 @@ import FormFour from "./components/formfour";
 import axios from "axios";
 
 const Journal: React.FC = () => {
+  //userId from useContext
   const { userId } = useUser();
   const [step, setStep] = useState(0);
   const [numQuestions, setNumQuestions] = useState(0);
