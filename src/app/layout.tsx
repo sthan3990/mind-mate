@@ -15,8 +15,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <ChakraUiProvider>
           <Flex flexDirection="column" minHeight="100vh">
-            {registerPathname != "/register" && <Navbar />
-            }
+            { (registerPathname != "/register" && registerPathname != "/login") && <Navbar /> }
+
             <Flex flex="1" justify="center" align="center">
               {children}
             </Flex>
