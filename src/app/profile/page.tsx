@@ -43,6 +43,22 @@ const UserProfilePage = () => {
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    function checkUserData() {
+      const item = localStorage.getItem('User')
+
+      if (item && item !== "") {
+        setUserId(item);
+      }
+    }
+
+    window.addEventListener('storage', checkUserData)
+
+    return () => {
+      window.removeEventListener('storage', checkUserData)
+    }
+  }, []);
+
   const [updatedFirstName, setUpdatedFirstName] = useState("");
   const [updatedLastName, setUpdatedLastName] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState("");
@@ -95,7 +111,7 @@ const UserProfilePage = () => {
   }
   console.log("userData in profile Page: ", userData)
 
-  if (!userId) {
+  if (userId === "") {
     return <Text>No user logged in!</Text>;
   }
 
