@@ -45,6 +45,7 @@ const UserProfilePage = () => {
 
   useEffect(() => {
     function checkUserData() {
+      console.log("local storage triggered");
       const item = localStorage.getItem('User')
 
       if (item && item !== "") {

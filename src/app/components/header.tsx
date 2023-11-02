@@ -36,19 +36,35 @@ const Links = [
 export default function Navbar() {
   const router = useRouter();
   const logout = () => {
-    setUserID("")
+    setUserId("")
     localStorage.setItem("User", "");
     // router.refresh();
-    router.push("/");
+    // router.push("/");
   };
-  const [userID, setUserID] = useState("");
+  const [userId, setUserId] = useState(localStorage.getItem("User") || "");
   useEffect(() => {
-    setUserID(
-      JSON.stringify(
-        localStorage.getItem("User") || localStorage.setItem("User", "")
-      )
-    );
-  }, [logout]);
+    function checkUserData() {
+      console.log("local storage triggered in header");
+      const item = localStorage.getItem('User')
+
+      if (item && item !== "") {
+        setUserId(item);
+      }
+    }
+
+    window.addEventListener('storage', checkUserData)
+
+    return () => {
+      window.removeEventListener('storage', checkUserData)
+    }
+  }, []);
+  // useEffect(() => {
+  //   setUserID(
+  //     JSON.stringify(
+  //       localStorage.getItem("User") || localStorage.setItem("User", "")
+  //     )
+  //   );
+  // }, [logout]);
 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -122,7 +138,7 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList bg="primary.900">
-                {!userID ? (
+                {!userId ? (
                   <Link href={"/login"} key={"/login"}>
                     <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
                   </Link>
