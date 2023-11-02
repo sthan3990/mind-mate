@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     }
 
     if (!journalId) {
-      return new NextResponse("User ID not provided.", {
+      return new NextResponse("Journal ID not provided.", {
         status: 400,
       });
     }

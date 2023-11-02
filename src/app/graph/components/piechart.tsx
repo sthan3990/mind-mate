@@ -1,8 +1,22 @@
+'use client';
+
 import { useState, useEffect } from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
-const PieChartComponent = ({ graphData }) => {
+interface DataItem {
+  label: string;
+  value: number;
+  Mood_Score: string;
+  moodCategory: string;
+}
+
+interface PieChartProps {
+  graphData: DataItem[];
+}
+
+const PieChartComponent: React.FC<PieChartProps> = ({ graphData }) => {
+
   const [moodData, setMoodData] = useState({
     "Extremely Upset": 0,
     "Quite Upset": 0,
@@ -12,16 +26,18 @@ const PieChartComponent = ({ graphData }) => {
   });
 
 
-const getMoodColor = (moodCategory) => {
-  const moodColors = {
-    "Extremely Upset": "#FF0000", // Red
-    "Quite Upset": "#FFA500", // Orange
-    "Neutral": "#FFFF00", // Yellow
-    "Happy": "#00FF00", // Green
-    "Extremely Happy": "#0000FF", // Blue
+  // 
+  const getMoodColor = (moodCategory: string) => {
+    const moodColors: { [key: string]: string } = {
+      "Extremely Upset": "#FF0000", // Red
+      "Quite Upset": "#FFA500", // Orange
+      "Neutral": "#FFFF00", // Yellow
+      "Happy": "#00FF00", // Green
+      "Extremely Happy": "#0000FF", // Blue
+    };
+    return moodColors[moodCategory] || "#808080"; // Default to gray if category not found
   };
-  return moodColors[moodCategory] || "#808080"; // Default to gray if category not found
-};
+
 
   useEffect(() => {
     const updatedMoodCounts = {
@@ -33,10 +49,11 @@ const getMoodColor = (moodCategory) => {
     };
 
     graphData.forEach((item) => {
+
       const moodScore = parseInt(item.Mood_Score, 10); // Convert to a number
 
       // Map mood scores to mood categories
-      const moodCategory = {
+      const moodCategory: { [key: string]: string } = {
         1: "Extremely Upset",
         2: "Quite Upset",
         3: "Neutral",
@@ -44,10 +61,10 @@ const getMoodColor = (moodCategory) => {
         5: "Extremely Happy",
       };
 
-      // Check if mood score is valid
-      if (moodCategory[moodScore]) {
-        updatedMoodCounts[moodCategory[moodScore]]++;
-      }
+      // // Check if mood score is valid
+      // if (moodCategory[moodScore]) {
+      //   updatedMoodCounts[moodCategory[moodScore]]++;
+      // }
     });
 
     setMoodData(updatedMoodCounts);
