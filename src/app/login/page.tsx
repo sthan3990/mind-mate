@@ -101,7 +101,7 @@ export default function JoinOurTeam() {
   const [password, setPassword] = useState("");
 
   const loginRequest = (email: string, password: string) => {
-    axios.post("/api/login", { email, password }).then((res) => {
+    axios.get("/api/login", { params: { email, password } }).then((res) => {
       console.log(res.data);
       if (res.data.message === "User logged in") {
         localStorage.setItem("User", res.data.userID);
