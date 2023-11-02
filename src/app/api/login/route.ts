@@ -2,9 +2,11 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 const bcrypt = require("bcrypt");
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const email = searchParams.get("email");
+  const password = searchParams.get("password");
   try {
-    const { email, password } = await request.json();
     if (!email || !password) {
       return new NextResponse("Email, and password is required", {
         status: 400,
@@ -26,10 +28,16 @@ export async function POST(request: Request) {
       return new NextResponse("password not correct");
     }
 
-    return NextResponse.json(
+    // let response = NextResponse.next()
+
+    let response = NextResponse.json(
       { message: "User logged in", userID: login.rows[0].id },
       { status: 200 }
     );
+    response.cookies.set("User", login.rows[0].id)
+    console.log("cookkies: ", response.cookies);
+    return response;
+
   } catch (error) {
     console.log(error);
   }

@@ -34,9 +34,11 @@ const Links = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const logout = () => {
     localStorage.setItem("User", "");
     refresh();
+    router.push("/register");
   };
   const [userID, setUserID] = useState("");
   useEffect(() => {
@@ -49,18 +51,16 @@ export default function Navbar() {
 
   const { refresh } = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const userId = localStorage.getItem('userId');
-  const userId = 1;
 
   const Links = [
-    { name: 'Chatbot', route: '/chatbot' },
-    { name: 'Journal', route: '/journal' },
-    { name: 'Register', route: '/register' },
+    { name: "Chatbot", route: "/chatbot" },
+    { name: "Journal", route: "/journal" },
+    { name: "Register", route: "/register" },
   ];
 
   const dropdownLinks = [
-    { name: 'Your Profile', route: `/profile/${userId}` },
-    { name: 'Logout', route: '/Projects' },
+    { name: "Your Profile", route: `/profile` },
+    { name: "Logout", route: "/Projects" },
   ];
 
   const menuItemStyles = {
@@ -70,8 +70,6 @@ export default function Navbar() {
       bg: useColorModeValue("blue.200", "blue.700"),
     },
   };
-
-  console.log(userID);
 
   return (
     <>
@@ -100,7 +98,6 @@ export default function Navbar() {
             >
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-                  
                   <Box {...menuItemStyles}>{link.name}</Box>
                 </Link>
               ))}
@@ -120,21 +117,21 @@ export default function Navbar() {
               >
                 <Avatar
                   size={"sm"}
-                  src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                  src="https://cdn0.iconfinder.com/data/icons/kuvio-basic-ui/32/more-512.png"
                 />
               </MenuButton>
               <MenuList bg="primary.900">
-                <Link href={"/profile/{id}"} key={"/profile/{id}"}>
-                  <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
-                </Link>
                 {!userID ? (
                   <Link href={"/login"} key={"/login"}>
                     <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
                   </Link>
                 ) : (
-                  <MenuItem onClick={logout} {...menuItemStyles}>
-                    {"Logout"}
-                  </MenuItem>
+                  <Link href={`/profile`} key={`/profile`}>
+                    <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
+                    <MenuItem onClick={logout} {...menuItemStyles}>
+                      {"Logout"}
+                    </MenuItem>
+                  </Link>
                 )}
               </MenuList>
             </Menu>
@@ -145,7 +142,6 @@ export default function Navbar() {
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
                 <Link href={link.route} key={link.route}>
-
                   <Box {...menuItemStyles}>{link.name}</Box>
                 </Link>
               ))}

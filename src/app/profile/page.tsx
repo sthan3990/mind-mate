@@ -9,30 +9,29 @@ import {
   Stack,
   Button,
   Heading,
-  useColorModeValue,
-  Link,
+  Input,
+  useToast,
 } from "@chakra-ui/react";
-import { useState, useEffect, } from "react";
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
+import { useRouter } from "next/navigation";
+// import { ValidateEmail } from "../../helper/validateEmail";
 
 const UserProfilePage = () => {
-  const [userData, setUserData] = useState(null);
+  const { push } = useRouter();
+  const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "" });
   const [loading, setLoading] = useState(true);
-  // const userId = useRouter().query.id;
-  // console.log(userId);
+
+  const [userId, setUserId] = useState(localStorage.getItem("User") || "");
+
+  console.log("page userInfo is: ", userId);
 
   useEffect(() => {
-
-    // Fetch user data based on userId when component mounts
     async function fetchUserData() {
-
       try {
-        const response = await fetch(`/api/get-user-profile?userId=1`);
-        console.log("response is ", response);
+        const response = await fetch(`/api/user-profile?userId=${userId}`);
         const data = await response.json();
-        console.log("after teh response.json")
-        console.log("the data is ", data);
         setUserData(data);
         setLoading(false);
       } catch (error) {
@@ -44,44 +43,110 @@ const UserProfilePage = () => {
     fetchUserData();
   }, []);
 
+  const [updatedFirstName, setUpdatedFirstName] = useState("");
+  const [updatedLastName, setUpdatedLastName] = useState("");
+  const [updatedEmail, setUpdatedEmail] = useState("");
+
+  useEffect(() => {
+    setUpdatedFirstName(userData["first_name"]);
+    setUpdatedEmail(userData["email"]);
+    setUpdatedLastName(userData["last_name"]);
+  }, [userData]);
+
+  const handleUpdate = (
+    updatedFirstName: string,
+    updatedLastName: string,
+    updatedEmail: string
+  ) => {
+    axios
+      .patch("/api/user-profile", {
+        first_name: updatedFirstName,
+        last_name: updatedLastName,
+        email: updatedEmail,
+        userId: userId,
+      })
+      .then((res) => {
+        console.log(res);
+        push(`/profile`);
+      });
+  };
+
+  const deleteUser = () => {
+    const isConfirmed = window.confirm("Are you sure you want to delete your account? This cannot be undone.");
+
+    if (isConfirmed) {
+      console.log("before axios");
+      axios
+        .delete("/api/user-profile")
+        .then((res) => {
+          console.log("in the .then");
+          console.log(res);
+          push("/register");
+        })
+        .catch((error) => {
+          console.error("Error while deleting:", error);
+        });
+      console.log("after axios");
+    }
+  };
+
   if (loading) {
     return <Text>Loading...</Text>;
   }
+  console.log("userData in profile Page: ", userData)
 
-  if (!userData) {
+  if (!userId) {
     return <Text>No user logged in!</Text>;
   }
 
   return (
-    <p>hello, no user signed in</p>
-    // <Flex minH={"100vh"} align={"center"} justify={"center"}>
-    //   <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-    //     <Stack align={"center"}>
-    //       <Heading fontSize={"4xl"} textAlign={"center"}>
-    //         User Profile
-    //       </Heading>
-    //       <Text fontSize={"lg"} color="white">
-    //         Welcome {userData.first_name} {userData.last_name}
-    //       </Text>
-    //     </Stack>
-    //     <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
-    //       <Stack spacing={6}>
-    //         <FormControl>
-    //           <FormLabel>First Name</FormLabel>
-    //           <Text>{userData.first_name}</Text>
-    //         </FormControl>
-    //         <FormControl>
-    //           <FormLabel>Last Name</FormLabel>
-    //           <Text>{userData.last_name}</Text>
-    //         </FormControl>
-    //         <FormControl>
-    //           <FormLabel>Email</FormLabel>
-    //           <Text>{userData.email}</Text>
-    //         </FormControl>
-    //       </Stack>
-    //     </Box>
-    //   </Stack>
-    // </Flex>
+    <Flex minH={"100vh"} align={"center"} justify={"center"}>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"} textAlign={"center"}>
+            User Profile Settings
+          </Heading>
+          <Text fontSize={"lg"} color="white">
+            Welcome {userData["first_name"]} {userData["last_name"]}
+          </Text>
+        </Stack>
+        <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
+          <Stack spacing={6}>
+            <FormControl>
+              <FormLabel>First Name</FormLabel>
+              <Input
+                placeholder={userData["first_name"]}
+                value={updatedFirstName}
+                onChange={(e) => setUpdatedFirstName(e.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Last Name</FormLabel>
+              <Input
+                placeholder={userData["last_name"]}
+                value={updatedLastName}
+                onChange={(e) => setUpdatedLastName(e.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                placeholder={userData["email"]}
+                value={updatedEmail}
+                onChange={(e) => setUpdatedEmail(e.target.value)}
+
+              />
+            </FormControl>
+            <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
+              Submit Changes
+            </Button>
+            <Button colorScheme="red" onClick={deleteUser}>
+              Delete Account
+            </Button>
+          </Stack>
+        </Box>
+      </Stack >
+    </Flex >
   );
 };
 
