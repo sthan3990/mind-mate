@@ -135,11 +135,15 @@ const Navbar = () => {
     <ChakraProvider theme={theme}>
       <Flex direction="column" align="center" p={4} bg="#F9F2FF" boxShadow="sm">
         <Flex width="100%" justify="space-between" align="center">
+
+          {/* Logo */}
           <Box>
             <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
           </Box>
-          <Flex justify="center"> {/* Just added justify="center" here */}
-          <HStack>
+          
+          {/* Menu Links */}
+          <Flex justify="center" alignItems="center"> {/* Added alignItems="center" */}
+            <HStack>
             <a href="#" onClick={e => e.preventDefault()}>
               <Text sx={linkStyle}>Guided Journal</Text>
             </a>
@@ -151,6 +155,7 @@ const Navbar = () => {
             </a>
             </HStack>
           </Flex>
+
           <Menu>
             <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
               Account
@@ -180,7 +185,12 @@ const Navbar = () => {
             </Portal>
           </Menu>
 
+ 
+          {/* Account Button */}
+          <Button borderRadius="550px" sx={accountButtonStyle}>Account</Button>
+
         </Flex>
+
         <Divider sx={dividerStyle} />
 
         <Flex direction="column" align="center" mt={["10%", "15%", "20%", "12%"]}>

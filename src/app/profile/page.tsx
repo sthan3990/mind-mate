@@ -25,7 +25,7 @@ const UserProfilePage = () => {
 
   const [userId, setUserId] = useState(localStorage.getItem("User") || "");
 
-  console.log("page userInfo is: ", userId);
+  // console.log("page userInfo is: ", userId);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -41,6 +41,23 @@ const UserProfilePage = () => {
     }
 
     fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    function checkUserData() {
+      console.log("local storage triggered");
+      const item = localStorage.getItem('User')
+
+      if (item && item !== "") {
+        setUserId(item);
+      }
+    }
+
+    window.addEventListener('storage', checkUserData)
+
+    return () => {
+      window.removeEventListener('storage', checkUserData)
+    }
   }, []);
 
   const [updatedFirstName, setUpdatedFirstName] = useState("");
@@ -95,7 +112,7 @@ const UserProfilePage = () => {
   }
   console.log("userData in profile Page: ", userData)
 
-  if (!userId) {
+  if (userId === "") {
     return <Text>No user logged in!</Text>;
   }
 
