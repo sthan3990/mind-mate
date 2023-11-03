@@ -18,10 +18,9 @@ import {
   Portal
 } from "@chakra-ui/react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { fonts } from "@/theme/fonts";
+
 import { useUser } from './../contexts/UserContext';
 import * as styles from '../styles/headerStyle';
-
 
 const theme = extendTheme({
   breakpoints: {
@@ -56,8 +55,13 @@ const Navbar = () => {
 
         {/* 1. Logo and MindMate Text Section */}
         <Flex alignItems="center">
-          <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
-          <Text sx={mindMateStyle} ml={20}>MindMate</Text>
+          <Link href="/">
+            <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
+          </Link>
+          <Link href="/">
+            <Text sx={mindMateStyle} ml={20}>MindMate</Text>
+          </Link>
+
         </Flex>
 
         {/* 2. Vertical Line Section */}
