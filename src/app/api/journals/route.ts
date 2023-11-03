@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { userId, emotionPre, emotionPost, numQuestions } =
+    const { userId, preMoodState, postMoodState, numQuestions } =
       await request.json();
-    if (!userId || !emotionPre || !emotionPost || !numQuestions) {
+    if (!userId || !preMoodState || !postMoodState || !numQuestions) {
       return new NextResponse(
         "User id, emotion pre and post, and number of questions need to be provided",
         {
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
       });
     }
 
-    await sql`INSERT INTO journals (user_id, emotion_pre, emotion_post, num_questions) VALUES (${userId}, ${emotionPre}, ${emotionPost}, ${numQuestions});`;
+    await sql`INSERT INTO journals (user_id, emotion_pre, emotion_post, num_questions) VALUES (${userId}, ${preMoodState}, ${postMoodState}, ${numQuestions});`;
     return NextResponse.json({ message: "Journal Created" }, { status: 200 });
   } catch (error) {
     console.error(error);
