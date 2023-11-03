@@ -21,7 +21,13 @@ export async function POST(request: Request) {
     }
 
     await sql`INSERT INTO journals (user_id, emotion_pre, emotion_post, num_questions) VALUES (${userId}, ${preMoodState}, ${postMoodState}, ${numQuestions});`;
-    return NextResponse.json({ message: "Journal Created" }, { status: 200 });
+    const journalId =
+      await sql`SELECT id FROM journals WHERE id=(SELECT max(id) FROM journals);
+    `;
+    return NextResponse.json(
+      { message: "Journal Created", journalId: journalId.rows[0] },
+      { status: 200 }
+    );
   } catch (error) {
     console.error(error);
   }
@@ -38,7 +44,7 @@ export async function GET(request: Request) {
     }
 
     const journals =
-      await sql`SELECT users.id, emotion_pre, emotion_post, num_questions, timestamp FROM users join journals ON users.id = journals.user_id WHERE users.id = ${userId};`;
+      await sql`SELECT users.id, journals.id as Jid, emotion_pre, emotion_post, num_questions, timestamp FROM users join journals ON users.id = journals.user_id WHERE users.id = ${userId};`;
     return NextResponse.json({ journals: journals.rows }, { status: 200 });
   } catch (error) {
     console.error(error);

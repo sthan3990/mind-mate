@@ -1,14 +1,8 @@
 "use client";
 import { useUser } from "../contexts/UserContext";
+
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Stack,
-  Button,
-  Text,
-  useDisclosure
-} from "@chakra-ui/react";
-import WarningModal from "./components/warningmodal";
+import { Box, Stack, Button, Text } from "@chakra-ui/react";
 import InitialJournal from "./components/initialpage";
 import FormOne from "./components/formone";
 import FormTwo from "./components/formtwo";
@@ -17,88 +11,61 @@ import FormFour from "./components/formfour";
 import axios from "axios";
 
 const Journal: React.FC = () => {
-  // userId from useContext
-  const [step, setStep] = useState(0);
-  const [journalId, setJournalId] = useState("");
+  //userId from useContext
   const { userId } = useUser();
+  const [step, setStep] = useState(0);
   const [numQuestions, setNumQuestions] = useState(0);
   const [preMoodState, setpreMoodState] = useState(0);
+  const [journalId, setJournalId] = useState(0);
   const [journalEntry, setJournalEntry] = useState("");
   const [postMoodState, setpostMoodState] = useState(0);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [quote, setQuote] = useState("");
 
-  useEffect(() => {
-    // Generate a date
-    let newDate = new Date();
-    let day = newDate.getDate();
-    let month = newDate.getMonth() + 1; // Month is 0-indexed, so add 1 to get the correct month.
-    let year = newDate.getFullYear();
-    const newJournalId =
-      userId +
-      "_" +
-      year +
-      (month < 10 ? "0" : "") +
-      month +
-      (day < 10 ? "0" : "") +
-      day;
-    setJournalId((prevJournal) => newJournalId);
-  }, [
-    journalId,
-    step,
+  useEffect(() => {}, [
     numQuestions,
     preMoodState,
     journalEntry,
     postMoodState,
-    userId
+    userId,
+    journalId,
   ]);
 
-  const checkFields = () => {
-    if (step === 0 && numQuestions === 0) {
-      onOpen(); // Open the modal when fields are missing
-      return false;
-    }
-    if (step === 1 && preMoodState === 0) {
-      onOpen(); // Open the modal when fields are missing
-      return false;
-    }
-    // Add similar checks for other steps...
-    return true;
-  };
-
   const handleContinue = () => {
-    const isValid = checkFields();
-    if (isValid) {
-      if (step === 1 || step === 4) {
-        writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
-      }
+    if (step < 4) {
       setStep(step + 1);
+    } else {
+      setStep(step + 1);
+      writeToSql(userId, preMoodState, postMoodState, numQuestions);
+      // Handle navigation to the final page or perform a post request here.
     }
   };
 
-  const writeToSql = (which: number) => {
-    if (which === 1) {
-      axios
-        .get("/api/questions", {
-          params: { journalId, numQuestions }
-        })
-        .then((res) => {
-          console.log(res.data);
-        });
-    } else {
-      axios
-        .post("/api/journals", {
-          userId,
-          preMoodState,
-          journalEntry,
-          postMoodState
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message === "User logged in") {
-            localStorage.setItem("User", res.data.userID);
-          }
-        });
-    }
+  const writeToSql = (
+    userId: string | null,
+    preMoodState: number,
+    postMoodState: number,
+    numQuestions: number
+  ) => {
+    axios
+      .post("/api/journals", {
+        userId,
+        preMoodState,
+        postMoodState,
+        numQuestions,
+      })
+      .then((res) => {
+        if (res.data.message === "Journal Created") {
+          setJournalId(res.data.journalId.id);
+        }
+      });
+
+    // TODO: how to g the journal id
+    // axios.get("/api/questions", { }).then((res) => {
+    //   console.log(res.data);
+    //   if (res.data.message === "User logged in") {
+    //     localStorage.setItem("User", res.data.userID);
+    //   }
+    // });
   };
 
   const handleBack = () => {
@@ -107,21 +74,20 @@ const Journal: React.FC = () => {
     }
   };
 
-  const handleQuestions = (numberChosen: number) => {
-    setNumQuestions(numberChosen);
-  };
+  // const handleQuestions = (numberChosen: number) => {
+  //   setNumQuestions((prevNum) => numberChosen);
+  // };
 
-  const handlepreMoodState = (moodChosen: number) => {
-    setpreMoodState(moodChosen);
-  };
+  // const handlepreMoodState = (moodChosen: number) => {
+  //   setpreMoodState((prevMoodState) => moodChosen);
+  // };
 
-  const handlepostMoodState = (moodChosen: number) => {
-    setpostMoodState(moodChosen);
-  };
+  // const handlepostMoodState = (moodChosen: number) => {
+  //   setpostMoodState((prevMoodState) => moodChosen);
+  // };
 
   const handleJournalEntry = (journalEntry: string) => {
-    setJournalEntry(journalEntry);
-
+    setJournalEntry((prevJournal) => journalEntry);
   };
 
   return (
@@ -134,15 +100,15 @@ const Journal: React.FC = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        {step === 0 && <InitialJournal handleQuestions={handleQuestions} />}
-        {step === 1 && <FormOne handleMoodState={handlepreMoodState} />}
+        {step === 0 && <InitialJournal setNumQuestions={setNumQuestions} />}
+        {step === 1 && <FormOne setpreMoodState={setpreMoodState} />}
         {step === 2 && (
           <FormTwo
             setJournalEntry={setJournalEntry}
             handleContinue={handleContinue}
           />
         )}
-        {step === 3 && <FormThree handleMoodState={handlepostMoodState} />}
+        {step === 3 && <FormThree setpostMoodState={setpostMoodState} />}
         {step === 4 && <FormFour />}
 
         {step != 2 && (
@@ -180,7 +146,6 @@ const Journal: React.FC = () => {
           </Box>
         )}
       </Stack>
-      <WarningModal isOpen={isOpen} step={step} onClose={onClose} />
     </>
   );
 };
