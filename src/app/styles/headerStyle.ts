@@ -1,8 +1,15 @@
 import { fonts } from "@/theme/fonts";
 
 export const logoStyle = {
-  width: ["40px", "60px", "70px", "60px"],
-  height: ["40px", "60px", "70px", "80px"],
+  width: ["60px"],
+  height: ["60px"],
+  zIndex: 2,
+  marginLeft: '15px'
+};
+
+export const logoStyleMobile = {
+  width: ["60px"],
+  height: ["60px"],
   zIndex: 2,
   marginLeft: '15px'
 };
