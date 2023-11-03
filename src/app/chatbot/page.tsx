@@ -37,22 +37,23 @@ const Chatbot: React.FC = ({ }) => {
 
       if (lastQuestion == "true") {
 
-
         append({
           content: 'Good Bye',
           // The content of the message
           role: 'user'
         });
 
+        // clear input area
         setInput('');
 
+        // stop the chat
+        stop();
       }
 
     },
     onFinish: (res) => {
       setNumMessages(numMessages + 1); // Increment numMessages
       localStorage.setItem("setMessageFinished", "true");
-
     }
   });
 
@@ -66,7 +67,7 @@ const Chatbot: React.FC = ({ }) => {
     if (input.trim() !== '') {
 
       // Send a user message to the API
-      append({ content: "input", role: 'user' });
+      append({ content: input, role: 'user' });
 
       // clear input field 
       setInput('');
@@ -86,7 +87,7 @@ const Chatbot: React.FC = ({ }) => {
     // Add more historical entries as needed
   ];
 
-
+  
   return (
     <form onSubmit={handleFormSubmit}>
       <Grid
