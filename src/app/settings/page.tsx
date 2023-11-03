@@ -10,13 +10,15 @@ import {
   Button,
   Heading,
   Input,
-  useToast,
+  InputGroup,
+  InputRightElement
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import { useRouter } from "next/navigation";
 import * as styles from "../styles/settingsStyle";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const UserProfilePage = () => {
   const logoStyle = styles.logoStyle;
@@ -60,6 +62,7 @@ const UserProfilePage = () => {
   const [updatedLastName, setUpdatedLastName] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState("");
   const [updatedPassword, setUpdatedPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setUpdatedFirstName(userData["first_name"]);
@@ -89,15 +92,18 @@ const UserProfilePage = () => {
   const changePassword = (
     updatedPassword: string,
   ) => {
-    axios
-      .patch("/api/users", {
-        password: updatedPassword,
-        userId: userId,
-      })
-      .then((res) => {
-        console.log(res);
-        push(`/settings`);
-      });
+    const isConfirmed = window.confirm("Are you sure you want to change your password?");
+    if (isConfirmed) {
+      axios
+        .patch("/api/users", {
+          password: updatedPassword,
+          userId: userId,
+        })
+        .then((res) => {
+          console.log(res);
+          push(`/settings`);
+        });
+    }
   };
 
   const deleteUser = () => {
@@ -177,13 +183,24 @@ const UserProfilePage = () => {
             </Button>
             <FormControl>
               <FormLabel>Change Password</FormLabel>
-              <Input
-                sx={rectangleIconStyle}
-                type="text"
-                onChange={(e) => setUpdatedPassword(e.target.value)}
+              <InputGroup>
+                <Input
+                  sx={rectangleIconStyle}
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setUpdatedPassword(e.target.value)}
+                />
 
-              />
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() => setShowPassword((prevState) => !prevState)}
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
+
             <Button mt={4} colorScheme="blue" onClick={() => changePassword(updatedPassword)}>
               Update Password
             </Button>
