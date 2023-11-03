@@ -16,7 +16,7 @@ export async function GET(request: Request) {
   console.log("userId in api route: ", userId);
   try {
     // Fetch user from db
-    const user = await sql`SELECT first_name, last_name, email FROM users WHERE id = ${userId};`;
+    const user = await sql`SELECT first_name, last_name, email, password FROM users WHERE id = ${userId};`;
 
     // const user = await sql`SELECT * FROM users;`;
     // console.log("user: ", user);
@@ -37,7 +37,8 @@ export async function GET(request: Request) {
 
 export async function PATCH(request: Request) {
   // Extract the updated data from the request body
-  const { first_name, last_name, email, userId } = await request.json();
+  const { first_name, last_name, email, userId, password } = await request.json();
+  console.log("password in route: ", password);
 
   if (!userId || isNaN(Number(userId))) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
