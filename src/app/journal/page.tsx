@@ -22,40 +22,42 @@ const Journal: React.FC = () => {
   const [postMoodState, setpostMoodState] = useState(0);
   const [quote, setQuote] = useState("");
 
-  // Generate a date
-  let newDate = new Date()
-  newDate.getDate();
 
-  useEffect(() => { }, [
-    numQuestions,
-    preMoodState,
-    journalEntry,
-    postMoodState,
-  ]);
+
+  useEffect(() => {
+
+  },
+    [
+      step,
+      numQuestions,
+      preMoodState,
+      journalEntry,
+      postMoodState,
+    ]);
 
   const handleContinue = () => {
-    if (step < 4) {
-      setStep(step + 1);
-    } else if (step == 1) {
-      setStep(step + 1);
-      writeToSql(1);
+
+    if (step === 1 || step === 4) {
+      writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
     }
-    else {
-      setStep(step + 1);
-      writeToSql(2);
-    }
+
+    setStep(step + 1);
   };
 
   const writeToSql = (which: number) => {
 
-    if (step == 1) {
-
-      // if (!userId){
-
-      setJournalId(userId + "_" + newDate.getDate()); 
+    if (which == 1) {
+        // Generate a date
+        let newDate = new Date();
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1; // Month is 0-indexed, so add 1 to get the correct month.
+        let year = newDate.getFullYear();
+        setJournalId(userId + "_" + year + (month < 10 ? '0' : '') + month + (day < 10 ? '0' : '') + day);
+        console.log(newDate);
+        console.log(journalId);
 
       axios.get("/api/questions", {
-        params: {journalId, numQuestions },
+        params: { journalId, numQuestions },
       })
         .then((res) => {
           console.log(res.data);
@@ -74,8 +76,6 @@ const Journal: React.FC = () => {
           }
         });
     }
-    // TODO: how to g the journal id
-
   };
 
   const handleBack = () => {
