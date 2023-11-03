@@ -4,10 +4,10 @@ import React from "react";
 import { Button, HStack, Stack, Box, Text } from "@chakra-ui/react";
 
 interface InitialJournalProps {
-  setNumQuestions: (numQuestions: number) => void;
+  handleQuestions: (numQuestions: number) => void;
 }
 
-const InitialJournal: React.FC<InitialJournalProps> = ({ setNumQuestions }) => {
+const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
   return (
     <Stack
       height="65vh"
@@ -36,7 +36,7 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ setNumQuestions }) => {
           <Box>
             <Button
               backgroundColor="transparent"
-              onClick={() => setNumQuestions(1)}
+              onClick={() => handleQuestions(1)}
             >
               <svg
                 width="133"
@@ -69,7 +69,7 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ setNumQuestions }) => {
           </Box>
 
           <Box>
-            <Button onClick={() => setNumQuestions(2)}>
+            <Button onClick={() => handleQuestions(2)}>
               <svg
                 width="134"
                 height="134"
@@ -101,7 +101,7 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ setNumQuestions }) => {
           </Box>
 
           <Box>
-            <Button onClick={() => setNumQuestions(3)}>
+            <Button onClick={() => handleQuestions(3)}>
               <svg
                 width="134"
                 height="134"

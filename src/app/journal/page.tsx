@@ -28,6 +28,9 @@ const Journal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
+    console.log(preMoodState);
+    console.log(postMoodState);
+    
     // Generate a date
     let newDate = new Date();
     let day = newDate.getDate();
@@ -67,6 +70,7 @@ const Journal: React.FC = () => {
 
   const handleContinue = () => {
     const isValid = checkFields();
+
     if (isValid) {
       if (step === 1 || step === 4) {
         writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
@@ -121,7 +125,6 @@ const Journal: React.FC = () => {
 
   const handleJournalEntry = (journalEntry: string) => {
     setJournalEntry(journalEntry);
-
   };
 
   return (
@@ -135,17 +138,17 @@ const Journal: React.FC = () => {
         justifyContent="space-between"
       >
         {step === 0 && <InitialJournal handleQuestions={handleQuestions} />}
-        {step === 1 && <FormOne handleMoodState={handlepreMoodState} />}
+        {step === 1 && <FormOne handlepreMoodState={handlepreMoodState} />}
         {step === 2 && (
           <FormTwo
             setJournalEntry={setJournalEntry}
             handleContinue={handleContinue}
           />
         )}
-        {step === 3 && <FormThree handleMoodState={handlepostMoodState} />}
+        {step === 3 && <FormThree handlepostMoodState={handlepostMoodState} />}
         {step === 4 && <FormFour />}
 
-        {step != 2 && (
+        {step !== 2 && (
           <Box>
             <Button background="#D0A2D1" onClick={handleBack}>
               <Text

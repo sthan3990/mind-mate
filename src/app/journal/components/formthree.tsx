@@ -5,10 +5,10 @@ import React from "react";
 import { Button, HStack, Stack, Box, Text } from "@chakra-ui/react";
 
 interface FormThreeProps {
-  setpostMoodState: (moodChosen: number) => void;
+  handlepostMoodState: (moodChosen: number) => void;
 }
 
-const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
+const FormThree: React.FC<FormThreeProps> = ({ handlepostMoodState }) => {
   return (
     <Stack
       width="80%"
@@ -63,7 +63,7 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
                 backgroundColor: "red.400",
               }}
               variant="unstyled"
-              onClick={() => setpostMoodState(1)}
+              onClick={() => handlepostMoodState(1)}
             >
               <svg
                 width="139"
@@ -134,7 +134,7 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpostMoodState(2)}>
+            <Button variant="unstyled" onClick={() => handlepostMoodState(2)}>
               <svg
                 width="139"
                 height="139"
@@ -197,7 +197,7 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpostMoodState(3)}>
+            <Button variant="unstyled" onClick={() => handlepostMoodState(3)}>
               <svg
                 width="139"
                 height="139"
@@ -247,7 +247,7 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpostMoodState(4)}>
+            <Button variant="unstyled" onClick={() => handlepostMoodState(4)}>
               <svg
                 width="139"
                 height="139"
@@ -314,7 +314,7 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpostMoodState(5)}>
+            <Button variant="unstyled" onClick={() => handlepostMoodState(5)}>
               <svg
                 width="139"
                 height="139"

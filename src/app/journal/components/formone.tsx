@@ -5,10 +5,10 @@ import React from "react";
 import { Button, HStack, Stack, Box, Text } from "@chakra-ui/react";
 
 interface FormOneProps {
-  setpreMoodState: (moodChosen: number) => void;
+  handlepreMoodState: (moodChosen: number) => void;
 }
 
-const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
+const FormOne: React.FC<FormOneProps> = ({ handlepreMoodState }) => {
   return (
     <Stack
       width="80%"
@@ -62,7 +62,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                 backgroundColor: "red.400",
               }}
               variant="unstyled"
-              onClick={() => setpreMoodState(1)}
+              onClick={() => handlepreMoodState(1)}
             >
               <svg
                 width="139"
@@ -133,7 +133,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpreMoodState(2)}>
+            <Button variant="unstyled" onClick={() => handlepreMoodState(2)}>
               <svg
                 width="139"
                 height="139"
@@ -196,7 +196,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpreMoodState(3)}>
+            <Button variant="unstyled" onClick={() => handlepreMoodState(3)}>
               <svg
                 width="139"
                 height="139"
@@ -246,7 +246,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpreMoodState(4)}>
+            <Button variant="unstyled" onClick={() => handlepreMoodState(4)}>
               <svg
                 width="139"
                 height="139"
@@ -313,7 +313,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
           </Box>
 
           <Box>
-            <Button variant="unstyled" onClick={() => setpreMoodState(5)}>
+            <Button variant="unstyled" onClick={() => handlepreMoodState(5)}>
               <svg
                 width="139"
                 height="139"
