@@ -38,6 +38,7 @@ const theme = extendTheme({
 const Navbar = () => {
   //Do not delete between this and the next comment
   const { userId, logout } = useUser();
+  // This is the other comment
   const logoStyle = {
     width: ["80px", "90px", "100px", "120px"],
     height: ["80px", "90px", "100px", "120px"],
