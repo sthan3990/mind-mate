@@ -9,16 +9,16 @@ import Chatbot from '../../chatbot/page';
 import { useNumMessages } from '../../helper/numofmessages';
 
 interface FormTwoProps {
-  handleJournalEntry: (entry: string) => void;
+  numQuestions: number
   handleContinue: () => void;
 }
 
-const FormTwo: React.FC<FormTwoProps> = ({ handleJournalEntry, handleContinue }) => { 
+const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => { 
   const { numMessages, setNumMessages } = useNumMessages();
 
   console.log("numMessages:", numMessages); // Log numMessages
 
-  if (numMessages < 4) {
+  if (numMessages < numQuestions) {
     return <Chatbot />;
   } else {
     setNumMessages(0); // Reset numMessages

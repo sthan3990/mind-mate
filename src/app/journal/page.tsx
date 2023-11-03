@@ -140,6 +140,7 @@ const Journal: React.FC = () => {
         {step === 1 && <FormOne handlepreMoodState={handlepreMoodState} />}
         {step === 2 && (
             <FormTwo
+              numQuestions={numQuestions}
               handleJournalEntry={handleJournalEntry}
               handleContinue={handleContinue}
             />
