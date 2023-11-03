@@ -26,8 +26,6 @@ export default function Chatbot() {
   const [copyValue, setCopyValue] = useState('');
   const { hasCopied, onCopy } = useClipboard(copyValue);
 
-  const chatBoxRef = useRef<HTMLDivElement | null>(null);
-
   const { messages, input, handleInputChange, handleSubmit, stop, append } = useChat({
     api: '/api/chatbot',
   });
@@ -37,9 +35,11 @@ export default function Chatbot() {
     handleSubmit(e);
   };
 
-  const handleArrowButtonClick = () => {
+  const handleArrowButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
     setNumMessages(numMessages + 1); // Increment numMessages
-    append({ content: input, role: 'user' });
+
+    // send the input to the API
+    handleSubmit(e);
   };
 
   const handleHistoryClick = (item: string) => {
