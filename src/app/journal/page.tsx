@@ -16,6 +16,7 @@ const Journal: React.FC = () => {
   const [step, setStep] = useState(0);
   const [numQuestions, setNumQuestions] = useState(0);
   const [preMoodState, setpreMoodState] = useState(0);
+  const [journalId, setJournalId] = useState(0);
   const [journalEntry, setJournalEntry] = useState("");
   const [postMoodState, setpostMoodState] = useState(0);
   const [quote, setQuote] = useState("");
@@ -25,6 +26,8 @@ const Journal: React.FC = () => {
     preMoodState,
     journalEntry,
     postMoodState,
+    userId,
+    journalId,
   ]);
 
   const handleContinue = () => {
@@ -32,20 +35,27 @@ const Journal: React.FC = () => {
       setStep(step + 1);
     } else {
       setStep(step + 1);
-      writeToSql();
+      writeToSql(userId, preMoodState, postMoodState, numQuestions);
       // Handle navigation to the final page or perform a post request here.
     }
   };
 
-  const writeToSql = () => {
+  const writeToSql = (
+    userId: string | null,
+    preMoodState: number,
+    postMoodState: number,
+    numQuestions: number
+  ) => {
     axios
       .post("/api/journals", {
-        params: { userId, preMoodState, postMoodState, numQuestions },
+        userId,
+        preMoodState,
+        postMoodState,
+        numQuestions,
       })
       .then((res) => {
-        console.log(res.data);
-        if (res.data.message === "User logged in") {
-          localStorage.setItem("User", res.data.userID);
+        if (res.data.message === "Journal Created") {
+          setJournalId(res.data.journalId.id);
         }
       });
 
