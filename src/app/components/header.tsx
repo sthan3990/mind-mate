@@ -125,31 +125,28 @@ const linkTab = {
 
          {/* 4. Account Section */}
         <Menu>
-          {!userId ? (
             <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
-              Login
+              Account
             </MenuButton>
-          ) : (
-            <>
-              <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
-                Account
-              </MenuButton>
-              <Portal>
-                <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
-                  <Link href="/settings" passHref>
-                    <MenuItem
-                      as="a"
-                      sx={{
-                        _hover: { background: "white", color: "#FBC1AA" },
-                        _active: { bg: "white", color: "#FBC1AA" }
-                      }}
-                    >
-                      Settings
-                    </MenuItem>
-                  </Link>
-                  <Divider orientation="horizontal" />
+            <Portal>
+              <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
+                <Link href="/settings" passHref>
                   <MenuItem
-                    onClick={logout}
+                    as="a"
+                    sx={{
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" }
+                    }}
+                  >
+                    Settings
+                  </MenuItem>
+                </Link>
+
+                <Divider orientation="horizontal" />
+
+                <Link href="/login" passHref>
+                  <MenuItem
+                    as="a"
                     sx={{
                       _hover: { background: "white", color: "#FBC1AA" },
                       _active: { bg: "white", color: "#FBC1AA" }
@@ -157,11 +154,12 @@ const linkTab = {
                   >
                     Logout
                   </MenuItem>
-                </MenuList>
-              </Portal>
-            </>
-          )}
-        </Menu>
+                </Link>
+
+              </MenuList>
+
+            </Portal>
+          </Menu>
 
       </Flex>
     </ChakraProvider>
