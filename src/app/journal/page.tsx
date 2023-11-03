@@ -19,10 +19,10 @@ import axios from "axios";
 const Journal: React.FC = () => {
   // userId from useContext
   const [step, setStep] = useState(0);
+  const [journalId, setJournalId] = useState("");
   const { userId } = useUser();
   const [numQuestions, setNumQuestions] = useState(0);
   const [preMoodState, setpreMoodState] = useState(0);
-  const [journalId, setJournalId] = useState(0);
   const [journalEntry, setJournalEntry] = useState("");
   const [postMoodState, setpostMoodState] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,6 +51,7 @@ const Journal: React.FC = () => {
     journalEntry,
     preMoodState,
     postMoodState,
+    userId
   ]);
 
   const checkFields = () => {
@@ -74,34 +75,33 @@ const Journal: React.FC = () => {
         writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
       }
       setStep(step + 1);
+    }
   };
 
-  const writeToSql = (
-    userId: string | null,
-    preMoodState: number,
-    postMoodState: number,
-    numQuestions: number
-  ) => {
-    axios
-      .post("/api/journals", {
-        userId,
-        preMoodState,
-        postMoodState,
-        numQuestions,
-      })
-      .then((res) => {
-        if (res.data.message === "Journal Created") {
-          setJournalId(res.data.journalId.id);
-        }
-      });
-
-    // TODO: how to g the journal id
-    // axios.get("/api/questions", { }).then((res) => {
-    //   console.log(res.data);
-    //   if (res.data.message === "User logged in") {
-    //     localStorage.setItem("User", res.data.userID);
-    //   }
-    // });
+  const writeToSql = (which: number) => {
+    if (which === 1) {
+      // axios
+      //   .get("/api/questions", {
+      //     params: { journalId, numQuestions }
+      //   })
+      //   .then((res) => {
+      //     console.log(res.data);
+      //   });
+    } else {
+      axios
+        .post("/api/journals", {
+          userId,
+          preMoodState,
+          journalEntry,
+          postMoodState
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message === "User logged in") {
+            localStorage.setItem("User", res.data.userID);
+          }
+        });
+    }
   };
 
   const handleBack = () => {
