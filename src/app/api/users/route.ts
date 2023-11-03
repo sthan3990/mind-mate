@@ -37,3 +37,41 @@ export async function GET(request: Request) {
   const users = await sql`SELECT * FROM users;`;
   return NextResponse.json({ users: users.rows }, { status: 200 });
 }
+
+export async function PATCH(request: Request) {
+  // Extract the updated data from the request body
+  const { userId, password } = await request.json();
+  console.log("password in route: ", password);
+
+  if (!userId || isNaN(Number(userId))) {
+    return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
+  }
+
+
+  try {
+
+    const salt = bcrypt.genSaltSync(8);
+    const hashedPassword = bcrypt.hashSync(password, salt)
+    console.log("hashed: ", hashedPassword)
+    // Update the user details in the database
+    const result = await sql`
+      UPDATE users
+      SET password = ${hashedPassword}
+      WHERE id = ${userId}
+      RETURNING password;
+    `;
+
+    // If user doesn't exist. Return a 404 error
+    if (result.rowCount === 0) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Return the updated user details
+    return NextResponse.json(result.rows[0], { status: 200 });
+
+  } catch (error) {
+    // Handle any unexpected errors
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
+
+}

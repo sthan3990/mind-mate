@@ -10,22 +10,35 @@ import {
   Button,
   Heading,
   Input,
-  useToast,
+  InputGroup,
+  InputRightElement
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import { useRouter } from "next/navigation";
+import * as styles from "../styles/settingsStyle";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const UserProfilePage = () => {
+  const logoStyle = styles.logoStyle;
+  const mainImageStyle = styles.mainImageStyle;
+  const textStyle = styles.textStyle;
+  const headingStyle = styles.headingStyle;
+  const rectangleIconStyle = styles.rectangleIconStyle;
+  const registerButtonStyle = styles.registerButtonStyle;
+  const loginButtonStyle = styles.loginButtonStyle;
+  const orTextStyle = styles.orTextStyle;
+  const lineStyle = styles.lineStyle;
   const { userId } = useUser();
-  console.log("context userId in beginning of profile page: ", userId);
+  // console.log("context userId in beginning of profile page: ", userId);
   const { push } = useRouter();
-  const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "" });
+  const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "", "password": "" });
   // const [userID, setUserID] = useState(userId || "")
   const [loading, setLoading] = useState(true);
-
   // const [userId, setUserId] = useState(localStorage.getItem("User") || "");
+  console.log("userdata with pass: ", userData);
+
 
   useEffect(() => {
     async function fetchUserData() {
@@ -45,31 +58,17 @@ const UserProfilePage = () => {
     fetchUserData();
   }, [userId]);
 
-  // useEffect(() => {
-  //   function checkUserData() {
-  //     console.log("local storage triggered");
-  //     const item = localStorage.getItem('User')
-
-  //     if (item && item !== "") {
-  //       setUserID(item);
-  //     }
-  //   }
-
-  //   window.addEventListener('storage', checkUserData)
-
-  //   return () => {
-  //     window.removeEventListener('storage', checkUserData)
-  //   }
-  // }, []);
-
   const [updatedFirstName, setUpdatedFirstName] = useState("");
   const [updatedLastName, setUpdatedLastName] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState("");
+  const [updatedPassword, setUpdatedPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setUpdatedFirstName(userData["first_name"]);
     setUpdatedEmail(userData["email"]);
     setUpdatedLastName(userData["last_name"]);
+    setUpdatedPassword(userData["password"]);
   }, [userData]);
 
   const handleUpdate = (
@@ -86,8 +85,25 @@ const UserProfilePage = () => {
       })
       .then((res) => {
         console.log(res);
-        push(`/profile`);
+        push(`/settings`);
       });
+  };
+
+  const changePassword = (
+    updatedPassword: string,
+  ) => {
+    const isConfirmed = window.confirm("Are you sure you want to change your password?");
+    if (isConfirmed) {
+      axios
+        .patch("/api/users", {
+          password: updatedPassword,
+          userId: userId,
+        })
+        .then((res) => {
+          console.log(res);
+          push(`/settings`);
+        });
+    }
   };
 
   const deleteUser = () => {
@@ -112,28 +128,29 @@ const UserProfilePage = () => {
   if (loading) {
     return <Text>Loading...</Text>;
   }
-  console.log("userData in profile Page: ", userData)
 
   if (userId === "") {
     return <Text>No user logged in!</Text>;
   }
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"}>
+    <Flex minH={"100vh"} align={"center"} justify={"center"} color="black">
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
+          <Heading fontSize={"4xl"} sx={headingStyle} textAlign={"center"}>
             User Profile Settings
           </Heading>
           <Text fontSize={"lg"} color="white">
             Welcome {userData["first_name"]} {userData["last_name"]}
           </Text>
         </Stack>
-        <Box rounded={"lg"} bg="black" boxShadow={"lg"} p={8}>
+        <Box>
           <Stack spacing={6}>
             <FormControl>
               <FormLabel>First Name</FormLabel>
               <Input
+                sx={rectangleIconStyle}
+                type="text"
                 placeholder={userData["first_name"]}
                 value={updatedFirstName}
                 onChange={(e) => setUpdatedFirstName(e.target.value)}
@@ -142,6 +159,8 @@ const UserProfilePage = () => {
             <FormControl>
               <FormLabel>Last Name</FormLabel>
               <Input
+                sx={rectangleIconStyle}
+                type="text"
                 placeholder={userData["last_name"]}
                 value={updatedLastName}
                 onChange={(e) => setUpdatedLastName(e.target.value)}
@@ -150,15 +169,42 @@ const UserProfilePage = () => {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
+                sx={rectangleIconStyle}
+                type="text"
                 placeholder={userData["email"]}
                 value={updatedEmail}
                 onChange={(e) => setUpdatedEmail(e.target.value)}
 
               />
             </FormControl>
+
             <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
               Submit Changes
             </Button>
+            <FormControl>
+              <FormLabel>Change Password</FormLabel>
+              <InputGroup>
+                <Input
+                  sx={rectangleIconStyle}
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setUpdatedPassword(e.target.value)}
+                />
+
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() => setShowPassword((prevState) => !prevState)}
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+
+            <Button mt={4} colorScheme="blue" onClick={() => changePassword(updatedPassword)}>
+              Update Password
+            </Button>
+
             <Button colorScheme="red" onClick={deleteUser}>
               Delete Account
             </Button>

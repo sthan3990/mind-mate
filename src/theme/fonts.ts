@@ -12,7 +12,6 @@ const alegreya_Sans = Alegreya_Sans({ weight: "500", subsets: ['greek'] });
 import { Inter } from "next/font/google";
 const inter = Inter({ weight: '800', subsets: ["latin"] });
 
-
 /** App Fonts */
 export const fonts = {
   body: poppinsBody.style.fontFamily,

@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import Link  from 'next/link';
 import {
   Flex,
@@ -135,6 +134,8 @@ const Navbar = () => {
 
   return (
     <ChakraProvider theme={theme}>
+    
+      
       <Flex direction="column" align="center" p={4} bg="#F9F2FF" boxShadow="sm">
         <Flex width="100%" justify="space-between" align="center">
 
@@ -153,8 +154,27 @@ const Navbar = () => {
                 <Link href="/progress-report">
                   <Text sx={linkStyle}>Progress Report</Text>
               </Link>
+
             </HStack>
-          </Flex>
+            </Flex>
+          {/* Menu Links */}
+          <Flex justify="center" alignItems="center">
+            {" "}
+            {/* Added alignItems="center" */}
+            <HStack>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                <Text sx={linkStyle}>Guided Journal</Text>
+              </a>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                <Text sx={linkStyle}>CBT Chatbot</Text>
+              </a>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                <Text sx={linkStyle}>Progress Report</Text>
+              </a>
+
+            </HStack>
+            </Flex>
+   
 
           <Menu>
             <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
@@ -208,6 +228,7 @@ const Navbar = () => {
           <Text sx={awarenessStyle}>Mindful Awareness</Text>
         </Flex>
       </Flex>
+      
     </ChakraProvider>
   );
 }

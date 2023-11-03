@@ -7,8 +7,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
 
-  // console.log("searchParams: ", searchParams);
-
   // Ensure user ID exists
   if (!userId || isNaN(Number(userId))) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
@@ -16,11 +14,7 @@ export async function GET(request: Request) {
   console.log("userId in api route: ", userId);
   try {
     // Fetch user from db
-    const user = await sql`SELECT first_name, last_name, email FROM users WHERE id = ${userId};`;
-
-    // const user = await sql`SELECT * FROM users;`;
-    // console.log("user: ", user);
-    // console.log("user api route: ", user);
+    const user = await sql`SELECT first_name, last_name, email, password FROM users WHERE id = ${userId};`;
 
     // If no user, return 404
     if (user.rowCount === 0) {
@@ -37,7 +31,8 @@ export async function GET(request: Request) {
 
 export async function PATCH(request: Request) {
   // Extract the updated data from the request body
-  const { first_name, last_name, email, userId } = await request.json();
+  const { first_name, last_name, email, userId, password } = await request.json();
+  console.log("password in route: ", password);
 
   if (!userId || isNaN(Number(userId))) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
@@ -71,9 +66,8 @@ export async function PATCH(request: Request) {
 
 export async function DELETE(request: Request) {
   // Extract the updated data from the request body
-  // console.log("request.json: ", request.json());
+
   const userId = cookies().get("User")?.value;
-  // const { userId } = await request.json();
 
   console.log("userId in delete route: ", userId);
 

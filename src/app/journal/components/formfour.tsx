@@ -1,10 +1,28 @@
 // Journal.tsx
 'use client';
-
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import { Button, HStack, Stack, Box, Text } from '@chakra-ui/react';
 
-const FormFour: React.FC = ({  }) => {
+const FormFour: React.FC = ({ }) => {
+  const motivationQuote = "";
+
+  // Code generator 
+  useEffect(() => {
+
+    const GrabAQuote = async () => {
+
+      axios.get('https://api.quotable.io/random')
+        .then((res) => {
+          const test2 = res.data.content;
+          const test = res.data.author
+          motivationQuote.concat(test,",",test2);
+
+        });
+    }
+  }, [])
+
+
   return (
     <Stack
       width="80%"
