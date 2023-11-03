@@ -61,7 +61,6 @@ const Navbar = () => {
           <Link href="/">
             <Text sx={mindMateStyle} ml={20}>MindMate</Text>
           </Link>
-
         </Flex>
 
         {/* 2. Vertical Line Section */}
