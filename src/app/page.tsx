@@ -1,6 +1,7 @@
 "use client";
+import { useUser } from "./contexts/UserContext";
 
-import Link  from 'next/link';
+import Link from "next/link";
 import {
   Flex,
   Text,
@@ -13,44 +14,46 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Portal
+  Portal,
 } from "@chakra-ui/react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { fonts } from "@/theme/fonts"; 
-
+import { fonts } from "@/theme/fonts";
 
 const theme = extendTheme({
   breakpoints: {
     sm: "30em",
     md: "48em",
     lg: "62em",
-    xl: "80em"
+    xl: "80em",
   },
   components: {
     Button: {
       baseStyle: {
-        fontWeight: "bold"
-      }
-    }
-  }
+        fontWeight: "bold",
+      },
+    },
+  },
 });
 
 const Navbar = () => {
+  //Do not delete between this and the next comment
+  const { userId, logout } = useUser();
+  // This is the other comment
   const logoStyle = {
     width: ["80px", "90px", "100px", "120px"],
     height: ["80px", "90px", "100px", "120px"],
     position: "absolute",
     top: "10px",
     left: ["10px", "20px", "30px", "50px"],
-    zIndex: 2 
+    zIndex: 2,
   };
 
   const linkStyle = {
     fontWeight: "bold",
     color: "gray.600",
-    mx: [2, 5, 6, 7], 
+    mx: [2, 5, 6, 7],
     fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
-    ml: [4, 10, 23]
+    ml: [4, 10, 23],
   };
 
   const accountButtonStyle = {
@@ -74,71 +77,68 @@ const Navbar = () => {
   };
 
   const chatStyle = {
-    color: '#FF6863',
+    color: "#FF6863",
     fontSize: ["32px", "48px", "64px", "64px"],
     fontFamily: fonts.alternative,
-    fontWeight: '700',
-    letterSpacing: 3.20,
-    wordWrap: 'break-word',
-    display: 'inline'
+    fontWeight: "700",
+    letterSpacing: 3.2,
+    wordWrap: "break-word",
+    display: "inline",
   };
 
   const dotStyle = {
-    color: '#15193B',
+    color: "#15193B",
     fontSize: ["32px", "48px", "64px", "64px"],
     fontFamily: fonts.alternative,
-    fontWeight: '700',
-    letterSpacing: 3.20,
-    wordWrap: 'break-word',
-    display: 'inline',
-    mx: 2
+    fontWeight: "700",
+    letterSpacing: 3.2,
+    wordWrap: "break-word",
+    display: "inline",
+    mx: 2,
   };
 
   const reflectStyle = {
-    color: 'rgba(255, 117.79, 42.50, 0.80)',
+    color: "rgba(255, 117.79, 42.50, 0.80)",
     fontSize: ["32px", "48px", "64px", "64px"],
     fontFamily: fonts.alternative,
-    fontWeight: '700',
-    letterSpacing: 3.20,
-    wordWrap: 'break-word',
-    display: 'inline'
+    fontWeight: "700",
+    letterSpacing: 3.2,
+    wordWrap: "break-word",
+    display: "inline",
   };
 
   const measureStyle = {
-    color: '#B022AA',
+    color: "#B022AA",
     fontSize: ["32px", "48px", "64px", "64px"],
     fontFamily: fonts.alternative,
-    fontWeight: '700',
-    letterSpacing: 3.20,
-    wordWrap: 'break-word',
-    display: 'inline'
+    fontWeight: "700",
+    letterSpacing: 3.2,
+    wordWrap: "break-word",
+    display: "inline",
   };
 
   const journeyStyle = {
-    color: '#15193B',
+    color: "#15193B",
     fontSize: ["32px", "48px", "64px", "64px"],
     fontFamily: fonts.alternative,
-    fontWeight: '700',
-    letterSpacing: 3.20,
-    wordWrap: 'break-word',
+    fontWeight: "700",
+    letterSpacing: 3.2,
+    wordWrap: "break-word",
   };
 
   const awarenessStyle = {
-    color: '#15193B',
+    color: "#15193B",
     fontSize: ["32px", "48px", "64px", "64px"],
     fontFamily: fonts.alternative,
-    fontWeight: '700',
-    letterSpacing: 3.20,
-    wordWrap: 'break-word',
+    fontWeight: "700",
+    letterSpacing: 3.2,
+    wordWrap: "break-word",
   };
 
   return (
     <ChakraProvider theme={theme}>
-    
-      
       <Flex direction="column" align="center" p={4} bg="#F9F2FF" boxShadow="sm">
         <Flex width="100%" justify="space-between" align="center">
-
           {/* Logo */}
           <Box>
             <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
@@ -146,17 +146,16 @@ const Navbar = () => {
           <Flex justify="center">
             <HStack>
               <Link href="/journal">
-                  <Text sx={linkStyle}>Guided Journal</Text>
-                </Link>
-                <Link href="/chatbot">
-                  <Text sx={linkStyle}>CBT Chatbot</Text>
-                </Link>
-                <Link href="/progress-report">
-                  <Text sx={linkStyle}>Progress Report</Text>
+                <Text sx={linkStyle}>Guided Journal</Text>
               </Link>
-
+              <Link href="/chatbot">
+                <Text sx={linkStyle}>CBT Chatbot</Text>
+              </Link>
+              <Link href="/progress-report">
+                <Text sx={linkStyle}>Progress Report</Text>
+              </Link>
             </HStack>
-            </Flex>
+          </Flex>
           {/* Menu Links */}
           <Flex justify="center" alignItems="center">
             {" "}
@@ -171,23 +170,25 @@ const Navbar = () => {
               <a href="#" onClick={(e) => e.preventDefault()}>
                 <Text sx={linkStyle}>Progress Report</Text>
               </a>
-
             </HStack>
-            </Flex>
-   
+          </Flex>
 
           <Menu>
-            <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
+            <MenuButton
+              as={Button}
+              borderRadius="550px"
+              sx={accountButtonStyle}
+            >
               Account
             </MenuButton>
             <Portal>
               <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
-                <Link href="/settings" passHref>
+                <Link href="/settings">
                   <MenuItem
                     as="a"
                     sx={{
                       _hover: { background: "white", color: "#FBC1AA" },
-                      _active: { bg: "white", color: "#FBC1AA" }
+                      _active: { bg: "white", color: "#FBC1AA" },
                     }}
                   >
                     Settings
@@ -196,27 +197,42 @@ const Navbar = () => {
 
                 <Divider orientation="horizontal" />
 
-                <Link href="/login" passHref>
+                {!userId ? (
+                  <Link href="/login" passHref>
+                    <MenuItem
+                      as="a"
+                      sx={{
+                        _hover: { background: "white", color: "#FBC1AA" },
+                        _active: { bg: "white", color: "#FBC1AA" },
+                      }}
+                    >
+                      Login
+                    </MenuItem>
+                  </Link>
+                ) : (
                   <MenuItem
                     as="a"
                     sx={{
                       _hover: { background: "white", color: "#FBC1AA" },
-                      _active: { bg: "white", color: "#FBC1AA" }
+                      _active: { bg: "white", color: "#FBC1AA" },
                     }}
+                    onClick={() => logout()}
                   >
                     Logout
                   </MenuItem>
-                </Link>
-
+                )}
               </MenuList>
-
             </Portal>
           </Menu>
         </Flex>
 
         <Divider sx={dividerStyle} />
 
-        <Flex direction="column" align="center" mt={["10%", "15%", "20%", "12%"]}>
+        <Flex
+          direction="column"
+          align="center"
+          mt={["10%", "15%", "20%", "12%"]}
+        >
           <Flex align="center">
             <Text sx={chatStyle}>Chat</Text>
             <Text sx={dotStyle}>.</Text>
@@ -228,10 +244,8 @@ const Navbar = () => {
           <Text sx={awarenessStyle}>Mindful Awareness</Text>
         </Flex>
       </Flex>
-      
     </ChakraProvider>
   );
-}
+};
 
 export default Navbar;
-
