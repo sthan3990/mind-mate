@@ -1,142 +1,175 @@
 "use client";
+
+import React from 'react';
+import Link  from 'next/link';
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useUser } from './../contexts/UserContext';
-
-
-import Link from "next/link";
 import {
-  Box,
   Flex,
-  Avatar,
-  HStack,
-  Image,
-  IconButton,
+  Text,
   Button,
+  Image,
+  Box,
+  Divider,
+  Stack,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
-  useDisclosure,
-  useColorModeValue,
-  Stack,
+  Portal
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import Weather from "./weather";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { fonts } from "@/theme/fonts"; 
+import { useUser } from './../contexts/UserContext';
 
-interface Props {
-  children: React.ReactNode;
-}
 
-const Links = [
-  { name: "Chatbot", route: "/chatbot" },
-  { name: "Journal", route: "/journal" },
-  { name: "Register", route: "/register" },
-];
+const theme = extendTheme({
+  breakpoints: {
+    sm: "30em",
+    md: "48em",
+    lg: "62em",
+    xl: "80em"
+  },
+  components: {
+    Button: {
+      baseStyle: {
+        fontWeight: "bold"
+      }
+    }
+  }
+});
 
-export default function Navbar() {
-  const router = useRouter();
+const Navbar = () => {
   const { userId, logout } = useUser();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter() as any;
 
-  const Links = [
-    { name: "Chatbot", route: "/chatbot" },
-    { name: "Journal", route: "/journal" },
-    { name: "Register", route: "/register" },
-  ];
-
-  const dropdownLinks = [
-    { name: "Your Profile", route: `/profile` },
-    { name: "Logout", route: "/Projects" },
-  ];
-
-  const menuItemStyles = {
-    bg: "primary.900",
-    _hover: {
-      textDecoration: "none",
-      bg: useColorModeValue("blue.200", "blue.700"),
-    },
+  const logoStyle = {
+    width: ["40px", "60px", "70px", "60px"],
+    height: ["40px", "60px", "70px", "80px"],
+    zIndex: 2,
+    marginLeft: '15px' 
   };
 
+  const mindMateStyle = {
+    color: 'white',
+    fontFamily: fonts.heading,
+    fontWeight: '600',
+    wordWrap: 'break-word',
+    marginLeft: '25px',
+    display: ['none', 'block', 'block', 'block'],
+    fontSize: ["0em", "1em", "1em", "2em"], 
+  };  
+  
+  const verticalLineStyle = {
+    borderLeft: '6px solid',
+    borderColor: '#15193B',
+    alignSelf: 'stretch',
+    mx: 20,
+    marginLeft: ['10px', '-20px', '-40px', '-50px'],
+    display: ['none', 'block', 'block', 'block']
+};
+
+const linkStyle = {
+    color: "white",
+    mx: [2, 5, 6, 7], 
+    fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
+    ml: [2, 8, 20] 
+};
+
+const linkTab = {
+    fontWeight: "bold",
+    color: "white",
+    mx: [2, 5, 6, 7], 
+    fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
+    ml: [2, 8, 20] 
+};
+
+  const accountButtonStyle = {
+    backgroundColor: "#FE8F55E5",
+    width: "10%",
+    height: "53px",
+    margin: 0,
+    marginRight: '25px',
+    lineHeight: "normal",
+    fontFamily: fonts.heading,
+    fontSize: ["0.8em", "0.9em", "1em", "1.3em"],
+    boxShadow: "2px 2px 10px rgba(0,0,0,0.2)",
+  };
+
+
   return (
-    <>
-      <Box bg="primary.900" px={4}>
-        <Flex
-          color="white"
-          h={16}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <HStack spacing={8} alignItems={"center"}>
-            <Box>
-              <Image height={50} width={50} src="/logo.svg" alt="Mind Mate" />
-            </Box>
-            <HStack
-              as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
-              {Links.map((link) => (
-                <Link href={link.route} key={link.route}>
-                  <Box {...menuItemStyles}>{link.name}</Box>
-                </Link>
-              ))}
-            </HStack>
-          </HStack>
-          <Flex alignItems={"center"}>
-            <Weather />
-            <Box ml={4} />
-            <Menu>
-              <MenuDivider />
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"sm"}
-                  src="https://cdn0.iconfinder.com/data/icons/kuvio-basic-ui/32/more-512.png"
-                />
+    <ChakraProvider theme={theme}>
+      <Flex direction="row" align="center" p={1} bg="#2D3258" boxShadow="sm" justifyContent="space-between">
+
+        {/* 1. Logo and MindMate Text Section */}
+        <Flex alignItems="center">
+          <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
+          <Text sx={mindMateStyle} ml={20}>MindMate</Text>
+        </Flex>
+
+        {/* 2. Vertical Line Section */}
+        <Box sx={ verticalLineStyle }></Box>
+
+        {/* 3. Text Section */}
+        <Stack direction="row" spacing={5} align="flex-start">
+          <Link href="/journal">
+            <Text sx={router.pathname === '/journal' ? linkTab : linkStyle}>Guided Journal</Text>
+          </Link>
+          <Link href="/chatbot">
+            <Text sx={router.pathname === '/chatbot' ? linkTab : linkStyle}>CBT Chatbot</Text>
+          </Link>
+          <Link href="/progress-report">
+            <Text sx={router.pathname === '/progress-report' ? linkTab : linkStyle}>Progress Report</Text>
+          </Link>
+        </Stack>
+
+
+         {/* 4. Account Section */}
+        <Menu>
+          {!userId ? (
+            <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
+              Login
+            </MenuButton>
+          ) : (
+            <>
+              <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
+                Account
               </MenuButton>
-              <MenuList bg="primary.900">
-                {!userId ? (
-                  <Link href={"/login"} key={"/login"}>
-                    <MenuItem {...menuItemStyles}> {"Login"} </MenuItem>
-                  </Link>
-                ) : (
-                  <Link href={`/profile`} key={`/profile`}>
-                    <MenuItem {...menuItemStyles}> {"Your Profile"} </MenuItem>
-                    <MenuItem onClick={logout} {...menuItemStyles}>
-                      {"Logout"}
+              <Portal>
+                <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
+                  <Link href="/settings" passHref>
+                    <MenuItem
+                      as="a"
+                      sx={{
+                        _hover: { background: "white", color: "#FBC1AA" },
+                        _active: { bg: "white", color: "#FBC1AA" }
+                      }}
+                    >
+                      Settings
                     </MenuItem>
                   </Link>
-                )}
-              </MenuList>
-            </Menu>
-          </Flex>
-        </Flex>
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
-                <Link href={link.route} key={link.route}>
-                  <Box {...menuItemStyles}>{link.name}</Box>
-                </Link>
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
-      </Box>
-    </>
+                  <Divider orientation="horizontal" />
+                  <MenuItem
+                    onClick={logout}
+                    sx={{
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" }
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </MenuList>
+              </Portal>
+            </>
+          )}
+        </Menu>
+
+      </Flex>
+    </ChakraProvider>
   );
 }
+
+export default Navbar;
+
+
+
+

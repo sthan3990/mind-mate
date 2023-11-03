@@ -169,9 +169,6 @@ const Navbar = () => {
                       _hover: { background: "white", color: "#FBC1AA" },
                       _active: { bg: "white", color: "#FBC1AA" }
                     }}
-                    onClick={() => {
-                      // Handle settings action here
-                    }}
                   >
                     Settings
                   </MenuItem>
@@ -185,9 +182,6 @@ const Navbar = () => {
                     sx={{
                       _hover: { background: "white", color: "#FBC1AA" },
                       _active: { bg: "white", color: "#FBC1AA" }
-                    }}
-                    onClick={() => {
-                      // Handle logout action here
                     }}
                   >
                     Logout
