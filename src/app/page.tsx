@@ -1,5 +1,6 @@
 "use client";
 import { useUser } from "./contexts/UserContext";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import {
@@ -38,6 +39,11 @@ const theme = extendTheme({
 const Navbar = () => {
   //Do not delete between this and the next comment
   const { userId, logout } = useUser();
+  const router = useRouter();
+  const clickLogout = () => {
+    logout();
+    router.push("register");
+  };
   // This is the other comment
   const logoStyle = {
     width: ["80px", "90px", "100px", "120px"],
@@ -160,17 +166,6 @@ const Navbar = () => {
           <Flex justify="center" alignItems="center">
             {" "}
             {/* Added alignItems="center" */}
-            <HStack>
-              <a href="#" onClick={(e) => e.preventDefault()}>
-                <Text sx={linkStyle}>Guided Journal</Text>
-              </a>
-              <a href="#" onClick={(e) => e.preventDefault()}>
-                <Text sx={linkStyle}>CBT Chatbot</Text>
-              </a>
-              <a href="#" onClick={(e) => e.preventDefault()}>
-                <Text sx={linkStyle}>Progress Report</Text>
-              </a>
-            </HStack>
           </Flex>
 
           <Menu>
@@ -216,7 +211,7 @@ const Navbar = () => {
                       _hover: { background: "white", color: "#FBC1AA" },
                       _active: { bg: "white", color: "#FBC1AA" },
                     }}
-                    onClick={() => logout()}
+                    onClick={() => clickLogout()}
                   >
                     Logout
                   </MenuItem>
