@@ -27,8 +27,6 @@ const Journal: React.FC = () => {
     postMoodState,
   ]);
 
-
-
     const handleContinue = () => {
       if (step < 4) {
         setStep(step + 1);
@@ -93,8 +91,7 @@ const Journal: React.FC = () => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Button onClick={GrabAQuote}>HELLO</Button>
-
+          
           {step === 0 && <InitialJournal handleQuestions={handleQuestions} />}
           {step === 1 && <FormOne handleMoodState={handlepostMoodState} />}
           {step === 2 && (
