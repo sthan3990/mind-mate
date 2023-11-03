@@ -139,7 +139,7 @@ const UserProfilePage = () => {
           </Heading>
         </Stack>
         <Box>
-          <Stack spacing={6}>
+          <Stack spacing={4}>
             <FormControl>
               <FormLabel>First Name</FormLabel>
               <Input

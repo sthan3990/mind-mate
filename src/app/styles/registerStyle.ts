@@ -53,7 +53,7 @@ export const headingStyle = {
 
 export const rectangleIconStyle = {
   backgroundColor: "#282A2F",
-  color: "#8692A6",
+  color: "#a1a9b5",
   borderWidth: "0.5px",
   borderColor: "#8692A6",
   fontFamily: fonts.heading,
