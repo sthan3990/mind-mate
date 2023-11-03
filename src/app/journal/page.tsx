@@ -86,9 +86,9 @@ const Journal: React.FC = () => {
   //   setpostMoodState((prevMoodState) => moodChosen);
   // };
 
-  const handleJournalEntry = (journalEntry: string) => {
-    setJournalEntry((prevJournal) => journalEntry);
-  };
+  // const handleJournalEntry = (journalEntry: string) => {
+  //   setJournalEntry((prevJournal) => journalEntry);
+  // };
 
   return (
     <>
@@ -104,7 +104,7 @@ const Journal: React.FC = () => {
         {step === 1 && <FormOne setpreMoodState={setpreMoodState} />}
         {step === 2 && (
           <FormTwo
-            setJournalEntry={setJournalEntry}
+            numQuestions={numQuestions}
             handleContinue={handleContinue}
           />
         )}
