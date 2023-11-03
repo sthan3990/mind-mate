@@ -13,7 +13,7 @@ import axios from "axios";
 const Journal: React.FC = () => {
   //userId from useContext
   const [step, setStep] = useState(0);
-  const { journalId, setJournalId } = useState("");
+  const [journalId, setJournalId] = useState("");
   const { userId } = useUser();
 
   const [numQuestions, setNumQuestions] = useState(0);
@@ -36,7 +36,7 @@ const Journal: React.FC = () => {
   const handleContinue = () => {
     if (step < 4) {
       setStep(step + 1);
-    } else if (step == 2) {
+    } else if (step == 1) {
       setStep(step + 1);
       writeToSql(1);
     }
@@ -48,9 +48,10 @@ const Journal: React.FC = () => {
 
   const writeToSql = (which: number) => {
 
-    if (which != 2) {
+    if (step == 1) {
 
-      if (!userId){
+      // if (!userId){
+
       setJournalId(userId + "_" + newDate.getDate()); 
 
       axios.get("/api/questions", {
@@ -59,7 +60,7 @@ const Journal: React.FC = () => {
         .then((res) => {
           console.log(res.data);
         });
-      }
+      // }
     }
     else {
       axios
