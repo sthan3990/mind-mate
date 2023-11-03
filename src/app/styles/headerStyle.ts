@@ -13,7 +13,7 @@ export const mindMateStyle = {
   fontWeight: '600',
   wordWrap: 'break-word',
   marginLeft: '25px',
-  display: ['none', 'block', 'block', 'block'],
+  display: ['none', 'none', 'block', 'block'],
   fontSize: ["0em", "1em", "1em", "2em"],
 };
 
@@ -23,7 +23,7 @@ export const verticalLineStyle = {
   alignSelf: 'stretch',
   mx: 20,
   marginLeft: ['10px', '-20px', '-40px', '-50px'],
-  display: ['none', 'block', 'block', 'block']
+  display: ['none', 'none', 'block', 'block']
 };
 
 export const linkStyle = {
