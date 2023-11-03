@@ -1,21 +1,7 @@
 "use client";
 
 // Journal.tsx
-import React, { useState } from "react";
-import {
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  Stack,
-  Input,
-  Box,
-  Grid,
-  GridItem,
-  Button,
-  Text,
-} from "@chakra-ui/react";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import debounce from "lodash/debounce";
+import React from "react";
 import Chatbot from "../../chatbot/page";
 import { useNumMessages } from "../../helper/numofmessages";
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Input,
   Button,
@@ -19,14 +19,28 @@ import {
 } from '@chakra-ui/react';
 import { CopyIcon, ArrowForwardIcon, ChatIcon, CloseIcon } from '@chakra-ui/icons';
 import { useChat } from 'ai/react';
+import { useNumMessages } from '../helper/numofmessages';
 
 export default function Chatbot() {
+  const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState('');
   const { hasCopied, onCopy } = useClipboard(copyValue);
+
   const chatBoxRef = useRef<HTMLDivElement | null>(null);
+
   const { messages, input, handleInputChange, handleSubmit, stop } = useChat({
-    api: '/api/chatbot', // Specify the API endpoint
+    api: '/api/chatbot',
   });
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setNumMessages(numMessages + 1); // Increment numMessages
+    handleSubmit(e);
+  };
+
+  const handleArrowButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
+    setNumMessages(numMessages + 1); // Increment numMessages
+    handleSubmit(e);
+  };
 
   const handleHistoryClick = (item: string) => {
     // Handle the click event, e.g., set the selected history item, or perform an action with it.
@@ -43,7 +57,7 @@ export default function Chatbot() {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleFormSubmit}>
       <Grid
         color="black"
         fontWeight="800"
@@ -168,7 +182,14 @@ export default function Chatbot() {
             </InputLeftElement>
             <InputRightElement w="25%">
               <HStack>
-                <IconButton ml={1} aria-label="Send" icon={<ArrowForwardIcon />} type="submit" />
+
+                <Button
+                  ml={1}
+                  aria-label="Send"
+                  leftIcon={<ArrowForwardIcon />}
+                  type="submit"
+                  onClick={(e) => handleArrowButtonClick(e)}
+                />
                 <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} onClick={stop} />
               </HStack>
             </InputRightElement>
