@@ -40,7 +40,7 @@ const Journal: React.FC = () => {
   const writeToSql = () => {
     axios
       .post("/api/journals", {
-        params: { userId, preMoodState, journalEntry, postMoodState },
+        params: { userId, preMoodState, postMoodState, numQuestions },
       })
       .then((res) => {
         console.log(res.data);
@@ -68,13 +68,13 @@ const Journal: React.FC = () => {
   //   setNumQuestions((prevNum) => numberChosen);
   // };
 
-  const handlepreMoodState = (moodChosen: number) => {
-    setpreMoodState((prevMoodState) => moodChosen);
-  };
+  // const handlepreMoodState = (moodChosen: number) => {
+  //   setpreMoodState((prevMoodState) => moodChosen);
+  // };
 
-  const handlepostMoodState = (moodChosen: number) => {
-    setpostMoodState((prevMoodState) => moodChosen);
-  };
+  // const handlepostMoodState = (moodChosen: number) => {
+  //   setpostMoodState((prevMoodState) => moodChosen);
+  // };
 
   const handleJournalEntry = (journalEntry: string) => {
     setJournalEntry((prevJournal) => journalEntry);
@@ -91,14 +91,14 @@ const Journal: React.FC = () => {
         justifyContent="space-between"
       >
         {step === 0 && <InitialJournal setNumQuestions={setNumQuestions} />}
-        {step === 1 && <FormOne handleMoodState={handlepostMoodState} />}
+        {step === 1 && <FormOne setpreMoodState={setpreMoodState} />}
         {step === 2 && (
           <FormTwo
             setJournalEntry={setJournalEntry}
             handleContinue={handleContinue}
           />
         )}
-        {step === 3 && <FormThree handleMoodState={handlepostMoodState} />}
+        {step === 3 && <FormThree setpostMoodState={setpostMoodState} />}
         {step === 4 && <FormFour />}
 
         {step != 2 && (
