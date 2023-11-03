@@ -15,7 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const rootStyles = {
     flexDirection: "column",
     minHeight: "100vh",
-    bgColor: "#F9F2FF",
+    bgColor: "#FFFF",
     justify: "flex-start",
   };
 

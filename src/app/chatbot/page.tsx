@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Input,
   Button,
@@ -21,34 +21,57 @@ import { CopyIcon, ArrowForwardIcon, ChatIcon, CloseIcon } from '@chakra-ui/icon
 import { useChat } from 'ai/react';
 import { useNumMessages } from '../helper/numofmessages';
 
-export default function Chatbot() {
+const Chatbot: React.FC = ({ }) => {
+
   const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState('');
   const { hasCopied, onCopy } = useClipboard(copyValue);
 
   const { messages, setInput, input, handleInputChange, handleSubmit, stop, append } = useChat({
     api: '/api/chatbot',
+
+    onResponse: (res) => {
+      localStorage.setItem("setMessageFinished", "false");
+
+      const lastQuestion = localStorage.getItem("lastQuestion");
+
+      if (lastQuestion == "true") {
+
+
+        append({
+          content: 'Good Bye',
+          // The content of the message
+          role: 'user'
+        });
+
+        setInput('');
+
+      }
+
+    },
+    onFinish: (res) => {
+      setNumMessages(numMessages + 1); // Increment numMessages
+      localStorage.setItem("setMessageFinished", "true");
+
+    }
   });
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    setNumMessages(numMessages + 1); // Increment numMessages
     handleSubmit(e);
   };
 
   const handleArrowButtonClick = (e: React.FormEvent<HTMLButtonElement>) => {
     //e.preventDefault(); // Prevent the default form submission
-  
+
     if (input.trim() !== '') {
-      setNumMessages(numMessages + 1); // Increment numMessages
-  
+
       // Send a user message to the API
-      append({ content: input, role: 'user' });
+      append({ content: "input", role: 'user' });
 
       // clear input field 
       setInput('');
     }
   };
-  
 
   const handleHistoryClick = (item: string) => {
     // Handle the click event, e.g., set the selected history item, or perform an action with it.
@@ -206,3 +229,5 @@ export default function Chatbot() {
     </form>
   );
 }
+
+export default Chatbot;  
