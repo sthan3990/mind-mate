@@ -60,7 +60,7 @@ const Navbar = () => {
   return (
     <ChakraProvider theme={theme}>
       <Flex direction="column" align="center" p={4} bg="#F9F2FF" boxShadow="sm">
-        <Flex width="100%" justify="space-between" align="center" >
+        <Flex width="100%" justify="space-between" align="center">
           {/* Logo */}
           <Box>
             <Image src="./logo.svg" alt="Logo" sx={logoStyle} />

@@ -59,7 +59,7 @@ const Navbar = () => {
             <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
           </Link>
           <Link href="/">
-            <Text sx={mindMateStyle} ml={20}>MindMate</Text>
+            <Text sx={mindMateStyle} mx={20}>MindMate</Text>
           </Link>
         </Flex>
 
@@ -67,7 +67,7 @@ const Navbar = () => {
         <Box sx={verticalLineStyle}></Box>
 
         {/* 3. Text Section */}
-        <Stack direction="row" spacing={5} align="flex-start">
+        <Stack direction="row" spacing={5} align="flex-start" mr="200">
           <Link href="/journal">
             <Text sx={router.pathname === '/journal' ? linkTab : linkStyle}>Guided Journal</Text>
           </Link>
