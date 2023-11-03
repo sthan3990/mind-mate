@@ -17,7 +17,7 @@ import {
   MenuItem,
   Portal
 } from "@chakra-ui/react";
-import { ChakraProvider, extendTheme, BoxProps, TextProps, ButtonProps } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { useUser } from './../contexts/UserContext';
 import * as styles from '../styles/headerStyle';
 
