@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { CopyIcon, ArrowForwardIcon, ChatIcon, CloseIcon } from '@chakra-ui/icons';
 import { useChat } from 'ai/react';
+import { fonts } from '@/theme/fonts';
 
 export default function Chatbot() {
   const [copyValue, setCopyValue] = useState('');
@@ -41,46 +42,62 @@ export default function Chatbot() {
     // Add more historical entries as needed
   ];
 
+  const styling = {
+    grid: {
+      color: "black",
+      fontWeight: "800",
+      templateAreas: `
+        "title title"
+        "history chat"
+        "history input"
+      `,
+      gridTemplateRows: "70px 1fr 0.12fr",
+      gridTemplateColumns: "257px 1fr",
+      width: '100vw',
+      height: '100vh',
+      gap: '0',
+      m: "0",
+      p: "3em 5em",
+    },
+
+    taxtHeader: {
+      fontFamily: fonts.body,
+      fontWeight: "bold",
+      fontSize: "40px",
+      color: "#FFFFFF",
+      textAlign: "center"
+    }
+  };
+
 
   return (
     <form onSubmit={handleSubmit}>
       <Grid
-        color="black"
-        fontWeight="800"
+        sx={styling.grid}
         templateAreas={`
         "title title"
         "history chat"
         "history input"
-      `}
-        gridTemplateRows="50px 1fr 0.12fr"
-        gridTemplateColumns="150px 1fr"
-        width='90vh'
-        h='70vh'
-        gap='0.0'
-        margin="1em">
+      `} >
 
         {/* TITLE */}
-        <GridItem
+        <GridItem 
           pl="2"
-          border="1px solid #D0A2D1"
+          border="3px solid #D0A2D1"
           area="title"
-          background="#2D3258">
-          <Text
-            fontFamily="Cantarell"
-            fontWeight="bold"
-            fontSize="40px"
-            color="#FFFFFF"
-            textAlign="center"
-          >
+          background="#2D3258"
+          height="70px">
+          <Text sx={styling.taxtHeader}>
             Your Guided Journal
           </Text>
         </GridItem>
 
         {/* HISTORY SECTION */}
         <GridItem
-          borderInlineStart="1px solid #D0A2D1"
-          borderBlockEnd="1px solid #D0A2D1"
+          borderInlineStart="3px solid #D0A2D1"
+          borderBlockEnd="3px solid #D0A2D1"
           pl="2"
+          pr="2"
           background="#15193B"
           area="history">
           <VStack margin="0.5em">
@@ -93,6 +110,7 @@ export default function Chatbot() {
                 variant="outline"
                 onClick={() => handleHistoryClick(item)}
                 width="100%"
+                textAlign="left"
               >
                 {item}
               </Button>
@@ -103,9 +121,9 @@ export default function Chatbot() {
         {/* CHAT SECTION */}
         <GridItem
           pl="2"
-          borderStart="1px solid #D0A2D1"
-          borderEnd="1px solid #D0A2D1"
-          borderTop="1px solid #D0A2D1"
+          borderStart="3px solid #D0A2D1"
+          borderEnd="3px solid #D0A2D1"
+          borderTop="3px solid #D0A2D1"
           background="#15193B"
           area="chat"
           style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
@@ -148,25 +166,25 @@ export default function Chatbot() {
         <GridItem
           pl="2"
           background="#15193B"
-          borderInlineStart="1px solid #D0A2D1"
-          borderInlineEnd="1px solid #D0A2D1"
-          borderBlockEnd="1px solid #D0A2D1"
+          borderInlineStart="3px solid #D0A2D1"
+          borderInlineEnd="3px solid #D0A2D1"
+          borderBlockEnd="3px solid #D0A2D1"
           area="input"
         >
           <InputGroup
-            width="100%" // Ensure it spans the entire width of the grid item
+            width="100%" 
           >
-            <InputLeftElement w="75%">
+            <InputLeftElement w="85%" pl="1em" pb="3">
               <Input
                 size="lg"
                 backgroundColor="#737AA8"
-                h="100%"
+                h="250%"
                 value={input}
                 onChange={handleInputChange}
                 placeholder="Type a message..."
               />
             </InputLeftElement>
-            <InputRightElement w="25%">
+            <InputRightElement w="15%" pb="3">
               <HStack>
                 <IconButton ml={1} aria-label="Send" icon={<ArrowForwardIcon />} type="submit" />
                 <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} onClick={stop} />

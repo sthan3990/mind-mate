@@ -59,57 +59,36 @@ const Navbar = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Flex direction="column" align="center" p={4} bg="#F9F2FF" boxShadow="sm">
-        <Flex width="100%" justify="space-between" align="center">
-          {/* Logo */}
-          <Box>
-            <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
-          </Box>
-          <Flex justify="center" ml="250">
-            <HStack>
-              <Link href="/journal">
-                <Text sx={linkStyle}>Guided Journal</Text>
-              </Link>
-              <Link href="/chatbot">
-                <Text sx={linkStyle}>CBT Chatbot</Text>
-              </Link>
-              <Link href="/progress-report">
-                <Text sx={linkStyle}>Progress Report</Text>
-              </Link>
-            </HStack>
-          </Flex>
-          {/* Menu Links */}
-          <Flex justify="center" alignItems="center">
-            {" "}
-            {/* Added alignItems="center" */}
-          </Flex>
-
-          <Menu>
-            <MenuButton
-              as={Button}
-              borderRadius="550px"
-              sx={accountButtonStyle}
-            >
-              Account
-            </MenuButton>
-            <Portal>
-              <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
-                <Link href="/settings">
-                  <MenuItem
-                    as="a"
-                    sx={{
-                      _hover: { background: "white", color: "#FBC1AA" },
-                      _active: { bg: "white", color: "#FBC1AA" },
-                    }}
-                  >
-                    Settings
-                  </MenuItem>
+      <Flex direction="column" minHeight="100vh">
+        {/* Navbar Container with Background Color */}
+        <Flex direction="column" align="center" p={4} bg="#F9F2FF" boxShadow="sm" mb={0}> 
+          <Flex width="100%" justify="space-between" align="center">
+            {/* Logo */}
+            <Box>
+              <Image src="./logo.svg" alt="Logo" sx={logoStyle} />
+            </Box>
+            <Flex justify="center" ml="250">
+              <HStack>
+                <Link href="/journal">
+                  <Text sx={linkStyle}>Guided Journal</Text>
                 </Link>
-
-                <Divider orientation="horizontal" />
-
-                {!userId ? (
-                  <Link href="/login" passHref>
+                <Link href="/chatbot">
+                  <Text sx={linkStyle}>CBT Chatbot</Text>
+                </Link>
+                <Link href="/progress-report">
+                  <Text sx={linkStyle}>Progress Report</Text>
+                </Link>
+              </HStack>
+            </Flex>
+            {/* Menu Links */}
+  
+            <Menu>
+              <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle}>
+                Account
+              </MenuButton>
+              <Portal>
+                <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
+                  <Link href="/settings">
                     <MenuItem
                       as="a"
                       sx={{
@@ -117,33 +96,45 @@ const Navbar = () => {
                         _active: { bg: "white", color: "#FBC1AA" },
                       }}
                     >
-                      Login
+                      Settings
                     </MenuItem>
                   </Link>
-                ) : (
-                  <MenuItem
-                    as="a"
-                    sx={{
-                      _hover: { background: "white", color: "#FBC1AA" },
-                      _active: { bg: "white", color: "#FBC1AA" },
-                    }}
-                    onClick={() => clickLogout()}
-                  >
-                    Logout
-                  </MenuItem>
-                )}
-              </MenuList>
-            </Portal>
-          </Menu>
+  
+                  <Divider orientation="horizontal" />
+  
+                  {!userId ? (
+                    <Link href="/login" passHref>
+                      <MenuItem
+                        as="a"
+                        sx={{
+                          _hover: { background: "white", color: "#FBC1AA" },
+                          _active: { bg: "white", color: "#FBC1AA" },
+                        }}
+                      >
+                        Login
+                      </MenuItem>
+                    </Link>
+                  ) : (
+                    <MenuItem
+                      as="a"
+                      sx={{
+                        _hover: { background: "white", color: "#FBC1AA" },
+                        _active: { bg: "white", color: "#FBC1AA" },
+                      }}
+                      onClick={() => clickLogout()}
+                    >
+                      Logout
+                    </MenuItem>
+                  )}
+                </MenuList>
+              </Portal>
+            </Menu>
+          </Flex>
         </Flex>
-
         <Divider sx={dividerStyle} />
-
-        <Flex
-          direction="column"
-          align="center"
-          mt={["10%", "15%", "20%", "12%"]}
-        >
+        
+        {/* Main Content without the Navbar's Background Color */}
+        <Flex direction="column" align="center" mt={["10%", "15%", "20%", "12%"]} bg="#F9F2FF" flexGrow={1}>
           <Flex align="center">
             <Text sx={chatStyle}>Chat</Text>
             <Text sx={dotStyle}>.</Text>
@@ -157,6 +148,7 @@ const Navbar = () => {
       </Flex>
     </ChakraProvider>
   );
+  
 };
 
 export default Navbar;
