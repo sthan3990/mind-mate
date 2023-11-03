@@ -3,10 +3,11 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 
 import { Poppins } from "next/font/google";
 const poppinsBody = Poppins({ weight: '100', subsets: ["latin"] });
-const poppinsHeader = Poppins({ weight: '200', subsets: ["latin"] });
+const poppinsHeader = Poppins({ weight: '500', subsets: ["latin"] });
 
 import { Alegreya_Sans } from "next/font/google";
 const alegreya_Sans = Alegreya_Sans({ weight: "500", subsets: ['greek'] });
+
 
 import { Inter } from "next/font/google";
 const inter = Inter({ weight: '800', subsets: ["latin"] });
