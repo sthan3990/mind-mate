@@ -1,31 +1,5 @@
 import { fonts } from "@/theme/fonts";
 
-export const logoStyle = {
-  display: "flex",
-  alignItems: "center",
-  position: "relative",
-  width: ["50%", "60%", "70%", "10%"],
-  height: ["41.02px", "49.224px", "57.428px", "82.04px"],
-  paddingTop: "20px",
-  paddingLeft: "20px",
-};
-
-export const mainImageStyle = {
-  maxWidth: ["90%", "92%", "94%", "96%"],
-  maxHeight: ["700px", "750px", "780px", "800px"],
-  margin: "0 auto",
-};
-
-export const textStyle = {
-  position: "relative",
-  fontSize: "40px",
-  fontWeight: 600,
-  fontFamily: fonts.heading,
-  textAlign: "left",
-  marginLeft: "20px",
-  color: "black",
-};
-
 export const headingStyle = {
   display: "flex",
   alignItems: "center",
@@ -40,6 +14,7 @@ export const headingStyle = {
 };
 
 export const rectangleIconStyle = {
+  width: "400px",
   backgroundColor: "#282A2F",
   color: "#8692A6",
   borderWidth: "0.5px",
@@ -51,8 +26,8 @@ export const rectangleIconStyle = {
 };
 
 
-export const registerButtonStyle = {
-  width: "300px",
+export const saveButtonStyle = {
+  width: "400px",
   height: "50px",
   borderRadius: "6px",
   bg: "#5871EB",
@@ -60,33 +35,11 @@ export const registerButtonStyle = {
   flexShrink: 0
 };
 
-export const loginButtonStyle = {
-  width: "300px",
+export const deleteButtonStyle = {
+  width: "400px",
   height: "50px",
   borderRadius: "6px",
-  background: "#D0A2D1",
+  background: "#b02f2f",
   color: "black",
   flexShrink: 0
-};
-
-export const orTextStyle = {
-  display: "flex",
-  width: "36px",
-  height: "10px",
-  flexDirection: "column",
-  justifyContent: "center",
-  flexShrink: 0,
-  color: "#BABABA",
-  textAlign: "center",
-  fontFamily: "Inter",
-  fontSize: "16px",
-  fontStyle: "normal",
-  fontWeight: 400,
-  lineHeight: "normal",
-};
-
-export const lineStyle = {
-  width: "172px",
-  height: "1px",
-  background: "#F5F5F5",
 };

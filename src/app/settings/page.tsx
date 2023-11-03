@@ -21,15 +21,12 @@ import * as styles from "../styles/settingsStyle";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const UserProfilePage = () => {
-  const logoStyle = styles.logoStyle;
-  const mainImageStyle = styles.mainImageStyle;
-  const textStyle = styles.textStyle;
+
   const headingStyle = styles.headingStyle;
   const rectangleIconStyle = styles.rectangleIconStyle;
-  const registerButtonStyle = styles.registerButtonStyle;
-  const loginButtonStyle = styles.loginButtonStyle;
-  const orTextStyle = styles.orTextStyle;
-  const lineStyle = styles.lineStyle;
+  const saveButtonStyle = styles.saveButtonStyle;
+  const deleteButtonStyle = styles.deleteButtonStyle;
+
   const { userId } = useUser();
   // console.log("context userId in beginning of profile page: ", userId);
   const { push } = useRouter();
@@ -135,14 +132,11 @@ const UserProfilePage = () => {
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} color="black">
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack spacing={5} mx={"auto"} maxW={"lg"} pb={12} px={6} >
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} sx={headingStyle} textAlign={"center"}>
-            User Profile Settings
+            User Settings
           </Heading>
-          <Text fontSize={"lg"} color="white">
-            Welcome {userData["first_name"]} {userData["last_name"]}
-          </Text>
         </Stack>
         <Box>
           <Stack spacing={6}>
@@ -178,11 +172,14 @@ const UserProfilePage = () => {
               />
             </FormControl>
 
-            <Button mt={4} colorScheme="teal" onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
-              Submit Changes
+            <Button
+              mt={4}
+              sx={saveButtonStyle}
+              onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
+              Save Changes
             </Button>
             <FormControl>
-              <FormLabel>Change Password</FormLabel>
+              <FormLabel>Update Password</FormLabel>
               <InputGroup>
                 <Input
                   sx={rectangleIconStyle}
@@ -201,11 +198,17 @@ const UserProfilePage = () => {
               </InputGroup>
             </FormControl>
 
-            <Button mt={4} colorScheme="blue" onClick={() => changePassword(updatedPassword)}>
-              Update Password
+            <Button
+              mt={4}
+              sx={saveButtonStyle}
+              bg={"blue.100"}
+              onClick={() => changePassword(updatedPassword)}>
+              Save New Password
             </Button>
 
-            <Button colorScheme="red" onClick={deleteUser}>
+            <Button
+              sx={deleteButtonStyle}
+              onClick={deleteUser}>
               Delete Account
             </Button>
           </Stack>
