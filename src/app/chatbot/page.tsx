@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Input,
   Button,
@@ -26,7 +26,7 @@ export default function Chatbot() {
   const [copyValue, setCopyValue] = useState('');
   const { hasCopied, onCopy } = useClipboard(copyValue);
 
-  const { messages, input, handleInputChange, handleSubmit, stop, append } = useChat({
+  const { messages, setInput, input, handleInputChange, handleSubmit, stop, append } = useChat({
     api: '/api/chatbot',
   });
 
@@ -35,12 +35,20 @@ export default function Chatbot() {
     handleSubmit(e);
   };
 
-  const handleArrowButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
-    setNumMessages(numMessages + 1); // Increment numMessages
+  const handleArrowButtonClick = (e: React.FormEvent<HTMLButtonElement>) => {
+    //e.preventDefault(); // Prevent the default form submission
+  
+    if (input.trim() !== '') {
+      setNumMessages(numMessages + 1); // Increment numMessages
+  
+      // Send a user message to the API
+      append({ content: input, role: 'user' });
 
-    // send the input to the API
-    handleSubmit(e);
+      // clear input field 
+      setInput('');
+    }
   };
+  
 
   const handleHistoryClick = (item: string) => {
     // Handle the click event, e.g., set the selected history item, or perform an action with it.
@@ -187,7 +195,6 @@ export default function Chatbot() {
                   ml={1}
                   aria-label="Send"
                   leftIcon={<ArrowForwardIcon />}
-                  type="submit"
                   onClick={handleArrowButtonClick}
                 />
                 <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} onClick={stop} />

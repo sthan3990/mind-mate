@@ -19,6 +19,8 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
     return <Chatbot />;
   } else {
     setNumMessages(0); // Reset numMessages
+    
+    // Show the continue button (can't figure out how to grab the "OpenAI complete" so the chatBot has time to write it's response)
     handleContinue(); // Call the function to navigate to the next page
   }
 };

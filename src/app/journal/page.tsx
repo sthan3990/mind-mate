@@ -66,13 +66,13 @@ const Journal: React.FC = () => {
   };
   const writeToSql = (which: number) => {
   if (which === 1) {
-    axios
-      .get("/api/questions", {
-        params: { journalId, numQuestions }
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
+    // axios
+    //   .get("/api/questions", {
+    //     params: { journalId, numQuestions }
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   });
   }
   else {
     axios
