@@ -28,9 +28,7 @@ const Journal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    console.log(preMoodState);
-    console.log(postMoodState);
-    
+    console.log(journalEntry);
     // Generate a date
     let newDate = new Date();
     let day = newDate.getDate();
@@ -45,12 +43,13 @@ const Journal: React.FC = () => {
       (day < 10 ? "0" : "") +
       day;
     setJournalId((prevJournal) => newJournalId);
+
   }, [
     journalId,
     step,
     numQuestions,
-    preMoodState,
     journalEntry,
+    preMoodState,
     postMoodState,
     userId
   ]);
@@ -81,13 +80,13 @@ const Journal: React.FC = () => {
 
   const writeToSql = (which: number) => {
     if (which === 1) {
-      axios
-        .get("/api/questions", {
-          params: { journalId, numQuestions }
-        })
-        .then((res) => {
-          console.log(res.data);
-        });
+      // axios
+      //   .get("/api/questions", {
+      //     params: { journalId, numQuestions }
+      //   })
+      //   .then((res) => {
+      //     console.log(res.data);
+      //   });
     } else {
       axios
         .post("/api/journals", {
@@ -141,7 +140,7 @@ const Journal: React.FC = () => {
         {step === 1 && <FormOne handlepreMoodState={handlepreMoodState} />}
         {step === 2 && (
           <FormTwo
-            setJournalEntry={setJournalEntry}
+            handleJournalEntry={handleJournalEntry}
             handleContinue={handleContinue}
           />
         )}

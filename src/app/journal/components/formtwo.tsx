@@ -7,18 +7,18 @@ import { ArrowForwardIcon } from '@chakra-ui/icons';
 import debounce from 'lodash/debounce';
 
 interface FormTwoProps {
-  setJournalEntry: (entry: string) => void;
+  handleJournalEntry: (entry: string) => void;
   handleContinue: () => void;
 }
 
-const FormTwo: React.FC<FormTwoProps> = ({ setJournalEntry, handleContinue }) => {
+const FormTwo: React.FC<FormTwoProps> = ({ handleJournalEntry, handleContinue }) => {
 
   const [tempJournal, setTempEntry] = useState('');
 
   // every two minutes => update 
   const debouncedSetJournalEntry = debounce((newJournalEntry :string) => {
     setTempEntry(newJournalEntry);
-    setJournalEntry(tempJournal);
+    handleJournalEntry(tempJournal);
   }, 120000);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ const FormTwo: React.FC<FormTwoProps> = ({ setJournalEntry, handleContinue }) =>
   // handle case when user presses the button
   const onButtonClick = () => {
     debouncedSetJournalEntry.flush();
-    setJournalEntry(tempJournal);
+    handleJournalEntry(tempJournal);
   };
 
   return (
@@ -98,7 +98,7 @@ const FormTwo: React.FC<FormTwoProps> = ({ setJournalEntry, handleContinue }) =>
             <InputRightElement w="5%">
               <Button leftIcon={< ArrowForwardIcon />} 
                onClick={() => {
-                setJournalEntry(tempJournal);
+                handleJournalEntry(tempJournal);
                 onButtonClick();
               }} />
             </InputRightElement>
