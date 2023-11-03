@@ -139,10 +139,11 @@ const Journal: React.FC = () => {
         {step === 0 && <InitialJournal handleQuestions={handleQuestions} />}
         {step === 1 && <FormOne handlepreMoodState={handlepreMoodState} />}
         {step === 2 && (
-          <FormTwo
-            handleJournalEntry={handleJournalEntry}
-            handleContinue={handleContinue}
-          />
+            <FormTwo
+              handleJournalEntry={handleJournalEntry}
+              handleContinue={handleContinue}
+            />
+
         )}
         {step === 3 && <FormThree handlepostMoodState={handlepostMoodState} />}
         {step === 4 && <FormFour />}

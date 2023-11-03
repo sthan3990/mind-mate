@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button, HStack, Stack, Box, Text } from "@chakra-ui/react";
-
+import { useNumMessages } from "../../helper/numofmessages";
 interface InitialJournalProps {
   handleQuestions: (numQuestions: number) => void;
 }
