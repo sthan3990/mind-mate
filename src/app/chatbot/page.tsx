@@ -28,7 +28,7 @@ export default function Chatbot() {
 
   const chatBoxRef = useRef<HTMLDivElement | null>(null);
 
-  const { messages, input, handleInputChange, handleSubmit, stop } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, stop, append } = useChat({
     api: '/api/chatbot',
   });
 
@@ -37,9 +37,9 @@ export default function Chatbot() {
     handleSubmit(e);
   };
 
-  const handleArrowButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleArrowButtonClick = () => {
     setNumMessages(numMessages + 1); // Increment numMessages
-    handleSubmit(e);
+    append({ content: input, role: 'user' });
   };
 
   const handleHistoryClick = (item: string) => {
@@ -188,7 +188,7 @@ export default function Chatbot() {
                   aria-label="Send"
                   leftIcon={<ArrowForwardIcon />}
                   type="submit"
-                  onClick={(e) => handleArrowButtonClick(e)}
+                  onClick={handleArrowButtonClick}
                 />
                 <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} onClick={stop} />
               </HStack>
