@@ -1,16 +1,14 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button, HStack, Stack, Box, Text } from '@chakra-ui/react';
+import React from "react";
+import { Button, HStack, Stack, Box, Text } from "@chakra-ui/react";
 
 interface InitialJournalProps {
-  handleQuestions: (numQuestions: number) => void;
+  setNumQuestions: (numQuestions: number) => void;
 }
 
-const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
-
+const InitialJournal: React.FC<InitialJournalProps> = ({ setNumQuestions }) => {
   return (
-
     <Stack
       height="65vh"
       background="#15193B"
@@ -36,7 +34,10 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
       <Box>
         <HStack spacing="4" align="center">
           <Box>
-            <Button backgroundColor="transparent" onClick={() => handleQuestions(1)} >
+            <Button
+              backgroundColor="transparent"
+              onClick={() => setNumQuestions(1)}
+            >
               <svg
                 width="133"
                 height="134"
@@ -44,8 +45,23 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <circle cx="66.5" cy="66.5" r="63.5" fill="white" stroke="black" strokeWidth="4" />
-                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
+                <circle
+                  cx="66.5"
+                  cy="66.5"
+                  r="63.5"
+                  fill="white"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+                <text
+                  x="50%"
+                  y="50%"
+                  textAnchor="middle"
+                  dy=".3em"
+                  fill="black"
+                  fontSize="40px"
+                  fontWeight="semibold"
+                >
                   1
                 </text>
               </svg>
@@ -53,7 +69,7 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
           </Box>
 
           <Box>
-            <Button onClick={() => handleQuestions(2)} >
+            <Button onClick={() => setNumQuestions(2)}>
               <svg
                 width="134"
                 height="134"
@@ -61,17 +77,31 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <circle cx="67" cy="67" r="65" fill="white" stroke="black" strokeWidth="4" />
-                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
+                <circle
+                  cx="67"
+                  cy="67"
+                  r="65"
+                  fill="white"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+                <text
+                  x="50%"
+                  y="50%"
+                  textAnchor="middle"
+                  dy=".3em"
+                  fill="black"
+                  fontSize="40px"
+                  fontWeight="semibold"
+                >
                   2
                 </text>
               </svg>
             </Button>
-
           </Box>
 
           <Box>
-            <Button onClick={() => handleQuestions(3)} >
+            <Button onClick={() => setNumQuestions(3)}>
               <svg
                 width="134"
                 height="134"
@@ -79,15 +109,28 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <circle cx="67" cy="67" r="65" fill="white" stroke="black" strokeWidth="4" />
-                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="black" fontSize="40px" fontWeight="semibold">
+                <circle
+                  cx="67"
+                  cy="67"
+                  r="65"
+                  fill="white"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+                <text
+                  x="50%"
+                  y="50%"
+                  textAnchor="middle"
+                  dy=".3em"
+                  fill="black"
+                  fontSize="40px"
+                  fontWeight="semibold"
+                >
                   3
                 </text>
               </svg>
             </Button>
-
           </Box>
-
         </HStack>
       </Box>
 
@@ -103,11 +146,12 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ handleQuestions }) => {
           maxWidth="973px"
           textAlign="center"
         >
-          Every question is a step towards self-discovery; even the smallest step can lead to profound insights. Choose what feels right for you today.
+          Every question is a step towards self-discovery; even the smallest
+          step can lead to profound insights. Choose what feels right for you
+          today.
         </Text>
       </Box>
     </Stack>
-
   );
 };
 
