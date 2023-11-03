@@ -1,8 +1,14 @@
 "use client";
 import { useUser } from "../contexts/UserContext";
-
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Button, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Stack,
+  Button,
+  Text,
+  useDisclosure
+} from "@chakra-ui/react";
+import WarningModal from "./components/warningmodal";
 import InitialJournal from "./components/initialpage";
 import FormOne from "./components/formone";
 import FormTwo from "./components/formtwo";
@@ -11,63 +17,81 @@ import FormFour from "./components/formfour";
 import axios from "axios";
 
 const Journal: React.FC = () => {
-  //userId from useContext
+  // userId from useContext
   const [step, setStep] = useState(0);
   const [journalId, setJournalId] = useState("");
   const { userId } = useUser();
-
   const [numQuestions, setNumQuestions] = useState(0);
   const [preMoodState, setpreMoodState] = useState(0);
   const [journalEntry, setJournalEntry] = useState("");
   const [postMoodState, setpostMoodState] = useState(0);
-  const [quote, setQuote] = useState("");
-
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
+    // Generate a date
+    let newDate = new Date();
+    let day = newDate.getDate();
+    let month = newDate.getMonth() + 1; // Month is 0-indexed, so add 1 to get the correct month.
+    let year = newDate.getFullYear();
+    const newJournalId =
+      userId +
+      "_" +
+      year +
+      (month < 10 ? "0" : "") +
+      month +
+      (day < 10 ? "0" : "") +
+      day;
+    setJournalId((prevJournal) => newJournalId);
+  }, [
+    journalId,
+    step,
+    numQuestions,
+    preMoodState,
+    journalEntry,
+    postMoodState,
+    userId
+  ]);
 
-  },
-    [
-      step,
-      numQuestions,
-      preMoodState,
-      journalEntry,
-      postMoodState,
-    ]);
+  const checkFields = () => {
+    if (step === 0 && numQuestions === 0) {
+      onOpen(); // Open the modal when fields are missing
+      return false;
+    }
+    if (step === 1 && preMoodState === 0) {
+      onOpen(); // Open the modal when fields are missing
+      return false;
+    }
+    // Add similar checks for other steps...
+    return true;
+  };
 
   const handleContinue = () => {
+    const isValid = checkFields();
 
-    if (step === 1 || step === 4) {
-      writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
+    if (isValid) {
+      if (step === 1 || step === 4) {
+        writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
+      }
+      setStep(step + 1);
     }
-
-    setStep(step + 1);
   };
 
   const writeToSql = (which: number) => {
-
-    if (which == 1) {
-        // Generate a date
-        let newDate = new Date();
-        let day = newDate.getDate();
-        let month = newDate.getMonth() + 1; // Month is 0-indexed, so add 1 to get the correct month.
-        let year = newDate.getFullYear();
-        setJournalId(userId + "_" + year + (month < 10 ? '0' : '') + month + (day < 10 ? '0' : '') + day);
-        console.log(newDate);
-        console.log(journalId);
-
-      axios.get("/api/questions", {
-        params: { journalId, numQuestions },
-      })
+    if (which === 1) {
+      axios
+        .get("/api/questions", {
+          params: { journalId, numQuestions }
+        })
         .then((res) => {
           console.log(res.data);
         });
-      // }
-    }
-    else {
+    } else {
       axios
         .post("/api/journals", {
-          params: { userId, preMoodState, journalEntry, postMoodState },
+          userId,
+          preMoodState,
+          journalEntry,
+          postMoodState
         })
         .then((res) => {
           console.log(res.data);
@@ -85,19 +109,19 @@ const Journal: React.FC = () => {
   };
 
   const handleQuestions = (numberChosen: number) => {
-    setNumQuestions((prevNum) => numberChosen);
+    setNumQuestions(numberChosen);
   };
 
   const handlepreMoodState = (moodChosen: number) => {
-    setpreMoodState((prevMoodState) => moodChosen);
+    setpreMoodState(moodChosen);
   };
 
   const handlepostMoodState = (moodChosen: number) => {
-    setpostMoodState((prevMoodState) => moodChosen);
+    setpostMoodState(moodChosen);
   };
 
   const handleJournalEntry = (journalEntry: string) => {
-    setJournalEntry((prevJournal) => journalEntry);
+    setJournalEntry(journalEntry);
   };
 
   return (
@@ -110,9 +134,8 @@ const Journal: React.FC = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-
         {step === 0 && <InitialJournal handleQuestions={handleQuestions} />}
-        {step === 1 && <FormOne handleMoodState={handlepostMoodState} />}
+        {step === 1 && <FormOne handleMoodState={handlepreMoodState} />}
         {step === 2 && (
           <FormTwo
             setJournalEntry={setJournalEntry}
@@ -122,7 +145,7 @@ const Journal: React.FC = () => {
         {step === 3 && <FormThree handleMoodState={handlepostMoodState} />}
         {step === 4 && <FormFour />}
 
-        {step != 2 && (
+        {step !== 2 && (
           <Box>
             <Button background="#D0A2D1" onClick={handleBack}>
               <Text
@@ -157,6 +180,7 @@ const Journal: React.FC = () => {
           </Box>
         )}
       </Stack>
+      <WarningModal isOpen={isOpen} step={step} onClose={onClose} />
     </>
   );
 };
