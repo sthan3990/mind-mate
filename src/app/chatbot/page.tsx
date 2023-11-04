@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Input,
   Button,
@@ -15,22 +15,33 @@ import {
   Grid,
   VStack,
   HStack,
-  Flex
-} from '@chakra-ui/react';
-import { CopyIcon, ArrowForwardIcon, ChatIcon, CloseIcon } from '@chakra-ui/icons';
-import { useChat } from 'ai/react';
-import { fonts } from '@/theme/fonts';
-import { useNumMessages } from '../helper/numofmessages';
+  Flex,
+} from "@chakra-ui/react";
+import {
+  CopyIcon,
+  ArrowForwardIcon,
+  ChatIcon,
+  CloseIcon,
+} from "@chakra-ui/icons";
+import { useChat } from "ai/react";
+import { fonts } from "@/theme/fonts";
+import { useNumMessages } from "../helper/numofmessages";
 
-
-const Chatbot: React.FC = ({ }) => {
-
+const Chatbot: React.FC = ({}) => {
   const { numMessages, setNumMessages } = useNumMessages();
-  const [copyValue, setCopyValue] = useState('');
+  const [copyValue, setCopyValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(copyValue);
 
-  const { messages, setInput, input, handleInputChange, handleSubmit, stop, append } = useChat({
-    api: '/api/chatbot',
+  const {
+    messages,
+    setInput,
+    input,
+    handleInputChange,
+    handleSubmit,
+    stop,
+    append,
+  } = useChat({
+    api: "/api/chatbot",
 
     onResponse: (res) => {
       localStorage.setItem("setMessageFinished", "false");
@@ -38,25 +49,23 @@ const Chatbot: React.FC = ({ }) => {
       const lastQuestion = localStorage.getItem("lastQuestion");
 
       if (lastQuestion == "true") {
-
         append({
-          content: 'Good Bye',
+          content: "Good Bye",
           // The content of the message
-          role: 'user'
+          role: "user",
         });
 
         // clear input area
-        setInput('');
+        setInput("");
 
         // stop the chat
         stop();
       }
-
     },
     onFinish: (res) => {
       setNumMessages(numMessages + 1); // Increment numMessages
       localStorage.setItem("setMessageFinished", "true");
-    }
+    },
   });
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,13 +75,12 @@ const Chatbot: React.FC = ({ }) => {
   const handleArrowButtonClick = (e: React.FormEvent<HTMLButtonElement>) => {
     //e.preventDefault(); // Prevent the default form submission
 
-    if (input.trim() !== '') {
-
+    if (input.trim() !== "") {
       // Send a user message to the API
-      append({ content: input, role: 'user' });
+      append({ content: input, role: "user" });
 
-      // clear input field 
-      setInput('');
+      // clear input field
+      setInput("");
     }
   };
 
@@ -100,9 +108,9 @@ const Chatbot: React.FC = ({ }) => {
       `,
       gridTemplateRows: "70px 1fr 0.12fr",
       gridTemplateColumns: "257px 1fr",
-      width: '100vw',
-      height: '100vh',
-      gap: '0',
+      width: "100vw",
+      height: "100vh",
+      gap: "0",
       m: "0",
       p: "3em 5em",
     },
@@ -112,8 +120,8 @@ const Chatbot: React.FC = ({ }) => {
       fontWeight: "bold",
       fontSize: "40px",
       color: "#FFFFFF",
-      textAlign: "center"
-    }
+      textAlign: "center",
+    },
   };
 
   return (
@@ -124,18 +132,17 @@ const Chatbot: React.FC = ({ }) => {
         "title title"
         "history chat"
         "history input"
-      `} >
-
+      `}
+      >
         {/* TITLE */}
-        <GridItem 
+        <GridItem
           pl="2"
           border="3px solid #D0A2D1"
           area="title"
           background="#2D3258"
-          height="70px">
-          <Text sx={styling.taxtHeader}>
-            Your Guided Journal
-          </Text>
+          height="70px"
+        >
+          <Text sx={styling.taxtHeader}>CBT Chatbot</Text>
         </GridItem>
 
         {/* HISTORY SECTION */}
@@ -145,7 +152,8 @@ const Chatbot: React.FC = ({ }) => {
           pl="2"
           pr="2"
           background="#15193B"
-          area="history">
+          area="history"
+        >
           <VStack margin="0.5em">
             {history.map((item, index) => (
               <Button
@@ -172,21 +180,21 @@ const Chatbot: React.FC = ({ }) => {
           borderTop="3px solid #D0A2D1"
           background="#15193B"
           area="chat"
-          style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
-          <Flex
-            margin="0.5em"
-            flex="1"
-            overflowY="auto"
-            flexDirection="column"
-          >
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            overflowY: "auto",
+          }}
+        >
+          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="column">
             {messages.map((message, index) => (
               <Box
                 key={index}
                 p={2}
                 maxW="80%"
-                alignSelf={message.role === 'user' ? 'flex-end' : 'flex-start'}
+                alignSelf={message.role === "user" ? "flex-end" : "flex-start"}
                 borderRadius="lg"
-                bgColor={message.role === 'user' ? '#5871EB' : '#D0A2D1'}
+                bgColor={message.role === "user" ? "#5871EB" : "#D0A2D1"}
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
@@ -194,7 +202,6 @@ const Chatbot: React.FC = ({ }) => {
               >
                 <Text fontSize="lg">{message.content}</Text>
                 <IconButton
-
                   size="xs"
                   aria-label="Copy Message"
                   icon={<CopyIcon />}
@@ -217,9 +224,7 @@ const Chatbot: React.FC = ({ }) => {
           borderBlockEnd="3px solid #D0A2D1"
           area="input"
         >
-          <InputGroup
-            width="100%" 
-          >
+          <InputGroup width="100%">
             <InputLeftElement w="85%" pl="1em" pb="3">
               <Input
                 size="lg"
@@ -232,14 +237,18 @@ const Chatbot: React.FC = ({ }) => {
             </InputLeftElement>
             <InputRightElement w="15%" pb="3">
               <HStack>
-
                 <Button
                   ml={1}
                   aria-label="Send"
                   leftIcon={<ArrowForwardIcon />}
                   onClick={handleArrowButtonClick}
                 />
-                <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} onClick={stop} />
+                <IconButton
+                  ml={1}
+                  aria-label="Stop"
+                  icon={<CloseIcon />}
+                  onClick={stop}
+                />
               </HStack>
             </InputRightElement>
           </InputGroup>
@@ -247,6 +256,6 @@ const Chatbot: React.FC = ({ }) => {
       </Grid>
     </form>
   );
-}
+};
 
-export default Chatbot;  
+export default Chatbot;
