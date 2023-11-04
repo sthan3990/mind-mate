@@ -70,6 +70,12 @@ export const drawerMain = {
   height: '100%'
 }
 
+export const drawerLogoStyle = {
+  ml: "3em",
+  width: ["8em"],
+  height: ["8em"],
+};
+
 export const accountButtonStyle = {
   backgroundColor: "#FE8F55E5",
   width: "10%",
@@ -83,8 +89,3 @@ export const accountButtonStyle = {
   boxShadow: "2px 2px 10px rgba(0,0,0,0.2)",
 };
 
-export const drawerLogoStyle = {
-  ml: "3em",
-  width: ["8em"],
-  height: ["8em"],
-};

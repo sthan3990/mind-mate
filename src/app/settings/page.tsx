@@ -28,6 +28,7 @@ const UserProfilePage = () => {
   const deleteButtonStyle = styles.deleteButtonStyle;
 
   const { userId } = useUser();
+  console.log("userId at beginning; ", userId);
   // console.log("context userId in beginning of profile page: ", userId);
   const { push } = useRouter();
   const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "", "password": "" });
@@ -121,17 +122,17 @@ const UserProfilePage = () => {
       console.log("after axios");
     }
   };
-
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-
-  if (userId === "") {
-    return <Text>No user logged in!</Text>;
+  console.log("userId at return component; ", userId);
+  if (!userId) {
+    return (
+      <Flex color="white" minH={"100vh"} align={"center"} justify={"center"} >
+        <Text>No user logged in!</Text>
+      </Flex>
+    )
   }
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"} color="black">
+    <Flex minH={"100vh"} align={"center"} justify={"center"} color="white" >
       <Stack spacing={5} mx={"auto"} maxW={"lg"} pb={12} px={6} >
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} sx={headingStyle} textAlign={"center"}>

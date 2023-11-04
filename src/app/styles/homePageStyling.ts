@@ -15,6 +15,7 @@ export const linkStyle = {
   mx: [2, 5, 6, 7],
   fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
   ml: [4, 10, 23],
+  whiteSpace: 'nowrap',
 };
 
 export const accountButtonStyle = {
@@ -94,4 +95,30 @@ export const awarenessStyle = {
   fontWeight: "700",
   letterSpacing: 3.2,
   wordWrap: "break-word",
+};
+
+export const drawerLinks = {
+  color: "navy",
+  mx: [2, 5, 6, 7],
+  fontSize: "1.2em",
+  ml: [2, 8, 20],
+  fontWeight: 'bold',
+  padding: '10px 10px',
+  my: '0.6em',
+  _hover: { background: "#FEEBC8", color: "#2D3258" },
+  borderRadius: "40px", // Add rounded border
+  border: "2px", // Add white border
+};
+
+export const drawerMain = {
+  bg: "#FEEBC8",
+  flexDirection: 'column',
+  justifyContent: 'center',
+  height: '100%'
+}
+
+export const drawerLogoStyle = {
+  ml: "3em",
+  width: ["8em"],
+  height: ["8em"],
 };
