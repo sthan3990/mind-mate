@@ -12,12 +12,13 @@ import { NumMessagesProvider } from "./helper/numofmessages";
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const registerPathname = usePathname();
 
-  const rootStyles = {
-    flexDirection: "column",
-    minHeight: "100vh",
-    bgColor: "#FFFF",
-    justify: "flex-start",
-  };
+    const rootStyles = {
+        flexDirection: "column",
+        minHeight: "100vh",
+        bgColor: "#15193B",
+        justify: "flex-start"
+    };
+
 
   return (
     <html>

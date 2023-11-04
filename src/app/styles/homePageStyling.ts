@@ -29,7 +29,7 @@ export const accountButtonStyle = {
 };
 
 export const dividerStyle = {
-  mt: 4,
+  mt: 0,
   bgGradient: "linear(to-r, #D0A2D1, #F9884AAD)",
   height: "5px",
   width: "100%",
