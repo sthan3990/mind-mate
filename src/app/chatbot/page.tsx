@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Input,
   Button,
@@ -20,14 +20,61 @@ import {
 import { CopyIcon, ArrowForwardIcon, ChatIcon, CloseIcon } from '@chakra-ui/icons';
 import { useChat } from 'ai/react';
 import { fonts } from '@/theme/fonts';
+import { useNumMessages } from '../helper/numofmessages';
 
-export default function Chatbot() {
+
+const Chatbot: React.FC = ({ }) => {
+
+  const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState('');
   const { hasCopied, onCopy } = useClipboard(copyValue);
-  const chatBoxRef = useRef<HTMLDivElement | null>(null);
-  const { messages, input, handleInputChange, handleSubmit, stop } = useChat({
-    api: '/api/chatbot', // Specify the API endpoint
+
+  const { messages, setInput, input, handleInputChange, handleSubmit, stop, append } = useChat({
+    api: '/api/chatbot',
+
+    onResponse: (res) => {
+      localStorage.setItem("setMessageFinished", "false");
+
+      const lastQuestion = localStorage.getItem("lastQuestion");
+
+      if (lastQuestion == "true") {
+
+        append({
+          content: 'Good Bye',
+          // The content of the message
+          role: 'user'
+        });
+
+        // clear input area
+        setInput('');
+
+        // stop the chat
+        stop();
+      }
+
+    },
+    onFinish: (res) => {
+      setNumMessages(numMessages + 1); // Increment numMessages
+      localStorage.setItem("setMessageFinished", "true");
+    }
   });
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    handleSubmit(e);
+  };
+
+  const handleArrowButtonClick = (e: React.FormEvent<HTMLButtonElement>) => {
+    //e.preventDefault(); // Prevent the default form submission
+
+    if (input.trim() !== '') {
+
+      // Send a user message to the API
+      append({ content: input, role: 'user' });
+
+      // clear input field 
+      setInput('');
+    }
+  };
 
   const handleHistoryClick = (item: string) => {
     // Handle the click event, e.g., set the selected history item, or perform an action with it.
@@ -69,9 +116,8 @@ export default function Chatbot() {
     }
   };
 
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleFormSubmit}>
       <Grid
         sx={styling.grid}
         templateAreas={`
@@ -186,7 +232,13 @@ export default function Chatbot() {
             </InputLeftElement>
             <InputRightElement w="15%" pb="3">
               <HStack>
-                <IconButton ml={1} aria-label="Send" icon={<ArrowForwardIcon />} type="submit" />
+
+                <Button
+                  ml={1}
+                  aria-label="Send"
+                  leftIcon={<ArrowForwardIcon />}
+                  onClick={handleArrowButtonClick}
+                />
                 <IconButton ml={1} aria-label="Stop" icon={<CloseIcon />} onClick={stop} />
               </HStack>
             </InputRightElement>
@@ -196,3 +248,5 @@ export default function Chatbot() {
     </form>
   );
 }
+
+export default Chatbot;  
