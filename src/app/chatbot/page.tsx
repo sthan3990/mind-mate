@@ -79,6 +79,11 @@ const Chatbot: React.FC = ({}) => {
   });
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (chatUsed && numMessages === 0) {
+      console.log("good");
+      createChatCBTItem();
+      setChatUsed(false);
+    }
     handleSubmit(e);
   };
 
@@ -91,10 +96,6 @@ const Chatbot: React.FC = ({}) => {
 
       // clear input field
       setInput("");
-    }
-    if (chatUsed) {
-      createChatCBTItem();
-      setChatUsed(false);
     }
   };
 
@@ -255,9 +256,7 @@ const Chatbot: React.FC = ({}) => {
                   ml={1}
                   aria-label="Send"
                   leftIcon={<ArrowForwardIcon />}
-                  onClick={() => {
-                    handleArrowButtonClick;
-                  }}
+                  onClick={handleArrowButtonClick}
                 />
                 <IconButton
                   ml={1}
