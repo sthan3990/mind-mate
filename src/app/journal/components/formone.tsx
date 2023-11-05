@@ -1,28 +1,34 @@
+import React, { useState } from 'react';
+import { Box, Button, HStack, Stack, Text } from '@chakra-ui/react';
+import { fonts } from '@/theme/fonts';
 
-"use client";
-
-import React from "react";
-import { Button, HStack, Stack, Box, Text } from "@chakra-ui/react";
-import { fonts } from "@/theme/fonts";
-
-
+// Define the styling object here
+const styling = {
+  textStyling: {
+    fontWeight: 'bold',
+    fontSize: '40px',
+    color: '#FFFFFF',
+    width: '100%',
+    maxWidth: '743.11px',
+    textAlign: 'center',
+    paddingTop: '100px',
+  },
+};
 
 interface FormOneProps {
   setpreMoodState: (moodChosen: number) => void;
 }
-const styling = {
-  textStyling: {
-    fontWeight: "bold",
-    fontSize: "40px",
-    color: "#FFFFFF",
-    width: "100%",
-    maxWidth: "743.11px",
-    textAlign: "center",
-    paddingTop: "100px",
-  },
-};
 
 const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
+  const [selectedMood, setSelectedMood] = useState<number | null>(null);
+
+  const handleSelectMood = (mood: number) => {
+    setSelectedMood(mood);
+    setpreMoodState(mood);
+  };
+
+  const isSelected = (mood: number) => selectedMood === mood;
+
   return (
     <Stack
       width="80%"
@@ -33,10 +39,9 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
       alignItems="center"
       justifyContent="space-between"
       marginBottom="3em"
-
     >
       <Box>
-      <Text sx={styling.textStyling} fontFamily={fonts.cantarell}>
+        <Text sx={styling.textStyling} fontFamily={fonts.cantarell}>
           Tap on the Emoji that Best Captures Your Current Emotion.
         </Text>
       </Box>
@@ -44,7 +49,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
       <Box>
         <Text
           marginTop="-1em"
-          fontFamily= {fonts.cantarell}
+          fontFamily={fonts.cantarell}
           fontWeight="semibolditalic"
           fontSize="24px"
           letterSpacing="-0.03em"
