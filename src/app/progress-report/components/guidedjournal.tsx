@@ -5,6 +5,12 @@ import axios from "axios";
 import * as style from "../../styles/progress-report";
 import { useUser } from "../../contexts/UserContext";
 import { countQuestionsByDate } from "../../helper/countquestionsbydate";
+import { avgEmotionByDate } from "@/app/helper/avgfeelingbydate";
+import Face1 from "./faces/face1";
+import Face2 from "./faces/face2";
+import Face3 from "./faces/face3";
+import Face4 from "./faces/face4";
+import Face5 from "./faces/face5";
 
 import {
   Button,
@@ -24,14 +30,35 @@ interface InitialProps {
 const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
   const { userId } = useUser();
   const [data, setData] = useState([]);
+  const [mood, setMood] = useState<{
+    [key: string]: number;
+  }>({});
   const [numOfQuestions, setNumOfQuestions] = useState<{
     [key: string]: number;
   }>({});
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem1, setSelectedItem1] = useState("");
+  const [selectedItem2, setSelectedItem2] = useState("");
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedItem(event.target.value);
-  };
+  let faceComponent;
+  switch (mood[selectedItem2]) {
+    case 1:
+      faceComponent = <Face1 />;
+      break;
+    case 2:
+      faceComponent = <Face2 />;
+      break;
+    case 3:
+      faceComponent = <Face3 />;
+      break;
+    case 4:
+      faceComponent = <Face4 />;
+      break;
+    case 5:
+      faceComponent = <Face5 />;
+      break;
+    default:
+      faceComponent = <div>Invalid face number</div>;
+  }
 
   const journal = async () => {
     try {
@@ -52,12 +79,22 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
   }, [userId]);
 
   useEffect(() => {
-    console.log(data);
     setNumOfQuestions(countQuestionsByDate(data));
+    setMood(avgEmotionByDate(data));
   }, [data]);
 
+  const handleSelectChange1 = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedItem1(event.target.value);
+  };
+
+  const handleSelectChange2 = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedItem2(event.target.value);
+  };
+
   useEffect(() => {
-    setSelectedItem(Object.keys(numOfQuestions)[0]);
+    console.log(mood);
+    setSelectedItem1(Object.keys(numOfQuestions)[0]);
+    setSelectedItem2(Object.keys(mood)[0]);
   }, [numOfQuestions]);
 
   return (
@@ -168,8 +205,8 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
               >
                 <h2>Number of Questions Asked</h2>
                 <select
-                  value={selectedItem}
-                  onChange={handleSelectChange}
+                  value={selectedItem1}
+                  onChange={handleSelectChange1}
                   style={{
                     height: "40px", // Set a fixed height
                     alignSelf: "flex-start", // Align the select element to the top
@@ -260,7 +297,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                     textAlign: "center",
                   }}
                 >
-                  {numOfQuestions[selectedItem]}
+                  {numOfQuestions[selectedItem1]}
                 </p>
               </div>
             </Box>
@@ -268,10 +305,44 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
             <Box
               width="50%"
               border="1px solid #D0A2D1"
+              marginRight="1em"
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
+              padding="20px"
             >
-              {/* Content of the second box */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <h2>AVG Feeling by Date</h2>
+                <select
+                  value={selectedItem2}
+                  onChange={handleSelectChange2}
+                  style={{
+                    height: "40px", // Set a fixed height
+                    alignSelf: "flex-start", // Align the select element to the top
+                  }}
+                >
+                  <option value="">Select an item</option>
+                  {Object.entries(mood).map(([key, value]) => (
+                    <option key={key} value={key}>
+                      {key}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div
+                style={{
+                  margin: 0,
+                  marginTop: "150px",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {faceComponent}
+              </div>
             </Box>
           </Flex>
         </GridItem>

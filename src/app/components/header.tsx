@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { useState } from 'react';
+import React from "react";
+import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import {
   Flex,
@@ -17,7 +17,7 @@ import {
   MenuList,
   MenuItem,
   Portal,
-  DrawerBody
+  DrawerBody,
 } from "@chakra-ui/react";
 import {
   ChakraProvider,
@@ -27,30 +27,28 @@ import {
   Drawer,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton
+  DrawerCloseButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import * as styles from '../styles/headerStyle';
+import * as styles from "../styles/headerStyle";
 import { useRouter } from "next/navigation";
-import { useUser } from "./contexts/UserContext";
+import { useUser } from "../contexts/UserContext";
 
 const theme = extendTheme({
   breakpoints: {
     sm: "48em",
     md: "55em",
     lg: "70em",
-    xl: "80em"
+    xl: "80em",
   },
   components: {
     Button: {
       baseStyle: {
-        fontWeight: "bold"
-      }
-    }
-  }
+        fontWeight: "bold",
+      },
+    },
+  },
 });
-
-
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -65,7 +63,10 @@ const Navbar = () => {
   const drawerLinks = styles.drawerLinks;
   const drawerMain = styles.drawerMain;
   const drawerLogoStyle = styles.drawerLogoStyle;
-  const currentLogoStyle = useBreakpointValue({ base: logoStyle, md: logoStyleMobile });
+  const currentLogoStyle = useBreakpointValue({
+    base: logoStyle,
+    md: logoStyleMobile,
+  });
 
   const [hamburgerVisibility, setHamburgerVisibility] = useState(false);
   const handleDrawerOpen = () => {
@@ -85,29 +86,38 @@ const Navbar = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Flex direction="row"
+      <Flex
+        direction="row"
         align="center"
         p={1}
         bg="#2D3258"
         boxShadow="sm"
         justifyContent="space-between"
         sx={{
-          height: { base: '6em', md: '5em' }
-        }}>
+          height: { base: "6em", md: "5em" },
+        }}
+      >
         {/* 1. Logo and MindMate Text Section */}
         <Flex alignItems="center">
           <Link href="/">
-            <Image src="./logo.svg" alt="Logo" sx={currentLogoStyle} minW="3em" />
+            <Image
+              src="./logo.svg"
+              alt="Logo"
+              sx={currentLogoStyle}
+              minW="3em"
+            />
           </Link>
           <Link href="/">
-            <Text sx={mindMateStyle} mx={20}>MindMate</Text>
+            <Text sx={mindMateStyle} mx={20}>
+              MindMate
+            </Text>
           </Link>
         </Flex>
         {/* 2. Hamburger Menu */}
         <IconButton
           icon={<HamburgerIcon color="#FE8F55E5" />}
           variant="outline"
-          display={{ base: 'block', md: 'none' }}
+          display={{ base: "block", md: "none" }}
           onClick={handleDrawerOpen}
           aria-label="Open Navigation"
           mx="2em"
@@ -118,22 +128,39 @@ const Navbar = () => {
         <Box sx={verticalLineStyle}></Box>
 
         {/* 3. Text Section */}
-        <Stack direction="row" spacing={5} align="flex-start" mr="200" display={{ base: 'none', md: 'flex' }}>
+        <Stack
+          direction="row"
+          spacing={5}
+          align="flex-start"
+          mr="200"
+          display={{ base: "none", md: "flex" }}
+        >
           <Link href="/journal">
-            <Text sx={pathname === '/journal' ? linkTab : linkStyle}>Guided Journal</Text>
+            <Text sx={pathname === "/journal" ? linkTab : linkStyle}>
+              Guided Journal
+            </Text>
           </Link>
           <Link href="/chatbot">
-            <Text sx={pathname === '/chatbot' ? linkTab : linkStyle}>CBT Chatbot</Text>
+            <Text sx={pathname === "/chatbot" ? linkTab : linkStyle}>
+              CBT Chatbot
+            </Text>
           </Link>
           <Link href="/progress-report">
-            <Text sx={pathname === '/progress-report' ? linkTab : linkStyle}>Progress Report</Text>
+            <Text sx={pathname === "/progress-report" ? linkTab : linkStyle}>
+              Progress Report
+            </Text>
           </Link>
         </Stack>
 
-
         {/* 4. Account Section */}
         <Menu>
-          <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle} minW="130px" display={{ base: 'none', md: 'flex' }}>
+          <MenuButton
+            as={Button}
+            borderRadius="550px"
+            sx={accountButtonStyle}
+            minW="130px"
+            display={{ base: "none", md: "flex" }}
+          >
             Account
           </MenuButton>
           <Portal>
@@ -143,7 +170,7 @@ const Navbar = () => {
                   as="a"
                   sx={{
                     _hover: { background: "white", color: "#FBC1AA" },
-                    _active: { bg: "white", color: "#FBC1AA" }
+                    _active: { bg: "white", color: "#FBC1AA" },
                   }}
                 >
                   Settings
@@ -153,31 +180,38 @@ const Navbar = () => {
               <Divider orientation="horizontal" />
 
               <MenuItem
-                      as="a"
-                      sx={{
-                        _hover: { background: "white", color: "#FBC1AA" },
-                        _active: { bg: "white", color: "#FBC1AA" },
-                      }}
-                      onClick={() => clickLogout()}
-                    >
-                      Logout
+                as="a"
+                sx={{
+                  _hover: { background: "white", color: "#FBC1AA" },
+                  _active: { bg: "white", color: "#FBC1AA" },
+                }}
+                onClick={() => clickLogout()}
+              >
+                Logout
               </MenuItem>
-
             </MenuList>
-
           </Portal>
         </Menu>
-
       </Flex>
       {/* Drawer */}
-      <Drawer placement="left" onClose={handleDrawerClose} isOpen={hamburgerVisibility}>
+      <Drawer
+        placement="left"
+        onClose={handleDrawerClose}
+        isOpen={hamburgerVisibility}
+      >
         <DrawerOverlay>
           <DrawerContent sx={drawerMain}>
             <DrawerCloseButton size="lg" />
             <DrawerBody>
               <Flex alignItems="center">
                 <Link href="/">
-                  <Image src="./logo.svg" alt="Logo" sx={drawerLogoStyle} minW="10em" my="2em" />
+                  <Image
+                    src="./logo.svg"
+                    alt="Logo"
+                    sx={drawerLogoStyle}
+                    minW="10em"
+                    my="2em"
+                  />
                 </Link>
               </Flex>
               <Stack spacing={4} p={4} align="start">
@@ -190,10 +224,14 @@ const Navbar = () => {
                 <Link href="/progress-report">
                   <Text sx={drawerLinks}>Progress Report</Text>
                 </Link>
-                <Link href="/settings"> {/* Add the Settings link */}
+                <Link href="/settings">
+                  {" "}
+                  {/* Add the Settings link */}
                   <Text sx={drawerLinks}>Account Settings</Text>
                 </Link>
-                <Link href="/login"> {/* Add the Logout link */}
+                <Link href="/login">
+                  {" "}
+                  {/* Add the Logout link */}
                   <Text sx={drawerLinks}>Logout</Text>
                 </Link>
               </Stack>
@@ -201,9 +239,8 @@ const Navbar = () => {
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>
-
     </ChakraProvider>
   );
-}
+};
 
 export default Navbar;
