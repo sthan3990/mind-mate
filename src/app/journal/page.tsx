@@ -18,7 +18,7 @@ import Buttons from './buttons';
 const Journal: React.FC = () => {
   //userId from useContext
   const { userId } = useUser();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(4);
   const [numQuestions, setNumQuestions] = useState(0);
   const [preMoodState, setpreMoodState] = useState(0);
   const [journalId, setJournalId] = useState<string>("");
