@@ -28,7 +28,6 @@ import {
 import { useChat } from "ai/react";
 import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../helper/numofmessages";
-import { text } from "stream/consumers";
 
 const Chatbot: React.FC = ({}) => {
   const { userId } = useUser();
@@ -104,11 +103,23 @@ const Chatbot: React.FC = ({}) => {
     console.log(`History item clicked: ${item}`);
   };
 
+  const history = [
+    "Entry 1",
+    "Entry 2",
+    "Entry 3",
+    "Entry 4",
+    // Add more historical entries as needed
+  ];
 
   const styling = {
     grid: {
       color: "black",
       fontWeight: "800",
+      templateAreas: `
+        "title title"
+        "history chat"
+        "history input"
+      `,
       gridTemplateRows: "70px 1fr 0.12fr",
       gridTemplateColumns: "257px 1fr",
       width: "100vw",
@@ -130,28 +141,58 @@ const Chatbot: React.FC = ({}) => {
   return (
     <form onSubmit={handleFormSubmit}>
       <Grid
-        templateRows="repeat(1, 1fr)"   // one row
-        templateColumns="repeat(1, 1fr)"  // one column
-        p="4em"
-        alignItems="end"
+        sx={styling.grid}
+        templateAreas={`
+        "title title"
+        "history chat"
+        "history input"
+      `}
       >
         {/* TITLE */}
-        <GridItem 
-          colSpan={2} pl="2"
-          border="4px solid #D0A2D1"
+        <GridItem
+          pl="2"
+          border="3px solid #D0A2D1"
+          area="title"
           background="#2D3258"
           height="70px"
         >
-          <Text sx={styling.taxtHeader}>CBT Chatbot</Text>
+          <Text sx={styling.taxtHeader}>Guided Journal</Text>
         </GridItem>
-  
-        {/* CHAT SCREEN */}
+
+        {/* HISTORY SECTION */}
+        <GridItem
+          borderInlineStart="3px solid #D0A2D1"
+          borderBlockEnd="3px solid #D0A2D1"
+          height="600px"
+          pl="2"
+          pr="2"
+          background="#15193B"
+          area="history"
+        >
+          <VStack margin="0.5em">
+            {history.map((item, index) => (
+              <Button
+                leftIcon={<ChatIcon />}
+                background="#737AA8"
+                key={index}
+                size="sm"
+                variant="outline"
+                onClick={() => handleHistoryClick(item)}
+                width="100%"
+                textAlign="left"
+              >
+                {item}
+              </Button>
+            ))}
+          </VStack>
+        </GridItem>
+
+        {/* CHAT SECTION */}
         <GridItem
           border="5px solid #D0A2D1"
-          height="500px"
+          height="600px"
         >
-          {/* CHAT SECTION */}
-          <VStack spacing={4} align="stretch" height="100%">
+        <VStack spacing={4} align="stretch" height="100%">
             {/* CHAT MESSAGE SECTION */}
             <Flex flex="1" overflowY="auto" flexDirection="column" bgColor="#15193B" pr="30px" pl="30px" pt="20px" pb="20px">
               {messages.map((message, index) => (
@@ -184,7 +225,7 @@ const Chatbot: React.FC = ({}) => {
               background="#15193B"
             >
               <InputGroup width="100%">
-                <InputLeftElement w="88%" pl="1em" pb="3">
+                <InputLeftElement w="85%" pl="1em" pb="3">
                   <Input
                     size="lg"
                     backgroundColor="#737AA8"
@@ -224,7 +265,7 @@ const Chatbot: React.FC = ({}) => {
               </InputGroup>
             </GridItem>
           </VStack>
-        </GridItem>
+          </GridItem>
       </Grid>
     </form>
   );
