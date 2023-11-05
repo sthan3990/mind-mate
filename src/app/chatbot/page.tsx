@@ -80,7 +80,6 @@ const Chatbot: React.FC = ({}) => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (chatUsed && numMessages === 0) {
-      console.log("good");
       createChatCBTItem();
       setChatUsed(false);
     }
