@@ -34,7 +34,6 @@ export const verticalLineStyle = {
 };
 
 export const linkStyle = {
-  fontWeight: "normal",
   color: "white",
   mx: [2, 5, 6, 7],
   fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
@@ -43,8 +42,7 @@ export const linkStyle = {
 };
 
 export const linkTab = {
-
-  fontWeight: "800",
+  fontWeight: "bold",
   color: "white",
   mx: [2, 5, 6, 7],
   fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
@@ -72,12 +70,6 @@ export const drawerMain = {
   height: '100%'
 }
 
-export const drawerLogoStyle = {
-  ml: "3em",
-  width: ["8em"],
-  height: ["8em"],
-};
-
 export const accountButtonStyle = {
   backgroundColor: "#FE8F55E5",
   width: "10%",
@@ -91,3 +83,8 @@ export const accountButtonStyle = {
   boxShadow: "2px 2px 10px rgba(0,0,0,0.2)",
 };
 
+export const drawerLogoStyle = {
+  ml: "3em",
+  width: ["8em"],
+  height: ["8em"],
+};

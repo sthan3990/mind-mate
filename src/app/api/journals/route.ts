@@ -44,7 +44,7 @@ export async function GET(request: Request) {
     }
 
     const journals =
-      await sql`SELECT users.id, journals.id as Jid, emotion_pre, emotion_post, num_questions, timestamp FROM users join journals ON users.id = journals.user_id WHERE users.id = ${userId};`;
+      await sql`SELECT emotion_pre, emotion_post, num_questions, timestamp FROM users join journals ON users.id = journals.user_id WHERE users.id = ${userId};`;
     return NextResponse.json({ journals: journals.rows }, { status: 200 });
   } catch (error) {
     console.error(error);

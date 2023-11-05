@@ -4,15 +4,17 @@ const bcrypt = require("bcrypt");
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const email = searchParams.get("email");
+  const email = searchParams.get("email") || "";
+  const transformedEmail = email.toLowerCase();
   const password = searchParams.get("password");
   try {
-    if (!email || !password) {
+    if (!transformedEmail || !password) {
       return new NextResponse("Email, and password is required", {
         status: 400,
       });
     }
-    const login = await sql`SELECT * FROM users WHERE email = ${email};`;
+    const login =
+      await sql`SELECT * FROM users WHERE email = ${transformedEmail};`;
     if (!login.rows[0]) {
       return new NextResponse("No account with that email", {
         status: 400,
@@ -34,10 +36,9 @@ export async function GET(request: Request) {
       { message: "User logged in", userID: login.rows[0].id },
       { status: 200 }
     );
-    response.cookies.set("User", login.rows[0].id)
+    response.cookies.set("User", login.rows[0].id);
     console.log("cookkies: ", response.cookies);
     return response;
-
   } catch (error) {
     console.log(error);
   }

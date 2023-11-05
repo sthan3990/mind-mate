@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   Flex,
   Text,
@@ -51,7 +51,7 @@ const theme = extendTheme({
 
 
 const Navbar = () => {
-  const router = useRouter() as any;
+  const pathname = usePathname();
 
   const logoStyle = styles.logoStyle;
   const mindMateStyle = styles.mindMateStyle;
@@ -83,7 +83,7 @@ const Navbar = () => {
         boxShadow="sm"
         justifyContent="space-between"
         sx={{
-          height: { base: '6em', md: 'auto' }
+          height: { base: '6em', md: '5em' }
         }}>
         {/* 1. Logo and MindMate Text Section */}
         <Flex alignItems="center">
@@ -111,13 +111,13 @@ const Navbar = () => {
         {/* 3. Text Section */}
         <Stack direction="row" spacing={5} align="flex-start" mr="200" display={{ base: 'none', md: 'flex' }}>
           <Link href="/journal">
-            <Text sx={router.pathname === '/journal' ? linkTab : linkStyle}>Guided Journal</Text>
+            <Text sx={pathname === '/journal' ? linkTab : linkStyle}>Guided Journal</Text>
           </Link>
           <Link href="/chatbot">
-            <Text sx={router.pathname === '/chatbot' ? linkTab : linkStyle}>CBT Chatbot</Text>
+            <Text sx={pathname === '/chatbot' ? linkTab : linkStyle}>CBT Chatbot</Text>
           </Link>
           <Link href="/progress-report">
-            <Text sx={router.pathname === '/progress-report' ? linkTab : linkStyle}>Progress Report</Text>
+            <Text sx={pathname === '/progress-report' ? linkTab : linkStyle}>Progress Report</Text>
           </Link>
         </Stack>
 
@@ -199,7 +199,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-
-
-
-
