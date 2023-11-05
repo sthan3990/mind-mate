@@ -12,15 +12,15 @@ interface PieGraphProps {
   timestamp: Date
 }
 
-const PieGraphComponent: React.FC<PieGraphProps> = () => {
+const PieGraphComponent: React.FC = () => {
 
   const [graphData, setGraphData] = useState([]);
   const [preMoodData, setPreMoodData] = useState<{ name: string, value: number, percentage: number }[]>([]);
   const [postMoodData, setPostMoodData] = useState<{ name: string, value: number, percentage: number }[]>([]);
   const [numQuestionsData, setNumQuestionsData] = useState([]);
 
-  //const {userId } = useUser();
-  const userId = "57";
+  const {userId } = useUser();
+  //const userId = "57";
 
   const fetchData = () => {
     axios.get('/api/journals/', { params: { userId } })
