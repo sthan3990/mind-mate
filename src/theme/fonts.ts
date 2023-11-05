@@ -9,7 +9,6 @@ const poppinsItalic = Poppins({ weight: '500', subsets: ["latin"], style: ["ital
 import { Alegreya_Sans } from "next/font/google";
 const alegreya_Sans = Alegreya_Sans({ weight: "500", subsets: ['greek'] });
 
-
 import { Inter } from "next/font/google";
 const inter = Inter({ weight: '800', subsets: ["latin"] });
 

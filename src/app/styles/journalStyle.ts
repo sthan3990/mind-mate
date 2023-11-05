@@ -31,10 +31,10 @@ export const mainImageStyle = {
 export const textStyle = {
   position: "relative",
   fontSize: "40px",
-  fontWeight: 600,
-  fontFamily: fonts.heading,
-  textAlign: "left",
-  marginLeft: "20px",
+  fontWeight: 700,
+  fontFamily: fonts.alternative,
+  textAlign: "center",
+  marginLeft: "40px",
   color: "black",
 };
 
@@ -49,8 +49,6 @@ export const headingStyle = {
   fontSize: ["20px", "24px", "28px", "32px"],
   maxWidth: "90%",
   alignSelf: "center",
-  fontFamily: fonts.alternative,
-  fontStyle: "italic",
 };
 
 export const rectangleIconStyle = {
