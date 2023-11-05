@@ -110,7 +110,7 @@ const Navbar = () => {
               sx={{ borderColor: "#15193B", boxSize: "3.2rem", fontSize: "1.5rem" }}
             />
 
-            <Flex justify="center" ml="250" display={{ base: 'none', md: 'flex' }}>
+            <Flex justify="center" ml="165" display={{ base: 'none', md: 'flex' }}>
               <HStack>
                 <Link href="/journal">
                   <Text sx={linkStyle}>Guided Journal</Text>
