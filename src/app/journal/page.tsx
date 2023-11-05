@@ -2,7 +2,7 @@
 import { useUser } from "../contexts/UserContext";
 
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Button, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Stack, Button, VStack, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import InitialJournal from "./components/initialpage";
 import FormOne from "./components/formone";
 import FormTwo from "./components/formtwo";
@@ -10,6 +10,10 @@ import FormThree from "./components/formthree";
 import FormFour from "./components/formfour";
 import axios from "axios";
 import WarningModal from "./components/warningmodal";
+import styled from "@emotion/styled";
+import { fonts } from "@/theme/fonts";
+import Buttons from './buttons';
+
 
 const Journal: React.FC = () => {
   //userId from useContext
@@ -98,7 +102,7 @@ const Journal: React.FC = () => {
   return (
     <>
       <Stack
-        height="65vh"
+        minHeight="88vh"
         background="#15193B"
         display="flex"
         flexDir="column"
@@ -116,39 +120,42 @@ const Journal: React.FC = () => {
         {step === 3 && <FormThree setpostMoodState={setpostMoodState} />}
         {step === 4 && <FormFour />}
 
-        {step != 2 && (
-          <Box>
-            <Button background="#D0A2D1" onClick={handleBack}>
+        {step !== 2 && (
+          <Flex
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            paddingBottom="50px"
+            marginBottom="50px"
+          >
+            <Buttons handleBack={handleBack} handleContinue={handleContinue} />
+
+            <Flex
+              width="100%"
+              justifyContent="space-between"
+              maxWidth="250px" 
+            >
+            </Flex>
+
+            {step === 0 && (
               <Text
-                fontFamily="Poppins"
-                fontWeight="semibold"
-                fontSize="24px"
+                fontFamily={fonts.poppinsItalic}
+                fontWeight="semibolditalic"
+                fontSize="20px"
                 letterSpacing="-0.03em"
-                color="#393939"
+                fontStyle="italic"
+                color="#CEB1CE"
                 width="100%"
-                maxWidth="118.2px"
+                maxWidth="973px"
                 textAlign="center"
-                onClick={handleBack}
+                marginTop="70px"
               >
-                Back
+                Every question is a step towards self-discovery; even the
+                smallest step can lead to profound insights. Choose what feels
+                right for you today.
               </Text>
-            </Button>
-            <Button background="#D0A2D1" onClick={handleContinue}>
-              <Text
-                fontFamily="Poppins"
-                fontWeight="semibold"
-                fontSize="24px"
-                letterSpacing="-0.03em"
-                color="#393939"
-                width="100%"
-                maxWidth="118.2px"
-                textAlign="center"
-                onClick={handleContinue}
-              >
-                Continue
-              </Text>
-            </Button>
-          </Box>
+            )}
+          </Flex>
         )}
         <WarningModal isOpen={isOpen} step={step} onClose={onClose} />
       </Stack>

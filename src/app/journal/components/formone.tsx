@@ -1,43 +1,50 @@
-// Journal.tsx
+
 "use client";
 
 import React from "react";
 import { Button, HStack, Stack, Box, Text } from "@chakra-ui/react";
+import { fonts } from "@/theme/fonts";
+
+
 
 interface FormOneProps {
   setpreMoodState: (moodChosen: number) => void;
 }
+const styling = {
+  textStyling: {
+    fontWeight: "bold",
+    fontSize: "40px",
+    color: "#FFFFFF",
+    width: "100%",
+    maxWidth: "743.11px",
+    textAlign: "center",
+    paddingTop: "100px",
+  },
+};
 
 const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
   return (
     <Stack
       width="80%"
-      height="65vh"
+      height="48vh"
       background="#15193B"
       display="flex"
       flexDir="column"
       alignItems="center"
       justifyContent="space-between"
-      marginBottom="10em"
+      marginBottom="3em"
+
     >
       <Box>
-        <Text
-          fontFamily="Cantarell"
-          fontWeight="bold"
-          fontSize="40px"
-          color="#FFFFFF"
-          width="100%"
-          maxWidth="743.11px"
-          textAlign="center"
-        >
-          Tap on the emoji that best captures your current emotion.
+      <Text sx={styling.textStyling} fontFamily={fonts.cantarell}>
+          Tap on the Emoji that Best Captures Your Current Emotion.
         </Text>
       </Box>
 
       <Box>
         <Text
-          marginTop="em"
-          fontFamily="Poppins"
+          marginTop="-1em"
+          fontFamily= {fonts.cantarell}
           fontWeight="semibolditalic"
           fontSize="24px"
           letterSpacing="-0.03em"
@@ -47,19 +54,17 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
           maxWidth="973px"
           textAlign="center"
         >
-          Let&#39s see where you&#39re at right now!
+          {"Let's see where you're at right now!"}
         </Text>
       </Box>
 
       <Box>
-        <HStack spacing="4" align="center">
+        <HStack spacing="5" align="center">
           <Box>
             <Button
-              w="140" // Set the width to 138px
-              h="140" // Set the height to 138px
-              borderRadius="50%" // Set a 50% border radius to create a circle
+
               _hover={{
-                backgroundColor: "red.400",
+                backgroundColor: "#D0A2D1",
               }}
               variant="unstyled"
               onClick={() => setpreMoodState(1)}
