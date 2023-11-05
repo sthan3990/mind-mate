@@ -34,6 +34,7 @@ export const verticalLineStyle = {
 };
 
 export const linkStyle = {
+  fontWeight: "normal",
   color: "white",
   mx: [2, 5, 6, 7],
   fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
@@ -42,6 +43,7 @@ export const linkStyle = {
 };
 
 export const linkTab = {
+
   fontWeight: "800",
   color: "white",
   mx: [2, 5, 6, 7],
