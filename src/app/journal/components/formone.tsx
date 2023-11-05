@@ -29,11 +29,8 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
 
   const isSelected = (mood: number) => {
     const result = selectedMood === mood;
-    console.log(`Is mood ${mood} selected?`, result); // Logs the result of the isSelected call for the mood
     return result;
   };
-
-  console.log("selectedMood: ", selectedMood);
 
   return (
     <Stack
