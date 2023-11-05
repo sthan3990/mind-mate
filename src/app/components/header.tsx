@@ -32,7 +32,7 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import * as styles from '../styles/headerStyle';
 import { useRouter } from "next/navigation";
-import { useUser } from "./contexts/UserContext";
+import { useUser } from "../contexts/UserContext";
 
 const theme = extendTheme({
   breakpoints: {
