@@ -83,7 +83,7 @@ const Navbar = () => {
         boxShadow="sm"
         justifyContent="space-between"
         sx={{
-          height: { base: '6em', md: 'auto' }
+          height: { base: '6em', md: '5em' }
         }}>
         {/* 1. Logo and MindMate Text Section */}
         <Flex alignItems="center">
