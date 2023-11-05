@@ -74,6 +74,11 @@ const Navbar = () => {
     setHamburgerVisibility(false);
   };
 
+  // Function to get the appropriate style
+  const getTabStyle = (path: string) => {
+    return router.pathname === path ? linkTab : linkStyle;
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <Flex direction="row"
@@ -111,13 +116,13 @@ const Navbar = () => {
         {/* 3. Text Section */}
         <Stack direction="row" spacing={5} align="flex-start" mr="200" display={{ base: 'none', md: 'flex' }}>
           <Link href="/journal">
-            <Text sx={router.pathname === '/journal' ? linkTab : linkStyle}>Guided Journal</Text>
+            <Text sx={getTabStyle('/journal')}>Guided Journal</Text>
           </Link>
           <Link href="/chatbot">
-            <Text sx={router.pathname === '/chatbot' ? linkTab : linkStyle}>CBT Chatbot</Text>
+            <Text sx={getTabStyle('/chatbot')}>CBT Chatbot</Text>
           </Link>
           <Link href="/progress-report">
-            <Text sx={router.pathname === '/progress-report' ? linkTab : linkStyle}>Progress Report</Text>
+            <Text sx={getTabStyle('/progress-report')}>Progress Report</Text>
           </Link>
         </Stack>
 

@@ -81,16 +81,17 @@ export const measureStyle = {
 
 export const journeyStyle = {
   color: "#15193B",
-  fontSize: ["32px", "48px", "64px", "64px"],
+  fontSize: ["25px", "48px", "64px", "64px"],
   fontFamily: fonts.alternative,
   fontWeight: "700",
   letterSpacing: 3.2,
   wordWrap: "break-word",
+  width: { base: '7em', md: 'auto' }
 };
 
 export const awarenessStyle = {
   color: "#15193B",
-  fontSize: ["32px", "48px", "64px", "64px"],
+  fontSize: ["20px", "48px", "64px", "64px"],
   fontFamily: fonts.alternative,
   fontWeight: "700",
   letterSpacing: 3.2,

@@ -19,7 +19,8 @@ import {
   MenuList,
   MenuItem,
   Portal,
-  DrawerBody
+  DrawerBody,
+  Spacer
 } from "@chakra-ui/react";
 import {
   ChakraProvider,
@@ -209,12 +210,14 @@ const Navbar = () => {
         <Divider sx={dividerStyle} />
 
         {/* Main Content without the Navbar's Background Color */}
-        <Flex direction="column" align="center" mt={["10%", "15%", "20%", "12%"]} bg="#F9F2FF" flexGrow={1}>
-          <Flex align="center">
+        <Flex direction="column" align="center" bg="#F9F2FF" flexGrow={1}>
+          <Flex align="center" mt={["10%", "15%", "15%", "10%"]}>
             <Text sx={chatStyle}>Chat</Text>
             <Text sx={dotStyle}>.</Text>
+            <br />
             <Text sx={reflectStyle}>Reflect</Text>
             <Text sx={dotStyle}>.</Text>
+            <br />
             <Text sx={measureStyle}>Measure</Text>
           </Flex>
           <Text sx={journeyStyle}>Your Three-Step Journey to</Text>
@@ -223,7 +226,6 @@ const Navbar = () => {
       </Flex>
     </ChakraProvider>
   );
-
 };
 
 export default Navbar;
