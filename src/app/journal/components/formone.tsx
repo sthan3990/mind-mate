@@ -54,7 +54,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
           maxWidth="973px"
           textAlign="center"
         >
-          Let's see where you're at right now!
+          {"Let's see where you're at right now!"}
         </Text>
       </Box>
 
