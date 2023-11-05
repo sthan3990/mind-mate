@@ -20,6 +20,7 @@ const styling = {
 
 const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
+  const [hoveredMood, setHoveredMood] = useState<number | null>(null);
 
   const handleSelectMood = (mood: number) => {
     setSelectedMood(mood);
@@ -72,13 +73,17 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
         <HStack spacing="5" align="center">
           {[1, 2, 3, 4, 5].map((mood) => (
 
-            <Box key={mood}>
+            <Box
+              key={mood}
+              onMouseEnter={() => setHoveredMood(mood)}
+              onMouseLeave={() => setHoveredMood(null)}
+            >
               <Button
                 variant="unstyled"
                 onClick={() => handleSelectMood(mood)}
-                _hover={{
-                  backgroundColor: '#D0A2D1',
-                }}
+              // _hover={{
+              //   backgroundColor: '#D0A2D1',
+              // }}
               >
                 <svg
                   width="139"
@@ -378,6 +383,16 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                       r="67"
                       fill="none"
                       stroke="#FE8F55E5" // Adjust this color to match your theme
+                      strokeWidth="5"
+                    />
+                  )}
+                  {!isSelected(mood) && hoveredMood === mood && (
+                    <circle
+                      cx="69.5"
+                      cy="69.5"
+                      r="67"
+                      fill="none"
+                      stroke="#D0A2D1" // This color for hovered mood
                       strokeWidth="5"
                     />
                   )}
