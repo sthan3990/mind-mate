@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       });
     }
 
-    await sql`INSERT INTO cbtchatsessions (user_id) VALUES (${userId});`;
+    await sql`INSERT INTO cbt_chatsessions (user_id) VALUES (${userId});`;
     return NextResponse.json(
       { message: "Chat CBT Session Created" },
       { status: 200 }
@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     }
 
     const sessions =
-      await sql`SELECT users.id, timestamp FROM users JOIN cbtChatSessions ON users.id = cbtChatSessions.user_id WHERE users.id = ${userId};`;
+      await sql`SELECT users.id, timestamp FROM users JOIN cbt_chatsessions ON users.id = cbt_chatsessions.user_id WHERE users.id = ${userId};`;
     return NextResponse.json({ sessions: sessions.rows }, { status: 200 });
   } catch (error) {
     console.error(error);
