@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Chatbot from "../../chatbot/page copy";
+import Chatbot from "./chatbot";
 import { useNumMessages } from "../../helper/numofmessages";
 import { debounce } from "lodash";
 
