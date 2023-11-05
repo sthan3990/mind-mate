@@ -14,7 +14,8 @@ export async function GET(request: Request) {
   console.log("userId in api route: ", userId);
   try {
     // Fetch user from db
-    const user = await sql`SELECT first_name, last_name, email, password FROM users WHERE id = ${userId};`;
+    const user =
+      await sql`SELECT first_name, last_name, email, password FROM users WHERE id = ${userId};`;
 
     // If no user, return 404
     if (user.rowCount === 0) {
@@ -22,7 +23,6 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json(user.rows[0], { status: 200 });
-
   } catch (error) {
     // Handle any unexpected errors
     return NextResponse.json({ error: error }, { status: 500 });
@@ -31,19 +31,20 @@ export async function GET(request: Request) {
 
 export async function PATCH(request: Request) {
   // Extract the updated data from the request body
-  const { first_name, last_name, email, userId, password } = await request.json();
+  const { first_name, last_name, email, userId, password } =
+    await request.json();
+  const transformedEmail = email.toLowerCase();
   console.log("password in route: ", password);
 
   if (!userId || isNaN(Number(userId))) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
   }
 
-
   try {
     // Update the user details in the database
     const result = await sql`
       UPDATE users
-      SET first_name = ${first_name}, last_name = ${last_name}, email = ${email}
+      SET first_name = ${first_name}, last_name = ${last_name}, email = ${transformedEmail}
       WHERE id = ${userId}
       RETURNING first_name, last_name, email;
     `;
@@ -55,14 +56,11 @@ export async function PATCH(request: Request) {
 
     // Return the updated user details
     return NextResponse.json(result.rows[0], { status: 200 });
-
   } catch (error) {
     // Handle any unexpected errors
     return NextResponse.json({ error: error }, { status: 500 });
   }
-
 }
-
 
 export async function DELETE(request: Request) {
   // Extract the updated data from the request body
@@ -88,11 +86,12 @@ export async function DELETE(request: Request) {
     }
 
     // Return success message if user deleted
-    return NextResponse.json({ message: "User successfully deleted" }, { status: 200 });
-
+    return NextResponse.json(
+      { message: "User successfully deleted" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error in DELETE route:", error);
     return NextResponse.json({ error: error }, { status: 500 });
   }
-
 }

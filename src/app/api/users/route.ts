@@ -5,12 +5,14 @@ const bcrypt = require("bcrypt");
 export async function POST(request: Request) {
   try {
     const { fName, lName, email, password } = await request.json();
-    if (!fName || !email || !password) {
+    const transformedEmail = email.toLowerCase();
+    if (!fName || !transformedEmail || !password) {
       return new NextResponse("First name, email, and password is required", {
         status: 400,
       });
     }
-    const check = await sql`SELECT * FROM users WHERE email = ${email};`;
+    const check =
+      await sql`SELECT * FROM users WHERE email = ${transformedEmail};`;
     if (check.rows[0]) {
       return new NextResponse("Account already exists", {
         status: 400,
@@ -21,13 +23,15 @@ export async function POST(request: Request) {
     const hashedPassword = bcrypt.hashSync(password, salt);
     const user = await sql`INSERT INTO users 
     (first_name, last_name, email, password) 
-    VALUES (${fName}, ${lName}, ${email}, ${hashedPassword}) 
+    VALUES (${fName}, ${lName}, ${transformedEmail}, ${hashedPassword}) 
     RETURNING *;`;
 
-    let response = NextResponse.json({ message: "user Created" }, { status: 200 });
-    response.cookies.set("User", user.rows[0].id)
+    let response = NextResponse.json(
+      { message: "user Created" },
+      { status: 200 }
+    );
+    response.cookies.set("User", user.rows[0].id);
     return response;
-
   } catch (error) {
     console.error(error);
   }
@@ -47,12 +51,10 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
   }
 
-
   try {
-
     const salt = bcrypt.genSaltSync(8);
-    const hashedPassword = bcrypt.hashSync(password, salt)
-    console.log("hashed: ", hashedPassword)
+    const hashedPassword = bcrypt.hashSync(password, salt);
+    console.log("hashed: ", hashedPassword);
     // Update the user details in the database
     const result = await sql`
       UPDATE users
@@ -68,10 +70,8 @@ export async function PATCH(request: Request) {
 
     // Return the updated user details
     return NextResponse.json(result.rows[0], { status: 200 });
-
   } catch (error) {
     // Handle any unexpected errors
     return NextResponse.json({ error: error }, { status: 500 });
   }
-
 }
