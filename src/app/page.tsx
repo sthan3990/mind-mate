@@ -31,7 +31,6 @@ import {
   DrawerContent,
   DrawerCloseButton
 } from "@chakra-ui/react";
-import { fonts } from "@/theme/fonts";
 import * as styles from './styles/homePageStyling';
 
 const theme = extendTheme({
