@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   Flex,
   Text,
@@ -39,7 +39,7 @@ const theme = extendTheme({
 
 const Navbar = () => {
   const { userId, logout } = useUser();
-  const router = useRouter() as any;
+  const pathname = usePathname();
 
   const logoStyle = styles.logoStyle;
   const mindMateStyle = styles.mindMateStyle;
@@ -48,11 +48,6 @@ const Navbar = () => {
   const linkTab = styles.linkTab;
   const accountButtonStyle = styles.accountButtonStyle;
   const x = false;
-  let pathname = "";
-  if (typeof window !== "undefined") {
-    pathname = window.location.pathname;
-    // Now you can use the pathname
-  }
 
   console.log("patname: ", pathname);
 
