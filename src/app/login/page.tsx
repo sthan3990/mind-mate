@@ -6,7 +6,6 @@ import { fonts } from "@/theme/fonts";
 import { useUser } from "../contexts/UserContext"; //for the context
 import * as styles from "../styles/loginStyle";
 
-
 import {
   Box,
   Stack,
@@ -25,7 +24,6 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function JoinOurTeam() {
-
   //define styles here
   const leftSideStyle = styles.leftSideStyle;
   const logoStyle = styles.logoStyle;
@@ -39,8 +37,7 @@ export default function JoinOurTeam() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, userId } = useUser(); // for the context
-  const router = useRouter();
+  const { login } = useUser(); // for the context
 
   const loginRequest = (email: string, password: string) => {
     login(email, password); // Just call login from context

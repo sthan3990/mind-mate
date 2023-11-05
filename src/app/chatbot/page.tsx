@@ -1,4 +1,6 @@
 "use client";
+import { useUser } from "../contexts/UserContext";
+import axios from "axios";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -28,9 +30,17 @@ import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../helper/numofmessages";
 
 const Chatbot: React.FC = ({}) => {
+  const { userId } = useUser();
+  const [chatUsed, setChatUsed] = useState(true);
   const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(copyValue);
+
+  const createChatCBTItem = () => {
+    axios.post("/api/chatbot-create", { userId }).then((res) => {
+      console.log(res);
+    });
+  };
 
   const {
     messages,
@@ -81,6 +91,10 @@ const Chatbot: React.FC = ({}) => {
 
       // clear input field
       setInput("");
+    }
+    if (chatUsed) {
+      createChatCBTItem();
+      setChatUsed(false);
     }
   };
 
@@ -241,7 +255,9 @@ const Chatbot: React.FC = ({}) => {
                   ml={1}
                   aria-label="Send"
                   leftIcon={<ArrowForwardIcon />}
-                  onClick={handleArrowButtonClick}
+                  onClick={() => {
+                    handleArrowButtonClick;
+                  }}
                 />
                 <IconButton
                   ml={1}
