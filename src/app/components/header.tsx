@@ -31,6 +31,8 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import * as styles from '../styles/headerStyle';
+import { useRouter } from "next/navigation";
+import { useUser } from "./contexts/UserContext";
 
 const theme = extendTheme({
   breakpoints: {
@@ -72,6 +74,13 @@ const Navbar = () => {
 
   const handleDrawerClose = () => {
     setHamburgerVisibility(false);
+  };
+
+  const { logout } = useUser();
+  const router = useRouter();
+  const clickLogout = () => {
+    logout();
+    router.push("register");
   };
 
   return (
@@ -143,17 +152,16 @@ const Navbar = () => {
 
               <Divider orientation="horizontal" />
 
-              <Link href="/login" passHref>
-                <MenuItem
-                  as="a"
-                  sx={{
-                    _hover: { background: "white", color: "#FBC1AA" },
-                    _active: { bg: "white", color: "#FBC1AA" }
-                  }}
-                >
-                  Logout
-                </MenuItem>
-              </Link>
+              <MenuItem
+                      as="a"
+                      sx={{
+                        _hover: { background: "white", color: "#FBC1AA" },
+                        _active: { bg: "white", color: "#FBC1AA" },
+                      }}
+                      onClick={() => clickLogout()}
+                    >
+                      Logout
+              </MenuItem>
 
             </MenuList>
 
