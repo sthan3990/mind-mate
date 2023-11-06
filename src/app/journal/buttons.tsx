@@ -14,7 +14,7 @@ const Buttons: React.FC<ButtonsProps> = ({ handleBack, handleContinue }) => {
     <Flex
       width="100%"
       justifyContent="space-between"
-      maxWidth="250px"
+      maxWidth="600px"
     >
       <HStack spacing="10em">
         <Button background="#D0A2D1" onClick={handleBack}>

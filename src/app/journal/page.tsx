@@ -18,7 +18,7 @@ import Buttons from './buttons';
 const Journal: React.FC = () => {
   //userId from useContext
   const { userId } = useUser();
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(0);
   const [numQuestions, setNumQuestions] = useState(0);
   const [preMoodState, setpreMoodState] = useState(0);
   const [journalId, setJournalId] = useState<string>("");
@@ -54,7 +54,10 @@ const Journal: React.FC = () => {
       onOpen(); // Open the modal when fields are missing
       return false;
     }
-    // Add similar checks for other steps...
+    if (step === 3 && postMoodState === 0) {
+      onOpen(); // Open the modal when fields are missing
+      return false;
+    }
     return true;
   };
 

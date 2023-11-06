@@ -10,12 +10,12 @@ const FormFour: React.FC = ({ }) => {
   const [quoteAuthor, setQuoteAuthor] = useState("");
   const [quoteMessage, setQuoteMessage] = useState("");
 
-  const leftSideStyle = styles.mainImageStyle;
+  const rightSideStyle = styles.rightSideStyle;
+  const leftSideStyle = styles.leftSideStyle;
   const mainImageStyle = styles.mainImageStyle;
   const textStyle = styles.textStyle;
   const headingStyle = styles.headingStyle;
  
-
   // Code generator 
   useEffect(() => {
 
