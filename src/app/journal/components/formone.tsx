@@ -76,8 +76,6 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
 
-                  {/* Include your SVG for each emoji, conditional upon 'mood' */}
-                  {/* The following is a placeholder example for mood 1 */}
                   {mood === 1 && (
                     <>
                       <path
@@ -139,7 +137,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                       </defs>
                     </>
                   )}
-                  {/* The following is a placeholder example for mood 2 */}
+
                   {mood === 2 && (
                     <>
                       <path
@@ -194,7 +192,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                       </defs>
                     </>
                   )}
-                  {/* The following is a placeholder example for mood 3 */}
+
                   {mood === 3 && (
                     <>
                       <path
@@ -236,7 +234,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                       />
                     </>
                   )}
-                  {/* The following is a placeholder example for mood 4 */}
+
                   {mood === 4 && (
                     <>
                       <path
@@ -295,7 +293,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                       </defs>
                     </>
                   )}
-                  {/* The following is a placeholder example for mood 5 */}
+
                   {mood === 5 && (
                     <>
                       <path
@@ -358,14 +356,14 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                       </defs>
                     </>
                   )}
-                  {/* Conditional rendering of the selection circle */}
+
                   {isSelected(mood) && (
                     <circle
                       cx="69.5"
                       cy="69.5"
                       r="67"
                       fill="none"
-                      stroke="#FE8F55E5" // Adjust this color to match your theme
+                      stroke="#FE8F55E5"
                       strokeWidth="5"
                     />
                   )}
@@ -375,7 +373,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
                       cy="69.5"
                       r="67"
                       fill="none"
-                      stroke="#D0A2D1" // This color for hovered mood
+                      stroke="#D0A2D1"
                       strokeWidth="5"
                     />
                   )}
