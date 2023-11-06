@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import * as style from "../../styles/progress-report";
+import PieGraphComponent from "./piegraph";
 
 import {
   Button,
@@ -19,7 +20,7 @@ interface InitialProps {
   setStep: (step: number) => void;
 }
 
-const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
+const PieChartPage: React.FC<InitialProps> = ({ setStep }) => {
   return (
     <form>
       <Grid
@@ -89,7 +90,7 @@ const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
               textAlign="left"
               onClick={() => setStep(3)}
             >
-              CBT Chat Calendar
+              Pie
             </Button>
           </VStack>
         </GridItem>
@@ -112,25 +113,14 @@ const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
           }}
         >
           <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
-            {/* Add the first box */}
             <Box
-              width="50%"
+              width="100%"
               border="1px solid #D0A2D1"
-              marginRight="1em"
+              marginRight="5em"
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
             >
-              {/* Content of the first box */}
-            </Box>
-
-            {/* Add the second box */}
-            <Box
-              width="50%"
-              border="1px solid #D0A2D1"
-              background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
-              borderRadius="40px"
-            >
-              {/* Content of the second box */}
+              <PieGraphComponent />
             </Box>
           </Flex>
         </GridItem>
@@ -139,4 +129,4 @@ const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
   );
 };
 
-export default ChatCBTCalendar;
+export default PieChartPage;

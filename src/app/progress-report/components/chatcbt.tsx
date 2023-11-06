@@ -87,7 +87,7 @@ const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
               textAlign="left"
               onClick={() => setStep(3)}
             >
-              CBT Chat Calendar
+              Pie Charts
             </Button>
           </VStack>
         </GridItem>
