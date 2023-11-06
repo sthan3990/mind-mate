@@ -52,7 +52,7 @@ const theme = extendTheme({
     },
   },
 });
-
+//testing
 const Navbar = () => {
   const pathname = usePathname();
 
