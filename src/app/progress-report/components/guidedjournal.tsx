@@ -293,8 +293,14 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                   style={{
                     position: "absolute",
                     margin: 0,
-                    marginTop: "55px",
+                    marginTop: "45px",
                     textAlign: "center",
+                    color: "#F6EFFC",
+                    fontFamily: "Poppins",
+                    fontSize: "40px",
+                    fontStyle: "normal",
+                    fontWeight: "600",
+                    lineHeight: "normal",
                   }}
                 >
                   {numOfQuestions[selectedItem1]}
