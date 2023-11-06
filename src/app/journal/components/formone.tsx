@@ -1,22 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Button, HStack, Stack, Text } from '@chakra-ui/react';
 import { fonts } from '@/theme/fonts';
+import * as styles from '../../styles/journalFormStyles'
 
 interface FormOneProps {
   setpreMoodState: (moodChosen: number) => void;
 }
-
-const styling = {
-  textStyling: {
-    fontWeight: 'bold',
-    fontSize: '40px',
-    color: '#FFFFFF',
-    width: '100%',
-    maxWidth: '743.11px',
-    textAlign: 'center',
-    paddingTop: '100px',
-  },
-};
 
 const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
@@ -29,11 +18,8 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
 
   const isSelected = (mood: number) => {
     const result = selectedMood === mood;
-    console.log(`Is mood ${mood} selected?`, result); // Logs the result of the isSelected call for the mood
     return result;
   };
-
-  console.log("selectedMood: ", selectedMood);
 
   return (
     <Stack
@@ -47,7 +33,7 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
       marginBottom="3em"
     >
       <Box>
-        <Text sx={styling.textStyling} fontFamily={fonts.cantarell}>
+        <Text sx={styles.headerText} fontFamily={fonts.cantarell}>
           Tap on the Emoji that Best Captures Your Current Emotion.
         </Text>
       </Box>
@@ -81,9 +67,6 @@ const FormOne: React.FC<FormOneProps> = ({ setpreMoodState }) => {
               <Button
                 variant="unstyled"
                 onClick={() => handleSelectMood(mood)}
-              // _hover={{
-              //   backgroundColor: '#D0A2D1',
-              // }}
               >
                 <svg
                   width="139"

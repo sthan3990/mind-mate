@@ -2,7 +2,7 @@
 import { useUser } from "../contexts/UserContext";
 
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Button, VStack, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Stack, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import InitialJournal from "./components/initialpage";
 import FormOne from "./components/formone";
 import FormTwo from "./components/formtwo";
@@ -10,7 +10,6 @@ import FormThree from "./components/formthree";
 import FormFour from "./components/formfour";
 import axios from "axios";
 import WarningModal from "./components/warningmodal";
-import styled from "@emotion/styled";
 import { fonts } from "@/theme/fonts";
 import Buttons from './buttons';
 
