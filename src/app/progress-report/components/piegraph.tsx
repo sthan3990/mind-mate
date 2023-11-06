@@ -32,7 +32,7 @@ const PieGraphComponent: React.FC = () => {
       })
   };
 
-  const sortData = () => {
+  const sortMoodData = () => {
 
     const totalEntries = graphData.length;
 
@@ -87,7 +87,9 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  sortData();
+  sortMoodData();
+  sortQuestionData();
+
 }, [graphData]);
 
 return (
