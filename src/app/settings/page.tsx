@@ -125,6 +125,7 @@ const UserProfilePage = () => {
           console.error("Error while deleting:", error);
         });
     }
+    localStorage.removeItem("User");
     logout();
   };
   console.log("userId at return component; ", userId);
