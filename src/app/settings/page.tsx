@@ -11,7 +11,7 @@ import {
   Heading,
   Input,
   InputGroup,
-  InputRightElement
+  InputRightElement,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -21,26 +21,30 @@ import * as styles from "../styles/settingsStyle";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const UserProfilePage = () => {
-
   const headingStyle = styles.headingStyle;
   const rectangleIconStyle = styles.rectangleIconStyle;
   const saveButtonStyle = styles.saveButtonStyle;
   const deleteButtonStyle = styles.deleteButtonStyle;
 
-  const { userId } = useUser();
+  const { userId, logout } = useUser();
   console.log("userId at beginning; ", userId);
   // console.log("context userId in beginning of profile page: ", userId);
   const { push } = useRouter();
-  const [userData, setUserData] = useState({ "first_name": "", "last_name": "", "email": "", "password": "" });
+  const [userData, setUserData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+  });
   // const [userID, setUserID] = useState(userId || "")
   const [loading, setLoading] = useState(true);
   // const [userId, setUserId] = useState(localStorage.getItem("User") || "");
   console.log("userdata with pass: ", userData);
 
-
   useEffect(() => {
     async function fetchUserData() {
-      if (userId) { // Only run the fetch if userId is available
+      if (userId) {
+        // Only run the fetch if userId is available
         try {
           const response = await fetch(`/api/user-profile?userId=${userId}`);
           const data = await response.json();
@@ -87,10 +91,10 @@ const UserProfilePage = () => {
       });
   };
 
-  const changePassword = (
-    updatedPassword: string,
-  ) => {
-    const isConfirmed = window.confirm("Are you sure you want to change your password?");
+  const changePassword = (updatedPassword: string) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to change your password?"
+    );
     if (isConfirmed) {
       axios
         .patch("/api/users", {
@@ -105,10 +109,11 @@ const UserProfilePage = () => {
   };
 
   const deleteUser = () => {
-    const isConfirmed = window.confirm("Are you sure you want to delete your account? This cannot be undone.");
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete your account? This cannot be undone."
+    );
 
     if (isConfirmed) {
-      console.log("before axios");
       axios
         .delete("/api/user-profile")
         .then((res) => {
@@ -119,21 +124,22 @@ const UserProfilePage = () => {
         .catch((error) => {
           console.error("Error while deleting:", error);
         });
-      console.log("after axios");
     }
+    localStorage.removeItem("User");
+    logout();
   };
   console.log("userId at return component; ", userId);
   if (!userId) {
     return (
-      <Flex color="white" minH={"100vh"} align={"center"} justify={"center"} >
+      <Flex color="white" minH={"100vh"} align={"center"} justify={"center"}>
         <Text>No user logged in!</Text>
       </Flex>
-    )
+    );
   }
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"} color="white" >
-      <Stack spacing={5} mx={"auto"} maxW={"lg"} pb={12} px={6} >
+    <Flex minH={"100vh"} align={"center"} justify={"center"} color="white">
+      <Stack spacing={5} mx={"auto"} maxW={"lg"} pb={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} sx={headingStyle} textAlign={"center"}>
             User Settings
@@ -169,14 +175,16 @@ const UserProfilePage = () => {
                 placeholder={userData["email"]}
                 value={updatedEmail}
                 onChange={(e) => setUpdatedEmail(e.target.value)}
-
               />
             </FormControl>
 
             <Button
               mt={4}
               sx={saveButtonStyle}
-              onClick={() => handleUpdate(updatedFirstName, updatedLastName, updatedEmail)}>
+              onClick={() =>
+                handleUpdate(updatedFirstName, updatedLastName, updatedEmail)
+              }
+            >
               Save Changes
             </Button>
             <FormControl>
@@ -203,19 +211,18 @@ const UserProfilePage = () => {
               mt={4}
               sx={saveButtonStyle}
               bg={"blue.100"}
-              onClick={() => changePassword(updatedPassword)}>
+              onClick={() => changePassword(updatedPassword)}
+            >
               Save New Password
             </Button>
 
-            <Button
-              sx={deleteButtonStyle}
-              onClick={deleteUser}>
+            <Button sx={deleteButtonStyle} onClick={deleteUser}>
               Delete Account
             </Button>
           </Stack>
         </Box>
-      </Stack >
-    </Flex >
+      </Stack>
+    </Flex>
   );
 };
 
