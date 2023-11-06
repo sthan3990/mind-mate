@@ -70,6 +70,7 @@ const Chatbot: React.FC = ({}) => {
 
         // stop the chat
         stop();
+
       }
     },
     onFinish: (res) => {

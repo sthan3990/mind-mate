@@ -123,6 +123,25 @@ const Journal: React.FC = () => {
         {step === 3 && <FormThree setpostMoodState={setpostMoodState} />}
         {step === 4 && <FormFour />}
 
+        {step === 0 && (
+          <Text
+            fontFamily={fonts.poppinsItalic}
+            fontWeight="semibolditalic"
+            fontSize="20px"
+            letterSpacing="-0.03em"
+            fontStyle="italic"
+            color="#CEB1CE"
+            width="100%"
+            maxWidth="973px"
+            textAlign="center"
+            marginTop="70px"
+          >
+            Every question is a step towards self-discovery; even the
+            smallest step can lead to profound insights. Choose what feels
+            right for you today.
+          </Text>
+        )}
+
         {step !== 2 && (
           <Flex
             flexDirection="column"
@@ -136,30 +155,12 @@ const Journal: React.FC = () => {
             <Flex
               width="100%"
               justifyContent="space-between"
-              maxWidth="250px" 
+              maxWidth="250px"
             >
             </Flex>
-
-            {step === 0 && (
-              <Text
-                fontFamily={fonts.poppinsItalic}
-                fontWeight="semibolditalic"
-                fontSize="20px"
-                letterSpacing="-0.03em"
-                fontStyle="italic"
-                color="#CEB1CE"
-                width="100%"
-                maxWidth="973px"
-                textAlign="center"
-                marginTop="70px"
-              >
-                Every question is a step towards self-discovery; even the
-                smallest step can lead to profound insights. Choose what feels
-                right for you today.
-              </Text>
-            )}
           </Flex>
         )}
+
         <WarningModal isOpen={isOpen} step={step} onClose={onClose} />
       </Stack>
     </>

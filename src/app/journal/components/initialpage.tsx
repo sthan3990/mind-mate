@@ -19,6 +19,8 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ setNumQuestions }) => {
 
   return (
     <Stack
+      width="100%"
+      maxWidth="600px"
       minHeight="15vh"
       background="#15193B"
       display="flex"
@@ -40,7 +42,7 @@ const InitialJournal: React.FC<InitialJournalProps> = ({ setNumQuestions }) => {
           Select the Number of Questions
         </Text>
       </Box>
-      <HStack spacing="4" align="center" marginTop="40px">
+      <HStack spacing="2" align="center" marginTop="80px">
         {[1, 3, 5].map((number) => (
           <Box
             key={number}
