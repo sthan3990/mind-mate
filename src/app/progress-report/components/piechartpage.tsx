@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import * as style from "../../styles/progress-report";
+import PieGraphComponent from "./piegraph";
 
 import {
   Button,
@@ -19,7 +20,7 @@ interface InitialProps {
   setStep: (step: number) => void;
 }
 
-const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
+const PieChartPage: React.FC<InitialProps> = ({ setStep }) => {
   return (
     <form>
       <Grid
@@ -37,7 +38,7 @@ const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
           background="#2D3258"
           height="70px"
         >
-          <Text sx={style.styling.taxtHeader}>Progress Report: ChatCBT</Text>
+          <Text sx={style.styling.taxtHeader}>Progress Report: Pie Charts</Text>
         </GridItem>
 
         {/* OPTION SECTION */}
@@ -122,16 +123,14 @@ const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
             overflowY: "auto",
           }}
         >
-          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
-            {/* Add the first box */}
+          <Flex margin="1em" flex="1" overflowY="auto" flexDirection="row">
             <Box
               width="100%"
               border="1px solid #D0A2D1"
-              marginRight="1em"
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
             >
-              {/* Content of the first box */}
+              <PieGraphComponent />
             </Box>
           </Flex>
         </GridItem>
@@ -139,4 +138,5 @@ const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
     </form>
   );
 };
-export default ChatCBT;
+
+export default PieChartPage;
