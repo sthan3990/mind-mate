@@ -12,6 +12,19 @@ export const leftSideStyle = {
   padding: 0,
 };
 
+export const rightSideStyle = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  position: "relative",
+  backgroundColor: "#f9f8f8",
+  width: "100%",
+  height: "832px",
+  margin: 0,
+  padding: 0,
+};
+
+
 export const logoStyle = {
   display: "flex",
   alignItems: "center",

@@ -4,15 +4,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { VStack, Spacer, SimpleGrid, Heading, Image, Stack, Box, Text } from '@chakra-ui/react';
 import { fonts } from "@/theme/fonts";
-import * as styles from "../../styles/journalStyle";
-import { rightSideStyle } from '@/app/styles/loginStyle';
+import * as styles from '@/app/styles/journalStyle';
 
 const FormFour: React.FC = ({ }) => {
   const [quoteAuthor, setQuoteAuthor] = useState("");
   const [quoteMessage, setQuoteMessage] = useState("");
 
   const leftSideStyle = styles.mainImageStyle;
-
   const mainImageStyle = styles.mainImageStyle;
   const textStyle = styles.textStyle;
   const headingStyle = styles.headingStyle;
