@@ -19,7 +19,7 @@ interface InitialProps {
   setStep: (step: number) => void;
 }
 
-const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
+const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
   return (
     <form>
       <Grid
@@ -37,7 +37,7 @@ const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
           background="#2D3258"
           height="70px"
         >
-          <Text sx={style.styling.taxtHeader}>Progress Report: ChatCBT</Text>
+          <Text sx={style.styling.taxtHeader}>Progress Report: Bar Graph</Text>
         </GridItem>
 
         {/* OPTION SECTION */}
@@ -139,4 +139,4 @@ const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
     </form>
   );
 };
-export default ChatCBT;
+export default BarGraphPage;

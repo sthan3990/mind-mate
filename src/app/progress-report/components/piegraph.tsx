@@ -102,6 +102,7 @@ const PieGraphComponent: React.FC = () => {
     <div style={{ marginLeft: "1em" }}>
       <div
         style={{
+          paddingTop: "20px",
           display: "flex",
         }}
       >
@@ -109,7 +110,7 @@ const PieGraphComponent: React.FC = () => {
           <Text>
             Your Mood Before Journal - Range is all of time right now{" "}
           </Text>
-          <PieChart width={500} height={250}>
+          <PieChart width={550} height={225}>
             <Pie
               data={preMoodData}
               dataKey="percentage"
@@ -123,7 +124,7 @@ const PieGraphComponent: React.FC = () => {
         </div>
         <div>
           <Text>Your Mood After Journal - Range is all of time right now</Text>
-          <PieChart width={730} height={250}>
+          <PieChart width={550} height={225}>
             <Pie
               data={postMoodData}
               dataKey="percentage"
@@ -138,7 +139,7 @@ const PieGraphComponent: React.FC = () => {
       </div>
 
       <Text>Breakdown of Number of Questions</Text>
-      <PieChart width={730} height={250}>
+      <PieChart width={550} height={225}>
         <Pie
           data={graphData}
           dataKey="num_questions"

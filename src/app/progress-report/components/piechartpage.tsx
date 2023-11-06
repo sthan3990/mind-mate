@@ -38,9 +38,7 @@ const PieChartPage: React.FC<InitialProps> = ({ setStep }) => {
           background="#2D3258"
           height="70px"
         >
-          <Text sx={style.styling.taxtHeader}>
-            Progress Report: CBT Calendar
-          </Text>
+          <Text sx={style.styling.taxtHeader}>Progress Report: Pie Charts</Text>
         </GridItem>
 
         {/* OPTION SECTION */}
@@ -90,7 +88,20 @@ const PieChartPage: React.FC<InitialProps> = ({ setStep }) => {
               textAlign="left"
               onClick={() => setStep(3)}
             >
-              Pie
+              Pie Charts
+            </Button>
+          </VStack>
+          <VStack margin="0.5em">
+            <Button
+              leftIcon={<CalendarIcon />}
+              background="#737AA8"
+              size="sm"
+              variant="outline"
+              width="100%"
+              textAlign="left"
+              onClick={() => setStep(4)}
+            >
+              Bar Graph
             </Button>
           </VStack>
         </GridItem>
@@ -112,11 +123,10 @@ const PieChartPage: React.FC<InitialProps> = ({ setStep }) => {
             overflowY: "auto",
           }}
         >
-          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
+          <Flex margin="1em" flex="1" overflowY="auto" flexDirection="row">
             <Box
               width="100%"
               border="1px solid #D0A2D1"
-              marginRight="5em"
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
             >
