@@ -24,13 +24,13 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
   return (
     <Stack
       width="80%"
-      height="65vh"
+      height="48vh"
       background="#15193B"
       display="flex"
       flexDir="column"
       alignItems="center"
       justifyContent="space-between"
-      marginBottom="10em"
+      marginBottom="3em"
     >
       <Box>
         <Text sx={styles.headerText} fontFamily={fonts.cantarell}>
@@ -40,8 +40,8 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
 
       <Box>
         <Text
-          marginTop="em"
-          fontFamily="Poppins"
+          marginTop="-1em"
+          fontFamily={fonts.cantarell}
           fontWeight="semibolditalic"
           fontSize="24px"
           letterSpacing="-0.03em"
