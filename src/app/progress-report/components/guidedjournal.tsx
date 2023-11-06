@@ -57,7 +57,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
       faceComponent = <Face5 />;
       break;
     default:
-      faceComponent = <div>Invalid face number</div>;
+      faceComponent = <div>Please select a date</div>;
   }
 
   const journal = async () => {
