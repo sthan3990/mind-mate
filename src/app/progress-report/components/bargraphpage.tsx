@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import * as style from "../../styles/progress-report";
+import BarGraphComponent from "./bargraph";
 
 import {
   Button,
@@ -19,7 +20,7 @@ interface InitialProps {
   setStep: (step: number) => void;
 }
 
-const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
+const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
   return (
     <form>
       <Grid
@@ -37,9 +38,7 @@ const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
           background="#2D3258"
           height="70px"
         >
-          <Text sx={style.styling.taxtHeader}>
-            Progress Report: CBT Calendar
-          </Text>
+          <Text sx={style.styling.taxtHeader}>Progress Report: Bar Graph</Text>
         </GridItem>
 
         {/* OPTION SECTION */}
@@ -89,7 +88,20 @@ const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
               textAlign="left"
               onClick={() => setStep(3)}
             >
-              CBT Chat Calendar
+              Pie Charts
+            </Button>
+          </VStack>
+          <VStack margin="0.5em">
+            <Button
+              leftIcon={<CalendarIcon />}
+              background="#737AA8"
+              size="sm"
+              variant="outline"
+              width="100%"
+              textAlign="left"
+              onClick={() => setStep(4)}
+            >
+              Bar Graph
             </Button>
           </VStack>
         </GridItem>
@@ -112,25 +124,23 @@ const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
           }}
         >
           <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
-            {/* Add the first box */}
             <Box
-              width="50%"
+              width="100%"
               border="1px solid #D0A2D1"
               marginRight="1em"
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
             >
-              {/* Content of the first box */}
-            </Box>
-
-            {/* Add the second box */}
-            <Box
-              width="50%"
-              border="1px solid #D0A2D1"
-              background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
-              borderRadius="40px"
-            >
-              {/* Content of the second box */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  paddingTop: "10em",
+                }}
+              >
+                <BarGraphComponent />
+              </div>
             </Box>
           </Flex>
         </GridItem>
@@ -138,5 +148,4 @@ const ChatCBTCalendar: React.FC<InitialProps> = ({ setStep }) => {
     </form>
   );
 };
-
-export default ChatCBTCalendar;
+export default BarGraphPage;

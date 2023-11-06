@@ -166,7 +166,20 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
               textAlign="left"
               onClick={() => setStep(3)}
             >
-              CBT Chat Calendar
+              Pie Charts
+            </Button>
+          </VStack>
+          <VStack margin="0.5em">
+            <Button
+              leftIcon={<CalendarIcon />}
+              background="#737AA8"
+              size="sm"
+              variant="outline"
+              width="100%"
+              textAlign="left"
+              onClick={() => setStep(4)}
+            >
+              Bar Graph
             </Button>
           </VStack>
         </GridItem>

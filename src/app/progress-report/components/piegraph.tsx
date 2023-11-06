@@ -44,13 +44,7 @@ const PieGraphComponent: React.FC = () => {
       { name: "Extremely Happy", value: 0,  percentage: 0 },
     ];
 
-    const updatedPostMoodData: { name: string, value: number, percentage: number}[] = [
-      { name: "Extremely Upset", value: 0, percentage: 0},
-      { name: "Quite Upset", value: 0, percentage: 0},
-      { name: "Neutral", value: 0, percentage: 0  },
-      { name: "Happy", value: 0, percentage: 0 },
-      { name: "Extremely Happy", value: 0,  percentage: 0 },
-    ];
+    const updatedPostMoodData: { name: string, value: number, percentage: number}[] = [];
 
     graphData.forEach((item: PieGraphProps) => {
 

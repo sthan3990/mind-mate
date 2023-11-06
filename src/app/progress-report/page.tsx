@@ -9,7 +9,8 @@ import PieGraphComponent from "./components/piegraph";
 import BarGraphComponent from "./components/bargraph";
 
 const ProgressReport: React.FC = () => {
-  const [step, setStep] = useState(4);
+ 
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     console.log(step);

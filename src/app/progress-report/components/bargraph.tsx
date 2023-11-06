@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "@/app/contexts/UserContext";
+
 import { Text, Select, Box } from '@chakra-ui/react';
 import { BarChart, CartesianGrid, XAxis, YAxis, Legend, Tooltip, Bar, } from 'recharts';
 
@@ -21,13 +22,14 @@ const BarGraphComponent: React.FC = () => {
   const userId = "57";
 
   const fetchData = () => {
-    axios.get('/api/journals/', { params: { userId } })
-      .then(response => {
+    axios
+      .get("/api/journals/", { params: { userId } })
+      .then((response) => {
         setGraphData(response.data.journals);
       })
-      .catch(error => {
-        console.error('Error:', error);
-      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const sortQuestionData = () => {
@@ -104,6 +106,6 @@ const BarGraphComponent: React.FC = () => {
 
     </Box>
   );
-}
+};
 
 export default BarGraphComponent;
