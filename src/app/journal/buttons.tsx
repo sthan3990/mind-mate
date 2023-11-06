@@ -16,7 +16,7 @@ const Buttons: React.FC<ButtonsProps> = ({ handleBack, handleContinue }) => {
       justifyContent="space-between"
       maxWidth="250px"
     >
-      <HStack spacing="10em">
+      <HStack margin="10px" spacing="10px">
         <Button background="#D0A2D1" onClick={handleBack}>
           <Text
             fontFamily={fonts.body}

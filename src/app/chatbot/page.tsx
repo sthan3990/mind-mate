@@ -36,12 +36,22 @@ const Chatbot: React.FC = ({}) => {
   const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(copyValue);
+  const [messageHistory, setMessageHistory] = useState([]);
 
   const createChatCBTItem = () => {
     axios.post("/api/chatbot-create", { userId }).then((res) => {
       console.log(res);
     });
   };
+
+  useEffect( () => {
+
+    axios.get("/api/chatbot-store", { params: userId }).then((res) => {
+      setMessageHistory(res.data);
+      console.log(res);
+    });
+
+  })
 
   const {
     messages,
@@ -60,6 +70,7 @@ const Chatbot: React.FC = ({}) => {
       const lastQuestion = localStorage.getItem("lastQuestion");
 
       if (lastQuestion == "true") {
+
         append({
           content: "Good Bye",
           // The content of the message
@@ -71,11 +82,17 @@ const Chatbot: React.FC = ({}) => {
 
         // stop the chat
         stop();
+
+        // store the journal section message data 
+        axios.post("/api/chatbot-history", {userId, messages }).then((res) => {
+          console.log(res);
+        });
       }
     },
     onFinish: (res) => {
       setNumMessages(numMessages + 1); // Increment numMessages
       localStorage.setItem("setMessageFinished", "true");
+
     },
   });
 
@@ -98,12 +115,6 @@ const Chatbot: React.FC = ({}) => {
       setInput("");
     }
   };
-
-  const handleHistoryClick = (item: string) => {
-    // Handle the click event, e.g., set the selected history item, or perform an action with it.
-    console.log(`History item clicked: ${item}`);
-  };
-
 
   const styling = {
     grid: {
@@ -152,6 +163,7 @@ const Chatbot: React.FC = ({}) => {
         >
           {/* CHAT SECTION */}
           <VStack spacing={4} align="stretch" height="100%">
+            
             {/* CHAT MESSAGE SECTION */}
             <Flex flex="1" overflowY="auto" flexDirection="column" bgColor="#15193B" pr="30px" pl="30px" pt="20px" pb="20px">
               {messages.map((message, index) => (

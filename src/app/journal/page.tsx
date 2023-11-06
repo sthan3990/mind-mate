@@ -2,7 +2,7 @@
 import { useUser } from "../contexts/UserContext";
 
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Button, VStack, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Stack, Button, VStack, Flex, Text, useDisclosure, HStack } from "@chakra-ui/react";
 import InitialJournal from "./components/initialpage";
 import FormOne from "./components/formone";
 import FormTwo from "./components/formtwo";
@@ -18,7 +18,7 @@ import Buttons from './buttons';
 const Journal: React.FC = () => {
   //userId from useContext
   const { userId } = useUser();
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(0);
   const [numQuestions, setNumQuestions] = useState(0);
   const [preMoodState, setpreMoodState] = useState(0);
   const [journalId, setJournalId] = useState<string>("");
@@ -133,10 +133,9 @@ const Journal: React.FC = () => {
             <Flex
               width="100%"
               justifyContent="space-between"
-              maxWidth="250px" 
+              maxWidth="600px" 
             >
             </Flex>
-
             {step === 0 && (
               <Text
                 fontFamily={fonts.poppinsItalic}

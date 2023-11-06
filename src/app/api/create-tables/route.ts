@@ -45,8 +45,17 @@ export async function GET(request: Request) {
         timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
       );`;
 
+    const cbtChatHistory = await sql`
+      CREATE TABLE IF NOT EXISTS cbt_chathistory (
+        id SERIAL PRIMARY KEY NOT NULL,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        message CHAR NOT NULL 
+      );`;
+
+
     return NextResponse.json(
-      { users, journals, questions, responses, cbtChatSessions },
+      { users, journals, questions, responses, cbtChatSessions, cbtChatHistory },
       { status: 200 }
     );
   } catch (error) {

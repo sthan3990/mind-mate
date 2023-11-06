@@ -47,7 +47,7 @@ const FormThree: React.FC<FormThreeProps> = ({ setpostMoodState }) => {
           maxWidth="973px"
           textAlign="center"
         >
-          Now that you&#39ve journaled, let&#39s check in again. Where are you
+          Now that you&#039;ve journaled, let&#039;s check in again. Where are you
           feeling now?
         </Text>
       </Box>
