@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import * as style from "../../styles/progress-report";
+import BarGraphComponent from "./bargraph";
 
 import {
   Button,
@@ -123,7 +124,6 @@ const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
           }}
         >
           <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
-            {/* Add the first box */}
             <Box
               width="100%"
               border="1px solid #D0A2D1"
@@ -131,7 +131,16 @@ const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
             >
-              {/* Content of the first box */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  paddingTop: "10em",
+                }}
+              >
+                <BarGraphComponent />
+              </div>
             </Box>
           </Flex>
         </GridItem>
