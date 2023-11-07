@@ -56,7 +56,6 @@ const theme = extendTheme({
 const Navbar = () => {
   const pathname = usePathname();
 
-  const { userId } = useUser();
 
   const logoStyle = styles.logoStyle;
   const mindMateStyle = styles.mindMateStyle;
@@ -82,7 +81,7 @@ const Navbar = () => {
     setHamburgerVisibility(false);
   };
 
-  const { logout } = useUser();
+  const { userId, logout } = useUser();
   const router = useRouter();
   const clickLogout = () => {
     logout();
