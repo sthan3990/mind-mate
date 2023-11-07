@@ -120,7 +120,8 @@ const Navbar = () => {
               display={{ base: 'block', md: 'none' }}
               onClick={handleDrawerOpen}
               aria-label="Open Navigation"
-              ml="15em"
+              ml="16.5em"
+              mt="0.3em"
               sx={{ borderColor: "#15193B", boxSize: "3.2rem", fontSize: "1.5rem" }}
             />
 
@@ -241,7 +242,9 @@ const Navbar = () => {
             </DrawerContent>
           </DrawerOverlay>
         </Drawer>
-        <Divider sx={dividerStyle} />
+        <Show above='md'>
+          <Divider sx={dividerStyle} />
+        </Show>
 
         {/* Main Content without the Navbar's Background Color */}
         <Flex
@@ -251,7 +254,7 @@ const Navbar = () => {
           flexGrow={1}
           p={4} // This adds padding to the Flex container to prevent content from touching the edges of the screen
         >
-          <Flex direction={{ base: "column", md: "row" }} align="center" mt={["1%", "1%", "15%", "10%"]} mb={["2%", "6%", "0%", "0%"]} >
+          <Flex direction={{ base: "column", md: "row" }} align="center" mt={["-7%", "-7%", "15%", "10%"]} mb={["2%", "6%", "0%", "0%"]} >
             <Text>
             </Text>
             <Text sx={chatStyle} m={{ base: 0, md: 2 }}>Chat.</Text> {/* Apply margin individually if you're using sx for other styles */}
