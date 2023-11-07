@@ -32,3 +32,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Contributers 
+[<img src="https://github.com/{{ williamkemeny }}.png" width="60px;"/><br /><sub><ahref="https://github.com/{{ williamkemeny }}">{{ williamkemeny }}</a></sub>](https://github.com/{{ williamkemeny }}/{{ repository }}
+[<img src="https://github.com/{{ NFerracuti }}.png" width="60px;"/><br /><sub><ahref="https://github.com/{{ NFerracuti }}">{{ NFerracuti }}</a></sub>](https://github.com/{{ NFerracuti }}/{{ repository }}
+[<img src="https://github.com/{{ contributor }}.png" width="60px;"/><br /><sub><ahref="https://github.com/{{ contributor }}">{{ contributor }}</a></sub>](https://github.com/{{ contributor }}/{{ repository }}
+[<img src="https://github.com/{{ contributor }}.png" width="60px;"/><br /><sub><ahref="https://github.com/{{ contributor }}">{{ contributor }}</a></sub>](https://github.com/{{ contributor }}/{{ repository }}
