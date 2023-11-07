@@ -136,7 +136,7 @@ const Navbar: React.FC = () => {
           display={{ base: "block", md: "none" }}
           onClick={handleDrawerOpen}
           aria-label="Open Navigation"
-          mx="2em"
+          ml="12em"
           sx={{ borderColor: "white", boxSize: "3.2rem", fontSize: "1.5rem" }}
         />
 

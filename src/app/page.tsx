@@ -20,7 +20,8 @@ import {
   MenuItem,
   Portal,
   DrawerBody,
-  Spacer
+  Show,
+  Hide,
 } from "@chakra-ui/react";
 import {
   ChakraProvider,
@@ -64,7 +65,7 @@ const Navbar = () => {
   const accountButtonStyle = styles.accountButtonStyle;
   const dividerStyle = styles.dividerStyle;
   const chatStyle = styles.chatStyle;
-  const dotStyle = styles.dotStyle;
+  // const dotStyle = styles.dotStyle;
   const reflectStyle = styles.reflectStyle;
   const measureStyle = styles.measureStyle;
   const journeyStyle = styles.journeyStyle;
@@ -83,21 +84,21 @@ const Navbar = () => {
   };
 
 
-  
+
   const accountButtonResponsiveStyle = useBreakpointValue({
-    base: { borderRadius: "550px", minW: "40px", p: 2 }, 
+    base: { borderRadius: "550px", minW: "40px", p: 2 },
     md: { borderRadius: "550px", minW: "130px", p: 4 }
   });
 
- // Redirect to register page if userId is null
-//  if (!userId) {
-//   router.push("/register");
-//   return null; // Return null to avoid rendering content in this case
-// }
+  // Redirect to register page if userId is null
+  //  if (!userId) {
+  //   router.push("/register");
+  //   return null; // Return null to avoid rendering content in this case
+  // }
 
   return (
     <ChakraProvider theme={theme}>
-       <Flex direction="column" minHeight="100vh">
+      <Flex direction="column" minHeight="100vh">
         {/* Navbar Container with Background Color */}
         <Flex direction="column"
           align="center"
@@ -119,7 +120,7 @@ const Navbar = () => {
               display={{ base: 'block', md: 'none' }}
               onClick={handleDrawerOpen}
               aria-label="Open Navigation"
-              mx="2em"
+              ml="15em"
               sx={{ borderColor: "#15193B", boxSize: "3.2rem", fontSize: "1.5rem" }}
             />
 
@@ -140,7 +141,7 @@ const Navbar = () => {
 
             <VStack align="stretch" spacing={-1}>
               <Menu>
-                <MenuButton 
+                <MenuButton
                   as={Button}
                   borderRadius="550px"
                   sx={{ ...accountButtonStyle, ...accountButtonResponsiveStyle }}
@@ -158,19 +159,19 @@ const Navbar = () => {
                     w="full"
                     minW="10em"
                   >
-                      <MenuItem
-                        as="a"
-                        sx={{
-                          bg:"#FBC1AA", borderRadius:"20px",
-                          _hover: { background: "white", color: "#FBC1AA" },
-                          _active: { bg: "white", color: "#FBC1AA" },
-                        }}
-                        href="/settings"
-                      >
-                        <Box textAlign="right" w="full" pr="0.5em">
-                          Settings
-                        </Box>
-                      </MenuItem>
+                    <MenuItem
+                      as="a"
+                      sx={{
+                        bg: "#FBC1AA", borderRadius: "20px",
+                        _hover: { background: "white", color: "#FBC1AA" },
+                        _active: { bg: "white", color: "#FBC1AA" },
+                      }}
+                      href="/settings"
+                    >
+                      <Box textAlign="right" w="full" pr="0.5em">
+                        Settings
+                      </Box>
+                    </MenuItem>
 
                     <Divider orientation="horizontal" />
 
@@ -179,7 +180,7 @@ const Navbar = () => {
                         <MenuItem
                           as="a"
                           sx={{
-                            bg:"#FBC1AA", borderRadius:"200px",
+                            bg: "#FBC1AA", borderRadius: "200px",
                             _hover: { background: "white", color: "#FBC1AA" },
                             _active: { bg: "white", color: "#FBC1AA" },
                           }}
@@ -193,7 +194,7 @@ const Navbar = () => {
                       <MenuItem
                         as="a"
                         sx={{
-                          bg:"#FBC1AA", borderRadius:"20px", mt:2,
+                          bg: "#FBC1AA", borderRadius: "20px", mt: 2,
                           _hover: { background: "white", color: "#FBC1AA" },
                           _active: { bg: "white", color: "#FBC1AA" },
                         }}
@@ -243,19 +244,34 @@ const Navbar = () => {
         <Divider sx={dividerStyle} />
 
         {/* Main Content without the Navbar's Background Color */}
-        <Flex direction="column" align="center" bg="#F9F2FF" flexGrow={1}>
-          <Flex align="center" mt={["10%", "15%", "15%", "10%"]}>
-            <Text sx={chatStyle}>Chat</Text>
-            <Text sx={dotStyle}>.</Text>
+        <Flex
+          direction="column"
+          align="center"
+          bg="#F9F2FF"
+          flexGrow={1}
+          p={4} // This adds padding to the Flex container to prevent content from touching the edges of the screen
+        >
+          <Flex direction={{ base: "column", md: "row" }} align="center" mt={["1%", "1%", "15%", "10%"]} mb={["2%", "6%", "0%", "0%"]} >
+            <Text>
+            </Text>
+            <Text sx={chatStyle} m={{ base: 0, md: 2 }}>Chat.</Text> {/* Apply margin individually if you're using sx for other styles */}
+            {/* <Text sx={dotStyle} m={2}>.</Text> */}
             <br />
-            <Text sx={reflectStyle}>Reflect</Text>
-            <Text sx={dotStyle}>.</Text>
+            <Text sx={reflectStyle} m={{ base: 0, md: 2 }}>Reflect.</Text>
+            {/* <Text sx={dotStyle} m={2}>.</Text> */}
             <br />
-            <Text sx={measureStyle}>Measure</Text>
+            <Text sx={measureStyle} m={{ base: 0, md: 2 }}>Measure.</Text>
           </Flex>
-          <Text sx={journeyStyle}>Your Three-Step Journey to</Text>
-          <Text sx={awarenessStyle}>Mindful Awareness</Text>
+          <Text sx={journeyStyle} m={2}>Your Three-Step Journey to</Text>
+          <Show above='md'>
+            <Text sx={awarenessStyle} m={2} mb={5}>Mindful Awareness</Text>
+          </Show>
+          <Show below='md'>
+            <Text sx={awarenessStyle} m={0}>Mindful</Text>
+            <Text sx={awarenessStyle} m={0} mb={5}>Awareness</Text>
+          </Show>
         </Flex>
+
       </Flex>
     </ChakraProvider>
   );
