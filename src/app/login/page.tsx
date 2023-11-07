@@ -38,16 +38,22 @@ export default function JoinOurTeam() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, userId } = useUser(); // for the context
+  const [statusMessage, setStatusMessage] = useState<string>("");
+
   const router = useRouter();
 
   const loginRequest = (email: string, password: string) => {
-    login(email, password); // Just call login from context
+    login(email, password);
   };
 
   useEffect(() => {
     const email = localStorage.getItem("User") || "";
+
     if (email) {
       push("/");
+    }
+    else {
+      setStatusMessage("Login failed");
     }
   }, [loginRequest]);
 
@@ -130,6 +136,9 @@ export default function JoinOurTeam() {
               >
                 Log In
               </Button>
+
+              {statusMessage}
+
             </Stack>
           </Stack>
         </Box>
