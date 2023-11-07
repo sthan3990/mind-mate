@@ -1,6 +1,7 @@
-"use client";
 
-import React from "react";
+'use client';
+
+import React, { useEffect } from "react";
 import ChakraUiProvider from "@/providers/chakra-ui.provider";
 import Navbar from "./components/header";
 import Footer from "./components/footer";
@@ -10,19 +11,21 @@ import { usePathname } from "next/navigation";
 import { NumMessagesProvider } from "./helper/numofmessages";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  
   const registerPathname = usePathname();
 
-    const rootStyles = {
+   const rootStyles = {
         flexDirection: "column",
         minHeight: "100vh",
         bgColor: "#15193B",
         justify: "flex-start"
-    };
-
+    }; 
 
   return (
     <html>
-      <head>{/* Add your head content here */}</head>
+      <head>
+        
+    </head>
       <body>
         <UserProvider>
           {" "}
@@ -37,7 +40,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                   flexDirection="column"
                   minHeight="100vh"
                   justify="flex-start"
-                >
+                > 
                   {children}
                 </Flex>
                 <Footer />

@@ -25,6 +25,12 @@ import {
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { delay } from "lodash";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
+
 
 export default function JoinOurTeam() {
   //define styles here
@@ -43,6 +49,7 @@ export default function JoinOurTeam() {
   const { login, userId } = useUser(); // for the context
   const [statusMessage, setStatusMessage] = useState<string>("");
   const [isWaiting, setIsWaiting] = useState(false);
+
 
   const router = useRouter();
 
