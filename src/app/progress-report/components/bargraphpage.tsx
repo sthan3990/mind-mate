@@ -138,7 +138,18 @@ const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
                   paddingTop: "10em",
                 }}
               >
-                <BarGraphComponent />
+                <div
+                  style={{
+                    textAlign: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <h1 style={{ marginBottom: "10px" }}>
+                    Your mood before and after journaling{" "}
+                  </h1>
+                  <BarGraphComponent />
+                </div>
               </div>
             </Box>
           </Flex>

@@ -4,14 +4,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "@/app/contexts/UserContext";
 import { Text } from "@chakra-ui/react";
-import { PieChart, Pie } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
+
+// Define an array of colors for the pie chart segments
+const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#0088FE", "#00C49F"];
 
 interface PieGraphProps {
   emotion_post: string;
   emotion_pre: string;
   timestamp: Date;
+  num_questions: number;
 }
-
 const PieGraphComponent: React.FC = () => {
   const [graphData, setGraphData] = useState([]);
   const [preMoodData, setPreMoodData] = useState<
@@ -92,6 +95,31 @@ const PieGraphComponent: React.FC = () => {
     sortData();
   }, [graphData]);
 
+  const MoodLegend = () => {
+    const legendItems = preMoodData.map((entry, index) => (
+      <div
+        key={`legend-item-${index}`}
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <div
+          style={{
+            width: 16,
+            height: 16,
+            backgroundColor: COLORS[index % COLORS.length],
+          }}
+        />
+        <span style={{ marginLeft: 8 }}>{entry.name}</span>
+      </div>
+    ));
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", marginLeft: 20 }}>
+        <div style={{ fontSize: 16, marginBottom: 8 }}>Mood Legend</div>
+        {legendItems}
+      </div>
+    );
+  };
+
   return (
     <div style={{ marginLeft: "1em" }}>
       <div
@@ -111,10 +139,26 @@ const PieGraphComponent: React.FC = () => {
               cx="50%"
               cy="50%"
               outerRadius={50}
-              fill="#8884d8"
               label
-            />
+            >
+              {preMoodData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
           </PieChart>
+          {preMoodData.map((entry, index) => (
+            <text
+              x={entry.percentage > 0 ? "50%" : "0%"}
+              y={entry.percentage > 0 ? "0%" : "50%"}
+              textAnchor="middle"
+              fill="white"
+              fontSize="12"
+              key={`text-${index}`}
+            ></text>
+          ))}
         </div>
         <div>
           <Text>Your Mood After Journal - Range is all of time right now</Text>
@@ -125,25 +169,62 @@ const PieGraphComponent: React.FC = () => {
               cx="50%"
               cy="50%"
               outerRadius={50}
-              fill="#82ca9d"
               label
-            />
+            >
+              {postMoodData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
           </PieChart>
+          {postMoodData.map((entry, index) => (
+            <text
+              x={entry.percentage > 0 ? "50%" : "0%"}
+              y={entry.percentage > 0 ? "0%" : "50%"}
+              textAnchor="middle"
+              fill="white"
+              fontSize="12"
+              key={`text-${index}`}
+            ></text>
+          ))}
         </div>
       </div>
-
-      <Text>Breakdown of Number of Questions</Text>
-      <PieChart width={550} height={225}>
-        <Pie
-          data={graphData}
-          dataKey="num_questions"
-          cx="50%"
-          cy="50%"
-          outerRadius={50}
-          fill="#82ca9d"
-          label
-        />
-      </PieChart>
+      <div
+        style={{
+          paddingTop: "20px",
+          display: "flex",
+        }}
+      >
+        <div>
+          <Text>Breakdown of Number of Questions</Text>
+          <PieChart width={550} height={225}>
+            <Pie
+              data={graphData}
+              dataKey="num_questions"
+              cx="50%"
+              cy="50%"
+              outerRadius={50}
+              label
+            >
+              {graphData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        </div>
+        <div
+          style={{
+            margin: "30px",
+          }}
+        >
+          {MoodLegend()}
+        </div>
+      </div>
     </div>
   );
 };
