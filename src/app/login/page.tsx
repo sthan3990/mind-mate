@@ -27,11 +27,6 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { delay } from "lodash";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: 'Invoices',
-};
-
-
 export default function JoinOurTeam() {
   //define styles here
   const leftSideStyle = styles.leftSideStyle;
