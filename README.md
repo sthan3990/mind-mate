@@ -32,4 +32,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Contributers 
-[](https://avatars.githubusercontent.com/u/44245684?v=4)](https://github.com/NFerracuti)
+<a href="https://github.com/sthan3990/mind-mate/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sthan3990/mind-mate" />
+</a>
