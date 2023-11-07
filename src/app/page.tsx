@@ -3,7 +3,6 @@ import { useUser } from "./contexts/UserContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import {getUser}
 import Link from "next/link";
 import {
   Flex,
