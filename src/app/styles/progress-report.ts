@@ -30,6 +30,6 @@ export const styling = {
     fontWeight: "bold",
     bg: "#f2e5fc",
     width: "10.5em",
-    borderColor: "white"
+    borderColor: "black",
   },
 };
