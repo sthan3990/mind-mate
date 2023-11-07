@@ -32,7 +32,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           {" "}
           {/* Wrap your application with UserProvider */}
           <ChakraUiProvider>
-          <ChangePageTitle title={usePathname()} />
+          <ChangePageTitle title={usePathname().toLocaleUpperCase()} />
             <NumMessagesProvider>
               <Flex sx={rootStyles}>
                 {registerPathname !== "/" &&
