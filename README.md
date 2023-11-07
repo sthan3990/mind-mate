@@ -14,21 +14,18 @@ yarn dev
 pnpm dev
 ```
 
-> Note: Node V18 or greater is required to run the project.
+> Note: Node V16 or greater is required to run the project.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## What is it?
 * TODO: Saba?
 * Final project for Lighthouse Labs 
-
-
-## Deploy on Vercel
-
+* Uses Chakra UI components to build responsive and accessible app ⚡️
+* 
 ## Contributers 
 <a href="https://github.com/sthan3990/mind-mate/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=sthan3990/mind-mate" />
