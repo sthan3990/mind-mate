@@ -9,6 +9,7 @@ import { UserProvider } from "./contexts/UserContext"; // Adjust the path as nec
 import { Flex } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 import { NumMessagesProvider } from "./helper/numofmessages";
+import ChangePageTitle from "./helper/createpagetitle"; 
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   
@@ -31,6 +32,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           {" "}
           {/* Wrap your application with UserProvider */}
           <ChakraUiProvider>
+          <ChangePageTitle title={usePathname()} />
             <NumMessagesProvider>
               <Flex sx={rootStyles}>
                 {registerPathname !== "/" &&

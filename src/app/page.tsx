@@ -31,7 +31,6 @@ import {
   DrawerCloseButton
 } from "@chakra-ui/react";
 import * as styles from './styles/homePageStyling';
-import ChangePageTitle from "./helper/createpagetitle";
 
 const theme = extendTheme({
   breakpoints: {
@@ -89,8 +88,7 @@ const Navbar = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <ChangePageTitle title="Home" />
-      <Flex direction="column" minHeight="100vh">
+       <Flex direction="column" minHeight="100vh">
         {/* Navbar Container with Background Color */}
         <Flex direction="column"
           align="center"

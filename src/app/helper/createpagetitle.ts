@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 interface HeadProps {
@@ -6,14 +6,14 @@ interface HeadProps {
 }
 
 const ChangePageTitle: React.FC<HeadProps> = ({ title }) => {
-
   const registerPathname = usePathname();
 
   useEffect(() => {
-    
-    // Set the document title based on the route and provided title
-    document.title = `${title} | MindMate`;
-  }, [registerPathname, title]);
+    // Extract the title from the route and set the document title
+    const pathname = registerPathname;
+    const titleFromPath = pathname === "/" ? "Home" : pathname.replace(/^\//, "");
+    document.title = `${titleFromPath} | MindMate`;
+  }, [registerPathname]);
 
   return null; // This component doesn't render anything
 };
