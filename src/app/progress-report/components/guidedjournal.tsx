@@ -272,7 +272,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                       d="M135.007 66.8217C135.007 102.631 106.119 131.643 70.5035 131.643C34.8882 131.643 6 102.631 6 66.8217C6 31.0127 34.8882 2 70.5035 2C106.119 2 135.007 31.0127 135.007 66.8217Z"
                       stroke="#15193B"
                       stroke-opacity="0.6"
-                      stroke-width="4"
+                      strokeWidth="4"
                     />
                   </g>
                   <defs>
@@ -283,9 +283,9 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                       width="141.007"
                       height="141.644"
                       filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
+                      colorInterpolationFilters="sRGB"
                     >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
                       <feColorMatrix
                         in="SourceAlpha"
                         type="matrix"
