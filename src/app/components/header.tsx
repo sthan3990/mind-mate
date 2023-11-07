@@ -36,7 +36,6 @@ import * as styles from "../styles/headerStyle";
 import { useRouter } from "next/navigation";
 import { useUser } from "../contexts/UserContext";
 import Weather from "./weather";
-const { userId } = useUser();
 
 const theme = extendTheme({
   breakpoints: {

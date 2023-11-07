@@ -102,8 +102,6 @@ export default function JoinOurTeam() {
               Welcome Back 👋
             </Heading>
 
-
-
             <Box as={"form"} mt={1} w="full" px={{ base: 6, md: 8, lg: 10 }}>
               {isWaiting ? (
                 <Center h="100%" >
