@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { ValidateEmail } from "../helper/validateEmail";
@@ -26,6 +26,8 @@ import {
   FormControl,
   FormLabel,
   InputRightElement,
+  Spinner,
+  Center
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import TermsModal from "./termsmodal";
@@ -51,29 +53,47 @@ export default function JoinOurTeam() {
   const [lName, setLName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isWaiting, setIsWaiting] = useState(false);
 
   const handleAgree = () => {
     setAgreed(!agreed); // Toggle the 'agreed' state
     onClose();
   };
 
-  const createAccount = (
+  useEffect(() => {
+    console.log("isWaiting in useEffect:", isWaiting);
+ 
+  }, [isWaiting]);
+
+
+  const createAccount = async (
     fName: string,
     lName: string,
     email: string,
     password: string
   ) => {
+    // Set the loading state to true when the process starts
+    setIsWaiting(true);
+  
     if (ValidateEmail(email)) {
-      axios
-        .post("/api/users", { fName, lName, email, password })
-        .then((res) => {
-          console.log(res);
-          push("/login");
-        });
+      try {
+        const response = await axios.post("/api/users", { fName, lName, email, password });
+        console.log(response);
+        push("/login");
+      } catch (ex) {
+        console.log(ex);
+        // Handle errors here, if needed
+      } finally {
+        // Set the loading state to false when the process completes (success or error)
+        setIsWaiting(false);
+      }
     } else {
       alert("Invalid email address!");
+      // Set the loading state to false if the email is invalid
+      setIsWaiting(false);
     }
   };
+  
 
   return (
     <SimpleGrid columns={[1, 1, 2, 2]} spacing={0.1} w="full" minChildWidth="320px">
@@ -97,6 +117,12 @@ export default function JoinOurTeam() {
               Create an Account 👋
             </Heading>
 
+
+            {isWaiting ? (
+            <Center h="100%" >
+                  <Spinner size="xl" color="#d0a2d1" />
+                </Center>
+              ) : (
             <Box as={"form"} mt={1} w="full" px={{ base: 6, md: 8, lg: 10 }}>
               <Stack spacing={4}>
                 <HStack spacing={4}>
@@ -145,6 +171,7 @@ export default function JoinOurTeam() {
                 </FormControl>
               </Stack>
             </Box>
+            )}
 
             <Stack spacing={5} pt={1} justifyContent="center" alignItems="center" width="100%" >
               <HStack spacing={2}>

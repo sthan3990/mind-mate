@@ -52,7 +52,6 @@ export default function JoinOurTeam() {
 
     try {
       const response = await login(email, password);
-      console.log(response);
       setStatusMessage(JSON.stringify(response));
     } catch (error) {
       setStatusMessage("Login Error. Check Username and/or Password");
