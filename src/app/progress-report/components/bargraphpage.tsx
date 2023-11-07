@@ -64,7 +64,7 @@ const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
             </Button>
           </VStack>
 
-          <VStack margin="0.5em">
+          {/* <VStack margin="0.5em">
             <Button
               leftIcon={<ChatIcon />}
               background="#737AA8"
@@ -76,7 +76,7 @@ const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
             >
               CBT Chat
             </Button>
-          </VStack>
+          </VStack> */}
           <VStack margin="0.5em">
             <Button
               leftIcon={<CalendarIcon />}
