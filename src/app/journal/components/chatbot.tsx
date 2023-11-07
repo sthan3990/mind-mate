@@ -1,9 +1,11 @@
 "use client";
+
 import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Spinner,
   Input,
   Button,
   Box,
@@ -18,6 +20,7 @@ import {
   VStack,
   HStack,
   Flex,
+  Center
 } from "@chakra-ui/react";
 import {
   CopyIcon,
@@ -29,19 +32,32 @@ import { useChat } from "ai/react";
 import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../../helper/numofmessages";
 
-const Chatbot: React.FC = ({}) => {
+const Chatbot: React.FC = ({ }) => {
   const { userId } = useUser();
   const [chatUsed, setChatUsed] = useState(true);
   const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(copyValue);
+  const [isWaiting, setIsWaiting] = useState(false);
+  const [isSendFieldDisabled, setIsSendFieldDisabled] = useState(false);
 
   const createChatCBTItem = () => {
     axios.post("/api/chatbot-create", { userId }).then((res) => {
       console.log(res);
     });
   };
-  
+
+  // Function to disable the send button
+  const disableSendField = () => {
+    setIsSendFieldDisabled(true);
+  };
+
+  // Function to enable the send button
+  const enableSendField = () => {
+    setIsSendFieldDisabled(false);
+  };
+
+
   const {
     messages,
     setInput,
@@ -54,6 +70,7 @@ const Chatbot: React.FC = ({}) => {
     api: "/api/chatbot",
 
     onResponse: (res) => {
+
       localStorage.setItem("setMessageFinished", "false");
 
       const lastQuestion = localStorage.getItem("lastQuestion");
@@ -70,25 +87,41 @@ const Chatbot: React.FC = ({}) => {
 
         // stop the chat
         stop();
-
       }
     },
     onFinish: (res) => {
       setNumMessages(numMessages + 1); // Increment numMessages
       localStorage.setItem("setMessageFinished", "true");
+
+      // enable send button 
+      enableSendField();
+
+      // turn off spinner when message is done
+      setIsWaiting(false);
     },
+
   });
 
+  useEffect(() => {
+
+  }, [isWaiting]);
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (chatUsed && numMessages === 0) {
       createChatCBTItem();
       setChatUsed(false);
     }
-    handleSubmit(e);
+
+    // Spinner to show "waiting"
+    setIsWaiting(true);
+
+    // disable send button 
+    disableSendField();
+
+    handleSubmit(e)
+
   };
 
   const handleArrowButtonClick = (e: React.FormEvent<HTMLButtonElement>) => {
-    //e.preventDefault(); // Prevent the default form submission
 
     if (input.trim() !== "") {
       // Send a user message to the API
@@ -193,9 +226,14 @@ const Chatbot: React.FC = ({}) => {
           border="5px solid #D0A2D1"
           height="600px"
         >
-        <VStack spacing={4} align="stretch" height="100%">
+          <VStack spacing={4} align="stretch" height="100%">
             {/* CHAT MESSAGE SECTION */}
             <Flex flex="1" overflowY="auto" flexDirection="column" bgColor="#15193B" pr="30px" pl="30px" pt="20px" pb="20px">
+
+              <Center h="100%" >
+                {isWaiting && <Spinner size="xl" color="#d0a2d1" />}
+              </Center>
+
               {messages.map((message, index) => (
                 <Box
                   key={index}
@@ -218,15 +256,16 @@ const Chatbot: React.FC = ({}) => {
                 </Box>
               ))}
             </Flex>
-  
+
             {/* INPUT SECTION */}
             <GridItem
               pl="1em"
+              pr="1em"
               pb="5em"
               background="#15193B"
             >
               <InputGroup width="100%">
-                <InputLeftElement w="85%" pl="1em" pb="3">
+                <InputLeftElement w="87%" pl="1em" pb="1em" pr="2em">
                   <Input
                     size="lg"
                     backgroundColor="#737AA8"
@@ -234,39 +273,40 @@ const Chatbot: React.FC = ({}) => {
                     value={input}
                     onChange={handleInputChange}
                     placeholder="Type a message..."
+                    isDisabled={isSendFieldDisabled}
                   />
                 </InputLeftElement>
-                <InputRightElement pr="4.5em" pb="1em">
+                <InputRightElement pr="5em" pb="1em" >
                   <HStack>
-                  <Button
-                    backgroundColor="#2D3258"
-                    borderColor="white"
-                    color="white"
-                    borderRadius="20"
-                    height="50px"
-                    width="100px"
-                    _hover={{
-                      bg: "white",
-                      color: "black",
-                      border: "1px solid black",
-                    }}
-                    aria-label="Send"
-                    onClick={handleArrowButtonClick}
-                  >
-                    <Text>Send</Text>
-                  </Button>
-                    {/* <IconButton
+                    <Button
+                      backgroundColor="#2D3258"
+                      borderColor="white"
+                      color="white"
+                      borderRadius="20"
+                      height="50px"
+                      width="100px"
+                      _hover={{
+                        bg: "white",
+                        color: "black",
+                        border: "1px solid black",
+                      }}
+                      aria-label="Send"
+                      onClick={handleArrowButtonClick}
+                    >
+                      <Text>Send</Text>
+                    </Button>
+                    <IconButton
                       ml={1}
                       aria-label="Stop"
                       icon={<CloseIcon />}
                       onClick={stop}
-                    /> */}
+                    />
                   </HStack>
                 </InputRightElement>
               </InputGroup>
             </GridItem>
           </VStack>
-          </GridItem>
+        </GridItem>
       </Grid>
     </form>
   );

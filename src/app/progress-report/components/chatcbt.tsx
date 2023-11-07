@@ -11,7 +11,7 @@ import {
   Grid,
   VStack,
   Flex,
-  Box,
+  Box
 } from "@chakra-ui/react";
 import { EditIcon, ChatIcon, CalendarIcon } from "@chakra-ui/icons";
 
@@ -20,6 +20,7 @@ interface InitialProps {
 }
 
 const ChatCBT: React.FC<InitialProps> = ({ setStep }) => {
+  
   return (
     <form>
       <Grid

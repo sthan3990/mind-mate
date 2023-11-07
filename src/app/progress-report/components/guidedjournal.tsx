@@ -20,6 +20,7 @@ import {
   VStack,
   Flex,
   Box,
+  Select,
 } from "@chakra-ui/react";
 import { EditIcon, ChatIcon, CalendarIcon } from "@chakra-ui/icons";
 
@@ -201,7 +202,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
             overflowY: "auto",
           }}
         >
-          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
+          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row" justifyContent="flex-start">
             <Box
               width="50%"
               border="1px solid #D0A2D1"
@@ -209,6 +210,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
               padding="20px"
+
             >
               <div
                 style={{
@@ -217,21 +219,30 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                 }}
               >
                 <h2>Number of Questions Asked</h2>
-                <select
-                  value={selectedItem1}
-                  onChange={handleSelectChange1}
-                  style={{
-                    height: "40px", // Set a fixed height
-                    alignSelf: "flex-start", // Align the select element to the top
-                  }}
-                >
-                  <option value="">Select an item</option>
-                  {Object.entries(numOfQuestions).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {key}
-                    </option>
-                  ))}
-                </select>
+                <GridItem colStart={3} colEnd={4}>
+                  <Select
+                    marginLeft="auto"
+                    sx={{
+                      ...style.styling.dropdown,
+
+                    }}
+                    value={selectedItem1}
+                    onChange={handleSelectChange1}
+                    style={{
+                      height: "2em",
+                      alignSelf: "flex-start",
+                    }}
+
+                  >
+                    <option value="">Select an item</option>
+                    {Object.entries(numOfQuestions).map(([key, value]) => (
+                      <option key={key} value={key}>
+                        {key}
+                      </option>
+                    ))}
+                  </Select>
+                </GridItem>
+
               </div>
               <div
                 style={{
@@ -261,7 +272,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                       d="M135.007 66.8217C135.007 102.631 106.119 131.643 70.5035 131.643C34.8882 131.643 6 102.631 6 66.8217C6 31.0127 34.8882 2 70.5035 2C106.119 2 135.007 31.0127 135.007 66.8217Z"
                       stroke="#15193B"
                       stroke-opacity="0.6"
-                      stroke-width="4"
+                      strokeWidth="4"
                     />
                   </g>
                   <defs>
@@ -272,9 +283,9 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                       width="141.007"
                       height="141.644"
                       filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
+                      colorInterpolationFilters="sRGB"
                     >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
                       <feColorMatrix
                         in="SourceAlpha"
                         type="matrix"
@@ -336,21 +347,26 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                 }}
               >
                 <h2>AVG Feeling by Date</h2>
-                <select
-                  value={selectedItem2}
-                  onChange={handleSelectChange2}
-                  style={{
-                    height: "40px", // Set a fixed height
-                    alignSelf: "flex-start", // Align the select element to the top
-                  }}
-                >
-                  <option value="">Select an item</option>
-                  {Object.entries(mood).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {key}
-                    </option>
-                  ))}
-                </select>
+                <GridItem colStart={3} colEnd={4}>
+                  <Select
+                    // placement="right-start"
+                    sx={style.styling.dropdown}
+                    value={selectedItem2}
+                    onChange={handleSelectChange2}
+                    style={{
+                      height: "2em", // Set a fixed height
+                      alignSelf: "flex-start", // Align the select element to the top
+                    }}
+                  >
+                    <option value="">Select an item</option>
+                    {Object.entries(mood).map(([key, value]) => (
+                      <option key={key} value={key}>
+                        {key}
+                      </option>
+                    ))}
+                  </Select>
+                </GridItem>
+
               </div>
               <div
                 style={{

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { fonts } from '@/theme/fonts';
 
 interface WeatherData {
   hourly: {
@@ -12,6 +13,12 @@ interface WeatherData {
 const Weather = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const weatherTextStyle = {
+    fontFamily: fonts.alternative,
+    fontSize: "20px",
+    color: 'red',
+  };
 
   useEffect(() => {
     const fetchWeatherData = async (latitude: number, longitude: number) => {
@@ -47,14 +54,15 @@ const Weather = () => {
     getLocationAndFetchWeather();
   }, []);
 
+  // use a fragment instead of div 
   return (
-    <div>
+    <div> 
       {error ? (
-        <p>{error}</p>
+        <p style={weatherTextStyle}>{error}</p>
       ) : weatherData ? (
-        <p>Current Weather: {weatherData.hourly.temperature_2m[0]}°C</p>
+        <p style={weatherTextStyle}>Current Weather: {weatherData.hourly.temperature_2m[0]}°C</p>
       ) : (
-        <p>Loading weather data...</p>
+        <p style={weatherTextStyle}>Loading weather data...</p>
       )}
     </div>
   );

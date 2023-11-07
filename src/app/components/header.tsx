@@ -11,6 +11,8 @@ import {
   Image,
   Box,
   Divider,
+  HStack,
+  VStack,
   Stack,
   Menu,
   MenuButton,
@@ -33,6 +35,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import * as styles from "../styles/headerStyle";
 import { useRouter } from "next/navigation";
 import { useUser } from "../contexts/UserContext";
+import Weather from "./weather";
 
 const theme = extendTheme({
   breakpoints: {
@@ -49,8 +52,9 @@ const theme = extendTheme({
     },
   },
 });
+//testing
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const pathname = usePathname();
 
   const logoStyle = styles.logoStyle;
@@ -77,28 +81,34 @@ const Navbar = () => {
     setHamburgerVisibility(false);
   };
 
-  const { logout } = useUser();
+  const { userId, logout } = useUser();
   const router = useRouter();
   const clickLogout = () => {
     logout();
     router.push("register");
   };
 
+  const accountButtonResponsiveStyle = useBreakpointValue({
+    base: { borderRadius: "550px", minW: "40px", p: 2 },
+    md: { borderRadius: "550px", minW: "130px", p: 4 }
+  });
+
+
   return (
     <ChakraProvider theme={theme}>
       <Flex
         direction="row"
-        align="center"
-        p={1}
+        alignItems="center"
         bg="#2D3258"
         boxShadow="sm"
         justifyContent="space-between"
         sx={{
           height: { base: "6em", md: "5em" },
+          paddingTop: "10px"
         }}
       >
-        {/* 1. Logo and MindMate Text Section */}
-        <Flex alignItems="center">
+        {/* 1. Logo and MindMate Text Section and the Vertical Line */}
+        <Flex alignItems="center" gap={4} >
           <Link href="/">
             <Image
               src="./logo.svg"
@@ -108,11 +118,17 @@ const Navbar = () => {
             />
           </Link>
           <Link href="/">
-            <Text sx={mindMateStyle} mx={20}>
+            <Text sx={mindMateStyle}>
               MindMate
             </Text>
           </Link>
+          {/* Vertical Line Section */}
+          <Divider
+            orientation="vertical"
+            sx={verticalLineStyle}
+          />
         </Flex>
+
         {/* 2. Hamburger Menu */}
         <IconButton
           icon={<HamburgerIcon color="#FE8F55E5" />}
@@ -120,19 +136,17 @@ const Navbar = () => {
           display={{ base: "block", md: "none" }}
           onClick={handleDrawerOpen}
           aria-label="Open Navigation"
-          mx="2em"
+          ml="12em"
           sx={{ borderColor: "white", boxSize: "3.2rem", fontSize: "1.5rem" }}
         />
 
-        {/* 2. Vertical Line Section */}
-        <Box sx={verticalLineStyle}></Box>
+
+
 
         {/* 3. Text Section */}
         <Stack
           direction="row"
-          spacing={5}
-          align="flex-start"
-          mr="200"
+          spacing={10}
           display={{ base: "none", md: "flex" }}
         >
           <Link href="/journal">
@@ -152,66 +166,66 @@ const Navbar = () => {
           </Link>
         </Stack>
 
-        {/* 4. Account Section */}
-        <Menu>
-          <MenuButton
-            as={Button}
-            borderRadius="550px"
-            sx={accountButtonStyle}
-            minW="130px"
-            display={{ base: "none", md: "flex" }}
-          >
-            Account
-          </MenuButton>
-          <Portal>
-            <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
-              <Link href="/settings" passHref>
+        {/* 4. Account Section and Weather */}
+        <VStack align="stretch" spacing={-1}>
+          <Menu>
+            <MenuButton
+              as={Button}
+              borderRadius="550px"
+              sx={{ ...accountButtonStyle, ...accountButtonResponsiveStyle }}
+              maxW="7em"
+              minW="6em"
+              display={{ base: "none", md: "flex" }}
+              flexShrink={0}
+            >
+              Account
+            </MenuButton>
+            <Portal>
+              <MenuList sx={{ bg: "#FBC1AA", borderRadius: "20px", mt: 2 }}>
                 <MenuItem
                   as="a"
                   sx={{
+                    bg: "#FBC1AA", borderRadius: "20px", mt: 2,
                     _hover: { background: "white", color: "#FBC1AA" },
                     _active: { bg: "white", color: "#FBC1AA" },
                   }}
+                  href="/settings"
                 >
                   Settings
                 </MenuItem>
-              </Link>
 
-              <Divider orientation="horizontal" />
+                <Divider orientation="horizontal" />
+                {/* add the menu item link */}
 
-              <MenuItem
-                as="a"
-                sx={{
-                  _hover: { background: "white", color: "#FBC1AA" },
-                  _active: { bg: "white", color: "#FBC1AA" },
-                }}
-                onClick={() => clickLogout()}
-              >
-                Logout
-              </MenuItem>
-            </MenuList>
-          </Portal>
-        </Menu>
+
+                <MenuItem
+                  as="a"
+                  sx={{
+                    bg: "#FBC1AA", borderRadius: "20px", mt: 2,
+                    _hover: { background: "white", color: "#FBC1AA" },
+                    _active: { bg: "white", color: "#FBC1AA" },
+                  }}
+                  onClick={() => clickLogout()}
+                >
+                  {userId ? "login" : "logout"}
+                </MenuItem>
+              </MenuList>
+            </Portal>
+          </Menu>
+          <Box display={{ base: 'none', md: 'block' }}>
+            <Weather />
+          </Box>
+        </VStack>
       </Flex>
       {/* Drawer */}
-      <Drawer
-        placement="left"
-        onClose={handleDrawerClose}
-        isOpen={hamburgerVisibility}
-      >
+      <Drawer placement="left" onClose={handleDrawerClose} isOpen={hamburgerVisibility}>
         <DrawerOverlay>
           <DrawerContent sx={drawerMain}>
             <DrawerCloseButton size="lg" />
             <DrawerBody>
               <Flex alignItems="center">
                 <Link href="/">
-                  <Image
-                    src="./logo.svg"
-                    alt="Logo"
-                    sx={drawerLogoStyle}
-                    minW="10em"
-                    my="2em"
-                  />
+                  <Image src="./logo.svg" alt="Logo" sx={drawerLogoStyle} minW="10em" my="2em" />
                 </Link>
               </Flex>
               <Stack spacing={4} p={4} align="start">
@@ -224,14 +238,10 @@ const Navbar = () => {
                 <Link href="/progress-report">
                   <Text sx={drawerLinks}>Progress Report</Text>
                 </Link>
-                <Link href="/settings">
-                  {" "}
-                  {/* Add the Settings link */}
+                <Link href="/settings"> {/* Add the Settings link */}
                   <Text sx={drawerLinks}>Account Settings</Text>
                 </Link>
-                <Link href="/login">
-                  {" "}
-                  {/* Add the Logout link */}
+                <Link href="/login"> {/* Add the Logout link */}
                   <Text sx={drawerLinks}>Logout</Text>
                 </Link>
               </Stack>

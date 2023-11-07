@@ -1,4 +1,5 @@
 "use client";
+
 import { useUser } from "../contexts/UserContext";
 
 import React, { useEffect, useState } from "react";
@@ -27,7 +28,6 @@ const Journal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    console.log(journalEntry);
     // Generate a date
     let newDate = new Date();
     let day = newDate.getDate();
@@ -141,7 +141,8 @@ const Journal: React.FC = () => {
           </Text>
         )}
 
-        {step !== 2 && (
+
+        {step !== 2 && step !== 4 && (
           <Flex
             flexDirection="column"
             alignItems="center"

@@ -19,26 +19,22 @@ export const mindMateStyle = {
   fontFamily: fonts.heading,
   fontWeight: '600',
   wordWrap: 'break-word',
-  marginLeft: '25px',
   display: ['none', 'none', 'block', 'block'],
   fontSize: ["0em", "1em", "1em", "2em"],
 };
 
 export const verticalLineStyle = {
-  borderLeft: '6px solid',
+  borderLeftWidth: '6px',
   borderColor: '#15193B',
+  height: 'auto',
   alignSelf: 'stretch',
-  mx: 20,
-  marginLeft: ['10px', '-20px', '-40px', '-50px'],
   display: ['none', 'none', 'block', 'block']
 };
 
 export const linkStyle = {
   fontWeight: "normal",
   color: "white",
-  mx: [2, 5, 6, 7],
   fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
-  ml: [2, 8, 20],
   whiteSpace: 'nowrap'
 };
 
@@ -46,9 +42,7 @@ export const linkTab = {
 
   fontWeight: "800",
   color: "white",
-  mx: [2, 5, 6, 7],
   fontSize: ["0.8em", "1em", "1.2em", "1.5em"],
-  ml: [2, 8, 20],
   whiteSpace: 'nowrap'
 };
 
@@ -81,7 +75,7 @@ export const drawerLogoStyle = {
 export const accountButtonStyle = {
   backgroundColor: "#FE8F55E5",
   width: "10%",
-  height: "53px",
+  height: "50px",
   margin: 0,
   marginRight: '25px',
   lineHeight: "normal",
@@ -89,5 +83,5 @@ export const accountButtonStyle = {
   fontFamily: fonts.heading,
   fontSize: ["0.8em", "0.9em", "1em", "1.3em"],
   boxShadow: "2px 2px 10px rgba(0,0,0,0.2)",
+  paddingTop: "10px"
 };
-

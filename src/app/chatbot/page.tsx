@@ -18,17 +18,13 @@ import {
   VStack,
   HStack,
   Flex,
+  Center,
+  Spinner
 } from "@chakra-ui/react";
-import {
-  CopyIcon,
-  ArrowForwardIcon,
-  ChatIcon,
-  CloseIcon,
-} from "@chakra-ui/icons";
+import {  CopyIcon, CloseIcon} from "@chakra-ui/icons";
 import { useChat } from "ai/react";
 import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../helper/numofmessages";
-import { text } from "stream/consumers";
 
 const Chatbot: React.FC = ({}) => {
   const { userId } = useUser();
@@ -36,12 +32,25 @@ const Chatbot: React.FC = ({}) => {
   const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(copyValue);
+  const [isWaiting, setIsWaiting] = useState(false);
+  const [isSendFieldDisabled, setIsSendFieldDisabled] = useState(false);
 
   const createChatCBTItem = () => {
     axios.post("/api/chatbot-create", { userId }).then((res) => {
       console.log(res);
     });
   };
+
+  // Function to disable the send button
+  const disableSendField = () => {
+    setIsSendFieldDisabled(true);
+  };
+
+  // Function to enable the send button
+  const enableSendField = () => {
+    setIsSendFieldDisabled(false);
+  };
+
 
   const {
     messages,
@@ -74,6 +83,13 @@ const Chatbot: React.FC = ({}) => {
       }
     },
     onFinish: (res) => {
+
+      // enable send button 
+      enableSendField();
+
+      // turn off spinner when message is done
+      setIsWaiting(false);
+
       setNumMessages(numMessages + 1); // Increment numMessages
       localStorage.setItem("setMessageFinished", "true");
     },
@@ -84,6 +100,14 @@ const Chatbot: React.FC = ({}) => {
       createChatCBTItem();
       setChatUsed(false);
     }
+
+     // Spinner to show "waiting"
+    setIsWaiting(true);
+
+     // disable send button 
+    disableSendField();
+
+
     handleSubmit(e);
   };
 
@@ -154,6 +178,12 @@ const Chatbot: React.FC = ({}) => {
           <VStack spacing={4} align="stretch" height="100%">
             {/* CHAT MESSAGE SECTION */}
             <Flex flex="1" overflowY="auto" flexDirection="column" bgColor="#15193B" pr="30px" pl="30px" pt="20px" pb="20px">
+
+            <Center h="100%" >
+                {isWaiting && <Spinner size="xl" color="#d0a2d1" />}
+              </Center>
+
+
               {messages.map((message, index) => (
                 <Box
                   key={index}
@@ -180,11 +210,12 @@ const Chatbot: React.FC = ({}) => {
             {/* INPUT SECTION */}
             <GridItem
               pl="1em"
+              pr="1em"
               pb="5em"
               background="#15193B"
             >
               <InputGroup width="100%">
-                <InputLeftElement w="88%" pl="1em" pb="3">
+                <InputLeftElement w="87%" pl="1em" pb="3">
                   <Input
                     size="lg"
                     backgroundColor="#737AA8"
@@ -192,9 +223,10 @@ const Chatbot: React.FC = ({}) => {
                     value={input}
                     onChange={handleInputChange}
                     placeholder="Type a message..."
+                    isDisabled={isSendFieldDisabled}
                   />
                 </InputLeftElement>
-                <InputRightElement pr="4.5em" pb="1em">
+                <InputRightElement pr="5em" pb="1em">
                   <HStack>
                   <Button
                     backgroundColor="#2D3258"
@@ -213,12 +245,12 @@ const Chatbot: React.FC = ({}) => {
                   >
                     <Text>Send</Text>
                   </Button>
-                    {/* <IconButton
+                    <IconButton
                       ml={1}
                       aria-label="Stop"
                       icon={<CloseIcon />}
                       onClick={stop}
-                    /> */}
+                    />
                   </HStack>
                 </InputRightElement>
               </InputGroup>

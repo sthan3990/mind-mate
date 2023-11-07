@@ -1,8 +1,8 @@
 import { fonts } from "@/theme/fonts";
 
 export const logoStyle = {
-  width: ["80px", "90px", "100px", "120px"],
-  height: ["80px", "90px", "100px", "120px"],
+  width: ["5em", "5em", "7em", "8em"],
+  height: ["5em", "5em", "7em", "8em"],
   position: "absolute",
   top: "10px",
   left: ["10px", "20px", "30px", "50px"],
@@ -31,37 +31,37 @@ export const accountButtonStyle = {
 
 export const dividerStyle = {
   mt: 0,
-  bgGradient: "linear(to-r, #D0A2D1, #F9884AAD)",
+  bgGradient: "linear(to-r, #f0e3f1, #fcc3a4)",
   height: "5px",
   width: "100%",
   border: "none",
   boxSizing: "border-box",
 };
 
+// export const dotStyle = {
+//   color: "#15193B",
+//   fontSize: ["32px", "2em", "3em", "4em"],
+//   fontFamily: fonts.alternative,
+//   fontWeight: "700",
+//   letterSpacing: 3.2,
+//   wordWrap: "break-word",
+//   display: "inline",
+//   mx: 2,
+// };
+
 export const chatStyle = {
   color: "#FF6863",
-  fontSize: ["32px", "48px", "64px", "64px"],
+  fontSize: ["2em", "3em", "3em", "4em"],
   fontFamily: fonts.alternative,
   fontWeight: "700",
   letterSpacing: 3.2,
   wordWrap: "break-word",
   display: "inline",
-};
-
-export const dotStyle = {
-  color: "#15193B",
-  fontSize: ["32px", "48px", "64px", "64px"],
-  fontFamily: fonts.alternative,
-  fontWeight: "700",
-  letterSpacing: 3.2,
-  wordWrap: "break-word",
-  display: "inline",
-  mx: 2,
 };
 
 export const reflectStyle = {
   color: "rgba(255, 117.79, 42.50, 0.80)",
-  fontSize: ["32px", "48px", "64px", "64px"],
+  fontSize: ["2em", "3em", "3em", "4em"],
   fontFamily: fonts.alternative,
   fontWeight: "700",
   letterSpacing: 3.2,
@@ -71,7 +71,7 @@ export const reflectStyle = {
 
 export const measureStyle = {
   color: "#B022AA",
-  fontSize: ["32px", "48px", "64px", "64px"],
+  fontSize: ["2em", "3em", "3em", "4em"],
   fontFamily: fonts.alternative,
   fontWeight: "700",
   letterSpacing: 3.2,
@@ -81,17 +81,18 @@ export const measureStyle = {
 
 export const journeyStyle = {
   color: "#15193B",
-  fontSize: ["25px", "48px", "64px", "64px"],
+  fontSize: ["2em", "3em", "3em", "4em"],
   fontFamily: fonts.alternative,
   fontWeight: "700",
   letterSpacing: 3.2,
   wordWrap: "break-word",
-  width: { base: '7em', md: 'auto' }
+  width: { base: '7em', md: 'auto' },
+  textAlign: "center",
 };
 
 export const awarenessStyle = {
   color: "#15193B",
-  fontSize: ["20px", "48px", "64px", "64px"],
+  fontSize: ["2em", "3em", "3em", "4em"],
   fontFamily: fonts.alternative,
   fontWeight: "700",
   letterSpacing: 3.2,
