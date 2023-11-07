@@ -4,12 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "@/app/contexts/UserContext";
 import { PieChart, Pie, Cell, Label } from "recharts";
-import {
-  Box,
-  Flex,
-  Text,
-  SimpleGrid,
-} from '@chakra-ui/react';
+
+import { Box, Flex, Text, SimpleGrid } from "@chakra-ui/react";
 import { text } from "stream/consumers";
 // Define an array of colors for the pie chart segments
 const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#0088FE", "#00C49F"];
@@ -66,7 +62,7 @@ const PieGraphComponent: React.FC = () => {
     innerRadius,
     outerRadius,
     percentage,
-    name
+    name,
   }) => {
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -76,25 +72,18 @@ const PieGraphComponent: React.FC = () => {
 
     if (["1", "3", "5"].includes(name) && percentage != 0) {
       textContent = `Num_Ques ${name} - ${percentage}%`;
-    }
 
-    else if (!["1", "3", "5"].includes(name) && percentage != 0) {
+    } else if (!["1", "3", "5"].includes(name) && percentage != 0) {
+
       textContent = `${name} - ${percentage}%`;
     }
 
     return (
-      <text
-        x={x}
-        y={y}
-        fill="black"
-        textAnchor={x > cx ? "start" : "end"}
-      >
+      <text x={x} y={y} fill="black" textAnchor={x > cx ? "start" : "end"}>
         {textContent}
       </text>
     );
-  }
-
-
+  };
 
   const sortQuestionData = () => {
     const questionsAnalytics: {
@@ -102,16 +91,24 @@ const PieGraphComponent: React.FC = () => {
       amountclicked: number;
       percentage: number;
     }[] = [
-        { name: "1", amountclicked: 0, percentage: 0 },
-        { name: "3", amountclicked: 0, percentage: 0 },
-        { name: "5", amountclicked: 0, percentage: 0 },
-      ];
+      { name: "1", amountclicked: 0, percentage: 0 },
+      { name: "3", amountclicked: 0, percentage: 0 },
+      { name: "5", amountclicked: 0, percentage: 0 },
+    ];
 
     graphData.forEach((item: PieGraphProps) => {
       const chosenNumQuestions = item.num_questions;
 
-      if (chosenNumQuestions === 1 || chosenNumQuestions === 3 || chosenNumQuestions === 5) {
-        const index = questionsAnalytics.findIndex((q) => q.name === chosenNumQuestions.toString());
+
+      if (
+        chosenNumQuestions === 1 ||
+        chosenNumQuestions === 3 ||
+        chosenNumQuestions === 5
+      ) {
+        const index = questionsAnalytics.findIndex(
+          (q) => q.name === chosenNumQuestions.toString()
+        );
+
 
         if (index !== -1) {
           questionsAnalytics[index].amountclicked++;
@@ -120,7 +117,12 @@ const PieGraphComponent: React.FC = () => {
     });
 
     // Calculate percentages and average
-    const totalClicked = questionsAnalytics.reduce((total, question) => total + question.amountclicked, 0);
+
+    const totalClicked = questionsAnalytics.reduce(
+      (total, question) => total + question.amountclicked,
+      0
+    );
+
     questionsAnalytics.forEach((question) => {
       question.percentage = (question.amountclicked / totalClicked) * 100;
     });
@@ -214,12 +216,15 @@ const PieGraphComponent: React.FC = () => {
   };
 
   return (
-    <>
+    <div style={{ margin: "15px" }}>
+
       <Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing="20px">
           {/* Graph 1 Section */}
           <Box>
-            <Text>Your Mood Before Journal - Range is all of time right now</Text>
+            <Text>
+              Your Mood Before Journal - Range is all of time right now
+            </Text>
             <PieChart width={550} height={225}>
               <Pie
                 data={preMoodData}
@@ -228,9 +233,13 @@ const PieGraphComponent: React.FC = () => {
                 cy="50%"
                 dataKey="percentage"
                 label={CustomLabel}
+                labelLine={false}
               >
                 {preMoodData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
             </PieChart>
@@ -238,7 +247,11 @@ const PieGraphComponent: React.FC = () => {
 
           {/* Graph 2 Section */}
           <Box>
-            <Text>Your Mood After Journal - Range is all of time right now</Text>
+
+            <Text>
+              Your Mood After Journal - Range is all of time right now
+            </Text>
+
             <PieChart width={550} height={225}>
               <Pie
                 data={postMoodData}
@@ -247,19 +260,18 @@ const PieGraphComponent: React.FC = () => {
                 cy="50%"
                 outerRadius={100}
                 label={CustomLabel}
+                labelLine={false}
               >
                 {postMoodData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
             </PieChart>
           </Box>
         </SimpleGrid>
-
-        {/* Mood Legend Section */}
-        <Box justifyContent="left" textAlign="left">
-          {MoodLegend()}
-        </Box>
 
         {/* Graph 3 Section (Centered) */}
         <Flex justifyContent="center" textAlign="center" marginTop="10px">
@@ -273,16 +285,23 @@ const PieGraphComponent: React.FC = () => {
                 cy="50%"
                 outerRadius={100}
                 label={CustomLabel}
+                labelLine={false}
               >
                 {questionData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+
                 ))}
               </Pie>
             </PieChart>
           </Box>
         </Flex>
       </Box>
-    </>
+
+    </div>
+
   );
 }
 
