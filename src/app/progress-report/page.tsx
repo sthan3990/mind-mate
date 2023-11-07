@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
 import GuidedJournal from "./components/guidedjournal";
 import ChatCBT from "./components/chatcbt";
 import PieChartPage from "./components/piechartpage";
 import BarGraphPage from "./components/bargraphpage";
+
 const ProgressReport: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     console.log(step);
@@ -20,6 +19,7 @@ const ProgressReport: React.FC = () => {
       {step === 2 && <ChatCBT setStep={setStep} />}
       {step === 3 && <PieChartPage setStep={setStep} />}
       {step === 4 && <BarGraphPage setStep={setStep} />}
+
     </>
   );
 };

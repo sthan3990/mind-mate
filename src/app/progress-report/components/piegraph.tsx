@@ -25,7 +25,8 @@ const PieGraphComponent: React.FC = () => {
   >([]);
   const [numQuestionsData, setNumQuestionsData] = useState([]);
 
-  const { userId } = useUser();
+  // const { userId } = useUser();
+  const userId = 57;
 
   const fetchData = () => {
     axios
@@ -38,6 +39,7 @@ const PieGraphComponent: React.FC = () => {
       });
   };
 
+  
   const sortData = () => {
     const totalEntries = graphData.length;
 
