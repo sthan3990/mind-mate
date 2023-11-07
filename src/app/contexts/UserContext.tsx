@@ -38,8 +38,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const response = await axios.get("/api/login", {
         params: { email, password },
       });
-      console.log("login response: ", response.data);
-  
+      
       if (response.data.message === "User logged in") {
         localStorage.setItem("User", response.data.userID);
         setUserId(response.data.userID); // Set user ID in context state
@@ -51,8 +50,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (error) {
       // Handle errors, e.g., show an alert or set an error state
-      console.error("Login error:", error);
-      return "A error occured";
+      console.error("Login error. Check username and password.", error);
+         return JSON.stringify(error);
     }
   };
 
