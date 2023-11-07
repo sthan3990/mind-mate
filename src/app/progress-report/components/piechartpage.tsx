@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import * as style from "../../styles/progress-report";
 import PieGraphComponent from "./piegraph";
@@ -22,8 +22,7 @@ interface InitialProps {
 
 const PieChartPage: React.FC<InitialProps> = ({ setStep }) => {
   return (
-    <form>
-      <Grid
+       <Grid
         sx={style.styling.grid}
         templateAreas={`
     "title title"
@@ -135,8 +134,7 @@ const PieChartPage: React.FC<InitialProps> = ({ setStep }) => {
           </Flex>
         </GridItem>
       </Grid>
-    </form>
-  );
+   );
 };
 
 export default PieChartPage;

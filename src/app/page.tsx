@@ -3,7 +3,7 @@ import { useUser } from "./contexts/UserContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-
+import {getUser}
 import Link from "next/link";
 import {
   Flex,
@@ -83,11 +83,19 @@ const Navbar = () => {
     setHamburgerVisibility(false);
   };
 
+<<<<<<< HEAD
   
   const accountButtonResponsiveStyle = useBreakpointValue({
     base: { borderRadius: "550px", minW: "40px", p: 2 }, 
     md: { borderRadius: "550px", minW: "130px", p: 4 }
   });
+=======
+ // Redirect to register page if userId is null
+ if (!userId) {
+  router.push("/register");
+  return null; // Return null to avoid rendering content in this case
+}
+>>>>>>> main
 
   return (
     <ChakraProvider theme={theme}>

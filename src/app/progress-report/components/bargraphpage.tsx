@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
 import * as style from "../../styles/progress-report";
 import BarGraphComponent from "./bargraph";
 
@@ -22,7 +21,7 @@ interface InitialProps {
 
 const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
   return (
-    <form>
+    <div>
       <Grid
         sx={style.styling.grid}
         templateAreas={`
@@ -139,13 +138,24 @@ const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
                   paddingTop: "10em",
                 }}
               >
-                <BarGraphComponent />
+                <div
+                  style={{
+                    textAlign: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <h1 style={{ marginBottom: "10px" }}>
+                    Your mood before and after journaling{" "}
+                  </h1>
+                  <BarGraphComponent />
+                </div>
               </div>
             </Box>
           </Flex>
         </GridItem>
       </Grid>
-    </form>
+    </div>
   );
 };
 export default BarGraphPage;

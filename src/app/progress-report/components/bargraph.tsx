@@ -43,7 +43,7 @@ const BarGraphComponent: React.FC = () => {
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="timestamp" />
       <YAxis />
-      <Bar dataKey="emotion_pre" fill="#8884d8" />
+      <Bar dataKey="emotion_pre" fill="#2c0bd4" />
       <Bar dataKey="emotion_post" fill="#82ca9d" />
     </BarChart>;
   }, [data]);
@@ -53,7 +53,7 @@ const BarGraphComponent: React.FC = () => {
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="timestamp" />
       <YAxis />
-      <Bar dataKey="emotion_pre" fill="#8884d8" />
+      <Bar dataKey="emotion_pre" fill="#2c0bd4" />
       <Bar dataKey="emotion_post" fill="#82ca9d" />
       <Legend />
     </BarChart>
