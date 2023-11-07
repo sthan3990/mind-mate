@@ -21,7 +21,7 @@ interface InitialProps {
 
 const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
   return (
-    <form>
+    <div>
       <Grid
         sx={style.styling.grid}
         templateAreas={`
@@ -155,7 +155,7 @@ const BarGraphPage: React.FC<InitialProps> = ({ setStep }) => {
           </Flex>
         </GridItem>
       </Grid>
-    </form>
+    </div>
   );
 };
 export default BarGraphPage;
