@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
 import * as style from "../../styles/progress-report";
 import BarGraphComponent from "./bargraph";
 
