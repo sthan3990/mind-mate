@@ -7,7 +7,7 @@ import PieChartPage from "./components/piechartpage";
 import BarGraphPage from "./components/bargraphpage";
 
 const ProgressReport: React.FC = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     console.log(step);
