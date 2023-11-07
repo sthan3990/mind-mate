@@ -262,13 +262,13 @@ const Navbar = () => {
             <br />
             <Text sx={measureStyle} m={{ base: 0, md: 2 }}>Measure.</Text>
           </Flex>
-          <Text sx={journeyStyle} m={2}>Your Three-Step Journey to</Text>
+          <Text sx={journeyStyle} m={{ base: 0, md: 2 }}>Your Three-Step Journey to</Text>
           <Show above='md'>
-            <Text sx={awarenessStyle} m={2} mb={5}>Mindful Awareness</Text>
+            <Text sx={awarenessStyle} m={{ base: 0, md: 2 }} mb={5}>Mindful Awareness</Text>
           </Show>
           <Show below='md'>
-            <Text sx={awarenessStyle} m={0}>Mindful</Text>
-            <Text sx={awarenessStyle} m={0} mb={5}>Awareness</Text>
+            <Text sx={awarenessStyle} m={{ base: 0, md: 2 }}>Mindful</Text>
+            <Text sx={awarenessStyle} m={{ base: 0, md: 2 }} mb={5}>Awareness</Text>
           </Show>
         </Flex>
 
