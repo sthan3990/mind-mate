@@ -144,7 +144,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
             </Button>
           </VStack>
 
-          <VStack margin="0.5em">
+          {/* <VStack margin="0.5em">
             <Button
               leftIcon={<ChatIcon />}
               background="#737AA8"
@@ -156,7 +156,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
             >
               CBT Chat
             </Button>
-          </VStack>
+          </VStack> */}
           <VStack margin="0.5em">
             <Button
               leftIcon={<CalendarIcon />}
@@ -202,7 +202,13 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
             overflowY: "auto",
           }}
         >
-          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row" justifyContent="flex-start">
+          <Flex
+            margin="0.5em"
+            flex="1"
+            overflowY="auto"
+            flexDirection="row"
+            justifyContent="flex-start"
+          >
             <Box
               width="50%"
               border="1px solid #D0A2D1"
@@ -210,7 +216,6 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
               padding="20px"
-
             >
               <div
                 style={{
@@ -224,7 +229,6 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                     marginLeft="auto"
                     sx={{
                       ...style.styling.dropdown,
-
                     }}
                     value={selectedItem1}
                     onChange={handleSelectChange1}
@@ -232,7 +236,6 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                       height: "2em",
                       alignSelf: "flex-start",
                     }}
-
                   >
                     <option value="">Select an item</option>
                     {Object.entries(numOfQuestions).map(([key, value]) => (
@@ -242,7 +245,6 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                     ))}
                   </Select>
                 </GridItem>
-
               </div>
               <div
                 style={{
@@ -366,7 +368,6 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                     ))}
                   </Select>
                 </GridItem>
-
               </div>
               <div
                 style={{
