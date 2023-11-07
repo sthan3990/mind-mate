@@ -38,35 +38,30 @@ const PieGraphComponent: React.FC = () => {
   const sortData = () => {
     const totalEntries = graphData.length;
 
+    const moodLabels = [
+      "Extremely Upset",
+      "Quite Upset",
+      "Neutral",
+      "Happy",
+      "Extremely Happy",
+    ];
+
     const updatedPreMoodData: {
       name: string;
       value: number;
       percentage: number;
-    }[] = [
-      { name: "Extremely Upset", value: 0, percentage: 0 },
-      { name: "Quite Upset", value: 0, percentage: 0 },
-      { name: "Neutral", value: 0, percentage: 0 },
-      { name: "Happy", value: 0, percentage: 0 },
-      { name: "Extremely Happy", value: 0, percentage: 0 },
-    ];
+    }[] = moodLabels.map((label) => ({ name: label, value: 0, percentage: 0 }));
 
     const updatedPostMoodData: {
       name: string;
       value: number;
       percentage: number;
-    }[] = [
-      { name: "Extremely Upset", value: 0, percentage: 0 },
-      { name: "Quite Upset", value: 0, percentage: 0 },
-      { name: "Neutral", value: 0, percentage: 0 },
-      { name: "Happy", value: 0, percentage: 0 },
-      { name: "Extremely Happy", value: 0, percentage: 0 },
-    ];
+    }[] = moodLabels.map((label) => ({ name: label, value: 0, percentage: 0 }));
 
     graphData.forEach((item: PieGraphProps) => {
       const preMoodScore = parseInt(item.emotion_pre, 10);
       const postMoodScore = parseInt(item.emotion_post, 10);
 
-      //
       if (preMoodScore >= 1 && preMoodScore <= 5) {
         updatedPreMoodData[preMoodScore - 1].value++;
       }
@@ -75,8 +70,7 @@ const PieGraphComponent: React.FC = () => {
         updatedPostMoodData[postMoodScore - 1].value++;
       }
 
-      // figure out percentages
-      // Round it to a whole number
+      // Calculate percentages
       updatedPreMoodData.forEach((category) => {
         category.percentage = Math.round((category.value / totalEntries) * 100);
       });
