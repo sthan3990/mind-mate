@@ -53,9 +53,9 @@ const theme = extendTheme({
   },
 });
 //testing
-const Navbar = () => {
-  const pathname = usePathname();
 
+const Navbar: React.FC = () => {
+  const pathname = usePathname();
 
   const logoStyle = styles.logoStyle;
   const mindMateStyle = styles.mindMateStyle;
