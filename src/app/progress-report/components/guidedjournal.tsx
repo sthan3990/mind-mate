@@ -202,15 +202,15 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
             overflowY: "auto",
           }}
         >
-          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
+          <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row" justifyContent="flex-start">
             <Box
-              sx={style.styling.boxContainer}
               width="50%"
               border="1px solid #D0A2D1"
               marginRight="1em"
               background="linear-gradient(180deg, #F9F2FF 0%, rgba(197, 154, 201, 0.50) 100%)"
               borderRadius="40px"
               padding="20px"
+
             >
               <div
                 style={{
@@ -219,27 +219,30 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                 }}
               >
                 <h2>Number of Questions Asked</h2>
-                <Select
-                  sx={{
-                    ...style.styling.dropdown,
-                    'svg': {
-                      transform: 'translateY(50%)',
-                    }
-                  }}
-                  value={selectedItem1}
-                  onChange={handleSelectChange1}
-                  style={{
-                    height: "40px",
-                    alignSelf: "flex-start",
-                  }}
-                >
-                  <option value="">Select an item</option>
-                  {Object.entries(numOfQuestions).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {key}
-                    </option>
-                  ))}
-                </Select>
+                <GridItem colStart={3} colEnd={4}>
+                  <Select
+                    marginLeft="auto"
+                    sx={{
+                      ...style.styling.dropdown,
+
+                    }}
+                    value={selectedItem1}
+                    onChange={handleSelectChange1}
+                    style={{
+                      height: "2em",
+                      alignSelf: "flex-start",
+                    }}
+
+                  >
+                    <option value="">Select an item</option>
+                    {Object.entries(numOfQuestions).map(([key, value]) => (
+                      <option key={key} value={key}>
+                        {key}
+                      </option>
+                    ))}
+                  </Select>
+                </GridItem>
+
               </div>
               <div
                 style={{
@@ -344,23 +347,26 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                 }}
               >
                 <h2>AVG Feeling by Date</h2>
-                <Select
-                  // placement="right-start"
-                  sx={style.styling.dropdown}
-                  value={selectedItem2}
-                  onChange={handleSelectChange2}
-                  style={{
-                    height: "40px", // Set a fixed height
-                    alignSelf: "flex-start", // Align the select element to the top
-                  }}
-                >
-                  <option value="">Select an item</option>
-                  {Object.entries(mood).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {key}
-                    </option>
-                  ))}
-                </Select>
+                <GridItem colStart={3} colEnd={4}>
+                  <Select
+                    // placement="right-start"
+                    sx={style.styling.dropdown}
+                    value={selectedItem2}
+                    onChange={handleSelectChange2}
+                    style={{
+                      height: "2em", // Set a fixed height
+                      alignSelf: "flex-start", // Align the select element to the top
+                    }}
+                  >
+                    <option value="">Select an item</option>
+                    {Object.entries(mood).map(([key, value]) => (
+                      <option key={key} value={key}>
+                        {key}
+                      </option>
+                    ))}
+                  </Select>
+                </GridItem>
+
               </div>
               <div
                 style={{

@@ -28,13 +28,8 @@ export const styling = {
   dropdown: {
     fontFamily: fonts.body,
     fontWeight: "bold",
-    bg: "#dcc0f3",
-    width: "auto",
-    position: "absolute",
-    right: 0,
-    top: 0,
-  },
-  boxContainer: {
-    position: "relative",
+    bg: "#f2e5fc",
+    width: "10.5em",
+    borderColor: "white"
   },
 };
