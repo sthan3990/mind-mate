@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "@/app/contexts/UserContext";
-import { Text } from "@chakra-ui/react";
-import { PieChart, Pie, Cell } from "recharts";
+import { Text, Tooltip } from "@chakra-ui/react";
+import { PieChart, Pie, Cell, Label } from "recharts";
 
 // Define an array of colors for the pie chart segments
 const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#0088FE", "#00C49F"];
@@ -15,6 +15,17 @@ interface PieGraphProps {
   timestamp: Date;
   num_questions: number;
 }
+
+interface CustomLabelProps {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percentage: number;
+  name: string; 
+}
+
 const PieGraphComponent: React.FC = () => {
   const [graphData, setGraphData] = useState([]);
   const [preMoodData, setPreMoodData] = useState<
@@ -23,10 +34,13 @@ const PieGraphComponent: React.FC = () => {
   const [postMoodData, setPostMoodData] = useState<
     { name: string; value: number; percentage: number }[]
   >([]);
-  const [numQuestionsData, setNumQuestionsData] = useState([]);
 
-  // const { userId } = useUser();
-  const userId = 57;
+  const [questionData, setQuestionData] = useState<
+  { name: string; amountclicked: number; percentage: number }[]
+  >([]);
+
+  //const { userId } = useUser();
+  const userId = "57";
 
   const fetchData = () => {
     axios
@@ -39,8 +53,71 @@ const PieGraphComponent: React.FC = () => {
       });
   };
 
-  
-  const sortData = () => {
+  // Show % for each section of the pie chart
+  const CustomLabel: React.FC<CustomLabelProps> = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percentage, 
+    name
+  }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    if (percentage != 0) {
+
+      return (
+        <text
+          x={x}
+          y={y}
+          fill="white"
+          textAnchor={x > cx ? "start" : "end"}
+        >
+          {`${name} - ${percentage}%`}
+        </text>
+      );
+    }
+  };
+ 
+  const sortQuestionData = () => {
+    const questionsAnalytics: {
+      name: string;
+      amountclicked: number;
+      percentage: number;
+    }[] = [
+        { name: "1", amountclicked: 0, percentage: 0 },
+        { name: "3", amountclicked: 0, percentage: 0 },
+        { name: "5", amountclicked: 0, percentage: 0 },
+      ];
+
+    graphData.forEach((item: PieGraphProps) => {
+      const chosenNumQuestions = item.num_questions;
+
+      if (chosenNumQuestions === 1 || chosenNumQuestions === 3 || chosenNumQuestions === 5) {
+        const index = questionsAnalytics.findIndex((q) => q.name === chosenNumQuestions.toString());
+
+        if (index !== -1) {
+          questionsAnalytics[index].amountclicked++;
+        }
+      }
+    });
+
+      // Calculate percentages and average
+  const totalClicked = questionsAnalytics.reduce((total, question) => total + question.amountclicked, 0);
+  questionsAnalytics.forEach((question) => {
+    question.percentage = (question.amountclicked / totalClicked) * 100;
+  });
+
+
+    // Update the state after processing the graphData
+    setQuestionData(questionsAnalytics);
+  };
+
+  const sortMoodData = () => {
     const totalEntries = graphData.length;
 
     const moodLabels = [
@@ -94,7 +171,8 @@ const PieGraphComponent: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    sortData();
+    sortMoodData();
+    sortQuestionData();
   }, [graphData]);
 
   const MoodLegend = () => {
@@ -137,11 +215,11 @@ const PieGraphComponent: React.FC = () => {
           <PieChart width={550} height={225}>
             <Pie
               data={preMoodData}
-              dataKey="percentage"
+              outerRadius={100}
               cx="50%"
               cy="50%"
-              outerRadius={50}
-              label
+              dataKey="percentage"
+              label={CustomLabel}
             >
               {preMoodData.map((entry, index) => (
                 <Cell
@@ -151,17 +229,9 @@ const PieGraphComponent: React.FC = () => {
               ))}
             </Pie>
           </PieChart>
-          {preMoodData.map((entry, index) => (
-            <text
-              x={entry.percentage > 0 ? "50%" : "0%"}
-              y={entry.percentage > 0 ? "0%" : "50%"}
-              textAnchor="middle"
-              fill="white"
-              fontSize="12"
-              key={`text-${index}`}
-            ></text>
-          ))}
         </div>
+
+
         <div>
           <Text>Your Mood After Journal - Range is all of time right now</Text>
           <PieChart width={550} height={225}>
@@ -170,8 +240,8 @@ const PieGraphComponent: React.FC = () => {
               dataKey="percentage"
               cx="50%"
               cy="50%"
-              outerRadius={50}
-              label
+              outerRadius={100}
+              label={CustomLabel}
             >
               {postMoodData.map((entry, index) => (
                 <Cell
@@ -181,16 +251,7 @@ const PieGraphComponent: React.FC = () => {
               ))}
             </Pie>
           </PieChart>
-          {postMoodData.map((entry, index) => (
-            <text
-              x={entry.percentage > 0 ? "50%" : "0%"}
-              y={entry.percentage > 0 ? "0%" : "50%"}
-              textAnchor="middle"
-              fill="white"
-              fontSize="12"
-              key={`text-${index}`}
-            ></text>
-          ))}
+
         </div>
       </div>
       <div
@@ -203,14 +264,15 @@ const PieGraphComponent: React.FC = () => {
           <Text>Breakdown of Number of Questions</Text>
           <PieChart width={550} height={225}>
             <Pie
-              data={graphData}
-              dataKey="num_questions"
+              data={questionData}
+              dataKey="amountclicked"
               cx="50%"
               cy="50%"
-              outerRadius={50}
-              label
+              outerRadius={100}
+              label={CustomLabel}
+
             >
-              {graphData.map((entry, index) => (
+              {questionData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
@@ -219,6 +281,7 @@ const PieGraphComponent: React.FC = () => {
             </Pie>
           </PieChart>
         </div>
+
         <div
           style={{
             margin: "30px",
@@ -227,8 +290,8 @@ const PieGraphComponent: React.FC = () => {
           {MoodLegend()}
         </div>
       </div>
-    </div>
+    </div >
   );
-};
+}
 
 export default PieGraphComponent;
