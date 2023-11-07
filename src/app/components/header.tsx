@@ -56,6 +56,8 @@ const theme = extendTheme({
 const Navbar = () => {
   const pathname = usePathname();
 
+  const { userId } = useUser();
+
   const logoStyle = styles.logoStyle;
   const mindMateStyle = styles.mindMateStyle;
   const verticalLineStyle = styles.verticalLineStyle;
@@ -195,6 +197,8 @@ const Navbar = () => {
 
                 <Divider orientation="horizontal" />
                 {/* add the menu item link */}
+
+               
                 <MenuItem
                   as="a"
                   sx={{
@@ -204,7 +208,7 @@ const Navbar = () => {
                   }}
                   onClick={() => clickLogout()}
                 >
-                  Logout
+                   { userId ?  "login" : "logout" }
                 </MenuItem>
               </MenuList>
             </Portal>
