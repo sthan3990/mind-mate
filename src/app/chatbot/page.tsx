@@ -21,7 +21,7 @@ import {
   Center,
   Spinner
 } from "@chakra-ui/react";
-import {  CopyIcon } from "@chakra-ui/icons";
+import {  CopyIcon, CloseIcon} from "@chakra-ui/icons";
 import { useChat } from "ai/react";
 import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../helper/numofmessages";
@@ -102,12 +102,12 @@ const Chatbot: React.FC = ({}) => {
     }
 
      // Spinner to show "waiting"
-     setIsWaiting(true);
+    setIsWaiting(true);
 
      // disable send button 
-     disableSendField();
+    disableSendField();
 
-     
+
     handleSubmit(e);
   };
 
