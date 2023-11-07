@@ -231,7 +231,7 @@ const Chatbot: React.FC = ({ }) => {
             <Flex flex="1" overflowY="auto" flexDirection="column" bgColor="#15193B" pr="30px" pl="30px" pt="20px" pb="20px">
 
               <Center h="100%" >
-                {isWaiting && <Spinner size="xl" color="yellow" />}
+                {isWaiting && <Spinner size="xl" color="#d0a2d1" />}
               </Center>
 
               {messages.map((message, index) => (
