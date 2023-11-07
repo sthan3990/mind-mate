@@ -17,7 +17,8 @@ const BarGraphComponent: React.FC = () => {
   const [graphData, setGraphData] = useState<DataEntry[]>([]);
   const [data, setData] = useState<DataEntry[]>([]);
 
-  const { userId } = useUser();
+  // const { userId } = useUser();
+  const userId = "57";
 
   const fetchData = () => {
     axios
@@ -42,7 +43,7 @@ const BarGraphComponent: React.FC = () => {
     <BarChart width={730} height={250} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="timestamp" />
-      <YAxis />
+      <YAxis domain={[0, 6]}  />
       <Bar dataKey="emotion_pre" fill="#2c0bd4" />
       <Bar dataKey="emotion_post" fill="#82ca9d" />
     </BarChart>;
@@ -52,7 +53,7 @@ const BarGraphComponent: React.FC = () => {
     <BarChart width={730} height={250} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="timestamp" />
-      <YAxis />
+      <YAxis domain={[0, 6]} />
       <Bar dataKey="emotion_pre" fill="#2c0bd4" />
       <Bar dataKey="emotion_post" fill="#82ca9d" />
       <Legend />

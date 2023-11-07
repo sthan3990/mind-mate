@@ -10,6 +10,7 @@ import {
   Text,
   SimpleGrid,
 } from '@chakra-ui/react';
+import { text } from "stream/consumers";
 // Define an array of colors for the pie chart segments
 const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#0088FE", "#00C49F"];
 
@@ -71,21 +72,29 @@ const PieGraphComponent: React.FC = () => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    let textContent = "";
 
-    if (percentage != 0) {
-
-      return (
-        <text
-          x={x}
-          y={y}
-          fill="black"
-          textAnchor={x > cx ? "start" : "end"}
-        >
-          {`${name} - ${percentage}%`}
-        </text>
-      );
+    if (["1", "3", "5"].includes(name) && percentage != 0) {
+      textContent = `Num_Ques ${name} - ${percentage}%`;
     }
-  };
+
+    else if (!["1", "3", "5"].includes(name) && percentage != 0) {
+      textContent = `${name} - ${percentage}%`;
+    }
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="black"
+        textAnchor={x > cx ? "start" : "end"}
+      >
+        {textContent}
+      </text>
+    );
+  }
+
+
 
   const sortQuestionData = () => {
     const questionsAnalytics: {
