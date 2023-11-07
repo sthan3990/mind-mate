@@ -29,8 +29,12 @@ export const styling = {
     fontFamily: fonts.body,
     fontWeight: "bold",
     bg: "#dcc0f3",
-    width: "10em",
-    display: "flex",
+    width: "auto",
     position: "absolute",
-  }
+    right: 0,
+    top: 0,
+  },
+  boxContainer: {
+    position: "relative",
+  },
 };

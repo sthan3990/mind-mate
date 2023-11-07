@@ -20,7 +20,7 @@ import {
   VStack,
   Flex,
   Box,
-  Select
+  Select,
 } from "@chakra-ui/react";
 import { EditIcon, ChatIcon, CalendarIcon } from "@chakra-ui/icons";
 
@@ -204,6 +204,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
         >
           <Flex margin="0.5em" flex="1" overflowY="auto" flexDirection="row">
             <Box
+              sx={style.styling.boxContainer}
               width="50%"
               border="1px solid #D0A2D1"
               marginRight="1em"
@@ -219,12 +220,17 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
               >
                 <h2>Number of Questions Asked</h2>
                 <Select
-                  sx={style.styling.dropdown}
+                  sx={{
+                    ...style.styling.dropdown,
+                    'svg': {
+                      transform: 'translateY(50%)',
+                    }
+                  }}
                   value={selectedItem1}
                   onChange={handleSelectChange1}
                   style={{
-                    height: "40px", // Set a fixed height
-                    alignSelf: "flex-start", // Align the select element to the top
+                    height: "40px",
+                    alignSelf: "flex-start",
                   }}
                 >
                   <option value="">Select an item</option>
