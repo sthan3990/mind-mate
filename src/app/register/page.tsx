@@ -93,7 +93,6 @@ export default function JoinOurTeam() {
       setIsWaiting(false);
     }
   };
-  
 
   return (
     <SimpleGrid columns={[1, 1, 2, 2]} spacing={0.1} w="full" minChildWidth="320px">
