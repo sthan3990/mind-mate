@@ -20,6 +20,7 @@ import {
   VStack,
   Flex,
   Box,
+  Select
 } from "@chakra-ui/react";
 import { EditIcon, ChatIcon, CalendarIcon } from "@chakra-ui/icons";
 
@@ -217,7 +218,8 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                 }}
               >
                 <h2>Number of Questions Asked</h2>
-                <select
+                <Select
+                  sx={style.styling.dropdown}
                   value={selectedItem1}
                   onChange={handleSelectChange1}
                   style={{
@@ -231,7 +233,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                       {key}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               <div
                 style={{
@@ -336,7 +338,9 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                 }}
               >
                 <h2>AVG Feeling by Date</h2>
-                <select
+                <Select
+                  // placement="right-start"
+                  sx={style.styling.dropdown}
                   value={selectedItem2}
                   onChange={handleSelectChange2}
                   style={{
@@ -350,7 +354,7 @@ const GuidedJournal: React.FC<InitialProps> = ({ setStep }) => {
                       {key}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               <div
                 style={{

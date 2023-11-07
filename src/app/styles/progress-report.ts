@@ -25,4 +25,12 @@ export const styling = {
     color: "#FFFFFF",
     textAlign: "center",
   },
+  dropdown: {
+    fontFamily: fonts.body,
+    fontWeight: "bold",
+    bg: "#dcc0f3",
+    width: "10em",
+    display: "flex",
+    position: "absolute",
+  }
 };
