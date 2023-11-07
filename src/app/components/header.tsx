@@ -214,7 +214,8 @@ const Navbar = () => {
                 >
                   <Box textAlign="right" w="full" pr="0.5em">
                     Logout
-                    { userId ?  "login" : "logout" }
+                    {/* this was the issue for the merge conflict so i brough it back in */}
+                    { userId ?  "login" : "logout" } 
                   </Box>
                 </MenuItem>
               </MenuList>
