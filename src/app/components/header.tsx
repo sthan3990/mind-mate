@@ -36,6 +36,7 @@ import * as styles from "../styles/headerStyle";
 import { useRouter } from "next/navigation";
 import { useUser } from "../contexts/UserContext";
 import Weather from "./weather";
+const { userId } = useUser();
 
 const theme = extendTheme({
   breakpoints: {
@@ -213,6 +214,7 @@ const Navbar = () => {
                 >
                   <Box textAlign="right" w="full" pr="0.5em">
                     Logout
+                    { userId ?  "login" : "logout" }
                   </Box>
                 </MenuItem>
               </MenuList>
