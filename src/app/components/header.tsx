@@ -87,13 +87,13 @@ const Navbar: React.FC = () => {
     logout();
     router.push("register");
   };
-  
+
   const accountButtonResponsiveStyle = useBreakpointValue({
-    base: { borderRadius: "550px", minW: "40px", p: 2 }, 
+    base: { borderRadius: "550px", minW: "40px", p: 2 },
     md: { borderRadius: "550px", minW: "130px", p: 4 }
   });
 
-  
+
   return (
     <ChakraProvider theme={theme}>
       <Flex
@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
         justifyContent="space-between"
         sx={{
           height: { base: "6em", md: "5em" },
-          paddingTop:"10px"
+          paddingTop: "10px"
         }}
       >
         {/* 1. Logo and MindMate Text Section and the Vertical Line */}
@@ -165,7 +165,7 @@ const Navbar: React.FC = () => {
             </Text>
           </Link>
         </Stack>
-        
+
         {/* 4. Account Section and Weather */}
         <VStack align="stretch" spacing={-1}>
           <Menu>
@@ -181,43 +181,33 @@ const Navbar: React.FC = () => {
               Account
             </MenuButton>
             <Portal>
-              <MenuList
-                bg="#FBC1AA"
-                borderRadius="20px"
-                w="full"
-                minW="10em"
-              >
-                  <MenuItem
-                    as="a"
-                    sx={{
-                      bg:"#FBC1AA", borderRadius:"20px",
-                      _hover: { background: "white", color: "#FBC1AA" },
-                      _active: { bg: "white", color: "#FBC1AA" },
-                    }}
-                    href="/settings" 
-                  >
-                    <Box textAlign="right" w="full" pr="0.5em">
-                      Settings
-                    </Box>
-                  </MenuItem>
+              <MenuList sx={{ bg: "#FBC1AA", borderRadius: "20px", mt: 2 }}>
+                <MenuItem
+                  as="a"
+                  sx={{
+                    bg: "#FBC1AA", borderRadius: "20px", mt: 2,
+                    _hover: { background: "white", color: "#FBC1AA" },
+                    _active: { bg: "white", color: "#FBC1AA" },
+                  }}
+                  href="/settings"
+                >
+                  Settings
+                </MenuItem>
 
                 <Divider orientation="horizontal" />
                 {/* add the menu item link */}
 
+
                 <MenuItem
                   as="a"
                   sx={{
-                    bg:"#FBC1AA", borderRadius:"20px", mt:2,
+                    bg: "#FBC1AA", borderRadius: "20px", mt: 2,
                     _hover: { background: "white", color: "#FBC1AA" },
                     _active: { bg: "white", color: "#FBC1AA" },
                   }}
                   onClick={() => clickLogout()}
                 >
-                  <Box textAlign="right" w="full" pr="0.5em">
-                    Logout
-                    {/* this was the issue for the merge conflict so i brough it back in */}
-                    { userId ?  "login" : "logout" } 
-                  </Box>
+                  {userId ? "login" : "logout"}
                 </MenuItem>
               </MenuList>
             </Portal>
@@ -228,27 +218,17 @@ const Navbar: React.FC = () => {
         </VStack>
       </Flex>
       {/* Drawer */}
-      <Drawer
-        placement="left"
-        onClose={handleDrawerClose}
-        isOpen={hamburgerVisibility}
-      >
+      <Drawer placement="left" onClose={handleDrawerClose} isOpen={hamburgerVisibility}>
         <DrawerOverlay>
           <DrawerContent sx={drawerMain}>
             <DrawerCloseButton size="lg" />
             <DrawerBody>
               <Flex alignItems="center">
                 <Link href="/">
-                  <Image
-                    src="./logo.svg"
-                    alt="Logo"
-                    sx={drawerLogoStyle}
-                    minW="10em"
-                    my="2em"
-                  />
+                  <Image src="./logo.svg" alt="Logo" sx={drawerLogoStyle} minW="10em" my="2em" />
                 </Link>
               </Flex>
-              <HStack justifyContent="center" >
+              <Stack spacing={4} p={4} align="start">
                 <Link href="/journal">
                   <Text sx={drawerLinks}>Guided Journal</Text>
                 </Link>
@@ -258,17 +238,13 @@ const Navbar: React.FC = () => {
                 <Link href="/progress-report">
                   <Text sx={drawerLinks}>Progress Report</Text>
                 </Link>
-                <Link href="/settings">
-                  {" "}
-                  {/* Add the Settings link */}
+                <Link href="/settings"> {/* Add the Settings link */}
                   <Text sx={drawerLinks}>Account Settings</Text>
                 </Link>
-                <Link href="/login">
-                  {" "}
-                  {/* Add the Logout link */}
+                <Link href="/login"> {/* Add the Logout link */}
                   <Text sx={drawerLinks}>Logout</Text>
                 </Link>
-              </HStack>
+              </Stack>
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
