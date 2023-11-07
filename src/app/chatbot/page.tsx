@@ -180,11 +180,12 @@ const Chatbot: React.FC = ({}) => {
             {/* INPUT SECTION */}
             <GridItem
               pl="1em"
+              pr="1em"
               pb="5em"
               background="#15193B"
             >
               <InputGroup width="100%">
-                <InputLeftElement w="88%" pl="1em" pb="3">
+                <InputLeftElement w="87%" pl="1em" pb="3">
                   <Input
                     size="lg"
                     backgroundColor="#737AA8"
@@ -194,7 +195,7 @@ const Chatbot: React.FC = ({}) => {
                     placeholder="Type a message..."
                   />
                 </InputLeftElement>
-                <InputRightElement pr="4.5em" pb="1em">
+                <InputRightElement pr="5em" pb="1em">
                   <HStack>
                   <Button
                     backgroundColor="#2D3258"
@@ -213,12 +214,12 @@ const Chatbot: React.FC = ({}) => {
                   >
                     <Text>Send</Text>
                   </Button>
-                    {/* <IconButton
+                    <IconButton
                       ml={1}
                       aria-label="Stop"
                       icon={<CloseIcon />}
                       onClick={stop}
-                    /> */}
+                    />
                   </HStack>
                 </InputRightElement>
               </InputGroup>

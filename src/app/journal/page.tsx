@@ -141,7 +141,8 @@ const Journal: React.FC = () => {
           </Text>
         )}
 
-        {step !== 2 && (
+
+        {step !== 2 && step !== 4 && (
           <Flex
             flexDirection="column"
             alignItems="center"

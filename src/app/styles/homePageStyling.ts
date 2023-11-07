@@ -31,7 +31,7 @@ export const accountButtonStyle = {
 
 export const dividerStyle = {
   mt: 0,
-  bgGradient: "linear(to-r, #D0A2D1, #F9884AAD)",
+  bgGradient: "linear(to-r, #f0e3f1, #fcc3a4)",
   height: "5px",
   width: "100%",
   border: "none",

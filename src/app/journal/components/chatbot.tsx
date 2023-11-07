@@ -227,7 +227,7 @@ const Chatbot: React.FC = ({}) => {
               background="#15193B"
             >
               <InputGroup width="100%">
-                <InputLeftElement w="85%" pl="1em" pb="1em" pr="2em">
+                <InputLeftElement w="87%" pl="1em" pb="1em" pr="2em">
                   <Input
                     size="lg"
                     backgroundColor="#737AA8"
@@ -237,7 +237,7 @@ const Chatbot: React.FC = ({}) => {
                     placeholder="Type a message..."
                   />
                 </InputLeftElement>
-                <InputRightElement pr="5.5em" pb="1em" >
+                <InputRightElement pr="5em" pb="1em" >
                   <HStack>
                   <Button
                     backgroundColor="#2D3258"

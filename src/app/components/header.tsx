@@ -180,17 +180,24 @@ const Navbar = () => {
               Account
             </MenuButton>
             <Portal>
-              <MenuList sx={{bg:"#FBC1AA", borderRadius:"20px", mt:2}}>
+              <MenuList
+                bg="#FBC1AA"
+                borderRadius="20px"
+                w="full"
+                minW="10em"
+              >
                   <MenuItem
                     as="a"
                     sx={{
-                      bg:"#FBC1AA", borderRadius:"20px", mt:2,
+                      bg:"#FBC1AA", borderRadius:"20px",
                       _hover: { background: "white", color: "#FBC1AA" },
                       _active: { bg: "white", color: "#FBC1AA" },
                     }}
                     href="/settings" 
                   >
-                    Settings
+                    <Box textAlign="right" w="full" pr="0.5em">
+                      Settings
+                    </Box>
                   </MenuItem>
 
                 <Divider orientation="horizontal" />
@@ -204,7 +211,9 @@ const Navbar = () => {
                   }}
                   onClick={() => clickLogout()}
                 >
-                  Logout
+                  <Box textAlign="right" w="full" pr="0.5em">
+                    Logout
+                  </Box>
                 </MenuItem>
               </MenuList>
             </Portal>
