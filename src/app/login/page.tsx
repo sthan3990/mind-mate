@@ -20,8 +20,12 @@ import {
   FormControl,
   FormLabel,
   InputRightElement,
+  Center,
+  Spinner
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { delay } from "lodash";
+import { Metadata } from "next";
 
 export default function JoinOurTeam() {
   //define styles here
@@ -38,16 +42,32 @@ export default function JoinOurTeam() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, userId } = useUser(); // for the context
+  const [statusMessage, setStatusMessage] = useState<string>("");
+  const [isWaiting, setIsWaiting] = useState(false);
+
+
   const router = useRouter();
 
-  const loginRequest = (email: string, password: string) => {
-    login(email, password); // Just call login from context
+  const loginRequest = async (email: string, password: string) => {
+    setStatusMessage("");
+    setIsWaiting(true);
+
+    try {
+      const response = await login(email, password);
+      setStatusMessage(JSON.stringify(response));
+    } catch (error) {
+      setStatusMessage("Login Error. Check Username and/or Password");
+    } finally {
+      setIsWaiting(false);
+    }
   };
 
   useEffect(() => {
     const email = localStorage.getItem("User") || "";
     if (email) {
       push("/");
+    }
+    else {
     }
   }, [loginRequest]);
 
@@ -82,38 +102,48 @@ export default function JoinOurTeam() {
               Welcome Back 👋
             </Heading>
 
+
+
             <Box as={"form"} mt={1} w="full" px={{ base: 6, md: 8, lg: 10 }}>
-              <Stack spacing={4}>
-                <FormControl id="email" isRequired>
-                  <FormLabel>Email address</FormLabel>
-                  <Input
-                    sx={rectangleIconStyle}
-                    type="email"
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </FormControl>
-                <FormControl id="password" isRequired>
-                  <FormLabel>Password</FormLabel>
-                  <InputGroup>
+              {isWaiting ? (
+                <Center h="100%" >
+                  <Spinner size="xl" color="#d0a2d1" />
+                </Center>
+              ) : (
+                <Stack spacing={4}>
+                  <FormControl id="email" isRequired>
+                    <FormLabel>Email address</FormLabel>
                     <Input
                       sx={rectangleIconStyle}
-                      type={showPassword ? "text" : "password"}
-                      onChange={(event) => setPassword(event.target.value)}
+                      type="email"
+                      onChange={(event) => setEmail(event.target.value)}
                     />
-                    <InputRightElement h={"full"}>
-                      <Button
-                        variant={"ghost"}
-                        onClick={() =>
-                          setShowPassword((prevState) => !prevState)
-                        }
-                      >
-                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </FormControl>
-              </Stack>
+                  </FormControl>
+                  <FormControl id="password" isRequired>
+                    <FormLabel>Password</FormLabel>
+                    <InputGroup>
+                      <Input
+                        sx={rectangleIconStyle}
+                        type={showPassword ? "text" : "password"}
+                        onChange={(event) => setPassword(event.target.value)}
+                      />
+                      <InputRightElement h={"full"}>
+                        <Button
+                          variant={"ghost"}
+                          onClick={() =>
+                            setShowPassword((prevState) => !prevState)
+                          }
+                        >
+                          {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+                  </FormControl>
+                </Stack>
+              )}
+              
             </Box>
+
 
             <Stack
               spacing={5}
@@ -130,6 +160,9 @@ export default function JoinOurTeam() {
               >
                 Log In
               </Button>
+
+              {statusMessage && <Text>{statusMessage}</Text>}
+
             </Stack>
           </Stack>
         </Box>

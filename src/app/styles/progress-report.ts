@@ -25,4 +25,11 @@ export const styling = {
     color: "#FFFFFF",
     textAlign: "center",
   },
+  dropdown: {
+    fontFamily: fonts.body,
+    fontWeight: "bold",
+    bg: "#f2e5fc",
+    width: "10.5em",
+    borderColor: "black",
+  },
 };

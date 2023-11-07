@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
   Image,
+  Center,
   useColorModeValue,
 } from '@chakra-ui/react'
 
@@ -28,9 +29,13 @@ export default function Footer() {
           spacing={8}>
           <Stack spacing={6}>
             <Box>
+              <Center>  
               <Image src="./logo.svg" alt="Mind Mate"/>
+              </Center>
             </Box>
-            <Text fontSize={'sm'}>© 2022 Chakra Templates. All rights reserved</Text>
+            <Center>
+            <Text fontSize={'sm'}>© 2023 MindMates. All rights reserved</Text>
+            </Center>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Product</ListHeader>

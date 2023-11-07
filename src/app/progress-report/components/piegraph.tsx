@@ -3,9 +3,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "@/app/contexts/UserContext";
-import { Text, Tooltip } from "@chakra-ui/react";
 import { PieChart, Pie, Cell, Label } from "recharts";
-
+import {
+  Box,
+  Flex,
+  Text,
+  SimpleGrid,
+} from '@chakra-ui/react';
+import { text } from "stream/consumers";
 // Define an array of colors for the pie chart segments
 const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#0088FE", "#00C49F"];
 
@@ -23,7 +28,7 @@ interface CustomLabelProps {
   innerRadius: number;
   outerRadius: number;
   percentage: number;
-  name: string; 
+  name: string;
 }
 
 const PieGraphComponent: React.FC = () => {
@@ -36,7 +41,7 @@ const PieGraphComponent: React.FC = () => {
   >([]);
 
   const [questionData, setQuestionData] = useState<
-  { name: string; amountclicked: number; percentage: number }[]
+    { name: string; amountclicked: number; percentage: number }[]
   >([]);
 
   //const { userId } = useUser();
@@ -60,29 +65,37 @@ const PieGraphComponent: React.FC = () => {
     midAngle,
     innerRadius,
     outerRadius,
-    percentage, 
+    percentage,
     name
   }) => {
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    let textContent = "";
 
-    if (percentage != 0) {
-
-      return (
-        <text
-          x={x}
-          y={y}
-          fill="white"
-          textAnchor={x > cx ? "start" : "end"}
-        >
-          {`${name} - ${percentage}%`}
-        </text>
-      );
+    if (["1", "3", "5"].includes(name) && percentage != 0) {
+      textContent = `Num_Ques ${name} - ${percentage}%`;
     }
-  };
- 
+
+    else if (!["1", "3", "5"].includes(name) && percentage != 0) {
+      textContent = `${name} - ${percentage}%`;
+    }
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="black"
+        textAnchor={x > cx ? "start" : "end"}
+      >
+        {textContent}
+      </text>
+    );
+  }
+
+
+
   const sortQuestionData = () => {
     const questionsAnalytics: {
       name: string;
@@ -106,11 +119,11 @@ const PieGraphComponent: React.FC = () => {
       }
     });
 
-      // Calculate percentages and average
-  const totalClicked = questionsAnalytics.reduce((total, question) => total + question.amountclicked, 0);
-  questionsAnalytics.forEach((question) => {
-    question.percentage = (question.amountclicked / totalClicked) * 100;
-  });
+    // Calculate percentages and average
+    const totalClicked = questionsAnalytics.reduce((total, question) => total + question.amountclicked, 0);
+    questionsAnalytics.forEach((question) => {
+      question.percentage = (question.amountclicked / totalClicked) * 100;
+    });
 
 
     // Update the state after processing the graphData
@@ -201,96 +214,75 @@ const PieGraphComponent: React.FC = () => {
   };
 
   return (
-    <div style={{ marginLeft: "1em" }}>
-      <div
-        style={{
-          paddingTop: "20px",
-          display: "flex",
-        }}
-      >
-        <div>
-          <Text>
-            Your Mood Before Journal - Range is all of time right now{" "}
-          </Text>
-          <PieChart width={550} height={225}>
-            <Pie
-              data={preMoodData}
-              outerRadius={100}
-              cx="50%"
-              cy="50%"
-              dataKey="percentage"
-              label={CustomLabel}
-            >
-              {preMoodData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-          </PieChart>
-        </div>
+    <>
+      <Box>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing="20px">
+          {/* Graph 1 Section */}
+          <Box>
+            <Text>Your Mood Before Journal - Range is all of time right now</Text>
+            <PieChart width={550} height={225}>
+              <Pie
+                data={preMoodData}
+                outerRadius={100}
+                cx="50%"
+                cy="50%"
+                dataKey="percentage"
+                label={CustomLabel}
+              >
+                {preMoodData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </Box>
 
+          {/* Graph 2 Section */}
+          <Box>
+            <Text>Your Mood After Journal - Range is all of time right now</Text>
+            <PieChart width={550} height={225}>
+              <Pie
+                data={postMoodData}
+                dataKey="percentage"
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                label={CustomLabel}
+              >
+                {postMoodData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </Box>
+        </SimpleGrid>
 
-        <div>
-          <Text>Your Mood After Journal - Range is all of time right now</Text>
-          <PieChart width={550} height={225}>
-            <Pie
-              data={postMoodData}
-              dataKey="percentage"
-              cx="50%"
-              cy="50%"
-              outerRadius={100}
-              label={CustomLabel}
-            >
-              {postMoodData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-          </PieChart>
-
-        </div>
-      </div>
-      <div
-        style={{
-          paddingTop: "20px",
-          display: "flex",
-        }}
-      >
-        <div>
-          <Text>Breakdown of Number of Questions</Text>
-          <PieChart width={550} height={225}>
-            <Pie
-              data={questionData}
-              dataKey="amountclicked"
-              cx="50%"
-              cy="50%"
-              outerRadius={100}
-              label={CustomLabel}
-
-            >
-              {questionData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-          </PieChart>
-        </div>
-
-        <div
-          style={{
-            margin: "30px",
-          }}
-        >
+        {/* Mood Legend Section */}
+        <Box justifyContent="left" textAlign="left">
           {MoodLegend()}
-        </div>
-      </div>
-    </div >
+        </Box>
+
+        {/* Graph 3 Section (Centered) */}
+        <Flex justifyContent="center" textAlign="center" marginTop="10px">
+          <Box>
+            <Text>Breakdown of Number of Questions</Text>
+            <PieChart width={550} height={225}>
+              <Pie
+                data={questionData}
+                dataKey="amountclicked"
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                label={CustomLabel}
+              >
+                {questionData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </Box>
+        </Flex>
+      </Box>
+    </>
   );
 }
 

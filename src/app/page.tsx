@@ -90,15 +90,14 @@ const Navbar = () => {
   });
 
  // Redirect to register page if userId is null
-if (!userId) {
-  router.push("/register");
-  return null; // Return null to avoid rendering content in this case
-}
-
+//  if (!userId) {
+//   router.push("/register");
+//   return null; // Return null to avoid rendering content in this case
+// }
 
   return (
     <ChakraProvider theme={theme}>
-      <Flex direction="column" minHeight="100vh">
+       <Flex direction="column" minHeight="100vh">
         {/* Navbar Container with Background Color */}
         <Flex direction="column"
           align="center"

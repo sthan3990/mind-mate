@@ -16,8 +16,8 @@ const Weather = () => {
 
   const weatherTextStyle = {
     fontFamily: fonts.alternative,
-    fontSize: "20",
-    color: '#FE8F5580',
+    fontSize: "20px",
+    color: 'red',
   };
 
   useEffect(() => {
