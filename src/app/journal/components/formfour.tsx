@@ -2,7 +2,7 @@
 'use client';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { VStack, Spacer, SimpleGrid, Heading, Image, Stack, Box, Text } from '@chakra-ui/react';
+import { HStack, VStack, Flex, Heading, Image, Stack, Box, Text } from '@chakra-ui/react';
 import { fonts } from "@/theme/fonts";
 import * as styles from '@/app/styles/journalStyle';
 
@@ -15,7 +15,7 @@ const FormFour: React.FC = ({ }) => {
   const mainImageStyle = styles.mainImageStyle;
   const textStyle = styles.textStyle;
   const headingStyle = styles.headingStyle;
- 
+
   // Code generator 
   useEffect(() => {
 
@@ -28,50 +28,53 @@ const FormFour: React.FC = ({ }) => {
   }, [])
 
   return (
-    <SimpleGrid 
-    bg="#F9F2FF" 
-    spacing={0.1} w="full" 
-    minChildWidth="320px"
+    <Flex 
+      direction="row" 
+      wrap="nowrap"
+      w="full"
+      h="20em"
+      align="stretch"
+      bg="#F9F2FF"
     >
-   
       {/* Left Side with Quote */}
       <VStack 
-        bg="#F9F2FF" 
-        justifyContent="center"
-        align='stretch'
-        color="black"
-        sx={leftSideStyle}
-        spacing={2}
+        flex="1"
+        p={20}
+        align="start"
+        bg="#F9F2FF"
+      >
+        <Heading 
+          fontSize={"2xl"} 
+          fontFamily={fonts.alternative}
         >
-            
-          <Box p={{ base: 4, md: 6, lg: 8 }}>
-          <Heading 
-          fontSize={"4xl"} 
-          fontFamily={fonts.heading}
-           sx={headingStyle}>
-            &quot;{quoteMessage}&quot;
-          </Heading>
-        </Box>
-
-        <Box>
-          <Text sx={textStyle}> 
-            {`By ${quoteAuthor} `}
-          </Text>
-        </Box>
-
+          &quot;{quoteMessage}&quot;
+        </Heading>
+        <Text 
+          fontSize="lg"
+          alignSelf="flex-end"
+        >
+          — {quoteAuthor}
+        </Text>
       </VStack>
 
-      <Stack bg="#F9F2FF" color="black" sx={rightSideStyle}>
-        <Box sx={mainImageStyle}>
-          {/* Main Image */}
-          <Image
-            background="transparent"
-             src="/journal/pagefour.png" 
-             alt="Mind Mate"
-              />
-        </Box>
-        </Stack>
-    </SimpleGrid>
+      {/* Right Side with Image */}
+      <Box 
+        flex="1.5"
+        position="relative"
+        bg="#F9F2FF"
+      >
+        <Image
+          position="absolute"
+          right={0}
+          bottom={0}
+          w="auto"
+          h="full"
+          opacity={0.7}
+          src="/journal/pagefour.png" 
+          alt="Mind Mate"
+        />
+      </Box>
+    </Flex>
   );
 };
 

@@ -12,6 +12,7 @@ import {
   Box,
   Divider,
   HStack,
+  VStack,
   Stack,
   Menu,
   MenuButton,
@@ -28,7 +29,8 @@ import {
   Drawer,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton
+  DrawerCloseButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import * as styles from './styles/homePageStyling';
 
@@ -80,6 +82,13 @@ const Navbar = () => {
     setHamburgerVisibility(false);
   };
 
+
+  
+  const accountButtonResponsiveStyle = useBreakpointValue({
+    base: { borderRadius: "550px", minW: "40px", p: 2 }, 
+    md: { borderRadius: "550px", minW: "130px", p: 4 }
+  });
+
  // Redirect to register page if userId is null
 //  if (!userId) {
 //   router.push("/register");
@@ -129,53 +138,74 @@ const Navbar = () => {
             </Flex>
             {/* Menu Links */}
 
-            <Menu>
-              <MenuButton as={Button} borderRadius="550px" sx={accountButtonStyle} display={{ base: 'none', md: 'flex' }}>
-                Account
-              </MenuButton>
-              <Portal>
-                <MenuList bg="#FBC1AA" borderRadius="20px" mt={2}>
-                  <Link href="/settings">
-                    <MenuItem
-                      as="a"
-                      sx={{
-                        _hover: { background: "white", color: "#FBC1AA" },
-                        _active: { bg: "white", color: "#FBC1AA" },
-                      }}
-                    >
-                      Settings
-                    </MenuItem>
-                  </Link>
-
-                  <Divider orientation="horizontal" />
-
-                  {!userId ? (
-                    <Link href="/login" passHref>
+            <VStack align="stretch" spacing={-1}>
+              <Menu>
+                <MenuButton 
+                  as={Button}
+                  borderRadius="550px"
+                  sx={{ ...accountButtonStyle, ...accountButtonResponsiveStyle }}
+                  maxW="7em"
+                  minW="6em"
+                  display={{ base: "none", md: "flex" }}
+                  flexShrink={0}
+                >
+                  Account
+                </MenuButton>
+                <Portal>
+                  <MenuList
+                    bg="#FBC1AA"
+                    borderRadius="20px"
+                    w="full"
+                    minW="10em"
+                  >
                       <MenuItem
                         as="a"
                         sx={{
+                          bg:"#FBC1AA", borderRadius:"20px",
                           _hover: { background: "white", color: "#FBC1AA" },
                           _active: { bg: "white", color: "#FBC1AA" },
                         }}
+                        href="/settings"
                       >
-                        Login
+                        <Box textAlign="right" w="full" pr="0.5em">
+                          Settings
+                        </Box>
                       </MenuItem>
-                    </Link>
-                  ) : (
-                    <MenuItem
-                      as="a"
-                      sx={{
-                        _hover: { background: "white", color: "#FBC1AA" },
-                        _active: { bg: "white", color: "#FBC1AA" },
-                      }}
-                      onClick={() => clickLogout()}
-                    >
-                      Logout
-                    </MenuItem>
-                  )}
-                </MenuList>
-              </Portal>
-            </Menu>
+
+                    <Divider orientation="horizontal" />
+
+                    {!userId ? (
+                      <Link href="/login" passHref>
+                        <MenuItem
+                          as="a"
+                          sx={{
+                            bg:"#FBC1AA", borderRadius:"200px",
+                            _hover: { background: "white", color: "#FBC1AA" },
+                            _active: { bg: "white", color: "#FBC1AA" },
+                          }}
+                        >
+                          <Box textAlign="right" w="full" pr="0.5em">
+                            Login
+                          </Box>
+                        </MenuItem>
+                      </Link>
+                    ) : (
+                      <MenuItem
+                        as="a"
+                        sx={{
+                          bg:"#FBC1AA", borderRadius:"20px", mt:2,
+                          _hover: { background: "white", color: "#FBC1AA" },
+                          _active: { bg: "white", color: "#FBC1AA" },
+                        }}
+                        onClick={() => clickLogout()}
+                      >
+                        Logout
+                      </MenuItem>
+                    )}
+                  </MenuList>
+                </Portal>
+              </Menu>
+            </VStack>
           </Flex>
         </Flex>
         {/* Drawer */}

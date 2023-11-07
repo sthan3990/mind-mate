@@ -36,6 +36,7 @@ import * as styles from "../styles/headerStyle";
 import { useRouter } from "next/navigation";
 import { useUser } from "../contexts/UserContext";
 import Weather from "./weather";
+const { userId } = useUser();
 
 const theme = extendTheme({
   breakpoints: {
@@ -182,23 +183,29 @@ const Navbar = () => {
               Account
             </MenuButton>
             <Portal>
-              <MenuList sx={{bg:"#FBC1AA", borderRadius:"20px", mt:2}}>
+              <MenuList
+                bg="#FBC1AA"
+                borderRadius="20px"
+                w="full"
+                minW="10em"
+              >
                   <MenuItem
                     as="a"
                     sx={{
-                      bg:"#FBC1AA", borderRadius:"20px", mt:2,
+                      bg:"#FBC1AA", borderRadius:"20px",
                       _hover: { background: "white", color: "#FBC1AA" },
                       _active: { bg: "white", color: "#FBC1AA" },
                     }}
                     href="/settings" 
                   >
-                    Settings
+                    <Box textAlign="right" w="full" pr="0.5em">
+                      Settings
+                    </Box>
                   </MenuItem>
 
                 <Divider orientation="horizontal" />
                 {/* add the menu item link */}
 
-               
                 <MenuItem
                   as="a"
                   sx={{
@@ -208,7 +215,11 @@ const Navbar = () => {
                   }}
                   onClick={() => clickLogout()}
                 >
-                   { userId ?  "login" : "logout" }
+                  <Box textAlign="right" w="full" pr="0.5em">
+                    Logout
+                    {/* this was the issue for the merge conflict so i brough it back in */}
+                    { userId ?  "login" : "logout" } 
+                  </Box>
                 </MenuItem>
               </MenuList>
             </Portal>
