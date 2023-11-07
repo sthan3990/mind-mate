@@ -81,10 +81,10 @@ const Navbar = () => {
   };
 
  // Redirect to register page if userId is null
- if (!userId) {
-  router.push("/register");
-  return null; // Return null to avoid rendering content in this case
-}
+//  if (!userId) {
+//   router.push("/register");
+//   return null; // Return null to avoid rendering content in this case
+// }
 
   return (
     <ChakraProvider theme={theme}>
