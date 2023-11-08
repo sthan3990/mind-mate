@@ -10,7 +10,6 @@ interface FormTwoProps {
   handleContinue: () => void;
 }
 
-
 const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
 
   const { numMessages, setNumMessages } = useNumMessages();
@@ -22,6 +21,8 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
 
     // Initialize messageFinished based on the stored value
     setMessageFinished(isMessageFinished);
+
+    localStorage.setItem("lastQuestion","false");
 
      // One question before end, let ChatBot page know
     if (numMessages < numQuestions) {
@@ -41,8 +42,6 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
         timer();
       }
     }
-    
-
   }, [numMessages, numQuestions, handleContinue]);
 
 // Your function that you want to delay

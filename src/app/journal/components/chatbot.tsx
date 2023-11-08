@@ -96,7 +96,7 @@ const Chatbot: React.FC = ({ }) => {
       localStorage.setItem("setMessageFinished", "true");
 
       // enable send button 
-      enableSendField();
+      //enableSendField();
 
       // turn off spinner when message is done
       setIsWaiting(false);
