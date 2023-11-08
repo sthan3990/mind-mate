@@ -47,7 +47,7 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
 
           // Go to next page
           handleContinue();
-        }, 1500);
+        }, 3000);
         timer();
       // }
     }

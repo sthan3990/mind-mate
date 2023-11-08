@@ -88,7 +88,7 @@ const Chatbot: React.FC = ({ }) => {
         setInput("");
 
         // stop the chat
-        stop();
+        //stop();
       }
     },
     onFinish: (res) => {
@@ -100,7 +100,6 @@ const Chatbot: React.FC = ({ }) => {
 
       // turn off spinner when message is done
       setIsWaiting(false);
-
 
       // let the API know we are at the last question
       localStorage.setItem("lastQuestion", "false");
