@@ -27,7 +27,8 @@ import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../helper/numofmessages";
 
 const Chatbot: React.FC = ({}) => {
-  const { userId } = useUser();
+  // const { userId } = useUser();
+  const userId = "96";
   const [chatUsed, setChatUsed] = useState(true);
   const { numMessages, setNumMessages } = useNumMessages();
   const [copyValue, setCopyValue] = useState("");
@@ -51,7 +52,6 @@ const Chatbot: React.FC = ({}) => {
     setIsSendFieldDisabled(false);
   };
 
-
   const {
     messages,
     setInput,
@@ -64,23 +64,23 @@ const Chatbot: React.FC = ({}) => {
     api: "/api/chatbot",
 
     onResponse: (res) => {
-      localStorage.setItem("setMessageFinished", "false");
+      // localStorage.setItem("setMessageFinished", "false");
 
-      const lastQuestion = localStorage.getItem("lastQuestion");
+      // const lastQuestion = localStorage.getItem("lastQuestion");
 
-      if (lastQuestion == "true") {
-        append({
-          content: "Good Bye",
-          // The content of the message
-          role: "user",
-        });
+      // if (lastQuestion == "true") {
+      //   append({
+      //     content: "Good Bye",
+      //     // The content of the message
+      //     role: "user",
+      //   });
 
         // clear input area
         setInput("");
 
-        // stop the chat
-        stop();
-      }
+        // // stop the chat
+        // stop();
+      
     },
     onFinish: (res) => {
 
@@ -90,8 +90,8 @@ const Chatbot: React.FC = ({}) => {
       // turn off spinner when message is done
       setIsWaiting(false);
 
-      setNumMessages(numMessages + 1); // Increment numMessages
-      localStorage.setItem("setMessageFinished", "true");
+      // setNumMessages(numMessages + 1); // Increment numMessages
+      // localStorage.setItem("setMessageFinished", "true");
     },
   });
 
@@ -106,7 +106,6 @@ const Chatbot: React.FC = ({}) => {
 
      // disable send button 
     disableSendField();
-
 
     handleSubmit(e);
   };
