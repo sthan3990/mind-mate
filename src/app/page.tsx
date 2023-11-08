@@ -254,7 +254,7 @@ const Navbar = () => {
           flexGrow={1}
           p={4} // This adds padding to the Flex container to prevent content from touching the edges of the screen
         >
-          <Flex direction={{ base: "column", md: "row" }} align="center" mt={["-7%", "-7%", "15%", "10%"]} mb={["2%", "6%", "0%", "0%"]} >
+          <Flex direction={{ base: "column", md: "row" }} align="center" mt={["0%", "0%", "15%", "10%"]} mb={["2%", "6%", "0%", "0%"]} >
             <Text>
             </Text>
             <Text sx={chatStyle} m={{ base: 0, md: 2 }}>Chat.</Text> {/* Apply margin individually if you're using sx for other styles */}

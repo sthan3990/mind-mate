@@ -36,7 +36,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <UserProvider>
           {" "}
-          {/* Wrap your application with UserProvider */}
           <ChakraUiProvider>
             <ChangePageTitle title={usePathname()} />
             <NumMessagesProvider>
