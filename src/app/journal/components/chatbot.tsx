@@ -42,9 +42,11 @@ const Chatbot: React.FC = ({ }) => {
   const [isSendFieldDisabled, setIsSendFieldDisabled] = useState(false);
 
   const createChatCBTItem = () => {
-    axios.post("/api/chatbot-create", { userId }).then((res) => {
-      console.log(res);
-    });
+    if (userId) {
+      axios.post("/api/chatbot-create", { userId }).then((res) => {
+        console.log(res);
+      });
+    }
   };
 
   // Function to disable the send button
