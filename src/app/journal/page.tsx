@@ -114,6 +114,7 @@ const Journal: React.FC = () => {
         {step === 0 && <InitialJournal setNumQuestions={setNumQuestions} />}
         {step === 1 && <FormOne setpreMoodState={setpreMoodState} />}
         {step === 2 && (
+          
           <FormTwo
             numQuestions={numQuestions}
             handleContinue={handleContinue}

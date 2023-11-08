@@ -81,7 +81,7 @@ const Chatbot: React.FC = ({ }) => {
         append({
           content: "Good Bye",
           // The content of the message
-          role: "user",
+          role: "assistant",
         });
 
         // clear input area

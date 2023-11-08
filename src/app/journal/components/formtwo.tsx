@@ -12,36 +12,42 @@ interface FormTwoProps {
 
 const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
 
-  const { numMessages, setNumMessages } = useNumMessages();
+  const {numMessages, setNumMessages } = useNumMessages();
   const [messageFinished, setMessageFinished] = useState<boolean | null>(null);
-
+  
   useEffect(() => {
-    // Get the 'setMessageFinished' value from localStorage
-    const isMessageFinished = localStorage.getItem("setMessageFinished") === "true";
+    // // Get the 'setMessageFinished' value from localStorage
+    // const isMessageFinished = localStorage.getItem("setMessageFinished") === "true"
 
-    // Initialize messageFinished based on the stored value
-    setMessageFinished(isMessageFinished);
+    // // Initialize messageFinished based on the stored value
+    // setMessageFinished(isMessageFinished);
 
-     // One question before end, let ChatBot page know
+    //  // One question before end, let ChatBot page know
     if (numMessages < numQuestions) {
-      if (isMessageFinished) {
-        localStorage.setItem("lastQuestion", "true");
-      }
+
+      // if (isMessageFinished) {
+      //   // let the API know we are at the last question
+      //  // localStorage.setItem("lastQuestion", "true");
+      // }
+
     // End the conversation
     } else if (numMessages === numQuestions) {
 
-      localStorage.setItem("lastQuestion","false");
+      // // If they're equal, run a delayed function and reset numMessages
+      // if (isMessageFinished) {
 
-      // If they're equal, run a delayed function and reset numMessages
-      if (isMessageFinished) {
+        // let the API know we are at the last question
+        localStorage.setItem("lastQuestion", "true");
+        
         // 1.5 second delay
         const timer = debounce(() => {
           // Reset numMessages and trigger the continue action
           setNumMessages(0);
+          // Go to next page
           handleContinue();
         }, 1500);
         timer();
-      }
+      // }
     }
   }, [numMessages, numQuestions, handleContinue]);
 
