@@ -36,13 +36,15 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
       // // If they're equal, run a delayed function and reset numMessages
       // if (isMessageFinished) {
 
-        // let the API know we are at the last question
-        localStorage.setItem("lastQuestion", "true");
-        
         // 1.5 second delay
         const timer = debounce(() => {
+
+          // let the API know we are at the last question
+          localStorage.setItem("lastQuestion", "true");
+          
           // Reset numMessages and trigger the continue action
           setNumMessages(0);
+
           // Go to next page
           handleContinue();
         }, 1500);

@@ -100,6 +100,11 @@ const Chatbot: React.FC = ({ }) => {
 
       // turn off spinner when message is done
       setIsWaiting(false);
+
+
+      // let the API know we are at the last question
+      localStorage.setItem("lastQuestion", "false");
+        
     },
 
   });
