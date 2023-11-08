@@ -22,8 +22,6 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
     // Initialize messageFinished based on the stored value
     setMessageFinished(isMessageFinished);
 
-    localStorage.setItem("lastQuestion","false");
-
      // One question before end, let ChatBot page know
     if (numMessages < numQuestions) {
       if (isMessageFinished) {
@@ -31,6 +29,9 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
       }
     // End the conversation
     } else if (numMessages === numQuestions) {
+
+      localStorage.setItem("lastQuestion","false");
+
       // If they're equal, run a delayed function and reset numMessages
       if (isMessageFinished) {
         // 1.5 second delay

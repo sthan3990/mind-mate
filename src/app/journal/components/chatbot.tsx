@@ -76,7 +76,7 @@ const Chatbot: React.FC = ({ }) => {
       localStorage.setItem("setMessageFinished", "false");
 
       const lastQuestion = localStorage.getItem("lastQuestion");
-
+      
       if (lastQuestion == "true") {
         append({
           content: "Good Bye",
