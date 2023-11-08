@@ -117,7 +117,7 @@ const Chatbot: React.FC = ({ }) => {
     setIsWaiting(true);
 
     // disable send button 
-    disableSendField();
+    //disableSendField();
 
     handleSubmit(e)
 
