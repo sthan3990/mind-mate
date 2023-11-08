@@ -88,6 +88,10 @@ const Navbar: React.FC = () => {
     router.push("register");
   };
 
+  const clickLogin = () => {
+    router.push("login");
+  };
+
   const accountButtonResponsiveStyle = useBreakpointValue({
     base: { borderRadius: "550px", minW: "40px", p: 2 },
     md: { borderRadius: "550px", minW: "130px", p: 4 },
@@ -190,19 +194,37 @@ const Navbar: React.FC = () => {
                 <Divider orientation="horizontal" />
                 {/* add the menu item link */}
 
-                <MenuItem
-                  as="a"
-                  sx={{
-                    bg: "#FBC1AA",
-                    borderRadius: "20px",
-                    mt: 2,
-                    _hover: { background: "white", color: "#FBC1AA" },
-                    _active: { bg: "white", color: "#FBC1AA" },
-                  }}
-                  onClick={() => clickLogout()}
-                >
-                  Logout
-                </MenuItem>
+                {userId ? (
+                  <MenuItem
+                    as="a"
+                    sx={{
+                      bg: "#FBC1AA",
+                      borderRadius: "20px",
+                      mt: 2,
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" },
+                    }}
+                    onClick={() => clickLogout()}
+                  >
+                    {" "}
+                    Logout
+                  </MenuItem>
+                ) : (
+                  <MenuItem
+                    as="a"
+                    sx={{
+                      bg: "#FBC1AA",
+                      borderRadius: "20px",
+                      mt: 2,
+                      _hover: { background: "white", color: "#FBC1AA" },
+                      _active: { bg: "white", color: "#FBC1AA" },
+                    }}
+                    onClick={() => clickLogin()}
+                  >
+                    {" "}
+                    Login
+                  </MenuItem>
+                )}
               </MenuList>
             </Portal>
           </Menu>
