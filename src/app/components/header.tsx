@@ -90,9 +90,8 @@ const Navbar: React.FC = () => {
 
   const accountButtonResponsiveStyle = useBreakpointValue({
     base: { borderRadius: "550px", minW: "40px", p: 2 },
-    md: { borderRadius: "550px", minW: "130px", p: 4 }
+    md: { borderRadius: "550px", minW: "130px", p: 4 },
   });
-
 
   return (
     <ChakraProvider theme={theme}>
@@ -104,11 +103,11 @@ const Navbar: React.FC = () => {
         justifyContent="space-between"
         sx={{
           height: { base: "6em", md: "5em" },
-          paddingTop: "10px"
+          paddingTop: "10px",
         }}
       >
         {/* 1. Logo and MindMate Text Section and the Vertical Line */}
-        <Flex alignItems="center" gap={4} >
+        <Flex alignItems="center" gap={4}>
           <Link href="/">
             <Image
               src="./logo.svg"
@@ -118,15 +117,10 @@ const Navbar: React.FC = () => {
             />
           </Link>
           <Link href="/">
-            <Text sx={mindMateStyle}>
-              MindMate
-            </Text>
+            <Text sx={mindMateStyle}>MindMate</Text>
           </Link>
           {/* Vertical Line Section */}
-          <Divider
-            orientation="vertical"
-            sx={verticalLineStyle}
-          />
+          <Divider orientation="vertical" sx={verticalLineStyle} />
         </Flex>
 
         {/* 2. Hamburger Menu */}
@@ -139,9 +133,6 @@ const Navbar: React.FC = () => {
           ml="12em"
           sx={{ borderColor: "white", boxSize: "3.2rem", fontSize: "1.5rem" }}
         />
-
-
-
 
         {/* 3. Text Section */}
         <Stack
@@ -185,7 +176,9 @@ const Navbar: React.FC = () => {
                 <MenuItem
                   as="a"
                   sx={{
-                    bg: "#FBC1AA", borderRadius: "20px", mt: 2,
+                    bg: "#FBC1AA",
+                    borderRadius: "20px",
+                    mt: 2,
                     _hover: { background: "white", color: "#FBC1AA" },
                     _active: { bg: "white", color: "#FBC1AA" },
                   }}
@@ -197,35 +190,46 @@ const Navbar: React.FC = () => {
                 <Divider orientation="horizontal" />
                 {/* add the menu item link */}
 
-
                 <MenuItem
                   as="a"
                   sx={{
-                    bg: "#FBC1AA", borderRadius: "20px", mt: 2,
+                    bg: "#FBC1AA",
+                    borderRadius: "20px",
+                    mt: 2,
                     _hover: { background: "white", color: "#FBC1AA" },
                     _active: { bg: "white", color: "#FBC1AA" },
                   }}
                   onClick={() => clickLogout()}
                 >
-                  {userId ? "login" : "logout"}
+                  Logout
                 </MenuItem>
               </MenuList>
             </Portal>
           </Menu>
-          <Box display={{ base: 'none', md: 'block' }}>
+          <Box display={{ base: "none", md: "block" }}>
             <Weather />
           </Box>
         </VStack>
       </Flex>
       {/* Drawer */}
-      <Drawer placement="left" onClose={handleDrawerClose} isOpen={hamburgerVisibility}>
+      <Drawer
+        placement="left"
+        onClose={handleDrawerClose}
+        isOpen={hamburgerVisibility}
+      >
         <DrawerOverlay>
           <DrawerContent sx={drawerMain}>
             <DrawerCloseButton size="lg" />
             <DrawerBody>
               <Flex alignItems="center">
                 <Link href="/">
-                  <Image src="./logo.svg" alt="Logo" sx={drawerLogoStyle} minW="10em" my="2em" />
+                  <Image
+                    src="./logo.svg"
+                    alt="Logo"
+                    sx={drawerLogoStyle}
+                    minW="10em"
+                    my="2em"
+                  />
                 </Link>
               </Flex>
               <Stack spacing={4} p={4} align="start">
@@ -238,10 +242,14 @@ const Navbar: React.FC = () => {
                 <Link href="/progress-report">
                   <Text sx={drawerLinks}>Progress Report</Text>
                 </Link>
-                <Link href="/settings"> {/* Add the Settings link */}
+                <Link href="/settings">
+                  {" "}
+                  {/* Add the Settings link */}
                   <Text sx={drawerLinks}>Account Settings</Text>
                 </Link>
-                <Link href="/login"> {/* Add the Logout link */}
+                <Link href="/login">
+                  {" "}
+                  {/* Add the Logout link */}
                   <Text sx={drawerLinks}>Logout</Text>
                 </Link>
               </Stack>

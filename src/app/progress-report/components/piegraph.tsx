@@ -40,8 +40,7 @@ const PieGraphComponent: React.FC = () => {
     { name: string; amountclicked: number; percentage: number }[]
   >([]);
 
-  //const { userId } = useUser();
-  const userId = "57";
+  const { userId } = useUser();
 
   const fetchData = () => {
     axios
@@ -72,9 +71,7 @@ const PieGraphComponent: React.FC = () => {
 
     if (["1", "3", "5"].includes(name) && percentage != 0) {
       textContent = `Num_Ques ${name} - ${percentage}%`;
-
     } else if (!["1", "3", "5"].includes(name) && percentage != 0) {
-
       textContent = `${name} - ${percentage}%`;
     }
 
@@ -99,7 +96,6 @@ const PieGraphComponent: React.FC = () => {
     graphData.forEach((item: PieGraphProps) => {
       const chosenNumQuestions = item.num_questions;
 
-
       if (
         chosenNumQuestions === 1 ||
         chosenNumQuestions === 3 ||
@@ -108,7 +104,6 @@ const PieGraphComponent: React.FC = () => {
         const index = questionsAnalytics.findIndex(
           (q) => q.name === chosenNumQuestions.toString()
         );
-
 
         if (index !== -1) {
           questionsAnalytics[index].amountclicked++;
@@ -126,7 +121,6 @@ const PieGraphComponent: React.FC = () => {
     questionsAnalytics.forEach((question) => {
       question.percentage = (question.amountclicked / totalClicked) * 100;
     });
-
 
     // Update the state after processing the graphData
     setQuestionData(questionsAnalytics);
@@ -217,7 +211,6 @@ const PieGraphComponent: React.FC = () => {
 
   return (
     <div style={{ margin: "15px" }}>
-
       <Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing="20px">
           {/* Graph 1 Section */}
@@ -247,7 +240,6 @@ const PieGraphComponent: React.FC = () => {
 
           {/* Graph 2 Section */}
           <Box>
-
             <Text>
               Your Mood After Journal - Range is all of time right now
             </Text>
@@ -292,17 +284,14 @@ const PieGraphComponent: React.FC = () => {
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
                   />
-
                 ))}
               </Pie>
             </PieChart>
           </Box>
         </Flex>
       </Box>
-
     </div>
-
   );
-}
+};
 
 export default PieGraphComponent;
