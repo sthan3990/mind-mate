@@ -31,6 +31,7 @@ import {
 import { useChat } from "ai/react";
 import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../../helper/numofmessages";
+import ChatInitialPage from "./chatinitial";
 
 const Chatbot: React.FC = ({ }) => {
   const { userId } = useUser();
@@ -40,6 +41,7 @@ const Chatbot: React.FC = ({ }) => {
   const { hasCopied, onCopy } = useClipboard(copyValue);
   const [isWaiting, setIsWaiting] = useState(false);
   const [isSendFieldDisabled, setIsSendFieldDisabled] = useState(false);
+  const [isFirstRun, setisFirstRun] = useState(true);
 
   const createChatCBTItem = () => {
     if (userId) {
@@ -48,6 +50,19 @@ const Chatbot: React.FC = ({ }) => {
       });
     }
   };
+
+  const handleOptionClick = (option: string) => { 
+
+    // start the conversation with option clicked by user
+    append({ content: option, role: "user" });
+
+    // Send it off 
+    setisFirstRun(false);
+
+    // decrement the number of messages so this doesn't count towards max
+    setNumMessages(numMessages - 1); // Increment numMessages
+    
+  }
 
   // Function to disable the send button
   const disableSendField = () => {
@@ -75,24 +90,10 @@ const Chatbot: React.FC = ({ }) => {
 
       localStorage.setItem("setMessageFinished", "false");
 
-      const lastQuestion = localStorage.getItem("lastQuestion");
-      
-      if (lastQuestion == "true") {
-        append({
-          content: "Good Bye",
-          // The content of the message
-          role: "assistant",
-        });
-
-        // clear input area
-        setInput("");
-
-        // stop the chat
-        //stop();
-      }
     },
     onFinish: (res) => {
       setNumMessages(numMessages + 1); // Increment numMessages
+      
       localStorage.setItem("setMessageFinished", "true");
 
       // enable send button 
@@ -101,9 +102,23 @@ const Chatbot: React.FC = ({ }) => {
       // turn off spinner when message is done
       setIsWaiting(false);
 
-      // let the API know we are at the last question
-      localStorage.setItem("lastQuestion", "false");
-        
+      const lastQuestion = localStorage.getItem("lastQuestion");
+      
+      if (lastQuestion == "true") {
+        append({
+          content: "Time to end the conversation. Good Bye",
+          // The content of the message
+          role: "assistant",
+        });
+
+        // clear input area
+        setInput("Good Bye!!");
+
+        // let the API know we are at the last question
+        localStorage.setItem("lastQuestion", "false");
+      
+      }
+
     },
 
   });
@@ -235,6 +250,11 @@ const Chatbot: React.FC = ({ }) => {
           <VStack spacing={4} align="stretch" height="100%">
             {/* CHAT MESSAGE SECTION */}
             <Flex flex="1" overflowY="auto" flexDirection="column" bgColor="#15193B" pr="30px" pl="30px" pt="20px" pb="20px">
+
+            {isFirstRun ? (
+              <ChatInitialPage
+               handleOptionClick={handleOptionClick} />
+             ) : null}
 
               <Center h="100%" >
                 {isWaiting && <Spinner size="xl" color="#d0a2d1" />}

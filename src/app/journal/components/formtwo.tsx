@@ -13,16 +13,16 @@ interface FormTwoProps {
 const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
 
   const {numMessages, setNumMessages } = useNumMessages();
-  const [messageFinished, setMessageFinished] = useState<boolean | null>(null);
+  const [messageFinished, setMessageFinished] = useState<string | null>("");
   
   useEffect(() => {
-    // // Get the 'setMessageFinished' value from localStorage
-    // const isMessageFinished = localStorage.getItem("setMessageFinished") === "true"
+    // Get the 'setMessageFinished' value from localStorage
+    const isMessageFinished = localStorage.getItem("setMessageFinished");
+    
+    // Initialize messageFinished based on the stored value
+    setMessageFinished(isMessageFinished);
 
-    // // Initialize messageFinished based on the stored value
-    // setMessageFinished(isMessageFinished);
-
-    //  // One question before end, let ChatBot page know
+    //  One question before end, let ChatBot page know
     if (numMessages < numQuestions) {
 
       // if (isMessageFinished) {
@@ -31,10 +31,7 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
       // }
 
     // End the conversation
-    } else if (numMessages === numQuestions) {
-
-      // // If they're equal, run a delayed function and reset numMessages
-      // if (isMessageFinished) {
+    } else if (numMessages === numQuestions && messageFinished) {
 
         // 1.5 second delay
         const timer = debounce(() => {
@@ -47,7 +44,7 @@ const FormTwo: React.FC<FormTwoProps> = ({ numQuestions, handleContinue }) => {
 
           // Go to next page
           handleContinue();
-        }, 3000);
+        }, 4000);
         timer();
       // }
     }
