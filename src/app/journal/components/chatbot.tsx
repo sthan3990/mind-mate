@@ -20,7 +20,11 @@ import {
   VStack,
   HStack,
   Flex,
-  Center
+  Center,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 import {
   CopyIcon,
@@ -32,6 +36,7 @@ import { useChat } from "ai/react";
 import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../../helper/numofmessages";
 import ChatInitialPage from "./chatinitial";
+import { debounce } from "lodash";
 
 interface ChatbotProps {
   numQuestions: number,
@@ -47,6 +52,12 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
   const [isWaiting, setIsWaiting] = useState(false);
   const [isSendFieldDisabled, setIsSendFieldDisabled] = useState(false);
   const [isFirstRun, setisFirstRun] = useState(true);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  useEffect(() => {
+    console.log(numMessages);
+    console.log(numQuestions);
+  }, [numMessages, numQuestions])
 
   const createChatCBTItem = () => {
     if (userId) {
@@ -64,11 +75,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
     // start the conversation with option clicked by user
     append({ content: option, role: "user" });
 
-    // decrement the number of messages so this doesn't count towards max
-    setNumMessages(numMessages - 1); // Increment numMessages
-
     setisFirstRun(false);
-
   }
 
   // Function to disable the send button
@@ -81,6 +88,14 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
     setIsSendFieldDisabled(false);
   };
 
+
+  const timer = debounce(() => {
+    stop();
+    // Reset numMessages and trigger the continue action
+    setNumMessages(0);
+    // Go to next page
+    handleContinue();
+  }, 4000);
 
   const {
     messages,
@@ -96,7 +111,9 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
     onResponse: (res) => {
       // Spinner to show "waiting"
       setIsWaiting(true);
-      localStorage.setItem("setMessageFinished", "false");
+
+      // hide alert
+      setAlertMessage("");
     },
 
     onFinish: (res) => {
@@ -105,29 +122,17 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
 
       // second last question
       if (numMessages === numQuestions - 1) {
-        append({
-          content: "This is my second last response.",
-          // The content of the message
-          role: "assistant",
-        });
 
-        stop();
-
+        setAlertMessage("Second Last Response with AI...")
       }
       // the last question
       else if (numMessages === numQuestions) {
-        append({
-          content: "This is my last response.",
-          // The content of the message
-          role: "assistant",
-        });
+        setAlertMessage("Last Response with AI... Good Bye")
 
-        stop();
-
-        handleContinue();
-
+        // Go to the next page 
+        timer();
       }
-    },
+    }
   });
 
   useEffect(() => {
@@ -139,14 +144,13 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
       setChatUsed(false);
     }
 
+    // Increment numMessages
+    setNumMessages(numMessages + 1);
 
     // disable send button 
     //disableSendField();
 
     handleSubmit(e);
-
-    setNumMessages(numMessages + 1); // Increment numMessages
-
 
   };
 
@@ -203,6 +207,14 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
+
+
+      {alertMessage &&
+        <Alert status='warning'>
+          <AlertIcon />
+          {alertMessage}
+        </Alert>
+      }
       <Grid
         sx={styling.grid}
         templateAreas={`
@@ -220,6 +232,8 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
           height="70px"
         >
           <Text sx={styling.taxtHeader}>Guided Journal</Text>
+
+
         </GridItem>
 
         {/* HISTORY SECTION */}
@@ -267,6 +281,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
               <Center h="100%" >
                 {isWaiting && <Spinner size="xl" color="#d0a2d1" />}
               </Center>
+
 
               {messages.map((message, index) => (
                 <Box
