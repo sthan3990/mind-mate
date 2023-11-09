@@ -12,8 +12,7 @@ import FormFour from "./components/formfour";
 import axios from "axios";
 import WarningModal from "./components/warningmodal";
 import { fonts } from "@/theme/fonts";
-import Buttons from './buttons';
-
+import Buttons from "./buttons";
 
 const Journal: React.FC = () => {
   //userId from useContext
@@ -62,6 +61,8 @@ const Journal: React.FC = () => {
 
   const handleContinue = () => {
     const isValid = checkFields();
+    console.log(isValid);
+    console.log(step);
 
     if (isValid) {
       if (step === 1 || step === 4) {
@@ -114,7 +115,6 @@ const Journal: React.FC = () => {
         {step === 0 && <InitialJournal setNumQuestions={setNumQuestions} />}
         {step === 1 && <FormOne setpreMoodState={setpreMoodState} />}
         {step === 2 && (
-          
           <FormTwo
             numQuestions={numQuestions}
             handleContinue={handleContinue}
@@ -136,12 +136,11 @@ const Journal: React.FC = () => {
             textAlign="center"
             marginTop="70px"
           >
-            Every question is a step towards self-discovery; even the
-            smallest step can lead to profound insights. Choose what feels
-            right for you today.
+            Every question is a step towards self-discovery; even the smallest
+            step can lead to profound insights. Choose what feels right for you
+            today.
           </Text>
         )}
-
 
         {step !== 2 && step !== 4 && (
           <Flex
@@ -157,8 +156,7 @@ const Journal: React.FC = () => {
               width="100%"
               justifyContent="space-between"
               maxWidth="250px"
-            >
-            </Flex>
+            ></Flex>
           </Flex>
         )}
 
