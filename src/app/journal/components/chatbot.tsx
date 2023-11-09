@@ -33,9 +33,9 @@ import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../../helper/numofmessages";
 import ChatInitialPage from "./chatinitial";
 
-interface ChatbotProps { 
+interface ChatbotProps {
   numQuestions: number,
-  handleContinue: () => void 
+  handleContinue: () => void
 }
 
 const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
@@ -94,25 +94,25 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
     api: "/api/chatbot",
 
     onResponse: (res) => {
-
+      // Spinner to show "waiting"
+      setIsWaiting(true);
       localStorage.setItem("setMessageFinished", "false");
-
     },
 
     onFinish: (res) => {
       // turn off spinner when message is done
       setIsWaiting(false);
 
-
       // second last question
-      if (numMessages === numQuestions -1) {
+      if (numMessages === numQuestions - 1) {
         append({
           content: "This is my second last response.",
           // The content of the message
           role: "assistant",
         });
 
-        stop
+        stop();
+
       }
       // the last question
       else if (numMessages === numQuestions) {
@@ -122,8 +122,10 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
           role: "assistant",
         });
 
+        stop();
+
         handleContinue();
-        
+
       }
     },
   });
@@ -137,8 +139,6 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
       setChatUsed(false);
     }
 
-    // Spinner to show "waiting"
-    setIsWaiting(true);
 
     // disable send button 
     //disableSendField();
