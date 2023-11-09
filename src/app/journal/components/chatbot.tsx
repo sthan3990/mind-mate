@@ -51,17 +51,14 @@ const Chatbot: React.FC = ({ }) => {
     }
   };
 
-  const handleOptionClick = (option: string) => { 
+  const handleOptionClick = (option: string) => {
 
     // start the conversation with option clicked by user
     append({ content: option, role: "user" });
 
-    // Send it off 
-    setisFirstRun(false);
-
     // decrement the number of messages so this doesn't count towards max
     setNumMessages(numMessages - 1); // Increment numMessages
-    
+
   }
 
   // Function to disable the send button
@@ -92,8 +89,14 @@ const Chatbot: React.FC = ({ }) => {
 
     },
     onFinish: (res) => {
+
+      if(isFirstRun){
+        // Send it off 
+        setisFirstRun(false);
+      }
+      else {
       setNumMessages(numMessages + 1); // Increment numMessages
-      
+
       localStorage.setItem("setMessageFinished", "true");
 
       // enable send button 
@@ -103,10 +106,10 @@ const Chatbot: React.FC = ({ }) => {
       setIsWaiting(false);
 
       const lastQuestion = localStorage.getItem("lastQuestion");
-      
+
       if (lastQuestion == "true") {
         append({
-          content: "Time to end the conversation. Good Bye",
+          content: "About time to end the conversation.",
           // The content of the message
           role: "assistant",
         });
@@ -114,13 +117,10 @@ const Chatbot: React.FC = ({ }) => {
         // clear input area
         setInput("Good Bye!!");
 
-        // let the API know we are at the last question
-        localStorage.setItem("lastQuestion", "false");
-      
+        stop();
       }
-
+      }
     },
-
   });
 
   useEffect(() => {
@@ -251,10 +251,10 @@ const Chatbot: React.FC = ({ }) => {
             {/* CHAT MESSAGE SECTION */}
             <Flex flex="1" overflowY="auto" flexDirection="column" bgColor="#15193B" pr="30px" pl="30px" pt="20px" pb="20px">
 
-            {isFirstRun ? (
-              <ChatInitialPage
-               handleOptionClick={handleOptionClick} />
-             ) : null}
+              {isFirstRun ? (
+                <ChatInitialPage
+                  handleOptionClick={handleOptionClick} />
+              ) : null}
 
               <Center h="100%" >
                 {isWaiting && <Spinner size="xl" color="#d0a2d1" />}
