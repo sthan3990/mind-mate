@@ -13,11 +13,11 @@ const ChatInitialPage: React.FC<ChatInitialProps> = ({handleOptionClick}) => {
   return (
     <Box p={4} justifyContent="center" textAlign="center">
       <Text color="white">{message}</Text>
-      <Flex mt={4}>
-        <Button onClick={() => handleOptionClick('Talk to me about Work')} mr={2}>About Work</Button>
-        <Button onClick={() => handleOptionClick('Talk to me about School')} mr={2}>About School</Button>
-        <Button onClick={() => handleOptionClick('Talk to me about my Friends')} mr={2}>About Friends</Button>
-        <Button onClick={() => handleOptionClick('Just talk to me')}>About Myself</Button>
+      <Flex mt={4} justifyContent="center" textAlign="center">
+        <Button background="#d0a2d1" onClick={() => handleOptionClick('Talk to me about Work')} mr={2}>About Work</Button>
+        <Button background="#d0a2d1" onClick={() => handleOptionClick('Talk to me about School')} mr={2}>About School</Button>
+        <Button background="#d0a2d1" onClick={() => handleOptionClick('Talk to me about my Friends')} mr={2}>About Friends</Button>
+        <Button background="#d0a2d1" onClick={() => handleOptionClick('Just talk to me')}>About Myself</Button>
       </Flex>
     </Box>
   );
