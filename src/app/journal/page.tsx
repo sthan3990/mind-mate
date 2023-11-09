@@ -63,6 +63,10 @@ const Journal: React.FC = () => {
   const handleContinue = () => {
     const isValid = checkFields();
 
+     console.log(isValid);
+    console.log(step);
+
+
     if (isValid) {
       if (step === 1 || step === 4) {
         writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
