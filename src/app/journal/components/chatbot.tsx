@@ -114,41 +114,48 @@ const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
 
       // hide alert
       setAlertMessage("");
+
+      disableSendField();
+
+      // Increment numMessages
+      setNumMessages(numMessages + 1);
+
     },
 
     onFinish: (res) => {
       // turn off spinner when message is done
       setIsWaiting(false);
+      enableSendField();
 
-      // second last question
-      if (numMessages === numQuestions - 1) {
-
-        setAlertMessage("Second Last Response with AI...")
-      }
       // the last question
-      else if (numMessages === numQuestions) {
-        setAlertMessage("Last Response with AI... Good Bye")
-
-        // Go to the next page 
+      if (numMessages >= numQuestions) {
         timer();
       }
     }
   });
 
   useEffect(() => {
+    console.log(numMessages);
+    console.log(numQuestions);
 
-  }, [isWaiting]);
+     // second last question
+     if (numMessages === numQuestions - 1) {
+      setAlertMessage("Second Last Response with AI...")
+    }
+    // the last question
+    else if (numMessages >= numQuestions) {
+      setAlertMessage("Last Response with AI... Good Bye")
+    }
+
+  }, [isWaiting, numMessages, numQuestions]);
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (chatUsed && numMessages === 0) {
       createChatCBTItem();
       setChatUsed(false);
     }
 
-    // Increment numMessages
-    setNumMessages(numMessages + 1);
-
-    // disable send button 
-    //disableSendField();
+    // make sure to disable the initial prompt in case the user just enters text
+    setisFirstRun(false);
 
     handleSubmit(e);
 
