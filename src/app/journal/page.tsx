@@ -61,39 +61,27 @@ const Journal: React.FC = () => {
 
   const handleContinue = () => {
     const isValid = checkFields();
-    console.log(isValid);
-    console.log(step);
 
     if (isValid) {
-      if (step === 1 || step === 4) {
-        writeToSql(step === 1 ? 1 : 2); // Call writeToSql with 1 for step 1, or 2 for step 4
+      if (step === 3) {
+        writeToSql(); // Call writeToSql with 1 for step 1, or 2 for step 4
       }
       setStep(step + 1);
     }
   };
-  const writeToSql = (which: number) => {
-    if (which === 1) {
-      // axios
-      //   .get("/api/questions", {
-      //     params: { journalId, numQuestions }
-      //   })
-      //   .then((res) => {
-      //     console.log(res.data);
-      //   });
-    } else {
-      axios
-        .post("/api/journals", {
-          userId,
-          preMoodState,
-          postMoodState,
-          numQuestions,
-        })
-        .then((res) => {
-          if (res.data.message === "Journal Created") {
-            setJournalId(res.data.journalId.id);
-          }
-        });
-    }
+  const writeToSql = () => {
+    axios
+      .post("/api/journals", {
+        userId,
+        preMoodState,
+        postMoodState,
+        numQuestions,
+      })
+      .then((res) => {
+        if (res.data.message === "Journal Created") {
+          setJournalId(res.data.journalId.id);
+        }
+      });
   };
 
   const handleBack = () => {
