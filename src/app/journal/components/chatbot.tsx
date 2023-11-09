@@ -33,7 +33,12 @@ import { fonts } from "@/theme/fonts";
 import { useNumMessages } from "../../helper/numofmessages";
 import ChatInitialPage from "./chatinitial";
 
-const Chatbot: React.FC = ({ }) => {
+interface ChatbotProps { 
+  numQuestions: number,
+  handleContinue: () => void 
+}
+
+const Chatbot: React.FC<ChatbotProps> = ({ numQuestions, handleContinue }) => {
   const { userId } = useUser();
   const [chatUsed, setChatUsed] = useState(true);
   const { numMessages, setNumMessages } = useNumMessages();
@@ -53,11 +58,16 @@ const Chatbot: React.FC = ({ }) => {
 
   const handleOptionClick = (option: string) => {
 
+    // turn off spinner when message is done
+    setIsWaiting(true);
+
     // start the conversation with option clicked by user
     append({ content: option, role: "user" });
 
     // decrement the number of messages so this doesn't count towards max
     setNumMessages(numMessages - 1); // Increment numMessages
+
+    setisFirstRun(false);
 
   }
 
@@ -88,37 +98,32 @@ const Chatbot: React.FC = ({ }) => {
       localStorage.setItem("setMessageFinished", "false");
 
     },
+
     onFinish: (res) => {
-
-      if(isFirstRun){
-        // Send it off 
-        setisFirstRun(false);
-      }
-      else {
-      setNumMessages(numMessages + 1); // Increment numMessages
-
-      localStorage.setItem("setMessageFinished", "true");
-
-      // enable send button 
-      //enableSendField();
-
       // turn off spinner when message is done
       setIsWaiting(false);
 
-      const lastQuestion = localStorage.getItem("lastQuestion");
 
-      if (lastQuestion == "true") {
+      // second last question
+      if (numMessages === numQuestions -1) {
         append({
-          content: "About time to end the conversation.",
+          content: "This is my second last response.",
           // The content of the message
           role: "assistant",
         });
 
-        // clear input area
-        setInput("Good Bye!!");
-
-        stop();
+        stop
       }
+      // the last question
+      else if (numMessages === numQuestions) {
+        append({
+          content: "This is my last response.",
+          // The content of the message
+          role: "assistant",
+        });
+
+        handleContinue();
+        
       }
     },
   });
@@ -138,7 +143,10 @@ const Chatbot: React.FC = ({ }) => {
     // disable send button 
     //disableSendField();
 
-    handleSubmit(e)
+    handleSubmit(e);
+
+    setNumMessages(numMessages + 1); // Increment numMessages
+
 
   };
 
