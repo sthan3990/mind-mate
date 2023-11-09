@@ -11,7 +11,7 @@ const ChatInitialPage: React.FC<ChatInitialProps> = ({handleOptionClick}) => {
   const [message, setMessage] = useState("Welcome to the CBT Chatbot. What would you like to talk about today?");
   
   return (
-    <Box p={4}>
+    <Box p={4} justifyContent="center" textAlign="center">
       <Text color="white">{message}</Text>
       <Flex mt={4}>
         <Button onClick={() => handleOptionClick('Talk to me about Work')} mr={2}>About Work</Button>
