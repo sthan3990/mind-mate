@@ -1,7 +1,9 @@
-# MindMate
+<p align="center">
+  <h1>MindMate</h1>
+  <img src="./public/screenshots/mind-mate-logos.png" alt="MindMate Logo" />
+</p>
 
-_Find the site being hosted at:_
-[https://mind-mate-eight.vercel.app/]([https://mind-mate-eight.vercel.app/)
+[Deployment](https://mind-mate-eight.vercel.app/)
 
 ## Contributors
 [Saba Oji](https://github.com/SabaO7)
@@ -19,7 +21,7 @@ _In addition to its interactive journaling feature, MindMate excels in tracking 
 
 _MindMate is more than just an app; it's a companion in your journey towards better mental health, offering a blend of technology and therapy techniques to support your path to self-improvement._
 
-## Tech Stack
+## :books: Tech Stack
 **MindMate** is _full-stack application_ that uses `Typescript`, `PostgreSQL` relational database system, and `Next.js` on top of `React.js` frameworks. Front-end has been build using `Chakra UI`.
 
 <p align="center">
@@ -29,9 +31,13 @@ _MindMate is more than just an app; it's a companion in your journey towards bet
 </p>
 
 
-## To Run Locally
+## :computer: To Run Locally
 
-First, run the development server:
+> Note: Node V16 or greater is required to run the project.
+
+- Run `npm i` to install dependencies
+
+- Run the development server:
 
 ```bash
 npm run dev
@@ -40,40 +46,35 @@ yarn dev
 # or
 pnpm dev
 ```
-> Note: Node V16 or greater is required to run the project.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## :triangular_flag_on_post: Getting Started
-
-Clone the repo onto your local device. 
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## :dart: Features
 
 ### Feature: Authentication
-Users can sign up for an account to access the app's features.
-Users can log in to their account to access personal data and use the app.
-Users can log out of the app to ensure their information is secure.
+- Users can sign up for an account to access the app's features.
+- Users can log in to their account to access personal data and use the app.
+- Users can log out of the app to ensure their information is secure.
 
 ### Feature: Account Management
-Users can change their username or email address to keep their information up to date.
-Users can access an account tab to manage personal settings in one place.
+- Users can change their username or email address to keep their information up to date.
+- Users can access an account tab to manage personal settings in one place.
 
 ### Feature: Guided Journal
-Users can view their past journal entries to reflect on previous thoughts and feelings. (WIP)
-Users can start a new journal session by selecting the number of prompts to control the depth of their journaling experience.
-Users can express current emotions using an emoji, allowing the AI to generate appropriate prompts for the journaling session.
-Users can interact with a chat interface for a guided journaling experience, responding to prompts.
-Users can view a motivational message after completing a journaling session, ending the experience on a positive note.
+- Users can view their past journal entries to reflect on previous thoughts and feelings. (WIP)
+- Users can start a new journal session by selecting the number of prompts to control the depth of their journaling experience.
+- Users can express current emotions using an emoji, allowing the AI to generate appropriate prompts for the journaling session.
+- Users can interact with a chat interface for a guided journaling experience, responding to prompts.
+- Users can view a motivational message after completing a journaling session, ending the experience on a positive note.
 
 ### Feature: CBT Chatbot
-Users can have a conversation with a CBT (Cognitive Behavioral Therapy) chatbot to work through thoughts and feelings without predefined prompts.
-Users can view a motivational message after their chat session to maintain a positive mindset.
+- Users can have a conversation with a CBT (Cognitive Behavioral Therapy) chatbot to work through thoughts and feelings without predefined prompts.
+- Users can view a motivational message after their chat session to maintain a positive mindset.
 
 ### Feature: Progress Report
-Users can view a report of their average journaling activity to understand usage patterns and engagement with the journaling process.
-Users can view a calendar report showing the frequency of their conversations to track consistency and dedication to mental wellness practices.
-Users can see a graphical report of their interactions over time to visualize engagement level and progress.
+- Users can view a report of their average journaling activity to understand usage patterns and engagement with the journaling process.
+- Users can view a calendar report showing the frequency of their conversations to track consistency and dedication to mental wellness practices.
+- Users can see a graphical report of their interactions over time to visualize engagement level and progress.
  
 ## App Feature Screenshots
 
@@ -102,10 +103,6 @@ Users can see a graphical report of their interactions over time to visualize en
 ![User Progress option - Pie Charts](./public/screenshots/progressPie.png)
 
 - Mobile Responsive
-
-![MindMate Mobile Responsive](./public/screenshots/mobileResponsiveHome.png)
-
-- Mobile Responsive Drawer
 
 ![MindMate Mobile Responsive](./public/screenshots/drawer.png)
 
