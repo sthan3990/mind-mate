@@ -1,7 +1,7 @@
-[MindMate Logo](./public/mstile-150x150.png)
-# - MindMate
+# MindMate
 
-Find the site being hosted on [https://mind-mate-eight.vercel.app/]([https://mind-mate-eight.vercel.app/)
+_Find the site being hosted at:_
+[https://mind-mate-eight.vercel.app/]([https://mind-mate-eight.vercel.app/)
 
 ## Contributors
 [Saba Oji](https://github.com/SabaO7)
@@ -9,22 +9,22 @@ Find the site being hosted on [https://mind-mate-eight.vercel.app/]([https://min
 [William Kemeny](https://github.com/williamkemeny)
 [Steven Han](https://github.com/sthan3990)
 
-# MindMate - _Revolutionizing Mental Health Journaling with AI_:
+## _Revolutionizing Mental Health Journaling with AI_:
 
-Discover a transformative approach to mental health with MindMate, an app that combines the art of journaling with the insights of cognitive behavioral therapy (CBT) through an AI chatbot powered by OpenAI's API. This innovative platform provides a conversational journaling experience, where users engage in meaningful dialogues with an AI therapist trained in CBT techniques.
+_Discover a transformative approach to mental health with MindMate, an app that combines the art of journaling with the insights of cognitive behavioral therapy (CBT) through an AI chatbot powered by OpenAI's API. This innovative platform provides a conversational journaling experience, where users engage in meaningful dialogues with an AI therapist trained in CBT techniques._
 
-MindMate's chat interface makes journaling an interactive, guided process. The AI chatbot helps users explore their thoughts and emotions in depth, offering CBT-based prompts and responses. This unique method facilitates self-discovery and emotional growth in a supportive, user-friendly environment.
+_MindMate's chat interface makes journaling an interactive, guided process. The AI chatbot helps users explore their thoughts and emotions in depth, offering CBT-based prompts and responses. This unique method facilitates self-discovery and emotional growth in a supportive, user-friendly environment._
 
-In addition to its interactive journaling feature, MindMate excels in tracking and presenting mental health progress. The app analyzes your conversations and provides insightful data, enabling you to monitor your journey and recognize patterns in your emotional well-being over time. This empowers users with a clear view of their personal growth and the effectiveness of their journaling practice.
+_In addition to its interactive journaling feature, MindMate excels in tracking and presenting mental health progress. The app analyzes your conversations and provides insightful data, enabling you to monitor your journey and recognize patterns in your emotional well-being over time. This empowers users with a clear view of their personal growth and the effectiveness of their journaling practice._
 
-MindMate is more than just an app; it's a companion in your journey towards better mental health, offering a blend of technology and therapy techniques to support your path to self-improvement.
+_MindMate is more than just an app; it's a companion in your journey towards better mental health, offering a blend of technology and therapy techniques to support your path to self-improvement._
 
 ## Tech Stack
 **MindMate** is _full-stack application_ that uses `Typescript`, `PostgreSQL` relational database system, and `Next.js` on top of `React.js` frameworks. Front-end has been build using `Chakra UI`.
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=postgres,nodejs,nextjs,css,javascript,typescript" />
+    <img src="https://skillicons.dev/icons?i=postgres,react,nodejs,nextjs,css,javascript,typescript" />
   </a>
 </p>
 
